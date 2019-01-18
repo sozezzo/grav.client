@@ -1,9 +1,9 @@
-//var methodCall = require('./grav.test.js').grav_test;
-//var methodCall = require('./grav.saveUrl.js').grav_saveUrl;
-//var methodCall = require('./grav.userimages.js').grav_userimages;
+require('dotenv').config();
+const Grav = require('./grav');
+const user = process.env.GRAV_USER;
+const pw = process.env.GRAV_PW;
+const grav = new Grav(user, pw);
 
-var Grav = require('./grav');
-var grav = new Grav("askmrtillman@gmail.com", "uKLM9SNTR7");
 grav.userimages().then((data) => {
   console.log(data);
 })
