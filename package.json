@@ -1,0 +1,16 @@
+{
+  "name": "grav.client",
+  "version": "0.0.1",
+  "description": "gravatar xml-rpc api client",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "request": "^2.88.0",
+    "xml-js": "^1.6.9"
+  }
+}
