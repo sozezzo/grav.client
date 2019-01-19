@@ -2,7 +2,7 @@ const request = require('request');
 const convert = require('xml-js');
 const grav = {};
 
-grav.exec = function(url, payload){
+grav.get = function(url, payload){
 
   return new Promise((resolve, reject) => {
     request.get({

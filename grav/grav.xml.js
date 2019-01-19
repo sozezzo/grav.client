@@ -1,4 +1,4 @@
-module.exports = function GravXML(password){
+module.exports = function GravXML(email, password){
   return {
     grav_test: function (){
       return `<methodCall>
@@ -32,12 +32,65 @@ module.exports = function GravXML(password){
             </methodCall>`;
     },
 
-    /*
-    grav_test: function (){},
-    grav_test: function (){},
-    grav_test: function (){},
-    grav_test: function (){}
-    */
+    grav_saveUrl: function (imageUrl){
+      return `<methodCall>
+                <methodName>grav.saveUrl</methodName>
+                <params>
+                  <param><value><struct>
+                    <member>
+                      <name>url</name>
+                      <value>
+                        <string>${imageUrl}</string>
+                      </value>
+                    </member>
+                    <member>
+                      <name>rating</name>
+                      <value>
+                        <int>0</int>
+                      </value>
+                    </member>
+                    <member>
+                      <name>password</name>
+                      <value>
+                        <string>${password}</string>
+                      </value>
+                    </member>
+                  </struct></value></param>
+                </params>
+              </methodCall>`;
+    },
+
+    grav_useUserimage: function (imageName){
+      return `<methodCall>
+                <methodName>grav.useUserimage</methodName>
+                <params>
+                  <param><value><struct>
+                    <member>
+                      <name>userimage</name>
+                      <value>
+                        <string>${imageName}</string>
+                      </value>
+                    </member>
+                    <member>
+                      <name>addresses</name>
+                      <value>
+                        <array>
+                        <data>
+                          <value><string>${email}</string></value>
+                        </data>
+                    </array>
+                      </value>
+                    </member>
+                    <member>
+                      <name>password</name>
+                      <value>
+                        <string>${password}</string>
+                      </value>
+                    </member>
+                  </struct></value></param>
+                </params>
+              </methodCall>`;
+    }
    
   }
 }
