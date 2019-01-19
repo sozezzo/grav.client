@@ -5,29 +5,29 @@
 ### installation
 
 ```sh
-  npm install grav
+  npm install grav-client
 ```
 
 ### usage
 
 ```javascript
  
-  const Grav = require('grav');
+  const Grav = require('grav-client');
 
   const grav = Grav.create("user@example.com", "password");
 
   // sanity check
   grav.test().then(...);
 
-  // add new image
+  // add new avatar
   const imageUrl = "https://via.placeholder.com/150";
   grav.saveUrl(imageUrl).then(...);
 
-  // get all user images
+  // get all avatars
   grav.userimages().then(...);
   
-  //use imageName from grav.userimages
-  const imageName = "0fa6e24a27f544abb2536746b5b9d5f0";
+  // use an avatar from grav.userimages()
+  const image = "0fa6e24a27f544abb2536746b5b9d5f0";
 
   // set primary avatar
   grav.useUserimage(imageName).then(...);
