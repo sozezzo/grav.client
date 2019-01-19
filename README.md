@@ -30,6 +30,6 @@
   const image = "0fa6e24a27f544abb2536746b5b9d5f0";
 
   // set primary avatar
-  grav.useUserimage(imageName).then(...);
+  grav.useUserimage(image).then(...);
 
  ```
