@@ -1,6 +1,6 @@
 var GravXML = require('./core/grav.xml');
 var crypto = require('crypto');
-var grav = require('./core');
+var api = require('./core/grav.api');
 
 function Grav(email, password){
   this.xml = new GravXML(email, password);
@@ -13,7 +13,7 @@ function Grav(email, password){
 Grav.prototype.test = function(){
   return new Promise((resolve, reject) => {
     const payload = this.xml.grav_test();
-    const result = grav.get(this.api_url, payload);
+    const result = api.get(this.api_url, payload);
     resolve(result);
   })
 }
@@ -21,7 +21,7 @@ Grav.prototype.test = function(){
 Grav.prototype.userimages = function(){
   return new Promise((resolve, reject) => {
     const payload = this.xml.grav_userimages();
-    const result = grav.get(this.api_url, payload);
+    const result = api.get(this.api_url, payload);
     resolve(result);
   })
 }
@@ -29,7 +29,7 @@ Grav.prototype.userimages = function(){
 Grav.prototype.saveUrl = function(imageUrl){
   return new Promise((resolve, reject) => {
     const payload = this.xml.grav_saveUrl(imageUrl);
-    const result = grav.get(this.api_url, payload);
+    const result = api.get(this.api_url, payload);
     resolve(result);
   })
 }
@@ -37,7 +37,7 @@ Grav.prototype.saveUrl = function(imageUrl){
 Grav.prototype.useUserimage = function(imageName){
   return new Promise((resolve, reject) => {
     const payload = this.xml.grav_useUserimage(imageName);
-    const result = grav.get(this.api_url, payload);
+    const result = api.get(this.api_url, payload);
     resolve(result);
   })
 }

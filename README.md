@@ -5,14 +5,14 @@
 ### installation
 
 ```sh
-  npm install grav-client
+  npm install grav.client
 ```
 
 ### usage
 
 ```javascript
  
-  const Grav = require('grav-client');
+  const Grav = require('grav.client');
 
   const grav = Grav.login("user@example.com", "password");
 

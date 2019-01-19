@@ -1,8 +1,8 @@
 const request = require('request');
 const convert = require('xml-js');
-const grav = {};
+const api = {};
 
-grav.get = function(url, payload){
+api.get = function(url, payload){
 
   return new Promise((resolve, reject) => {
     request.get({
@@ -17,4 +17,4 @@ grav.get = function(url, payload){
   })
 }
 
-module.exports = grav;
+module.exports = api;
