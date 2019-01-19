@@ -14,7 +14,7 @@
  
   const Grav = require('grav-client');
 
-  const grav = Grav.create("user@example.com", "password");
+  const grav = Grav.login("user@example.com", "password");
 
   // sanity check
   grav.test().then(...);

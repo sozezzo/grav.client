@@ -42,10 +42,8 @@ Grav.prototype.useUserimage = function(imageName){
   })
 }
 
-//
-
 module.exports = {
-  create: function(email, pw){
+  login: function(email, pw){
     return new Grav(email, pw)
   }
 };
