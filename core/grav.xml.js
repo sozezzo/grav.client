@@ -1,5 +1,34 @@
 module.exports = function GravXML(email, password){
-  return {
+  return {  
+
+    grav_exists: function(hash){
+
+      return `<methodCall>
+                <methodName>grav.test</methodName>
+                <params>
+                  <param><value><struct>
+                    <member>
+                      <name>hashes</name>
+                      <value>
+                        <array>
+                          <data>
+                            <value>${hash}</value>
+                          </data>
+                        </array>
+                      </value>
+                    </member>
+                    <member>
+                      <name>password</name>
+                      <value>
+                        <string>${password}</string>
+                      </value>
+                    </member>
+                  </struct></value></param>
+                </params>
+              </methodCall>`;
+
+    },
+
     grav_test: function (){
       return `<methodCall>
                 <methodName>grav.test</methodName>
