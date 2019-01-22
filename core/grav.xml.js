@@ -4,7 +4,7 @@ module.exports = function GravXML(email, password){
     grav_exists: function(hash){
 
       return `<methodCall>
-                <methodName>grav.test</methodName>
+                <methodName>grav.exists</methodName>
                 <params>
                   <param><value><struct>
                     <member>
