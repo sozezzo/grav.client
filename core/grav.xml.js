@@ -29,6 +29,24 @@ module.exports = function GravXML(email, password){
 
     },
 
+    grav_addresses: function(){
+
+      return `<methodCall>
+                <methodName>grav.addresses</methodName>
+                <params>
+                  <param><value><struct>
+                    <member>
+                      <name>password</name>
+                      <value>
+                        <string>${password}</string>
+                      </value>
+                    </member>
+                  </struct></value></param>
+                </params>
+              </methodCall>`;
+
+    },
+
     grav_test: function (){
       return `<methodCall>
                 <methodName>grav.test</methodName>

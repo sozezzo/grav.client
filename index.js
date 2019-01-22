@@ -18,6 +18,14 @@ Grav.prototype.exists = function(){
   })
 }
 
+Grav.prototype.addresses = function(){
+  return new Promise((resolve, reject) => {
+    const payload = this.xml.grav_addresses();
+    const result = api.get(this.api_url, payload);
+    resolve(result);
+  })
+}
+
 Grav.prototype.userimages = function(){
   return new Promise((resolve, reject) => {
     const payload = this.xml.grav_userimages();
