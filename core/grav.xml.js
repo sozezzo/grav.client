@@ -47,22 +47,6 @@ module.exports = function GravXML(email, password){
 
     },
 
-    grav_test: function (){
-      return `<methodCall>
-                <methodName>grav.test</methodName>
-                <params>
-                  <param><value><struct>
-                    <member>
-                      <name>password</name>
-                      <value>
-                        <string>${password}</string>
-                      </value>
-                    </member>
-                  </struct></value></param>
-                </params>
-              </methodCall>`;
-    },
-
     grav_userimages: function (){
       return `<methodCall>
               <methodName>grav.userimages</methodName>
@@ -77,6 +61,34 @@ module.exports = function GravXML(email, password){
                 </struct></value></param>
               </params>
             </methodCall>`;
+    },
+    
+    grav_saveData: function (imageData){
+      return `<methodCall>
+                <methodName>grav.saveData</methodName>
+                <params>
+                  <param><value><struct>
+                    <member>
+                      <name>data</name>
+                      <value>
+                        <string>${imageData}</string>
+                      </value>
+                    </member>
+                    <member>
+                      <name>rating</name>
+                      <value>
+                        <int>0</int>
+                      </value>
+                    </member>
+                    <member>
+                      <name>password</name>
+                      <value>
+                        <string>${password}</string>
+                      </value>
+                    </member>
+                  </struct></value></param>
+                </params>
+              </methodCall>`;
     },
 
     grav_saveUrl: function (imageUrl){
@@ -137,7 +149,23 @@ module.exports = function GravXML(email, password){
                   </struct></value></param>
                 </params>
               </methodCall>`;
-    }
+    },
+
+    grav_test: function (){
+      return `<methodCall>
+                <methodName>grav.test</methodName>
+                <params>
+                  <param><value><struct>
+                    <member>
+                      <name>password</name>
+                      <value>
+                        <string>${password}</string>
+                      </value>
+                    </member>
+                  </struct></value></param>
+                </params>
+              </methodCall>`;
+    },
    
   }
 }

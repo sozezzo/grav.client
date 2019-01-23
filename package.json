@@ -3,8 +3,12 @@
   "version": "0.0.1",
   "description": "gravatar xml-rpc api client",
   "keywords": [
-    "gravatar", "xml-rpc", "api",
-    "client", "daily", "avatar"
+    "gravatar",
+    "xml-rpc",
+    "api",
+    "client",
+    "daily",
+    "avatar"
   ],
   "repository": {
     "type": "git",
@@ -17,6 +21,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "cloudinary": "^1.13.2",
     "crypto": "^1.0.1",
     "dotenv": "^6.2.0",
     "jasmine": "^3.3.1",
