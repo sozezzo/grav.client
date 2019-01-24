@@ -1,14 +1,6 @@
 const GravXML = require('./core/grav.xml');
 const crypto = require('crypto');
 const api = require('./core/grav.api');
-const cloudinary = require('cloudinary');
-const creds = require('./demo/creds');
-
-cloudinary.config({ 
-  cloud_name: creds.cloud_name, 
-  api_key: creds.api_key, 
-  api_secret: creds.api_secret
-});
 
 function Grav(email, password){
   this.xml = new GravXML(email, password);
@@ -42,18 +34,19 @@ Grav.prototype.userimages = function(){
   })
 }
 
-Grav.prototype.saveData = function(imageData){
+Grav.prototype.saveData = function(imageData, ext){
   return new Promise((resolve, reject) => {
-    const uploadString = "data:image/png;base64,";
-    cloudinary.v2.uploader.upload(uploadString + imageData, { 
-        public_id: `avatar_${this.hash}`, 
-        tags: ['grav.client']
-      }, (error, result) => {
-        if(error) reject(error);
-        this.saveUrl(result.url).then(data => {
-          resolve(data);
+    const avatar = {
+      id: this.hash,
+      data: imageData, 
+      ext
+    };
+    api.post(avatar).then(imageUrl => {
+        this.saveUrl(imageUrl).then(data => {
+          resolve(imageUrl);
         })
-    });
+      })
+      .catch(reject)
   })
 }
 
