@@ -74,6 +74,22 @@ Grav.prototype.useUserimage = function(imageName){
   })
 }
 
+Grav.prototype.removeImage = function(){
+  return new Promise((resolve, reject) => {
+    const payload = this.xml.grav_removeImage();
+    const result = api.get(this.api_url, payload);
+    resolve(result);
+  })
+}
+
+Grav.prototype.deleteUserimage = function(imageName){
+  return new Promise((resolve, reject) => {
+    const payload = this.xml.grav_deleteUserimage(imageName);
+    const result = api.get(this.api_url, payload);
+    resolve(result);
+  })
+}
+
 Grav.prototype.test = function(){
   return new Promise((resolve, reject) => {
     const payload = this.xml.grav_test();
