@@ -134,10 +134,10 @@ module.exports = function GravXML(email, password){
                       <name>addresses</name>
                       <value>
                         <array>
-                        <data>
-                          <value><string>${email}</string></value>
-                        </data>
-                    </array>
+                          <data>
+                            <value><string>${email}</string></value>
+                          </data>
+                        </array>
                       </value>
                     </member>
                     <member>
@@ -149,6 +149,54 @@ module.exports = function GravXML(email, password){
                   </struct></value></param>
                 </params>
               </methodCall>`;
+    },
+
+    grav_removeImage: function (){
+      return `<methodCall>
+              <methodName>grav.removeImage</methodName>
+              <params>
+                <param><value><struct>
+                  <member>
+                    <name>addresses</name>
+                    <value>
+                      <array>
+                        <data>
+                          <value><string>${email}</string></value>
+                        </data>
+                      </array>
+                    </value>
+                  </member>
+                  <member>
+                    <name>password</name>
+                    <value>
+                      <string>${password}</string>
+                    </value>
+                  </member>
+                </struct></value></param>
+              </params>
+            </methodCall>`;
+    },
+
+    grav_deleteUserimage: function (imageName){
+      return `<methodCall>
+              <methodName>grav.deleteUserimage</methodName>
+              <params>
+                <param><value><struct>
+                  <member>
+                    <name>userimage</name>
+                    <value>
+                      <string>${imageName}</string>
+                    </value>
+                  </member>
+                  <member>
+                    <name>password</name>
+                    <value>
+                      <string>${password}</string>
+                    </value>
+                  </member>
+                </struct></value></param>
+              </params>
+            </methodCall>`;
     },
 
     grav_test: function (){
