@@ -1,3 +1,5 @@
+const utils = require('../grav.utils');
+
 function AddressParser(){
   this.data = null;
 }
@@ -14,16 +16,10 @@ AddressParser.prototype.transform = function(){
   const address = {};
   address.email = this.data.email;
   this.data.fields.forEach(field => {
-    const fieldValue = parseFieldValue(field.value);
+    const fieldValue = utils.parseFieldValue(field.value);
     address[field.name._text] = fieldValue;
   })
   return address;
-}
-
-function parseFieldValue(fieldValue){
-  if(fieldValue.int) return Number(fieldValue.int._text);
-  if(fieldValue.string) return fieldValue.string._text;
-  throw new Error('could not parse field value', fieldValue);
 }
 
 module.exports = AddressParser;
