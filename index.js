@@ -43,13 +43,14 @@ Grav.prototype.saveData = function(imageData, ext){
     };
     api.post(avatar).then(imageUrl => {
         this.saveUrl(imageUrl).then(data => {
-          resolve(imageUrl);
+          resolve(data);
         })
       })
       .catch(reject)
   })
 }
 
+// api endpoint broken
 Grav.prototype.saveData__ = function(imageData){
   return new Promise((resolve, reject) => {
     const payload = this.xml.grav_saveData(imageData);
