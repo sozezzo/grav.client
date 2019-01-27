@@ -1,6 +1,6 @@
 const creds = require('../creds');
 const {
-  Grav, UserImagesParser, AckParser,
+  Grav, UserImagesParser, UseUserImageParser,
   ParseContext
 } = require('../index');
 
@@ -14,8 +14,9 @@ grav.userimages().then(data => {
   const images = context.parse(data);
   const newImage = images[0];
   // set as primary avatar
+  newImage.name = "d83bae7ec0e25069af6f3a006ecbf289";
   grav.useUserimage(newImage.name).then(data => {
-    context.parser = new AckParser();
+    context.parser = new UseUserImageParser();
     const response = context.parse(data);
     console.log(response);
   }).catch(err => console.log(err));
