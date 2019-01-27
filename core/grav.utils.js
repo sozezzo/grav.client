@@ -1,7 +1,6 @@
 const utils = {};
 
 utils.api_origin = "https://secure.gravatar.com";
-//utils.api_origin = "https://gravatar.com";
 
 utils.rating = {
   0: 'g',
