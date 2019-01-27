@@ -9,9 +9,9 @@ api.get = function(url, payload){
       url:     url,
       body:    payload
     }, function(error, response, body){
-      if(error) return reject(error);
-      const json = convert.xml2json(body, {compact: true, spaces: 4});
-      return resolve(json);
+      if(error) reject(error);
+      const json = convert.xml2json(body, { compact: true, spaces: 4 });
+      resolve(json);
     });
   })
 }
@@ -23,8 +23,8 @@ api.post = function(avatar){
       url:     "https://morning-cymbal.glitch.me/api/v1/avatars",
       body:    JSON.stringify(avatar)
     }, function(error, response, body){
-      if(error) return reject(error);
-      return resolve(body);
+      if(error) reject(error);
+      resolve(body);
     });
   })
 }
