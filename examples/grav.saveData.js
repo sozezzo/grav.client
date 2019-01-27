@@ -1,8 +1,9 @@
-const Grav = require('../index');
-const fs = require('fs');
 const creds = require('../creds');
-const SaveUrlParser = require('../core/parsers/saveUrl.parser');
-const ParseContext = require('../core/parsers/_parse.context');
+const fs = require('fs');
+const { 
+  Grav, SaveUrlParser, ParseContext
+ } = require('../index');
+
 
 //internally, grav.saveData relies upon grav.saveUrl
 const saveUrlParser = new SaveUrlParser();

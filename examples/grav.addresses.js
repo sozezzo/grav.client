@@ -1,7 +1,7 @@
-var Grav = require('../index');
 const creds = require('../creds');
-const AddressParser = require('../core/parsers/address.parser');
-const ParseContext = require('../core/parsers/_parse.context');
+const {
+  Grav, AddressParser, ParseContext
+} = require('../index');
 
 const addressParser = new AddressParser();
 const context = new ParseContext(addressParser);

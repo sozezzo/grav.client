@@ -1,7 +1,7 @@
-var Grav = require('../index');
 const creds = require('../creds');
-const SaveUrlParser = require('../core/parsers/saveUrl.parser');
-const ParseContext = require('../core/parsers/_parse.context');
+const { 
+  Grav, SaveUrlParser, ParseContext
+} = require('../index');
 
 const saveUrlParser = new SaveUrlParser();
 const context = new ParseContext(saveUrlParser);
