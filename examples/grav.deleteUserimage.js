@@ -13,12 +13,10 @@ grav.userimages().then(data => {
   // pick one
   const images = context.parse(data);
   const newImage = images[0];
-
   // delete it
   grav.deleteUserimage(newImage.name).then(data => {
     context.parser = new DeleteUserImageParser();
     const response = context.parse(data);
     console.log(response);
-  });
-  
-})
+  }).catch(err => console.log(err)); 
+}).catch(err => console.log(err));

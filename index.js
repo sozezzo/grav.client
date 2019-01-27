@@ -1,17 +1,18 @@
 const GravXML = require('./core/grav.xml');
 const crypto = require('crypto');
 const api = require('./core/grav.api');
+const utils = require('./core/grav.utils');
 
 function Grav(email, password){
   this.xml = new GravXML(email, password);
   this.hash = crypto.createHash('md5')
                     .update(email)
                     .digest("hex");
-  this.api_url = `https://secure.gravatar.com/xmlrpc?user=${this.hash}`;
+  this.api_url = `${utils.api_origin}/xmlrpc?x=5&user=${this.hash}`;
 }
 
 Grav.prototype.exists = function(){
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     const payload = this.xml.grav_exists(this.hash);
     const result = api.get(this.api_url, payload);
     resolve(result);

@@ -21,7 +21,7 @@ ExistsParser.prototype.transform = function(){
   const exists = utils.parseFieldValue(this.data.response.value);
   if(exists){
     const emailHash = this.data.response.name._text;
-    const avatarUrl = `https://secure.gravatar.com/avatar/${emailHash}`;
+    const avatarUrl = `${utils.api_origin}/avatar/${emailHash}`;
     return { emailHash, avatarUrl };
   }
 }

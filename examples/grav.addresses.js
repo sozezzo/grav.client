@@ -10,4 +10,4 @@ const grav = Grav.login(creds.email, creds.password);
 grav.addresses().then(data => {
   const addressData = context.parse(data);
   console.log(addressData);
-});
+}).catch(err => console.log(err));

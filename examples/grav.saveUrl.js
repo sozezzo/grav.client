@@ -12,4 +12,4 @@ const imageUrl = "https://via.placeholder.com/150";
 grav.saveUrl(imageUrl).then(data => {
   const response = context.parse(data);
   console.log(response);
-});
+}).catch(err => console.log(err));
