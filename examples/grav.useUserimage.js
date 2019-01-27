@@ -1,8 +1,8 @@
-const Grav = require('../index');
 const creds = require('../creds');
-const UserImagesParser = require('../core/parsers/userimages.parser');
-const AckParser = require('../core/parsers/ack.parser');
-const ParseContext = require('../core/parsers/_parse.context');
+const {
+  Grav, UserImagesParser, AckParser,
+  ParseContext
+} = require('../index');
 
 const userImagesParser = new UserImagesParser();
 const context = new ParseContext(userImagesParser);
