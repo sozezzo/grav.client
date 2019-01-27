@@ -4,7 +4,6 @@ const {
   Grav, SaveUrlParser, ParseContext
  } = require('../index');
 
-
 //internally, grav.saveData relies upon grav.saveUrl
 const saveUrlParser = new SaveUrlParser();
 const context = new ParseContext(saveUrlParser);

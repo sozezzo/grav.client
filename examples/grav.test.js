@@ -1,10 +1,10 @@
 const creds = require('../creds');
 const { 
-  Grav, AckParser, ParseContext 
+  Grav, TestParser, ParseContext 
 } = require('../index');
 
-const ackParser = new AckParser();
-const context = new ParseContext(ackParser);
+const testParser = new TestParser();
+const context = new ParseContext(testParser);
 const grav = Grav.login(creds.email, creds.password);
 
 grav.test().then(data => {
