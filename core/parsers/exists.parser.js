@@ -19,10 +19,12 @@ ExistsParser.prototype.transform = function(){
     throw new Error(this.fault.message);
   }
   const exists = utils.parseFieldValue(this.data.response.value);
+  const emailHash = this.data.response.name._text;
   if(exists){
-    const emailHash = this.data.response.name._text;
     const avatarUrl = `${utils.api_origin}/avatar/${emailHash}`;
     return { emailHash, avatarUrl };
+  }else{
+    throw new Error(`no matching gravatar for email hash "${emailHash}"`);
   }
 }
 
