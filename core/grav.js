@@ -5,6 +5,7 @@ const utils = require('./grav.utils');
 const fs = require('fs');
 
 function Grav(email, password){
+  email = `${email}`.trim().toLowerCase();
   this.xml = new GravXML(email, password);
   this.hash = crypto.createHash('md5')
                     .update(email)
@@ -54,9 +55,10 @@ Grav.prototype.saveData = function(image, ext){
       }
     };
     api.post(avatar).then(imageUrl => {
-      this.saveUrl(imageUrl).then(data => {
-        resolve(data);
-      }).catch(reject);
+      console.log(imageUrl);
+      // this.saveUrl(imageUrl).then(data => {
+      //   resolve(data);
+      // }).catch(reject);
     }).catch(reject);
   })
 }
