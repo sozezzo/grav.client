@@ -18,15 +18,29 @@ api.get = function(url, payload){
 
 api.post = function(avatar){
   return new Promise((resolve, reject) => {
-    request.post({
-      headers: { 'content-type' : 'application/json' },
-      url:     "https://morning-cymbal.glitch.me/api/v1/avatars",
-      body:    JSON.stringify(avatar)
-    }, function(error, response, body){
+    const save = avatar.data ? saveBase64Image : saveImageFile;
+    save(avatar, function(error, response, body){
       if(error) reject(error);
       resolve(body);
     });
   })
 }
+
+function saveImageFile(avatar, callback){
+  request.post({
+    headers: { 'content-type' : 'multipart/form-data; charset=UTF-8' },
+    url:'http://localhost:8081/api/v1/avatars',
+    formData: avatar.formData
+  }, callback);
+}
+
+function saveBase64Image(avatar, callback){
+  request.post({
+    headers: { 'content-type' : 'application/json' },
+    url:     "https://morning-cymbal.glitch.me/api/v1/avatars",
+    body:    JSON.stringify(avatar)
+  }, callback);
+}
+
 
 module.exports = api;
