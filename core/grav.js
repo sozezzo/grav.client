@@ -2,6 +2,7 @@ const GravXML = require('./grav.xml');
 const crypto = require('crypto');
 const api = require('./grav.api');
 const utils = require('./grav.utils');
+const fs = require('fs');
 
 function Grav(email, password){
   this.xml = new GravXML(email, password);
@@ -41,12 +42,16 @@ Grav.prototype.userimages = function(){
   })
 }
 
-Grav.prototype.saveData = function(imageData, ext){
+Grav.prototype.saveData = function(image, ext){
   return new Promise((resolve, reject) => {
-    const avatar = {
+    const avatar = ext ? {
       id: this.hash,
-      data: imageData, 
+      data: image, 
       ext
+    } : {
+      formData: {
+        avatar:  fs.createReadStream(image)
+      }
     };
     api.post(avatar).then(imageUrl => {
       this.saveUrl(imageUrl).then(data => {
