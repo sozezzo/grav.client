@@ -36,11 +36,12 @@ function saveImageFile(avatar, callback){
 
 function saveBase64Image(avatar, callback){
   request.post({
-    headers: { 'content-type' : 'application/json' },
-    url:     "https://morning-cymbal.glitch.me/api/v1/avatars",
+    headers: { 'content-type' : 'application/json; charset=UTF-8' },
+    url:     "http://localhost:8081/api/v1/avatars/base64",
     body:    JSON.stringify(avatar)
   }, callback);
 }
 
 
 module.exports = api;
+
