@@ -29,7 +29,7 @@ api.post = function(avatar){
 function saveImageFile(avatar, callback){
   request.post({
     headers: { 'content-type' : 'multipart/form-data; charset=UTF-8' },
-    url:'http://dailyavatar.io/api/v1/avatars',
+    url:'https://dailyavatar.io/api/v1/avatars',
     formData: avatar.formData
   }, callback);
 }
@@ -37,7 +37,7 @@ function saveImageFile(avatar, callback){
 function saveBase64Image(avatar, callback){
   request.post({
     headers: { 'content-type' : 'application/json; charset=UTF-8' },
-    url:     "http://dailyavatar.io/api/v1/avatars/base64",
+    url:     "https://dailyavatar.io/api/v1/avatars/base64",
     body:    JSON.stringify(avatar)
   }, callback);
 }
