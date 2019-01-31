@@ -63,7 +63,7 @@ module.exports = function GravXML(email, password){
             </methodCall>`;
     },
     
-    grav_saveData: function (imageData){
+    grav_saveData: function (imageData, rating = 0){
       return `<methodCall>
                 <methodName>grav.saveData</methodName>
                 <params>
@@ -77,7 +77,7 @@ module.exports = function GravXML(email, password){
                     <member>
                       <name>rating</name>
                       <value>
-                        <int>0</int>
+                        <int>${rating}</int>
                       </value>
                     </member>
                     <member>
@@ -91,7 +91,7 @@ module.exports = function GravXML(email, password){
               </methodCall>`;
     },
 
-    grav_saveUrl: function (imageUrl){
+    grav_saveUrl: function (imageUrl, rating = 0){
       return `<methodCall>
                 <methodName>grav.saveUrl</methodName>
                 <params>
@@ -105,7 +105,7 @@ module.exports = function GravXML(email, password){
                     <member>
                       <name>rating</name>
                       <value>
-                        <int>0</int>
+                        <int>${rating}</int>
                       </value>
                     </member>
                     <member>

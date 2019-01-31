@@ -43,7 +43,7 @@ Grav.prototype.userimages = function(){
   })
 }
 
-Grav.prototype.saveData = function(image, ext){
+Grav.prototype.saveData = function(image, ext, rating = 0){
   return new Promise((resolve, reject) => {
     const avatar = ext ? {
       id: this.hash,
@@ -55,10 +55,9 @@ Grav.prototype.saveData = function(image, ext){
       }
     };
     api.post(avatar).then(imageUrl => {
-      console.log(imageUrl);
-      // this.saveUrl(imageUrl).then(data => {
-      //   resolve(data);
-      // }).catch(reject);
+      this.saveUrl(imageUrl, rating).then(data => {
+        resolve(data);
+      }).catch(reject);
     }).catch(reject);
   })
 }
@@ -66,7 +65,7 @@ Grav.prototype.saveData = function(image, ext){
 // api endpoint broken
 Grav.prototype.saveData__ = function(imageData){
   return new Promise((resolve, reject) => {
-    const payload = this.xml.grav_saveData(imageData);
+    const payload = this.xml.grav_saveData(imageData, rating);
     api.get(this.api_url, payload)
     .then(response => {
       resolve(response);
@@ -74,9 +73,9 @@ Grav.prototype.saveData__ = function(imageData){
   })
 }
 
-Grav.prototype.saveUrl = function(imageUrl){
+Grav.prototype.saveUrl = function(imageUrl, rating = 0){
   return new Promise((resolve, reject) => {
-    const payload = this.xml.grav_saveUrl(imageUrl);
+    const payload = this.xml.grav_saveUrl(imageUrl, rating);
     api.get(this.api_url, payload)
     .then(response => {
       resolve(response);
