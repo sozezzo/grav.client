@@ -1,16 +1,17 @@
-const RATED = require('./image.rating');
+const request = require('request');
 const creds = require('../creds');
+const fs = require('fs');
 const { 
-  Grav, SaveUrlParser, ParseContext, 
-} = require('../index');
+  Grav, SaveUrlParser, ParseContext
+ } = require('../index');
 
+//internally, grav.saveData relies upon grav.saveUrl
 const saveUrlParser = new SaveUrlParser();
 const context = new ParseContext(saveUrlParser);
 const grav = Grav.login(creds.email, creds.password);
+const imageFilePath = `${__dirname}/gump.jpg`;
 
-const imageUrl = "https://via.placeholder.com/150";
-
-grav.saveUrl(imageUrl, RATED.G).then(data => {
+grav.saveData(imageFilePath).then(data => {
   const response = context.parse(data);
   console.log(response);
 }).catch(err => console.log(err));

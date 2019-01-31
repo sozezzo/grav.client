@@ -1,6 +1,6 @@
 {
   "name": "grav.client",
-  "version": "1.0.1",
+  "version": "1.1.1",
   "description": "gravatar xml-rpc api client",
   "keywords": [
     "gravatar",

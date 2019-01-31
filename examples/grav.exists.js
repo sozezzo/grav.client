@@ -1,7 +1,7 @@
-const Grav = require('../index');
 const creds = require('../creds');
-const ExistsParser = require('../core/parsers/exists.parser');
-const ParseContext = require('../core/parsers/_parse.context');
+const { 
+  Grav, ExistsParser, ParseContext
+} = require('../index');
 
 const existsParser = new ExistsParser();
 const context = new ParseContext(existsParser);

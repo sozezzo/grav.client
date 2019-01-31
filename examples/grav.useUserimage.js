@@ -1,21 +1,21 @@
-const Grav = require('../index');
 const creds = require('../creds');
-const UserImagesParser = require('../core/parsers/userimages.parser');
-const AckParser = require('../core/parsers/ack.parser');
-const ParseContext = require('../core/parsers/_parse.context');
+const {
+  Grav, ParseContext,
+  UserImagesParser, UseUserImageParser
+} = require('../index');
 
 const userImagesParser = new UserImagesParser();
 const context = new ParseContext(userImagesParser);
 const grav = Grav.login(creds.email, creds.password);
 
-// get avatars
+// collect all avatars
 grav.userimages().then(data => {
   // pick one
   const images = context.parse(data);
-  const newImage = images[0];
+  const selectedImage = images[0];
   // set as primary avatar
-  grav.useUserimage(newImage.name).then(data => {
-    context.parser = new AckParser();
+  grav.useUserimage(selectedImage.name).then(data => {
+    context.parser = new UseUserImageParser();
     const response = context.parse(data);
     console.log(response);
   }).catch(err => console.log(err));

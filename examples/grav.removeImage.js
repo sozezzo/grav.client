@@ -1,10 +1,10 @@
-const Grav = require('../index');
 const creds = require('../creds');
-const AckParser = require('../core/parsers/ack.parser');
-const ParseContext = require('../core/parsers/_parse.context');
+const {
+  Grav, RemoveImageParser, ParseContext
+} = require('../index');
 
-const ackParser = new AckParser();
-const context = new ParseContext(ackParser);
+const removeImageParser = new RemoveImageParser();
+const context = new ParseContext(removeImageParser);
 const grav = Grav.login(creds.email, creds.password);
 
 // removes current primary avatar

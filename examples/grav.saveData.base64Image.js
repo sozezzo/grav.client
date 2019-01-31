@@ -1,8 +1,9 @@
-const Grav = require('../index');
-const fs = require('fs');
+const RATED = require('./image.rating');
 const creds = require('../creds');
-const SaveUrlParser = require('../core/parsers/saveUrl.parser');
-const ParseContext = require('../core/parsers/_parse.context');
+const fs = require('fs');
+const { 
+  Grav, SaveUrlParser, ParseContext
+ } = require('../index');
 
 //internally, grav.saveData relies upon grav.saveUrl
 const saveUrlParser = new SaveUrlParser();
@@ -11,7 +12,7 @@ const bitmap = fs.readFileSync('./gump.jpg');
 const imageData = new Buffer(bitmap).toString('base64');
 const grav = Grav.login(creds.email, creds.password);
 
-grav.saveData(imageData, 'jpg').then(data => {
+grav.saveData(imageData, 'jpg', RATED.G).then(data => {
   const response = context.parse(data);
   console.log(response);
 }).catch(err => console.log(err));
