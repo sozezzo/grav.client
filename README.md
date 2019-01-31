@@ -135,6 +135,23 @@ grav.userimages().then(userImagesResponse => {
 { response: true }
 ```
 
+With the exception of `grav.saveData`, each method has a corresponding parser: 
+
+| Parser     | Method  |
+|------------|--------------|
+| `ExistsParser` | `grav.exists()` |
+| `AddressParser` | `grav.addresses()` |
+| `UserImagesParser` | `grav.userimages()` |
+| § `SaveUrlParser` | `grav.saveData()`|
+| `SaveUrlParser` | `grav.saveUrl()` |
+| `UseUserImageParser` | `grav.useUserimage()` |
+| `RemoveImageParser` | `grav.removeImage()` |
+| `DeleteUserImageParser` | `grav.deleteUserimage()` |
+| `TestParser`| `grav.test()` |
+
+
+> § Internally, `grav.saveData` relies upon `grav.saveUrl`.
+
 ### Examples
  
  For more demos, be sure to check out the [examples](https://github.com/mrtillman/grav.client/tree/master/examples) folder.
