@@ -116,7 +116,7 @@ const {
 
 const userImagesParser = new UserImagesParser();
 const context = new ParseContext(userImagesParser);
-const grav = Grav.login(creds.email, creds.password);
+const grav = Grav.login("user@example.com", "password");
 
 // collect all avatars
 grav.userimages().then(userImagesResponse => {

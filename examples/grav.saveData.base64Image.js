@@ -1,3 +1,4 @@
+const RATED = require('./image.rating');
 const creds = require('../creds');
 const fs = require('fs');
 const { 
@@ -11,7 +12,7 @@ const bitmap = fs.readFileSync('./gump.jpg');
 const imageData = new Buffer(bitmap).toString('base64');
 const grav = Grav.login(creds.email, creds.password);
 
-grav.saveData(imageData, 'jpg').then(data => {
+grav.saveData(imageData, 'jpg', RATED.G).then(data => {
   const response = context.parse(data);
   console.log(response);
 }).catch(err => console.log(err));
