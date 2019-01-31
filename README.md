@@ -42,11 +42,11 @@
 | `grav.exists()` | check whether a hash has a gravatar |
 | `grav.addresses()` | get a list of addresses for this account |
 | `grav.userimages()` | return an array of userimages for this account |
-| `grav.saveData()` | save binary image data as a userimage for this account  |
-| `grav.saveUrl()` | read an image via its URL and save that as a userimage for this account |
-| `grav.useUserimage()` | use a userimage as a gravatar for one of more addresses on this account |
+| `grav.saveData(imageData)` | save binary image data as a userimage for this account  |
+| `grav.saveUrl(imageUrl)` | read an image via its URL and save that as a userimage for this account |
+| `grav.useUserimage(imageName)` | use a userimage as a gravatar for one of more addresses on this account |
 | `grav.removeImage()` | remove the userimage associated with one or more email addresses |
-| `grav.deleteUserimage()` | remove a userimage from the account and any email addresses with which it is associated |
+| `grav.deleteUserimage(imageName)` | remove a userimage from the account and any email addresses with which it is associated |
 | `grav.test()` | a test function |
  
 ### Parsers
@@ -142,11 +142,11 @@ With the exception of `grav.saveData`, each method has a corresponding parser:
 | `ExistsParser` | `grav.exists()` |
 | `AddressParser` | `grav.addresses()` |
 | `UserImagesParser` | `grav.userimages()` |
-| § `SaveUrlParser` | `grav.saveData()`|
-| `SaveUrlParser` | `grav.saveUrl()` |
-| `UseUserImageParser` | `grav.useUserimage()` |
+| § `SaveUrlParser` | `grav.saveData(imageData)`|
+| `SaveUrlParser` | `grav.saveUrl(imageUrl)` |
+| `UseUserImageParser` | `grav.useUserimage(imageName)` |
 | `RemoveImageParser` | `grav.removeImage()` |
-| `DeleteUserImageParser` | `grav.deleteUserimage()` |
+| `DeleteUserImageParser` | `grav.deleteUserimage(imageName)` |
 | `TestParser`| `grav.test()` |
 
 
