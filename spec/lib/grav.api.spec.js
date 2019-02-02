@@ -1,9 +1,9 @@
-const api = require('../../core/grav.api');
+const api = require('../../lib/grav.api');
 const nock = require('nock');
 const crypto = require('crypto');
-const GravXML = require('../../core/grav.xml');
+const GravXML = require('../../lib/grav.xml');
 const creds = require('../../creds');
-const utils = require('../../core/grav.utils');
+const utils = require('../../lib/grav.utils');
 
 let hash;
 let xml;
@@ -14,8 +14,8 @@ describe('xml-rpc api client', function(){
 
   beforeEach(function(){
     hash = crypto.createHash('md5')
-    .update(creds.email.trim().toLowerCase())
-    .digest("hex");
+                 .update(creds.email.trim().toLowerCase())
+                 .digest("hex");
     xml = new GravXML(creds.email, creds.password);
     endpoint = `${utils.api_origin}/xmlrpc?user=${hash}`;
   })
