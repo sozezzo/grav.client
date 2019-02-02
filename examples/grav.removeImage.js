@@ -8,7 +8,7 @@ const context = new ParseContext(removeImageParser);
 const grav = Grav.login(creds.email, creds.password);
 
 // removes current primary avatar
-grav.removeImage().then(data => {
-  const response = context.parse(data);
-  console.log(response);
-}).catch(err => console.log(err));
+grav.removeImage()
+    .then(data => context.parse(data))
+    .then(console.log)
+    .catch(console.log);

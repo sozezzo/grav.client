@@ -39,22 +39,23 @@
  
 |Method     | Description  |
 |-----------|--------------|
-| `grav.exists()` | check whether a hash has a gravatar |
-| `grav.addresses()` | get a list of addresses for this account |
-| `grav.userimages()` | return an array of userimages for this account |
-| `grav.saveData(imageData)` | save binary image data as a userimage for this account  |
-| `grav.saveUrl(imageUrl)` | read an image via its URL and save that as a userimage for this account |
-| `grav.useUserimage(imageName)` | use a userimage as a gravatar for one of more addresses on this account |
-| `grav.removeImage()` | remove the userimage associated with one or more email addresses |
-| `grav.deleteUserimage(imageName)` | remove a userimage from the account and any email addresses with which it is associated |
-| `grav.test()` | a test function |
+| `grav.exists()` | returns a gravatar if the account exists |
+| `grav.addresses()` | returns all email addresses for this account |
+| `grav.userImages()` | returns all gravatar images for this account  |
+| `grav.saveImage(imageFilePath,rating)` | upload an image |
+| `grav.saveEncodedImage(imageData,mimetype,rating)` | upload a base64 encoded image |
+| `grav.saveUrl(imageUrl)` | save image url |
+| `grav.useUserimage(imageName)` | set primary gravatar icon using an image from this account  |
+| `grav.removeImage()` | set default Gravatar logo as the primary icon for this account |
+| `grav.deleteUserimage(imageName)` | remove an image from this account |
+| `grav.test()` | sanity check |
  
 ### Parsers
 
-Parsers are helper modules designed to normalize the raw JSON response data.
+The raw response is verbose:
 
 ```js
-grav.test().then(data => console.log(data)) // raw
+grav.test().then(data => console.log(data))
 ```
 ```json
 {
@@ -86,75 +87,75 @@ grav.test().then(data => console.log(data)) // raw
 }
 ```
 
+Parsers are helper classes designed to normalize the raw response data:
+
 ```js
 const { 
     ParseContext,
     TestParser
-} = require('../index');
+} = require('grav.client');
 
 const testParser = new TestParser();
-const parseContext = new ParseContext(testParser);
-const grav = Grav.login("user@example.com", "password");
+const context = new ParseContext(testParser);
+const grav = Grav.login(creds.email, creds.password);
 
-grav.test().then(data => {
-  const response = parseContext.parse(data); // parsed
-  console.log(data);
-})
+grav.test()
+    .then(data => context.parse(data))
+    .then(console.log)
+    .catch(console.log);
 ```
 
 ```js
 { response: 1548903405 }
 ```
 
-Notice how the `testParser` is instantiated and then passed to the `parseContext`. This allows us to define a family of parsers that may be interchanged during runtime:
+The `ParseContext` allows us to interchange different parsers as runtime:
 
 ```js
 const {
   Grav, ParseContext,
-  UserImagesParser, UseUserImageParser
-} = require('../index');
+  userImagesParser, UseUserImageParser
+} = require('grav.client');
 
-const userImagesParser = new UserImagesParser();
+const userImagesParser = new userImagesParser();
 const context = new ParseContext(userImagesParser);
 const grav = Grav.login("user@example.com", "password");
 
-// collect all avatars
-grav.userimages().then(userImagesResponse => {
-  // pick one
-  const images = context.parse(userImagesResponse);
-  const selectedImage = images[0];
-  // set as primary avatar
-  grav.useUserimage(selectedImage.name).then(useUserimageResponse => {
-    context.parser = new UseUserImageParser();
-    const response = context.parse(useUserimageResponse);
-    console.log(response);
-  }).catch(err => console.log(err));
-}).catch(err => console.log(err));
+grav.userImages()
+    .then(userImages => context.parse(userImages))
+    .then(images => images[0])
+    .then(image => grav.useUserimage(image.name))
+    .then(useUserimageResponse => {
+      context.parser = new UseUserImageParser();
+      return context.parse(useUserimageResponse);
+    })
+    .then(console.log)
+    .catch(console.log);
 ```
 ```js
 { response: true }
 ```
 
-With the exception of `grav.saveData`, each method has a corresponding parser: 
+Each method has a corresponding parser: 
 
 | Parser     | Method  |
 |------------|--------------|
 | `ExistsParser` | `grav.exists()` |
 | `AddressParser` | `grav.addresses()` |
-| `UserImagesParser` | `grav.userimages()` |
-| § `SaveUrlParser` | `grav.saveData(imageData)`|
+| `userImagesParser` | `grav.userImages()` |
+| * `SaveUrlParser` | `grav.saveImage(imageUrl)` |
+| * `SaveUrlParser` | `grav.saveEncodedImage(imageData, 'jpeg', rating)`|
 | `SaveUrlParser` | `grav.saveUrl(imageUrl)` |
 | `UseUserImageParser` | `grav.useUserimage(imageName)` |
 | `RemoveImageParser` | `grav.removeImage()` |
 | `DeleteUserImageParser` | `grav.deleteUserimage(imageName)` |
 | `TestParser`| `grav.test()` |
 
-
-> § Internally, `grav.saveData` relies upon `grav.saveUrl`.
+&ast; `grav.saveImage` and `grav.saveEncodedImage` rely on `grav.saveUrl`.
 
 ### Examples
  
- For more demos, be sure to check out the [examples](https://github.com/mrtillman/grav.client/tree/master/examples) folder.
+ For more demos, be sure to check out the [examples](https://github.com/mrtillman/grav.client/tree/master/examples).
 
 ## License
 [MIT](https://github.com/mrtillman/grav.client/blob/master/LICENSE.md)

@@ -7,7 +7,7 @@ const testParser = new TestParser();
 const context = new ParseContext(testParser);
 const grav = Grav.login(creds.email, creds.password);
 
-grav.test().then(data => {
-  const response = context.parse(data);
-  console.log(response);
-}).catch(err => console.log(err));
+grav.test()
+    .then(data => context.parse(data))
+    .then(console.log)
+    .catch(console.log);
