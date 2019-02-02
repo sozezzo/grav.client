@@ -11,7 +11,7 @@ const grav = Grav.login(creds.email, creds.password);
 grav.userImages()
     .then(userImages => context.parse(userImages))
     .then(images => images[0])
-    .then(image => grav.deleteUserimage(image.name))
+    .then(image => grav.deleteUserImage(image.name))
     .then(deleteUserimageResponse => {
       context.parser = new DeleteUserImageParser();
       return context.parse(deleteUserimageResponse);

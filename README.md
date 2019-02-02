@@ -45,9 +45,9 @@
 | `grav.saveImage(imageFilePath,rating)` | upload an image |
 | `grav.saveEncodedImage(imageData,mimetype,rating)` | upload a base64 encoded image |
 | `grav.saveUrl(imageUrl)` | save image url |
-| `grav.useUserimage(imageName)` | set primary gravatar icon using an image from this account  |
+| `grav.useUserImage(imageName)` | set primary gravatar icon using an image from this account  |
 | `grav.removeImage()` | set default Gravatar logo as the primary icon for this account |
-| `grav.deleteUserimage(imageName)` | remove an image from this account |
+| `grav.deleteUserImage(imageName)` | remove an image from this account |
 | `grav.test()` | sanity check |
  
 ### Parsers
@@ -97,7 +97,7 @@ const {
 
 const testParser = new TestParser();
 const context = new ParseContext(testParser);
-const grav = Grav.login(creds.email, creds.password);
+const grav = Grav.login("user@example.com", "password");
 
 grav.test()
     .then(data => context.parse(data))

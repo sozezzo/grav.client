@@ -35,7 +35,7 @@ Grav.prototype.addresses = function(){
 
 Grav.prototype.userImages = function(){
   return new Promise((resolve, reject) => {
-    const payload = this.xml.grav_userimages();
+    const payload = this.xml.grav_userImages();
     api.get(this.api_url, payload)
     .then(response => {
       resolve(response);
@@ -83,9 +83,9 @@ Grav.prototype.saveUrl = function(imageUrl, rating = 0){
   })
 }
 
-Grav.prototype.useUserimage = function(imageName){
+Grav.prototype.useUserImage = function(imageName){
   return new Promise((resolve, reject) => {
-    const payload = this.xml.grav_useUserimage(imageName);
+    const payload = this.xml.grav_useUserImage(imageName);
     api.get(this.api_url, payload)
     .then(response => {
       resolve(response);
@@ -103,9 +103,9 @@ Grav.prototype.removeImage = function(){
   })
 }
 
-Grav.prototype.deleteUserimage = function(imageName){
+Grav.prototype.deleteUserImage = function(imageName){
   return new Promise((resolve, reject) => {
-    const payload = this.xml.grav_deleteUserimage(imageName);
+    const payload = this.xml.grav_deleteUserImage(imageName);
     api.get(this.api_url, payload)
     .then(response => {
       resolve(response);

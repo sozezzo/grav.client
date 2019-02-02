@@ -47,7 +47,7 @@ module.exports = function GravXML(email, password){
 
     },
 
-    grav_userimages: function (){
+    grav_userImages: function (){
       return `<methodCall>
               <methodName>grav.userimages</methodName>
               <params>
@@ -91,7 +91,7 @@ module.exports = function GravXML(email, password){
               </methodCall>`;
     },
 
-    grav_useUserimage: function (imageName){
+    grav_useUserImage: function (imageName){
       return `<methodCall>
                 <methodName>grav.useUserimage</methodName>
                 <params>
@@ -149,7 +149,7 @@ module.exports = function GravXML(email, password){
             </methodCall>`;
     },
 
-    grav_deleteUserimage: function (imageName){
+    grav_deleteUserImage: function (imageName){
       return `<methodCall>
               <methodName>grav.deleteUserimage</methodName>
               <params>
