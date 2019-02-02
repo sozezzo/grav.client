@@ -42,17 +42,17 @@
 | `grav.exists()` | returns a gravatar if the account exists |
 | `grav.addresses()` | returns all email addresses tied to this account |
 | `grav.userimages()` | returns all gravatar images for this account  |
-| `grav.saveImage(imageFilePath,rating)` | upload a new image |
+| `grav.saveImage(imageFilePath,rating)` | upload an image |
 | `grav.saveEncodedImage(imageData,mimetype,rating)` | upload a base64 encoded image |
 | `grav.saveUrl(imageUrl)` | save image url |
 | `grav.useUserimage(imageName)` | set a new primary gravatar using one of the images from this account |
 | `grav.removeImage()` | set primary image to the default Gravatar icon |
 | `grav.deleteUserimage(imageName)` | remove an image from this account |
-| `grav.test()` | a test function |
+| `grav.test()` | sanity check |
  
 ### Parsers
 
-The raw response data is  verbose:
+The raw response is verbose:
 
 ```js
 grav.test().then(data => console.log(data))

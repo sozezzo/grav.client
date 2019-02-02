@@ -5,7 +5,7 @@ const {
   Grav, SaveUrlParser, ParseContext
  } = require('../index');
 
-// internally, grav.saveEncodedImage relies upon grav.saveUrl
+// internally, grav.saveEncodedImage relies on grav.saveUrl
 const saveUrlParser = new SaveUrlParser();
 const context = new ParseContext(saveUrlParser);
 const bitmap = fs.readFileSync('./gump.jpg');
