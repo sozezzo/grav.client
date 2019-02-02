@@ -41,7 +41,7 @@
 |-----------|--------------|
 | `grav.exists()` | returns a gravatar if the account exists |
 | `grav.addresses()` | returns all email addresses for this account |
-| `grav.userimages()` | returns all gravatar images for this account  |
+| `grav.userImages()` | returns all gravatar images for this account  |
 | `grav.saveImage(imageFilePath,rating)` | upload an image |
 | `grav.saveEncodedImage(imageData,mimetype,rating)` | upload a base64 encoded image |
 | `grav.saveUrl(imageUrl)` | save image url |
@@ -114,14 +114,14 @@ The `ParseContext` allows us to interchange different parsers as runtime:
 ```js
 const {
   Grav, ParseContext,
-  UserImagesParser, UseUserImageParser
+  userImagesParser, UseUserImageParser
 } = require('grav.client');
 
-const userImagesParser = new UserImagesParser();
+const userImagesParser = new userImagesParser();
 const context = new ParseContext(userImagesParser);
 const grav = Grav.login("user@example.com", "password");
 
-grav.userimages()
+grav.userImages()
     .then(userImages => context.parse(userImages))
     .then(images => images[0])
     .then(image => grav.useUserimage(image.name))
@@ -142,7 +142,7 @@ Each method has a corresponding parser:
 |------------|--------------|
 | `ExistsParser` | `grav.exists()` |
 | `AddressParser` | `grav.addresses()` |
-| `UserImagesParser` | `grav.userimages()` |
+| `userImagesParser` | `grav.userImages()` |
 | * `SaveUrlParser` | `grav.saveImage(imageUrl)` |
 | * `SaveUrlParser` | `grav.saveEncodedImage(imageData, 'jpeg', rating)`|
 | `SaveUrlParser` | `grav.saveUrl(imageUrl)` |
