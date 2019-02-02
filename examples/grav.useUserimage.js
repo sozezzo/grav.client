@@ -8,7 +8,7 @@ const userImagesParser = new UserImagesParser();
 const context = new ParseContext(userImagesParser);
 const grav = Grav.login(creds.email, creds.password);
 
-grav.userimages()
+grav.userImages()
     .then(userImages => context.parse(userImages))
     .then(images => images[0])
     .then(image => grav.useUserimage(image.name))

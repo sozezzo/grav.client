@@ -18,7 +18,7 @@ api.get = function(url, payload){
 
 api.post = function(avatar){
   return new Promise((resolve, reject) => {
-    const save = avatar.data ? saveBase64Image : saveImageFile;
+    const save = avatar.mimetype ? saveEncodedImage : saveImageFile;
     save(avatar, function(error, response, body){
       if(error) reject(error);
       resolve(body);
@@ -34,14 +34,13 @@ function saveImageFile(avatar, callback){
   }, callback);
 }
 
-function saveBase64Image(avatar, callback){
+function saveEncodedImage(avatar, callback){
   request.post({
     headers: { 'content-type' : 'application/json; charset=UTF-8' },
     url:     "https://dailyavatar.io/api/v1/avatars/base64",
     body:    JSON.stringify(avatar)
   }, callback);
 }
-
 
 module.exports = api;
 

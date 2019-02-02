@@ -5,7 +5,7 @@ const Grav = require('./core/grav');
 const ParseContext = require('./core/parsers/parse.context');
 const RemoveImageParser = require('./core/parsers/removeImage.parser');
 const TestParser = require('./core/parsers/test.parser');
-const UserImagesParser = require('./core/parsers/userimages.parser');
+const UserImagesParser = require('./core/parsers/userImages.parser');
 const UseUserImageParser = require('./core/parsers/useUserImage.parser');
 const SaveUrlParser = require('./core/parsers/saveUrl.parser');
 

@@ -62,34 +62,6 @@ module.exports = function GravXML(email, password){
               </params>
             </methodCall>`;
     },
-    
-    grav_saveData: function (imageData, rating = 0){
-      return `<methodCall>
-                <methodName>grav.saveData</methodName>
-                <params>
-                  <param><value><struct>
-                    <member>
-                      <name>data</name>
-                      <value>
-                        <string>${imageData}</string>
-                      </value>
-                    </member>
-                    <member>
-                      <name>rating</name>
-                      <value>
-                        <int>${rating}</int>
-                      </value>
-                    </member>
-                    <member>
-                      <name>password</name>
-                      <value>
-                        <string>${password}</string>
-                      </value>
-                    </member>
-                  </struct></value></param>
-                </params>
-              </methodCall>`;
-    },
 
     grav_saveUrl: function (imageUrl, rating = 0){
       return `<methodCall>
