@@ -124,10 +124,10 @@ const grav = Grav.login("user@example.com", "password");
 grav.userImages()
     .then(userImages => context.parse(userImages))
     .then(images => images[0])
-    .then(image => grav.useUserimage(image.name))
-    .then(useUserimageResponse => {
+    .then(image => grav.useUserImage(image.name))
+    .then(useUserImageResponse => {
       context.parser = new UseUserImageParser();
-      return context.parse(useUserimageResponse);
+      return context.parse(useUserImageResponse);
     })
     .then(console.log)
     .catch(console.log);
@@ -146,9 +146,9 @@ Each method has a corresponding parser:
 | * `SaveUrlParser` | `grav.saveImage(imageUrl)` |
 | * `SaveUrlParser` | `grav.saveEncodedImage(imageData, 'jpeg', rating)`|
 | `SaveUrlParser` | `grav.saveUrl(imageUrl)` |
-| `UseUserImageParser` | `grav.useUserimage(imageName)` |
+| `UseUserImageParser` | `grav.useUserImage(imageName)` |
 | `RemoveImageParser` | `grav.removeImage()` |
-| `DeleteUserImageParser` | `grav.deleteUserimage(imageName)` |
+| `DeleteUserImageParser` | `grav.deleteUserImage(imageName)` |
 | `TestParser`| `grav.test()` |
 
 &ast; `grav.saveImage` and `grav.saveEncodedImage` rely on `grav.saveUrl`.

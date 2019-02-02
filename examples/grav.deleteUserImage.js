@@ -12,9 +12,9 @@ grav.userImages()
     .then(userImages => context.parse(userImages))
     .then(images => images[0])
     .then(image => grav.deleteUserImage(image.name))
-    .then(deleteUserimageResponse => {
+    .then(deleteUserImageResponse => {
       context.parser = new DeleteUserImageParser();
-      return context.parse(deleteUserimageResponse);
+      return context.parse(deleteUserImageResponse);
     })
     .then(console.log)
     .catch(console.log);
