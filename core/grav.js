@@ -3,6 +3,7 @@ const crypto = require('crypto');
 const api = require('./grav.api');
 const utils = require('./grav.utils');
 const fs = require('fs');
+const Parsers = require('../core/parsers');
 
 function Grav(email, password){
   email = `${email}`.trim().toLowerCase();
@@ -11,6 +12,7 @@ function Grav(email, password){
                     .update(email)
                     .digest("hex");
   this.api_url = `${utils.api_origin}/xmlrpc?user=${this.hash}`;
+  this.verbose = false;
 }
 
 Grav.prototype.exists = function(){
@@ -18,7 +20,14 @@ Grav.prototype.exists = function(){
     const payload = this.xml.grav_exists(this.hash);
     api.get(this.api_url, payload)
     .then(response => {
-      resolve(response);
+      if(this.verbose){
+        const { ParseContext, ExistsParser } = Parsers;
+        const context = new ParseContext(new ExistsParser());
+        const _response = context.parse(response);
+        resolve(_response);
+      } else {
+        resolve(response);
+      }
     }).catch(reject);
   })
 }

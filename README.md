@@ -109,7 +109,7 @@ grav.test()
 { response: 1548903405 }
 ```
 
-The `ParseContext` allows us to interchange different parsers as runtime:
+The `ParseContext` allows us to interchange different parsers at runtime:
 
 ```js
 const {
