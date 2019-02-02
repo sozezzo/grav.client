@@ -43,8 +43,8 @@
 | `grav.addresses()` | returns all email addresses for this account |
 | `grav.userImages()` | returns all gravatar images for this account  |
 | `grav.saveImage(imageFilePath,rating)` | upload an image |
-| `grav.saveEncodedImage(imageData,mimetype,rating)` | upload a base64 encoded image |
-| `grav.saveUrl(imageUrl)` | save image url |
+| `grav.saveEncodedImage(base64String,mimetype,rating)` | upload a base64 encoded image |
+| `grav.saveUrl(imageUrl,rating)` | save image url |
 | `grav.useUserImage(imageName)` | set primary gravatar icon using an image from this account  |
 | `grav.removeImage()` | set default Gravatar logo as the primary icon for this account |
 | `grav.deleteUserImage(imageName)` | remove an image from this account |
@@ -109,6 +109,16 @@ grav.test()
 { response: 1548903405 }
 ```
 
+The global `autoParse` flag will enable parsing everywhere:
+
+```js
+grav.autoParse = true;
+
+grav.test()
+    // .then(data => context.parse(data))
+    .then(console.log) // auto-parsed
+```
+
 The `ParseContext` allows us to interchange different parsers at runtime:
 
 ```js
@@ -143,9 +153,9 @@ Each method has a corresponding parser:
 | `ExistsParser` | `grav.exists()` |
 | `AddressParser` | `grav.addresses()` |
 | `userImagesParser` | `grav.userImages()` |
-| * `SaveUrlParser` | `grav.saveImage(imageUrl)` |
-| * `SaveUrlParser` | `grav.saveEncodedImage(imageData, 'jpeg', rating)`|
-| `SaveUrlParser` | `grav.saveUrl(imageUrl)` |
+| * `SaveUrlParser` | `grav.saveImage(imageUrl,rating)` |
+| * `SaveUrlParser` | `grav.saveEncodedImage(base64String,mimetype,rating)`|
+| `SaveUrlParser` | `grav.saveUrl(imageUrl,rating)` |
 | `UseUserImageParser` | `grav.useUserImage(imageName)` |
 | `RemoveImageParser` | `grav.removeImage()` |
 | `DeleteUserImageParser` | `grav.deleteUserImage(imageName)` |
