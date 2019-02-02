@@ -40,13 +40,13 @@
 |Method     | Description  |
 |-----------|--------------|
 | `grav.exists()` | returns a gravatar if the account exists |
-| `grav.addresses()` | returns all email addresses tied to this account |
+| `grav.addresses()` | returns all email addresses for this account |
 | `grav.userimages()` | returns all gravatar images for this account  |
 | `grav.saveImage(imageFilePath,rating)` | upload an image |
 | `grav.saveEncodedImage(imageData,mimetype,rating)` | upload a base64 encoded image |
 | `grav.saveUrl(imageUrl)` | save image url |
-| `grav.useUserimage(imageName)` | set a new primary gravatar using one of the images from this account |
-| `grav.removeImage()` | set primary image to the default Gravatar icon |
+| `grav.useUserimage(imageName)` | set primary gravatar icon using an image from this account  |
+| `grav.removeImage()` | set default Gravatar logo as the primary icon for this account |
 | `grav.deleteUserimage(imageName)` | remove an image from this account |
 | `grav.test()` | sanity check |
  

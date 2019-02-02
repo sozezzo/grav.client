@@ -4,7 +4,7 @@ const {
   Grav, SaveUrlParser, ParseContext
  } = require('../index');
 
-//internally, grav.saveImage relies on grav.saveUrl
+// internally, grav.saveImage relies on grav.saveUrl
 const saveUrlParser = new SaveUrlParser();
 const context = new ParseContext(saveUrlParser);
 const grav = Grav.login(creds.email, creds.password);
