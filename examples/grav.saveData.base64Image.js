@@ -5,14 +5,14 @@ const {
   Grav, SaveUrlParser, ParseContext
  } = require('../index');
 
-//internally, grav.saveData relies upon grav.saveUrl
+// internally, grav.saveData relies upon grav.saveUrl
 const saveUrlParser = new SaveUrlParser();
 const context = new ParseContext(saveUrlParser);
 const bitmap = fs.readFileSync('./gump.jpg');
 const imageData = new Buffer(bitmap).toString('base64');
 const grav = Grav.login(creds.email, creds.password);
 
-grav.saveData(imageData, 'jpg', RATED.G).then(data => {
-  const response = context.parse(data);
-  console.log(response);
-}).catch(err => console.log(err));
+grav.saveData(imageData, 'jpg', RATED.G)
+    .then(data => context.parse(data))
+    .then(console.log)
+    .catch(console.log);

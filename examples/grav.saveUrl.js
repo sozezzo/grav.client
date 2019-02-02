@@ -10,7 +10,7 @@ const grav = Grav.login(creds.email, creds.password);
 
 const imageUrl = "https://via.placeholder.com/150";
 
-grav.saveUrl(imageUrl, RATED.G).then(data => {
-  const response = context.parse(data);
-  console.log(response);
-}).catch(err => console.log(err));
+grav.saveUrl(imageUrl, RATED.G)
+    .then(data => context.parse(data))
+    .then(console.log)
+    .catch(console.log);

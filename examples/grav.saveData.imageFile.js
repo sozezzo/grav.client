@@ -1,6 +1,5 @@
-const request = require('request');
+const RATED = require('./image.rating');
 const creds = require('../creds');
-const fs = require('fs');
 const { 
   Grav, SaveUrlParser, ParseContext
  } = require('../index');
@@ -11,7 +10,7 @@ const context = new ParseContext(saveUrlParser);
 const grav = Grav.login(creds.email, creds.password);
 const imageFilePath = `${__dirname}/gump.jpg`;
 
-grav.saveData(imageFilePath).then(data => {
-  const response = context.parse(data);
-  console.log(response);
-}).catch(err => console.log(err));
+grav.saveData(imageFilePath, null, RATED.G)
+    .then(data => context.parse(data))
+    .then(console.log)
+    .catch(console.log);
