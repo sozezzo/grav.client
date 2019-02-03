@@ -1,13 +1,13 @@
-const AddressParser = require('./core/parsers/address.parser');
-const DeleteUserImageParser = require('./core/parsers/deleteUserImage.parser');
-const ExistsParser = require('./core/parsers/exists.parser');
-const Grav = require('./core/grav');
-const ParseContext = require('./core/parsers/parse.context');
-const RemoveImageParser = require('./core/parsers/removeImage.parser');
-const TestParser = require('./core/parsers/test.parser');
-const UserImagesParser = require('./core/parsers/userImages.parser');
-const UseUserImageParser = require('./core/parsers/useUserImage.parser');
-const SaveUrlParser = require('./core/parsers/saveUrl.parser');
+const AddressParser = require('./lib/parsers/address.parser');
+const DeleteUserImageParser = require('./lib/parsers/deleteUserImage.parser');
+const ExistsParser = require('./lib/parsers/exists.parser');
+const Grav = require('./lib');
+const ParseContext = require('./lib/parsers/parse.context');
+const RemoveImageParser = require('./lib/parsers/removeImage.parser');
+const TestParser = require('./lib/parsers/test.parser');
+const UserImagesParser = require('./lib/parsers/userImages.parser');
+const UseUserImageParser = require('./lib/parsers/useUserImage.parser');
+const SaveUrlParser = require('./lib/parsers/saveUrl.parser');
 
 module.exports = {
   AddressParser, DeleteUserImageParser, ExistsParser,
