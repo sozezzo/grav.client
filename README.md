@@ -91,6 +91,7 @@ Parsers are helper classes designed to normalize the raw response data:
 
 ```js
 const { 
+    Grav,
     ParseContext,
     TestParser
 } = require('grav.client');
@@ -109,7 +110,7 @@ grav.test()
 { response: 1548903405 }
 ```
 
-The global `autoParse` flag will enable parsing everywhere:
+The global `autoParse` flag enables parsing everywhere:
 
 ```js
 grav.autoParse = true;
