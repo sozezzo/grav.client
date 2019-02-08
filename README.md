@@ -125,10 +125,10 @@ The `ParseContext` allows us to interchange different parsers at runtime:
 ```js
 const {
   Grav, ParseContext,
-  userImagesParser, UseUserImageParser
+  UserImagesParser, UseUserImageParser
 } = require('grav.client');
 
-const userImagesParser = new userImagesParser();
+const userImagesParser = new UserImagesParser();
 const context = new ParseContext(userImagesParser);
 const grav = Grav.login("user@example.com", "password");
 
@@ -167,6 +167,8 @@ Each method has a corresponding parser:
 ### Examples
  
  For more demos, be sure to check out the [examples](https://github.com/mrtillman/grav.client/tree/master/examples).
+
+ Example method responses may be found [here](https://github.com/mrtillman/grav.client/tree/master/spec/responses).
 
 ## License
 [MIT](https://github.com/mrtillman/grav.client/blob/master/LICENSE.md)
