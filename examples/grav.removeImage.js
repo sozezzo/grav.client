@@ -9,6 +9,6 @@ const grav = Grav.login(creds.email, creds.password);
 
 // removes current primary avatar
 grav.removeImage()
-    .then(data => context.parse(data))
+    //.then(data => context.parse(data))
     .then(console.log)
     .catch(console.log);
