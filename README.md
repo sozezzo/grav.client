@@ -8,9 +8,10 @@
  https://en.gravatar.com/site/implement/xmlrpc. 
  
  You can also try it out using [Postman](https://learning.getpostman.com/):
+
  [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/e27a4edf756f4cbe80b5)
 
-See the [unofficial API docs](https://documenter.getpostman.com/view/1403721/Rztpr87i) for more details.
+To learn more, see the [unofficial API docs](https://documenter.getpostman.com/view/1403721/Rztpr87i).
 
 ## Table of Contents
 
