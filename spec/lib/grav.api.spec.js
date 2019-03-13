@@ -1,8 +1,10 @@
+require('dotenv').config();
+const email = process.env.EMAIL;
+const password = process.env.PASSWORD;
 const api = require('../../lib/grav.api');
 const nock = require('nock');
 const crypto = require('crypto');
 const GravXML = require('../../lib/grav.xml');
-const creds = require('../../creds');
 const utils = require('../../lib/grav.utils');
 
 let hash;
@@ -14,9 +16,9 @@ describe('xml-rpc api client', function(){
 
   beforeEach(function(){
     hash = crypto.createHash('md5')
-                 .update(creds.email.trim().toLowerCase())
+                 .update(email)
                  .digest("hex");
-    xml = new GravXML(creds.email, creds.password);
+    xml = new GravXML(email, password);
     endpoint = `${utils.api_origin}/xmlrpc?user=${hash}`;
   })
 
