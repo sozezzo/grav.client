@@ -174,9 +174,9 @@ Each method has a corresponding parser:
 
 ### Examples
  
- For more demos, be sure to check out the [demos](https://github.com/mrtillman/grav.client/tree/master/demo).
+ For more examples, be sure to check out the [demos](https://github.com/mrtillman/grav.client/tree/master/demo).
 
- Example method responses may be found [here](https://github.com/mrtillman/grav.client/tree/master/spec/responses).
+ Sample method responses may be found [here](https://github.com/mrtillman/grav.client/tree/master/spec/responses).
 
 ## License
 [MIT](https://github.com/mrtillman/grav.client/blob/master/LICENSE.md)
