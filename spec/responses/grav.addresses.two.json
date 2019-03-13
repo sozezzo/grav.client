@@ -12,7 +12,7 @@
                         "member": [
                             {
                                 "name": {
-                                    "_text": "fulltimewarehouseassociate@gmail.com"
+                                    "_text": "user1@example.com"
                                 },
                                 "value": {
                                     "struct": {
@@ -51,7 +51,7 @@
                             },
                             {
                                 "name": {
-                                    "_text": "askmrtillman@gmail.com"
+                                    "_text": "user2@example.com"
                                 },
                                 "value": {
                                     "struct": {
