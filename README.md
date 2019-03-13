@@ -172,7 +172,7 @@ Each method has a corresponding parser:
 
 ### Examples
  
- For more demos, be sure to check out the [examples](https://github.com/mrtillman/grav.client/tree/master/examples).
+ For more demos, be sure to check out the [demos](https://github.com/mrtillman/grav.client/tree/master/demo).
 
  Example method responses may be found [here](https://github.com/mrtillman/grav.client/tree/master/spec/responses).
 
