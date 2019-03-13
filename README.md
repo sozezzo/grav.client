@@ -4,6 +4,8 @@
  
  ---
  
+ [![Try stripe on RunKit](https://badge.runkitcdn.com/stripe.svg)](https://runkit.com/mrtillman/gravatar-xml-rpc-api)
+ 
  Please refer to the official Gravatar XML-RPC API documentation for more details:
  https://en.gravatar.com/site/implement/xmlrpc. 
  
