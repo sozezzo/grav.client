@@ -18,7 +18,7 @@
   "scripts": {
     "test": "jasmine"
   },
-  "author": "",
+  "author": "mrtillman",
   "license": "MIT",
   "dependencies": {
     "crypto": "^1.0.1",
