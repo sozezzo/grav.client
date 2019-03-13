@@ -18,6 +18,7 @@ To learn more, see the [unofficial API docs](https://documenter.getpostman.com/v
 ## Table of Contents
 
 - [Installation](#Installation)
+- [Tests](#Tests)
 - [Usage](#Usage)
     + [Methods](#Methods)
     + [Parsers](#Parsers)
@@ -29,6 +30,22 @@ To learn more, see the [unofficial API docs](https://documenter.getpostman.com/v
 
 ```sh
   npm install grav.client
+```
+
+## Tests
+
+```sh
+  cd grav.client
+
+  npm test
+
+  Randomized with seed 59193
+  Started
+  ...........................
+
+
+  27 specs, 0 failures
+  Finished in 0.118 seconds
 ```
 
 ## Usage
