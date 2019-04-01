@@ -21,6 +21,7 @@
   "author": "mrtillman",
   "license": "MIT",
   "dependencies": {
+    "babel-jest": "^24.6.0",
     "crypto": "^1.0.1",
     "dotenv": "^6.2.0",
     "nock": "^10.0.6",
