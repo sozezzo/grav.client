@@ -1,162 +1,72 @@
-require('dotenv').config();
-const email = process.env.EMAIL;
-const password = process.env.PASSWORD;
+const mock = require('../test.doubles/mocks');
 const api = require('../../lib/grav.api');
-const nock = require('nock');
-const crypto = require('crypto');
-const GravXML = require('../../lib/grav.xml');
 const utils = require('../../lib/grav.utils');
+const fakes = require('../test.doubles/fakes');
+const endpoint = `${utils.api_origin}/xmlrpc?user=user`;
+const xmlPayload = '<methodCall></methodCall>';
 
-let hash;
-let xml;
-let endpoint;
-let response = '<?xml version="1.0"?><methodResponse></methodResponse>';
+mock.httpServer();
 
-describe('xml-rpc api client', function(){
+describe('grav.api', () => {
 
-  beforeEach(function(){
-    hash = crypto.createHash('md5')
-                 .update(email)
-                 .digest("hex");
-    xml = new GravXML(email, password);
-    endpoint = `${utils.api_origin}/xmlrpc?user=${hash}`;
-  })
-
-  it('should have get method', function(){
+  it('should have get method', () => {
     expect(api.get).toBeDefined();
   })
 
-  it('should implement grav.exists', function(){
-
-    nock(utils.api_origin)
-    .get(`/xmlrpc?user=${hash}`)
-    .reply(200, response);
-    
-    payload = xml.grav_exists(hash);
-    
-    api.get(endpoint, payload)
-       .then(response => {
-          const _response = JSON.parse(response);
-          expect(typeof response).toBe('string');
-          expect(typeof _response).toBe('object');
-          expect(_response._declaration).toBeDefined();
-          expect(_response.methodResponse).toBeDefined();
-        })
-
+  it('should have post method', () => {
+    expect(api.post).toBeDefined();
   })
 
-  it('should implement grav.addresses', function(){
-
-    nock(utils.api_origin)
-    .get(`/xmlrpc?user=${hash}`)
-    .reply(200, response);
-    
-    payload = xml.grav_addresses(hash);
-    
-    api.get(endpoint, payload)
-       .then(response => {
-          const _response = JSON.parse(response);
-          expect(typeof response).toBe('string');
-          expect(typeof _response).toBe('object');
-          expect(_response._declaration).toBeDefined();
-          expect(_response.methodResponse).toBeDefined();
-        })
-
+  it('should have saveEncodedImage method', () => {
+    expect(api.saveEncodedImage).toBeDefined();
   })
 
-  it('should implement grav.userImages', function(){
-
-    nock(utils.api_origin)
-    .get(`/xmlrpc?user=${hash}`)
-    .reply(200, response);
-    
-    payload = xml.grav_userImages(hash);
-    
-    api.get(endpoint, payload)
-       .then(response => {
-          const _response = JSON.parse(response);
-          expect(typeof response).toBe('string');
-          expect(typeof _response).toBe('object');
-          expect(_response._declaration).toBeDefined();
-          expect(_response.methodResponse).toBeDefined();
-        })
-
+  it('should have saveImageFile method', () => {
+    expect(api.saveImageFile).toBeDefined();
   })
 
-  it('should implement grav.saveUrl', function(){
-
-    nock(utils.api_origin)
-    .get(`/xmlrpc?user=${hash}`)
-    .reply(200, response);
-    
-    payload = xml.grav_saveUrl(hash);
-    
-    api.get(endpoint, payload)
-       .then(response => {
-          const _response = JSON.parse(response);
-          expect(typeof response).toBe('string');
-          expect(typeof _response).toBe('object');
-          expect(_response._declaration).toBeDefined();
-          expect(_response.methodResponse).toBeDefined();
-        })
-
+  it('should invoke callback after saving encoded image', (done) => {
+    api.saveEncodedImage({}, (err, response, body) => {
+      expect(body).toBe(fakes.imageUrl);
+      done();
+    });
   })
 
-  it('should implement grav.removeImage', function(){
-
-    nock(utils.api_origin)
-    .get(`/xmlrpc?user=${hash}`)
-    .reply(200, response);
-    
-    payload = xml.grav_removeImage(hash);
-    
-    api.get(endpoint, payload)
-       .then(response => {
-          const _response = JSON.parse(response);
-          expect(typeof response).toBe('string');
-          expect(typeof _response).toBe('object');
-          expect(_response._declaration).toBeDefined();
-          expect(_response.methodResponse).toBeDefined();
-        })
-
+  it('should invoke callback after saving image file', (done) => {
+    api.saveImageFile({}, (err, response, body) => {
+      expect(body).toBe(fakes.imageUrl);
+      done();
+    });
   })
 
-  it('should implement grav.deleteUserImage', function(){
-
-    nock(utils.api_origin)
-    .get(`/xmlrpc?user=${hash}`)
-    .reply(200, response);
-    
-    payload = xml.grav_deleteUserImage(hash);
-    
-    api.get(endpoint, payload)
-       .then(response => {
-          const _response = JSON.parse(response);
-          expect(typeof response).toBe('string');
-          expect(typeof _response).toBe('object');
-          expect(_response._declaration).toBeDefined();
-          expect(_response.methodResponse).toBeDefined();
-        })
-
+  describe('grav.api.get', () => {
+    it('should convert text/xml response to json object', () => {
+      api.get(endpoint, xmlPayload)
+         .then(response => {
+            expect(typeof response).toBe('object');
+          })
+    })
   })
 
-  it('should implement grav.test', function(){
-
-    nock(utils.api_origin)
-    .get(`/xmlrpc?user=${hash}`)
-    .reply(200, response);
-    
-    payload = xml.grav_test(hash);
-    
-    api.get(endpoint, payload)
-       .then(response => {
-          const _response = JSON.parse(response);
-          expect(typeof response).toBe('string');
-          expect(typeof _response).toBe('object');
-          expect(_response._declaration).toBeDefined();
-          expect(_response.methodResponse).toBeDefined();
-        })
-
+  describe('grav.api.post', () => {
+    it('should save encoded image if mimetype is present', (done) => {
+      const avatar = { mimetype: 'jpg' };
+      const saveEncodedImageSpy = jest.spyOn(api, 'saveEncodedImage');
+      api.post(avatar)
+         .then(response => {
+           expect(saveEncodedImageSpy).toHaveBeenCalled();
+           done();
+          })
+    })
+    it('should save image file if mimetype is not present', (done) => {
+      const avatar = { mimetype: undefined };
+      const saveImageFileSpy = jest.spyOn(api, 'saveImageFile');
+      api.post(avatar)
+         .then(response => {
+           expect(saveImageFileSpy).toHaveBeenCalled();
+           done();
+          })
+    })
   })
 
 })
