@@ -1,40 +1,27 @@
 const utils = require('../../lib/grav.utils');
-
-const booleanField = {
-      boolean: { _text: "1" }
-}
-
-const intField = {
-  int: { _text: "1" }
-}
-
-const stringField = {
-  string: { _text: "2 hands 10 fingers" }
-}
+const fakes = require('../test.doubles/fakes');
 
 describe('grav.utils', function(){
 
   it('should have correct api origin', function(){
-    
     expect(utils.api_origin).toEqual("https://secure.gravatar.com");
-
   })
 
-  it('should have correct rating values', function(){
-
-    expect(utils.rating[0]).toEqual('g');
-    expect(utils.rating[1]).toEqual('pg');
-    expect(utils.rating[2]).toEqual('r');
-    expect(utils.rating[3]).toEqual('x');
-    
+  test.each([
+    ['g', 0],
+    ['pg', 1],
+    ['r', 2],
+    ['x', 3],
+  ])('should have "%s" rating value', (code, index) => {
+    expect(utils.rating[index]).toBe(code);
   })
 
-  it('should parse raw field values', function(){
-    
-    expect(utils.parseFieldValue(booleanField)).toEqual(true);
-    expect(utils.parseFieldValue(intField)).toEqual(1);
-    expect(utils.parseFieldValue(stringField)).toEqual("2 hands 10 fingers");
-
+  test.each([
+    ['bool', fakes.booleanField, true],
+    ['int', fakes.intField, 1],
+    ['string', fakes.stringField, "2 hands 10 fingers"],
+  ])('should parse %s field', (typeName, field, fieldValue) => {
+    expect(utils.parseFieldValue(field)).toBe(fieldValue);
   })
 
 })
