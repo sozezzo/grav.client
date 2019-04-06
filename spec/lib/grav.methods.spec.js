@@ -1,127 +1,124 @@
-const GravXML = require('../../lib/grav.xml');
-const imageName = 'imageName';
-const userEmail = 'user@example.com';
-const userPassword = 'userPassword';
-const hash = 'hash';
-const gravXml = new GravXML(userEmail, userPassword);
+const GravMethods = require('../../lib/grav.methods');
+const { GRAV } = require('../../lib/constants');
 
-describe('grav.xml', function(){
+describe('grav.methods', function(){
+  
+  const imageName = 'imageName';
+  const userEmail = 'user@example.com';
+  const userPassword = 'userPassword';
+  const hash = 'hash';
+  const gravMethods = new GravMethods(userEmail, userPassword);
 
   test.each([
-    ['grav_exists'],
-    ['grav_addresses'],
-    ['grav_userImages'],
-    ['grav_saveUrl'],
-    ['grav_useUserImage'],
-    ['grav_removeImage'],
-    ['grav_deleteUserImage'],
-    ['grav_test'],
-  ])('should have "%s" method', (methodName) => {
-    expect(gravXml[methodName]).toBeDefined();
+    [GRAV.EXISTS],
+    [GRAV.ADDRESSES],
+    [GRAV.USER_IMAGES],
+    [GRAV.SAVE_URL],
+    [GRAV.USE_USER_IMAGE],
+    [GRAV.REMOVE_IMAGE],
+    [GRAV.DELETE_USER_IMAGE],
+    [GRAV.TEST],
+  ])('should include %s', (methodName) => {
+    expect(gravMethods[methodName]).toBeDefined();
   })
 
-  describe('grav_exists', () => {
-    const getMethodCall = () => (gravXml.grav_exists(hash));
+  describe('grav.exists', () => {
+    const method = gravMethods[GRAV.EXISTS];
+    const methodCall = method(hash);
     it('should include hash in method call', function(){
       const hashElement = `<value>${hash}</value>`;
-      const methodCall = getMethodCall();
       expect(methodCall).toContain(hashElement);
     })
     it('should include password in method call', function(){
       const passwordElement = `<string>${userPassword}</string>`;
-      const methodCall = getMethodCall();
       expect(methodCall).toContain(passwordElement);
     })
   })
 
-  describe('grav_addresses', () => {
+  describe('grav.addresses', () => {
+    const method = gravMethods[GRAV.ADDRESSES];
+    const methodCall = method();
     it('should include password in method call', function(){
       const passwordElement = `<string>${userPassword}</string>`;
-      const methodCall = gravXml.grav_addresses(hash);
       expect(methodCall).toContain(passwordElement);
     })
   })
 
-  describe('grav_userImages', () => {
+  describe('grav.userImages', () => {
+    const method = gravMethods[GRAV.USER_IMAGES];
+    const methodCall = method();
     it('should include password in method call', function(){
       const passwordElement = `<string>${userPassword}</string>`;
-      const methodCall = gravXml.grav_userImages(hash);
       expect(methodCall).toContain(passwordElement);
     })
   })
 
-  describe('grav_saveUrl', () => {
+  describe('grav.saveUrl', () => {
     const imageUrl = 'imageUrl';
     const rating = 0;
-    const getMethodCall = () => (gravXml.grav_saveUrl(imageUrl,rating));
-    it('should include image url in method call', function(){
-      const methodCall = getMethodCall();
+    const method = gravMethods[GRAV.SAVE_URL];
+    const methodCall = method(imageUrl, rating);
+    it('should include image url in method call', () => {
       const imageUrlElement = `<string>${imageUrl}</string>`;
       expect(methodCall).toContain(imageUrlElement);
     })
-    it('should include rating in method call', function(){
-      const methodCall = getMethodCall();
-      const ratingElement = 0;
+    it('should include rating in method call', () => {
+      const ratingElement = `<int>${rating}</int>`;
       expect(methodCall).toContain(ratingElement);
     })
-    it('should include password in method call', function(){
-      const methodCall = getMethodCall();
+    it('should include password in method call', () => {
       const passwordElement = `<string>${userPassword}</string>`;
       expect(methodCall).toContain(passwordElement);
     })
   })
 
-  describe('grav_useUserImage', () => {
-    const getMethodCall = () => (gravXml.grav_useUserImage(imageName));
+  describe('grav.useUserImage', () => {
+    const method = gravMethods[GRAV.USE_USER_IMAGE];
+    const methodCall = method(imageName);
     it('should include image name in method call ', () => {
-      const methodCall = getMethodCall();
       const imageNameElement = `<string>${imageName}</string>`
       expect(methodCall).toContain(imageNameElement);
     })
     it('should include user email in method call ', () => {
-      const methodCall = getMethodCall();
       const userEmailElement = `<string>${userEmail}</string>`
       expect(methodCall).toContain(userEmailElement);
     })
     it('should include password in method call ', () => {
-      const methodCall = getMethodCall();
       const userPasswordElement = `<string>${userPassword}</string>`
       expect(methodCall).toContain(userPasswordElement);
     })
   })
 
-  describe('grav_removeImage', () => {
-    const getMethodCall = () => (gravXml.grav_removeImage());
+  describe('grav.removeImage', () => {
+    const method = gravMethods[GRAV.REMOVE_IMAGE];
+    const methodCall = method();
     it('should include user email in method call ', () => {
-      const methodCall = getMethodCall();
       const userEmailElement = `<string>${userEmail}</string>`
       expect(methodCall).toContain(userEmailElement);
     })
     it('should include password in method call ', () => {
-      const methodCall = getMethodCall();
       const userPasswordElement = `<string>${userPassword}</string>`
       expect(methodCall).toContain(userPasswordElement);
     })
   })
 
-  describe('grav_deleteUserImage', () => {
-    const getMethodCall = () => (gravXml.grav_deleteUserImage(imageName));
+  describe('grav.deleteUserImage', () => {
+    const method = gravMethods[GRAV.DELETE_USER_IMAGE];
+    const methodCall = method(imageName);
     it('should include image name in method call ', () => {
-      const methodCall = getMethodCall();
       const imageNameElement = `<string>${imageName}</string>`
       expect(methodCall).toContain(imageNameElement);
     })
     it('should include password in method call ', () => {
-      const methodCall = getMethodCall();
       const userPasswordElement = `<string>${userPassword}</string>`
       expect(methodCall).toContain(userPasswordElement);
     })
   })
 
-  describe('grav_test', () => {
-    const getMethodCall = () => (gravXml.grav_test());
+  describe('grav.test', () => {
+    const method = gravMethods[GRAV.TEST];
+    const methodCall = method();
     it('should include password in method call ', () => {
-      const methodCall = getMethodCall();
       const userPasswordElement = `<string>${userPassword}</string>`
       expect(methodCall).toContain(userPasswordElement);
     })
