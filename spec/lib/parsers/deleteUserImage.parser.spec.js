@@ -9,8 +9,6 @@ const getParser = () => {
 
 describe('deleteUserImage.parser', function(){
 
-  const parser = getParser();
-
   it('should have collect method', () => {
     const parser = getParser();
     expect(parser.collect).toBeDefined();
