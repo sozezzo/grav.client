@@ -1,7 +1,7 @@
 const GravMethods = require('../../lib/grav.methods');
 const { GRAV } = require('../../lib/constants');
 
-describe('grav.methods', function(){
+describe('GravMethods', function(){
   
   const imageName = 'imageName';
   const userEmail = 'user@example.com';

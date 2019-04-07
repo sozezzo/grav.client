@@ -7,7 +7,7 @@ const getParser = () => {
   return parser;
 }
 
-describe('deleteUserImage.parser', function(){
+describe('DeleteUserImageParser', function(){
 
   it('should have collect method', () => {
     const parser = getParser();

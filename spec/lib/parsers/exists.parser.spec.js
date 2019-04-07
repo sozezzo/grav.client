@@ -31,14 +31,12 @@ describe('ExistsParser', () => {
   describe('ExistsParser.transform', () => {
     it('should get email hash', () => {
       const parser = getParser();
-      parser.collect();
-      const transformed = parser.transform();
+      const transformed = parser.collect().transform();
       expect(transformed.emailHash).toBeDefined();
     })
     it('should get avatar url', () => {
       const parser = getParser();
-      parser.collect();
-      const transformed = parser.transform();
+      const transformed = parser.collect().transform();
       expect(transformed.avatarUrl).toBeDefined();
     })
   })

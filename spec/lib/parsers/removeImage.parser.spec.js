@@ -19,16 +19,10 @@ describe('RemoveImageParser', function(){
     expect(parser.transform).toBeDefined();
   });
 
-  it('should collect method response value from response', function(){
-    const parser = getParser();
-    parser.collect();
-    expect(parser.response).toBe(true);
-  })
-
-  it('should get method response value after transform', function(){
+  it('should parse response', function(){
     const parser = getParser();
     const transform = parser.collect().transform();
-    expect(transform.response).toBe(true);
+    expect(parser.response).toBe(transform.response);
   })
 
 })
