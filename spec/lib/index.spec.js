@@ -13,7 +13,7 @@ describe('Grav', () => {
   describe('Grav.saveImage', () => {
     const grav = getGrav();
     it('should return image url', () => {
-      return grav.saveImage('', 0).then(response => {
+      return grav.saveImage(fake.imageUrl, 0).then(response => {
         expect(response.imageName).toBe(fake.imageName);
       })
     });
@@ -22,7 +22,7 @@ describe('Grav', () => {
   describe('Grav.saveEncodedImage', () => {
     const grav = getGrav();
     it('should return image url', () => {
-      return grav.saveEncodedImage('imageData','png',0).then(response => {
+      return grav.saveEncodedImage(fake.imageData,'png',0).then(response => {
         expect(response.imageName).toBe(fake.imageName);
       })
     });

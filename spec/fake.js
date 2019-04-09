@@ -1,6 +1,7 @@
 module.exports = {
   imageUrl: 'not-a-real-image.jpeg',
   imageName : 'imageName',
+  imageData : 'ZmFrZQ==',
   userEmail : 'user@example.com',
   userPassword : 'userPassword',
   hash : 'hash',
