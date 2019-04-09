@@ -37,12 +37,11 @@ describe('AddressParser', function(){
     it('should get array from response', () => {
       const parser = getParser(multipleAddressResponse);
       parser.collect();
-      expect(parser.data).toBeInstanceOf(Array);
+      expect(parser.data.length).toBeGreaterThan(1);
     })
     it('should get each email from response', () => {
       const parser = getParser(multipleAddressResponse);
       parser.collect();
-      expect(parser.data.length).toBeGreaterThan(1);
       parser.data.forEach(item => {
         expect(item.email).toBeDefined();
       })

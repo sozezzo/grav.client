@@ -1,13 +1,14 @@
-const mock = require('../test.doubles/mocks');
+const nock = require('nock');
 const api = require('../../lib/grav.api');
 const utils = require('../../lib/grav.utils');
-const fakes = require('../test.doubles/fakes');
+const fake = require('../fake');
 const endpoint = `${utils.api_origin}/xmlrpc?user=user`;
 const xmlPayload = '<methodCall></methodCall>';
-
-mock.httpServer();
+const xmlResponse = '<?xml version="1.0"?><methodResponse></methodResponse>';
 
 describe('grav.api', () => {
+  
+  beforeAll(mockHttpServer);
 
   it('should have get method', () => {
     expect(api.get).toBeDefined();
@@ -27,14 +28,14 @@ describe('grav.api', () => {
 
   it('should return image url after saving encoded image', (done) => {
     api.saveEncodedImage({}, (err, response, body) => {
-      expect(body).toBe(fakes.imageUrl);
+      expect(body).toBe(fake.imageUrl);
       done();
     });
   })
 
   it('should return image url after saving image file', (done) => {
     api.saveImageFile({}, (err, response, body) => {
-      expect(body).toBe(fakes.imageUrl);
+      expect(body).toBe(fake.imageUrl);
       done();
     });
   })
@@ -49,7 +50,11 @@ describe('grav.api', () => {
   })
 
   describe('grav.api.post', () => {
+    
+    beforeAll(mockHttpServer);
+
     it('should save encoded image if mimetype is present', (done) => {
+      
       const avatar = { mimetype: 'jpg' };
       const saveEncodedImageSpy = jest.spyOn(api, 'saveEncodedImage');
       api.post(avatar)
@@ -70,3 +75,23 @@ describe('grav.api', () => {
   })
 
 })
+
+function mockHttpServer() {
+  nock(utils.api_origin, {
+    reqheaders: { 'content-type' : 'text/xml' }
+  })
+  .get(`/xmlrpc?user=user`)
+  .reply(200, xmlResponse);
+  
+  nock('https://dailyavatar.io', {
+    reqheaders: { 'content-type' : 'multipart/form-data; charset=UTF-8' }
+  })
+  .post(`/api/v1/avatars`)
+  .reply(200, fake.imageUrl);
+  
+  nock('https://dailyavatar.io', {
+    reqheaders: { 'content-type' : 'application/json; charset=UTF-8' }
+  })
+  .post(`/api/v1/avatars/base64`)
+  .reply(200, fake.imageUrl);
+};

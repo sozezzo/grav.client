@@ -1,5 +1,5 @@
 const utils = require('../../lib/grav.utils');
-const fakes = require('../test.doubles/fakes');
+const fake = require('../fake');
 
 describe('grav.utils', function(){
 
@@ -17,9 +17,9 @@ describe('grav.utils', function(){
   })
 
   test.each([
-    ['bool', fakes.booleanField, true],
-    ['int', fakes.intField, 1],
-    ['string', fakes.stringField, "2 hands 10 fingers"],
+    ['bool', fake.booleanField, true],
+    ['int', fake.intField, 1],
+    ['string', fake.stringField, "2 hands 10 fingers"],
   ])('should parse %s field', (typeName, field, fieldValue) => {
     expect(utils.parseFieldValue(field)).toBe(fieldValue);
   })
