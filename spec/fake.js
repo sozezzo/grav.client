@@ -1,9 +1,9 @@
 module.exports = {
   imageUrl: 'not-a-real-image.jpeg',
-  imageName : 'imageName',
+  imageName : 'b13ef59e996c16dcc127df002dd4578b',
   imageData : 'ZmFrZQ==',
   userEmail : 'user@example.com',
-  userPassword : 'userPassword',
+  userPassword : 'password',
   hash : 'hash',
   booleanField : {
       boolean: { _text: "1" }
