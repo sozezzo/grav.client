@@ -1,33 +1,98 @@
 const AddressParser = require('../../../lib/parsers/address.parser');
-const rawResponse = require('../../responses/grav.addresses');
+const singleAddressResponse = require('../../responses/grav.addresses');
+const multipleAddressResponse = require('../../responses/grav.addresses.two');
 
-describe('userImages.parser', function(){
+const getParser = (response) => {
+  const parser = new AddressParser();
+  parser.data = response || singleAddressResponse;
+  return parser;
+}
 
-  let addressParser;
-  let parsedResponse;
+describe('AddressParser', function(){
 
-  beforeEach(function(){
-     addressParser = new AddressParser();
-     addressParser.data = rawResponse;
-     parsedResponse = null;
+  it('should have collect method', () => {
+    const parser = getParser();
+    expect(parser.collect).toBeDefined();
+  });
+
+  it('should have transform method', () => {
+    const parser = getParser();
+    expect(parser.transform).toBeDefined();
+  });
+
+  describe('AddressParser.collect single address', () => {
+    it('should get single object from response', () => {
+      const parser = getParser();
+      parser.collect();
+      expect(parser.data).toBeInstanceOf(Object);
+    })
+    it('should get single email from response', () => {
+      const parser = getParser();
+      parser.collect();
+      expect(parser.data.email).toBeDefined();
+    })
   })
 
-  it('should have collect and transform methods', function(){
-    expect(addressParser.collect).toBeDefined();
-    expect(addressParser.transform).toBeDefined();
+  describe('AddressParser.collect multiple addresses', () => {
+    it('should get array from response', () => {
+      const parser = getParser(multipleAddressResponse);
+      parser.collect();
+      expect(parser.data.length).toBeGreaterThan(1);
+    })
+    it('should get each email from response', () => {
+      const parser = getParser(multipleAddressResponse);
+      parser.collect();
+      parser.data.forEach(item => {
+        expect(item.email).toBeDefined();
+      })
+    })
   })
 
-  it('should collect', function(){
-    addressParser.collect();
-    expect(addressParser.data.email).toBeDefined();
-    expect(addressParser.data.fields).toBeDefined();
+  describe('AddressParser.transform single address', () => {
+    const getTransform = () => {
+      const parser = getParser();
+      return parser.collect().transform();
+    };
+    it('should get rating field', () => {
+      const transform = getTransform();
+      expect(transform.rating).toBeDefined();
+    })
+    it('should get user image field', () => {
+      const transform = getTransform();
+      expect(transform.userimage).toBeDefined();
+    })
+    it('should get user image url field', () => {
+      const transform = getTransform();
+      expect(transform.userimage_url).toBeDefined();
+    })
   })
 
-  it('should transform', function(){
-    addressParser.collect();
-    parsedResponse = addressParser.transform()
-    expect(parsedResponse.email).toBeDefined();
-    expect(parsedResponse.rating).toBeDefined();
+  describe('AddressParser.transform multiple addresses', () => {
+    const getTransform = () => {
+      const parser = getParser(multipleAddressResponse);
+      return parser.collect().transform();
+    };
+    it('should get array from transform', () => {
+      const transform = getTransform();
+      expect(transform).toBeInstanceOf(Array);
+    })
+    it('should get each rating field', () => {
+      const transform = getTransform();
+      transform.forEach(item => {
+        expect(item.rating).toBeDefined();
+      })
+    })
+    it('should get each user image field', () => {
+      const transform = getTransform();
+      transform.forEach(item => {
+        expect(item.userimage).toBeDefined();
+      })
+    })
+    it('should get each user image url field', () => {
+      const transform = getTransform();
+      transform.forEach(item => {
+        expect(item.userimage_url).toBeDefined();
+      })
+    })
   })
-
 })

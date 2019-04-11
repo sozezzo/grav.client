@@ -1,1 +1,0 @@
-module.exports = { G:0, PG:1, R:2, X:3 };

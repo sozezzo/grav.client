@@ -1,23 +1,44 @@
 const ExistsParser = require('../../../lib/parsers/exists.parser');
-const rawResponse = require('../../responses/grav.exists');
-let existsParser;
-let parsedResponse;
+const response = require('../../responses/grav.exists');
 
-describe('exists.parser', function(){  
+const getParser = () => {
+  const parser = new ExistsParser();
+  parser.data = response;
+  return parser; 
+}
 
-  beforeEach(function(){
-    existsParser = new ExistsParser();
-    existsParser.data = rawResponse;
-    parsedResponse = null;
+describe('ExistsParser', () => {  
+
+  it('should have collect method', function(){
+    const parser = getParser();
+    expect(parser.collect).toBeDefined();
+  });
+
+  it('should have transform method', function(){
+    const parser = getParser();
+    expect(parser.transform).toBeDefined();
+  });
+
+  describe('ExistsParser.collect', () => {
+    it('should get member from method response', () => {
+      const parser = getParser();
+      const member = response.methodResponse.params.param.value.struct.member;
+      parser.collect();
+      expect(parser.data.response).toBe(member);
+    })
   })
 
-  it('should parse', function(){
-    expect(existsParser.collect).toBeDefined();
-    existsParser.collect();
-    expect(existsParser.data.response).toBeDefined();
-    parsedResponse = existsParser.transform()
-    expect(parsedResponse.emailHash).toBeDefined();
-    expect(parsedResponse.avatarUrl).toBeDefined();
+  describe('ExistsParser.transform', () => {
+    it('should get email hash', () => {
+      const parser = getParser();
+      const transformed = parser.collect().transform();
+      expect(transformed.emailHash).toBeDefined();
+    })
+    it('should get avatar url', () => {
+      const parser = getParser();
+      const transformed = parser.collect().transform();
+      expect(transformed.avatarUrl).toBeDefined();
+    })
   })
 
 })

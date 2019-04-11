@@ -1,7 +1,7 @@
 require('dotenv').config();
 const email = process.env.EMAIL;
 const password = process.env.PASSWORD;
-const RATED = require('./image.rating');
+const { RATED } = require('../lib/constants');
 const { 
   Grav, SaveUrlParser, ParseContext, 
 } = require('../index');

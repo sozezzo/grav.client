@@ -1,32 +1,36 @@
-const DeleteUserImage = require('../../../lib/parsers/deleteUserImage.parser');
-const rawResponse = require('../../responses/grav.deleteUserImage');
+const DeleteUserImageParser = require('../../../lib/parsers/deleteUserImage.parser');
+const response = require('../../responses/grav.deleteUserImage');
 
-describe('deleteUserImage.parser', function(){
+const getParser = () => {
+  const parser = new DeleteUserImageParser();
+  parser.data = response;
+  return parser;
+}
 
-  let deleteUserImage;
-  let parsedResponse;
+describe('DeleteUserImageParser', function(){
 
-  beforeEach(function(){
-     deleteUserImage = new DeleteUserImage();
-     deleteUserImage.data = rawResponse;
-     parsedResponse = null;
+  it('should have collect method', () => {
+    const parser = getParser();
+    expect(parser.collect).toBeDefined();
+  });
+
+  it('should have transform method', () => {
+    const parser = getParser();
+    expect(parser.transform).toBeDefined();
+  });
+
+  it('should collect response value from method response', function(){
+    const responseValue = response.methodResponse.params.param.value;
+    const parser = getParser();
+    parser.collect();
+    expect(parser.data.response).toBe(responseValue);
   })
 
-  it('should have collect and transform methods', function(){
-    expect(deleteUserImage.collect).toBeDefined();
-    expect(deleteUserImage.transform).toBeDefined();
-  })
-
-  it('should collect', function(){
-    deleteUserImage.collect();
-    expect(deleteUserImage.data.response).toBeDefined();
-  })
-
-  it('should transform', function(){
-    deleteUserImage.collect();
-    parsedResponse = deleteUserImage.transform();
-    expect(parsedResponse.deleted).toBeDefined();
-    expect(parsedResponse.deleted).toBeTruthy();
+  it('should get boolean response after transform', function(){
+    const parser = getParser();
+    parser.collect();
+    transform = parser.transform();
+    expect(transform.deleted).toBe(true);
   })
 
 })
