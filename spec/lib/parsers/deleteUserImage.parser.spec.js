@@ -28,8 +28,7 @@ describe('DeleteUserImageParser', function(){
 
   it('should get boolean response after transform', function(){
     const parser = getParser();
-    parser.collect();
-    transform = parser.transform();
+    const transform = parser.collect().transform();
     expect(transform.deleted).toBe(true);
   })
 
