@@ -4,8 +4,9 @@
  
  ---
  
- [![Try stripe on RunKit](https://badge.runkitcdn.com/stripe.svg)](https://runkit.com/mrtillman/gravatar-xml-rpc-api)
- 
+[![Build Status](https://travis-ci.com/mrtillman/grav.client.svg?branch=master)](https://travis-ci.com/mrtillman/grav.client)
+[![Try stripe on RunKit](https://badge.runkitcdn.com/stripe.svg)](https://runkit.com/mrtillman/gravatar-xml-rpc-api)
+
  Please refer to the official Gravatar XML-RPC API documentation for more details:
  https://en.gravatar.com/site/implement/xmlrpc. 
  
@@ -39,13 +40,11 @@ To learn more, see the [unofficial API docs](https://documenter.getpostman.com/v
 
   npm test
 
-  Randomized with seed 59193
-  Started
-  ...........................
-
-
-  27 specs, 0 failures
-  Finished in 0.118 seconds
+  Test Suites: 14 passed, 14 total
+  Tests:       104 passed, 104 total
+  Snapshots:   0 total
+  Time:        4.639s
+  Ran all test suites.
 ```
 
 ## Usage
