@@ -9,24 +9,29 @@ describe('ParseContext', () => {
   }
   it('should have parser',()=>{
     const context = getContext();
-    expect(context.parser).toBeDefined();
+    expect(context.parsers.length).toBeDefined();
   })
   it('should perform collect',()=>{
     const context = getContext();
-    const collectSpy = jest.spyOn(context.parser, 'collect');
+    const parser = context.parsers[0];
+    const collectSpy = jest.spyOn(parser, 'collect');
     context.parse(data);
     expect(collectSpy).toHaveBeenCalled();
   })
   it('should perform transform',()=>{
     const context = getContext();
-    const transformSpy = jest.spyOn(context.parser, 'transform');
+    const parser = context.parsers[0];
+    const transformSpy = jest.spyOn(parser, 'transform');
     context.parse(data);
     expect(transformSpy).toHaveBeenCalled();
   })
-  it('should parse data',()=>{
+  it('should remove parser after parsing',()=>{
     const context = getContext();
+    const parserCountBeforeParse = context.parsers.length;
     context.parse(data);
-    expect(context.parser.data).toBeDefined();
+    const parserCountAfterParse = context.parsers.length;
+    expect(parserCountBeforeParse).toEqual(1);
+    expect(parserCountAfterParse).toEqual(0);
   })
   it('should return object',()=>{
     const context = getContext();
