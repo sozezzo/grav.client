@@ -1,4 +1,5 @@
 module.exports = {
   verbose: true,
-  testPathIgnorePatterns: ["demo/"]
+  testPathIgnorePatterns: ["demo/"],
+  collectCoverageFrom: ["**/lib/**/*.{js,jsx}"],
 };

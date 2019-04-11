@@ -10,9 +10,9 @@ const getGrav = (autoParse) => {
   const grav = new Grav(fake.userEmail, fake.userPassword);;
   if(autoParse){
     grav.autoParse = true;
-    const parseContextMock = jest.fn();
-    parseContextMock.mockReturnValue({ parse: jest.fn(m => true) })
-    grav.getParseContext = parseContextMock;
+    const mockParseContext = jest.fn();
+    mockParseContext.mockReturnValue({ parse: jest.fn(m => true) })
+    grav.getParseContext = mockParseContext;
   }
   return grav;
 }
