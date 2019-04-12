@@ -26,17 +26,15 @@ describe('grav.api', () => {
     expect(api.saveImageFile).toBeDefined();
   })
 
-  it('should return image url after saving encoded image', (done) => {
+  it('should return image url after saving encoded image', () => {
     api.saveEncodedImage({}, (err, response, body) => {
       expect(body).toBe(fake.imageUrl);
-      done();
     });
   })
 
-  it('should return image url after saving image file', (done) => {
+  it('should return image url after saving image file', () => {
     api.saveImageFile({}, (err, response, body) => {
       expect(body).toBe(fake.imageUrl);
-      done();
     });
   })
 

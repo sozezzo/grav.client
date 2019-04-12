@@ -59,7 +59,7 @@ To learn more, see the [unofficial API docs](https://documenter.getpostman.com/v
 
  ```
  
-### Methods
+## Methods
  
 |Method     | Description  |
 |-----------|--------------|
@@ -74,7 +74,7 @@ To learn more, see the [unofficial API docs](https://documenter.getpostman.com/v
 | `grav.deleteUserImage(imageName)` | remove an image from this account |
 | `grav.test()` | sanity check |
  
-### Parsers
+## Parsers
 
 The raw response is verbose:
 
@@ -153,6 +153,8 @@ const {
 } = require('grav.client');
 
 const userImagesParser = new UserImagesParser();
+
+// create context to parse user images
 const context = new ParseContext(userImagesParser);
 const grav = Grav.login("user@example.com", "password");
 
@@ -161,12 +163,45 @@ grav.userImages()
     .then(images => images[0])
     .then(image => grav.useUserImage(image.name))
     .then(useUserImageResponse => {
+
+      // update context to parse the
+      // "use user image" response
       context.parser = new UseUserImageParser();
       return context.parse(useUserImageResponse);
     })
     .then(console.log)
     .catch(console.log);
 ```
+
+Notice how the `context` is instantiated with the `userImagesParser`, which is later swapped out for an instance of `UseUserImageParser`. We can achieve the same effect by passing the instance of `UseUserImageParser` to the `ParseContext` constructor, after the `userImagesParser`. For example: `new ParseContext(userImagesParser, useUserImageParser)`.
+
+In general, the `ParseContext` accepts a variable number of parsers: `new ParseContext(firstParser, nextParser, ..., lastParser)`. Each call to `ParseContext.parse` executes the current parser and then loads the next one.
+
+So, alternatively:
+
+```js
+const userImagesParser = new UserImagesParser();
+const useUserImageParser = new UseUserImageParser();
+
+// create context that will 1. parse user images
+// and then 2. parse the "use user image" response
+const context = new ParseContext(userImagesParser, useUserImageParser);
+const grav = Grav.login(email, password);
+
+grav.userImages()
+    .then(userImages => context.parse(userImages))
+    .then(images => images[0])
+    .then(image => grav.useUserImage(image.name))
+    .then(useUserImageResponse => {
+
+      // context.parser = new UseUserImageParser(); // not needed
+      // parser is swapped out for the next one automatically
+      return context.parse(useUserImageResponse);
+    })
+    .then(console.log)
+    .catch(console.log);
+```
+
 ```js
 { response: true }
 ```
