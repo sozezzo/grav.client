@@ -5,6 +5,7 @@
  ---
  
 [![Build Status](https://travis-ci.com/mrtillman/grav.client.svg?branch=master)](https://travis-ci.com/mrtillman/grav.client)
+[![Coverage Status](https://coveralls.io/repos/github/mrtillman/grav.client/badge.svg?branch=dev)](https://coveralls.io/github/mrtillman/grav.client?branch=dev)
 [![Try stripe on RunKit](https://badge.runkitcdn.com/stripe.svg)](https://runkit.com/mrtillman/gravatar-xml-rpc-api)
 
  Please refer to the official Gravatar XML-RPC API documentation for more details:
