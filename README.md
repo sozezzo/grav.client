@@ -134,7 +134,7 @@ grav.test()
 { response: 1548903405 }
 ```
 
-The global `autoParse` flag enables parsing everywhere:
+The `autoParse` switch enables parsing everywhere:
 
 ```js
 grav.autoParse = true;
