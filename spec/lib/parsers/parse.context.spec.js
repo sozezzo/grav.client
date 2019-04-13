@@ -38,4 +38,9 @@ describe('ParseContext', () => {
     const returnValue = context.parse(data);
     expect(returnValue).toBeInstanceOf(Object);
   })
+  it('should not return object if parser missing ',()=>{
+    const context = new ParseContext();
+    const returnValue = context.parse(data);
+    expect(returnValue).toBeUndefined();
+  })
 })

@@ -34,6 +34,12 @@ describe('Grav', () => {
     expect(Grav.login(fake.userEmail, fake.userPassword)).toBeInstanceOf(Object);
   })
 
+  it('should get parse context', () => {
+    const grav = getGrav();
+    const context = grav.getParseContext(Parsers.TestParser);
+    expect(context.parsers[0]).toBeInstanceOf(Parsers.TestParser);
+  })
+
   describe('Parsing:', () => {
     test.each(parameters)
     ('Grav.%s: should parse raw response', (method) => {
