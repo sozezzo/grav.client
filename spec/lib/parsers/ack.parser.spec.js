@@ -1,12 +1,12 @@
-const SaveUrlParser = require('../../../lib/parsers/saveUrl.parser');
-const response = require('../../responses/grav.saveUrl');
+const AckParser = require('../../../lib/parsers/ack.parser');
+const rawResponse = require('../../responses/grav.test');
 const faultResponse = require('../../responses/fault.response');
 
-describe('SaveUrlParser', function(){
+describe('UseUserImageParser', function(){  
 
   const getParser = (_response) => {
-    parser = new SaveUrlParser();
-    parser.data = _response || response;
+    parser = new AckParser();
+    parser.data = _response || rawResponse;
     return parser;
   }
 
@@ -22,14 +22,8 @@ describe('SaveUrlParser', function(){
 
   it('should get response value', function(){
     const parser = getParser();
-    parser.collect();
-    expect(parser.data.response).toBe(response.methodResponse.params.param.value);
-  })
-
-  it('should get image name', function(){
-    const parser = getParser();
     const transform = parser.collect().transform();
-    expect(transform.imageName).toBeDefined();
+    expect(transform.response).toBeDefined();
   })
 
   it('should get fault response', () => {

@@ -7,7 +7,7 @@ jest.mock('fs');
 jest.mock('../../lib/grav.api');
 
 const getGrav = (autoParse) => {
-  const grav = new Grav(fake.userEmail, fake.userPassword);;
+  const grav = new Grav(fake.userEmail, fake.userPassword);
   if(autoParse){
     grav.autoParse = true;
     const mockParseContext = jest.fn();
@@ -29,6 +29,10 @@ describe('Grav', () => {
     ['userImages', Parsers.UserImagesParser],
     ['useUserImage', Parsers.UseUserImageParser],
   ];
+
+  it('should return object after login', () => {
+    expect(Grav.login(fake.userEmail, fake.userPassword)).toBeInstanceOf(Object);
+  })
 
   describe('Parsing:', () => {
     test.each(parameters)

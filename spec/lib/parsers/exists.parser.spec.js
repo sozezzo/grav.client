@@ -1,7 +1,6 @@
 const ExistsParser = require('../../../lib/parsers/exists.parser');
 const faultResponse = require('../../responses/fault.response');
 const response = require('../../responses/grav.exists');
-const fake = require('../../fake');
 
 const getParser = (_response) => {
   const parser = new ExistsParser();
