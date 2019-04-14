@@ -5,7 +5,8 @@
  ---
  
 [![Build Status](https://travis-ci.com/mrtillman/grav.client.svg?branch=master)](https://travis-ci.com/mrtillman/grav.client)
-[![Try stripe on RunKit](https://badge.runkitcdn.com/stripe.svg)](https://runkit.com/mrtillman/gravatar-xml-rpc-api)
+[![Coverage Status](https://coveralls.io/repos/github/mrtillman/grav.client/badge.svg?branch=dev)](https://coveralls.io/github/mrtillman/grav.client?branch=dev)
+[![Known Vulnerabilities](https://snyk.io/test/github/mrtillman/grav.client/badge.svg)](https://snyk.io/test/github/mrtillman/grav.client)
 
  Please refer to the official Gravatar XML-RPC API documentation for more details:
  https://en.gravatar.com/site/implement/xmlrpc. 
@@ -36,14 +37,10 @@ To learn more, see the [unofficial API docs](https://documenter.getpostman.com/v
 ## Tests
 
 ```sh
-  cd grav.client
-
-  npm test
-
-  Test Suites: 14 passed, 14 total
-  Tests:       104 passed, 104 total
+  Test Suites: 15 passed, 15 total
+  Tests:       127 passed, 127 total
   Snapshots:   0 total
-  Time:        4.639s
+  Time:        27.278s
   Ran all test suites.
 ```
 
@@ -59,7 +56,7 @@ To learn more, see the [unofficial API docs](https://documenter.getpostman.com/v
 
  ```
  
-### Methods
+## Methods
  
 |Method     | Description  |
 |-----------|--------------|
@@ -74,7 +71,7 @@ To learn more, see the [unofficial API docs](https://documenter.getpostman.com/v
 | `grav.deleteUserImage(imageName)` | remove an image from this account |
 | `grav.test()` | sanity check |
  
-### Parsers
+## Parsers
 
 The raw response is verbose:
 
@@ -134,7 +131,7 @@ grav.test()
 { response: 1548903405 }
 ```
 
-The global `autoParse` flag enables parsing everywhere:
+The `autoParse` switch enables parsing everywhere:
 
 ```js
 grav.autoParse = true;
@@ -153,6 +150,8 @@ const {
 } = require('grav.client');
 
 const userImagesParser = new UserImagesParser();
+
+// create context to parse user images
 const context = new ParseContext(userImagesParser);
 const grav = Grav.login("user@example.com", "password");
 
@@ -161,12 +160,45 @@ grav.userImages()
     .then(images => images[0])
     .then(image => grav.useUserImage(image.name))
     .then(useUserImageResponse => {
+
+      // update context to parse the
+      // "use user image" response
       context.parser = new UseUserImageParser();
       return context.parse(useUserImageResponse);
     })
     .then(console.log)
     .catch(console.log);
 ```
+
+Notice how the `context` is instantiated with the `userImagesParser`, which is later swapped out for an instance of `UseUserImageParser`. We can achieve the same effect by passing the instance of `UseUserImageParser` to the `ParseContext` constructor, after the `userImagesParser`. For example: `new ParseContext(userImagesParser, useUserImageParser)`.
+
+In general, the `ParseContext` accepts a variable number of parsers: `new ParseContext(firstParser, nextParser, ..., lastParser)`. Each call to `ParseContext.parse` executes the current parser and then loads the next one.
+
+So, alternatively:
+
+```js
+const userImagesParser = new UserImagesParser();
+const useUserImageParser = new UseUserImageParser();
+
+// create context that will 1. parse user images
+// and then 2. parse the "use user image" response
+const context = new ParseContext(userImagesParser, useUserImageParser);
+const grav = Grav.login(email, password);
+
+grav.userImages()
+    .then(userImages => context.parse(userImages))
+    .then(images => images[0])
+    .then(image => grav.useUserImage(image.name))
+    .then(useUserImageResponse => {
+
+      // context.parser = new UseUserImageParser(); // not needed
+      // parser is swapped out for the next one automatically
+      return context.parse(useUserImageResponse);
+    })
+    .then(console.log)
+    .catch(console.log);
+```
+
 ```js
 { response: true }
 ```

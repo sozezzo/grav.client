@@ -4,7 +4,8 @@ module.exports = {
   imageData : 'ZmFrZQ==',
   userEmail : 'user@example.com',
   userPassword : 'password',
-  hash : 'hash',
+  errorMessage: 'something went wrong',
+  hash : '912ec803b2ce49e4a541068d495ab570',
   booleanField : {
       boolean: { _text: "1" }
   },

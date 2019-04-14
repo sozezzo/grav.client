@@ -20,6 +20,7 @@ describe('grav.utils', function(){
     ['bool', fake.booleanField, true],
     ['int', fake.intField, 1],
     ['string', fake.stringField, "2 hands 10 fingers"],
+    ['null', undefined, null],
   ])('should parse %s field', (typeName, field, fieldValue) => {
     expect(utils.parseFieldValue(field)).toBe(fieldValue);
   })

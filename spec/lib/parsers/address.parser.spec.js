@@ -1,6 +1,7 @@
 const AddressParser = require('../../../lib/parsers/address.parser');
 const singleAddressResponse = require('../../responses/grav.addresses');
 const multipleAddressResponse = require('../../responses/grav.addresses.two');
+const faultResponse = require('../../responses/fault.response');
 
 const getParser = (response) => {
   const parser = new AddressParser();
@@ -19,6 +20,21 @@ describe('AddressParser', function(){
     const parser = getParser();
     expect(parser.transform).toBeDefined();
   });
+
+  it('should get fault response', () => {
+    const parser = getParser(faultResponse);
+    parser.collect();
+    expect(parser.fault).toBeDefined();
+  })
+  
+  it('should error on fault response', () => {
+    const faultCode = "-9";
+    const faultString = "invalid or missing authentication information";
+    const errorMessage = `faultCode ${faultCode}: ${faultString}`;
+    const parser = getParser(faultResponse);
+    parser.collect();
+    expect(() => parser.transform()).toThrowError(errorMessage);
+  })
 
   describe('AddressParser.collect single address', () => {
     it('should get single object from response', () => {

@@ -21,7 +21,7 @@ describe('UseUserImageParser', function(){
 
   it('should get response value', function(){
     const parser = getParser();
-    const transform = parser.collect().transform()
+    const transform = parser.collect().transform();
     expect(transform.response).toBeDefined();
   })
 

@@ -1,9 +1,10 @@
 const DeleteUserImageParser = require('../../../lib/parsers/deleteUserImage.parser');
 const response = require('../../responses/grav.deleteUserImage');
+const faultResponse = require('../../responses/fault.response');
 
-const getParser = () => {
+const getParser = (_response) => {
   const parser = new DeleteUserImageParser();
-  parser.data = response;
+  parser.data = _response || response;;
   return parser;
 }
 
@@ -28,9 +29,23 @@ describe('DeleteUserImageParser', function(){
 
   it('should get boolean response after transform', function(){
     const parser = getParser();
-    parser.collect();
-    transform = parser.transform();
+    const transform = parser.collect().transform();
     expect(transform.deleted).toBe(true);
+  })
+
+  it('should get fault response', () => {
+    const parser = getParser(faultResponse);
+    parser.collect();
+    expect(parser.fault).toBeDefined();
+  })
+  
+  it('should error on fault response', () => {
+    const faultCode = "-9";
+    const faultString = "invalid or missing authentication information";
+    const errorMessage = `faultCode ${faultCode}: ${faultString}`;
+    const parser = getParser(faultResponse);
+    parser.collect();
+    expect(() => parser.transform()).toThrowError(errorMessage);
   })
 
 })

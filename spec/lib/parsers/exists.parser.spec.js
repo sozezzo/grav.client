@@ -1,9 +1,11 @@
 const ExistsParser = require('../../../lib/parsers/exists.parser');
+const faultResponse = require('../../responses/fault.response');
+const invalidEmailResponse = require('../../responses/grav.exists.fail');
 const response = require('../../responses/grav.exists');
 
-const getParser = () => {
+const getParser = (_response) => {
   const parser = new ExistsParser();
-  parser.data = response;
+  parser.data = _response || response;
   return parser; 
 }
 
@@ -26,6 +28,11 @@ describe('ExistsParser', () => {
       parser.collect();
       expect(parser.data.response).toBe(member);
     })
+    it('should get fault response', () => {
+      const parser = getParser(faultResponse);
+      parser.collect();
+      expect(parser.fault).toBeDefined();
+    })
   })
 
   describe('ExistsParser.transform', () => {
@@ -38,6 +45,19 @@ describe('ExistsParser', () => {
       const parser = getParser();
       const transformed = parser.collect().transform();
       expect(transformed.avatarUrl).toBeDefined();
+    })
+    it('should throw error on fault response', () => {
+      const faultCode = "-9";
+      const faultString = "invalid or missing authentication information";
+      const errorMessage = `faultCode ${faultCode}: ${faultString}`;
+      const parser = getParser(faultResponse);
+      parser.collect();
+      expect(() => parser.transform()).toThrowError(errorMessage);
+    })
+    it('should throw error if email is invalid', () => {
+      const parser = getParser(invalidEmailResponse);
+      parser.collect();
+      expect(() => parser.transform()).toThrow();
     })
   })
 
