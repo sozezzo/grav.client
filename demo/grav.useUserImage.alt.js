@@ -7,8 +7,8 @@ const {
 } = require('../index');
 
 const userImagesParser = new UserImagesParser();
-const userUserImageParser = new UseUserImageParser();
-const context = new ParseContext(userImagesParser, userUserImageParser);
+const useUserImageParser = new UseUserImageParser();
+const context = new ParseContext(userImagesParser, useUserImageParser);
 const grav = Grav.login(email, password);
 
 grav.userImages()
