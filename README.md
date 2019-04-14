@@ -5,7 +5,7 @@
  ---
  
 [![Build Status](https://travis-ci.com/mrtillman/grav.client.svg?branch=master)](https://travis-ci.com/mrtillman/grav.client)
-[![Coverage Status](https://coveralls.io/repos/github/mrtillman/grav.client/badge.svg?branch=dev)](https://coveralls.io/github/mrtillman/grav.client?branch=dev)
+[![Coverage Status](https://coveralls.io/repos/github/mrtillman/grav.client/badge.svg?branch=master)](https://coveralls.io/github/mrtillman/grav.client?branch=master)
 [![Known Vulnerabilities](https://snyk.io/test/github/mrtillman/grav.client/badge.svg)](https://snyk.io/test/github/mrtillman/grav.client)
 
  Please refer to the official Gravatar XML-RPC API documentation for more details:
