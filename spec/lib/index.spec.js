@@ -16,6 +16,11 @@ const getGrav = (autoParse) => {
   }
   return grav;
 }
+const getSaveUrlMock = () => {
+  const saveUrlMock = jest.fn();
+  saveUrlMock.mockReturnValue({ imageName: fake.imageName });
+  return saveUrlMock;
+}
 
 describe('Grav', () => {
 
@@ -64,20 +69,22 @@ describe('Grav', () => {
   })
 
   describe('Grav.saveImage', () => {
-    const grav = getGrav();
+    const grav = getGrav(true);
+    grav.saveUrl = getSaveUrlMock();
     it('should return image url', () => {
       return grav.saveImage(fake.imageUrl, RATED.G).then(response => {
         expect(response.imageName).toBe(fake.imageName);
-      })
+      });
     });
   })
 
   describe('Grav.saveEncodedImage', () => {
-    const grav = getGrav();
+    const grav = getGrav(true);
+    grav.saveUrl = getSaveUrlMock();
     it('should return image url', () => {
       return grav.saveEncodedImage(fake.imageData, 'png', RATED.G).then(response => {
         expect(response.imageName).toBe(fake.imageName);
-      })
+      });
     });
   })
 
