@@ -37,7 +37,7 @@ describe('Grav', () => {
   it('should get parse context', () => {
     const grav = getGrav();
     const context = grav.getParseContext(Parsers.TestParser);
-    expect(context.parsers[0]).toBeInstanceOf(Parsers.TestParser);
+    expect(context.parser).toBeInstanceOf(Parsers.TestParser);
   })
 
   describe('Parsing:', () => {

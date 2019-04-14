@@ -2,35 +2,38 @@
 const ParseContext = require('../../../lib/parsers/parse.context');
 const AckParser = require('../../../lib/parsers/ack.parser');
 const data = require('../../responses/grav.test');
-
 describe('ParseContext', () => {
-  const getContext = () => {
-    return new ParseContext(new AckParser());
+  const parser = new AckParser();
+  const getContext = (queue=false) => {
+    return new ParseContext(parser);
   }
   it('should have parser',()=>{
     const context = getContext();
-    expect(context.parsers.length).toBeDefined();
+    expect(context.parser).toBeDefined();
   })
   it('should perform collect',()=>{
     const context = getContext();
-    const parser = context.parsers[0];
-    const collectSpy = jest.spyOn(parser, 'collect');
+    const collectSpy = jest.spyOn(context.parser, 'collect');
     context.parse(data);
     expect(collectSpy).toHaveBeenCalled();
   })
   it('should perform transform',()=>{
     const context = getContext();
-    const parser = context.parsers[0];
-    const transformSpy = jest.spyOn(parser, 'transform');
+    const transformSpy = jest.spyOn(context.parser, 'transform');
     context.parse(data);
     expect(transformSpy).toHaveBeenCalled();
   })
-  it('should remove parser after parsing',()=>{
-    const context = getContext();
+  it('should queue parsers',()=>{
+    const context = new ParseContext(parser, parser);
+    expect(context.parsers.length).toEqual(2);
+  })
+  it('should remove parsers from queue',()=>{
+    const context = new ParseContext(parser, parser);
     const parserCountBeforeParse = context.parsers.length;
     context.parse(data);
+    context.parse(data);
     const parserCountAfterParse = context.parsers.length;
-    expect(parserCountBeforeParse).toEqual(1);
+    expect(parserCountBeforeParse).toEqual(2);
     expect(parserCountAfterParse).toEqual(0);
   })
   it('should return object',()=>{

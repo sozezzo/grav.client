@@ -37,10 +37,15 @@ To learn more, see the [unofficial API docs](https://documenter.getpostman.com/v
 ## Tests
 
 ```sh
+  cd grav.client
+  npm test
+
+  ...
+
   Test Suites: 15 passed, 15 total
-  Tests:       127 passed, 127 total
+  Tests:       128 passed, 128 total
   Snapshots:   0 total
-  Time:        27.278s
+  Time:        4.776s, estimated 5s
   Ran all test suites.
 ```
 
@@ -170,11 +175,11 @@ grav.userImages()
     .catch(console.log);
 ```
 
-Notice how the `context` is instantiated with the `userImagesParser`, which is later swapped out for an instance of `UseUserImageParser`. We can achieve the same effect by passing the instance of `UseUserImageParser` to the `ParseContext` constructor, after the `userImagesParser`. For example: `new ParseContext(userImagesParser, useUserImageParser)`.
+Notice how the `context` is instantiated with the `userImagesParser`, which is later swapped out for an instance of `UseUserImageParser`. We can achieve the same effect by passing the instance of `UseUserImageParser` to the `ParseContext` constructor. For example: `new ParseContext(userImagesParser, new UseUserImageParser())`.
 
-In general, the `ParseContext` accepts a variable number of parsers: `new ParseContext(firstParser, nextParser, ..., lastParser)`. Each call to `ParseContext.parse` executes the current parser and then loads the next one.
+In general, the `ParseContext` accepts a variable number of parsers that serve as a queue. Each call to `ParseContext.parse` dequeues the next parser. Once a parser is used it gets removed from the queue. However, if the context is instantiated with a single parser, that parser does not get removed.
 
-So, alternatively:
+So, alternatively, the previous code snippet may be written as:
 
 ```js
 const userImagesParser = new UserImagesParser();
