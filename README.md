@@ -7,6 +7,7 @@
 [![Build Status](https://travis-ci.com/mrtillman/grav.client.svg?branch=master)](https://travis-ci.com/mrtillman/grav.client)
 [![Coverage Status](https://coveralls.io/repos/github/mrtillman/grav.client/badge.svg?branch=master)](https://coveralls.io/github/mrtillman/grav.client?branch=master)
 [![Known Vulnerabilities](https://snyk.io/test/github/mrtillman/grav.client/badge.svg)](https://snyk.io/test/github/mrtillman/grav.client)
+[![npm version](https://badge.fury.io/js/grav.client.svg)](https://badge.fury.io/js/grav.client)
 
  Please refer to the official Gravatar XML-RPC API documentation for more details:
  https://en.gravatar.com/site/implement/xmlrpc. 
@@ -214,7 +215,7 @@ Each method has a corresponding parser:
 |------------|--------------|
 | `ExistsParser` | `grav.exists()` |
 | `AddressParser` | `grav.addresses()` |
-| `userImagesParser` | `grav.userImages()` |
+| `UserImagesParser` | `grav.userImages()` |
 | * `SaveUrlParser` | `grav.saveImage(imageUrl,rating)` |
 | * `SaveUrlParser` | `grav.saveEncodedImage(base64String,mimetype,rating)`|
 | `SaveUrlParser` | `grav.saveUrl(imageUrl,rating)` |
