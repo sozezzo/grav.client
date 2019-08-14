@@ -9,6 +9,8 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/mrtillman/grav.client/badge.svg)](https://snyk.io/test/github/mrtillman/grav.client)
 [![npm version](https://badge.fury.io/js/grav.client.svg)](https://badge.fury.io/js/grav.client)
 
+[![NPM](https://nodei.co/npm/grav.client.png)](https://nodei.co/npm/grav.client/)
+
  Please refer to the official Gravatar XML-RPC API documentation for more details:
  https://en.gravatar.com/site/implement/xmlrpc. 
  
