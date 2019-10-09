@@ -6,9 +6,7 @@
     "gravatar",
     "xml-rpc",
     "api",
-    "client",
-    "daily",
-    "avatar"
+    "client"
   ],
   "repository": {
     "type": "git",
