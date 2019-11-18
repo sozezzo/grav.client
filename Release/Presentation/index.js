@@ -4,8 +4,8 @@ var Grav = /** @class */ (function () {
     function Grav() {
     }
     Grav.prototype.test = function () {
-        return "test";
+        return "this is a test from 2.2.9";
     };
     return Grav;
 }());
-exports.default = Grav;
+exports.Grav = Grav;
