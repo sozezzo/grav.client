@@ -5,7 +5,10 @@ describe('grav.client', function() {
   beforeEach(() => {
     grav = new Grav();
   })
-  it('add', function() {
+  it('should have login method', function() {
+    expect(grav.login).toBeDefined();
+  });
+  it('should have test method', function() {
     expect(grav.test).toBeDefined();
   });
 });
