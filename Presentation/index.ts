@@ -1,7 +1,5 @@
-class Grav {
+export class Grav {
   test() : string {
-    return "test";
+    return "this is a test from 2.2.9";
   }
 }
-
-export default Grav;
