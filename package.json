@@ -2,7 +2,8 @@
   "name": "grav.client",
   "version": "2.2.9",
   "description": "gravatar xml-rpc api client",
-  "main": "./index.js",
+  "main": "Release/Presentation/index.js",
+  "types": "Release/Presentation/index.d.ts",
   "scripts": {
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
