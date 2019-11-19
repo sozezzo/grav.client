@@ -1,6 +1,6 @@
 # grav.client
 
- A Gravatar API client for Node.js with Promises.
+ A Gravatar API client for Node.js.
  
  ---
  
@@ -20,34 +20,10 @@
 
 To learn more, see the [unofficial API docs](https://documenter.getpostman.com/view/1403721/Rztpr87i).
 
-## Table of Contents
-
-- [Installation](#Installation)
-- [Tests](#Tests)
-- [Usage](#Usage)
-    + [Methods](#Methods)
-    + [Parsers](#Parsers)
-    + [Examples](#Examples)
-- [License](#License)
-
-
 ## Installation
 
 ```sh
   npm install grav.client
-```
-
-## Tests
-
-```bash
-# unit tests
-$ npm run test
-
-# test coverage
-$ npm run test:cov
-
-# acceptance tests
-$ npm run test:spec
 ```
 
 ## Usage
@@ -76,10 +52,6 @@ $ npm run test:spec
 | `grav.removeImage()` | set default Gravatar logo as the primary icon for this account |
 | `grav.deleteUserImage(imageName)` | remove an image from this account |
 | `grav.test()` | sanity check |
- 
- For more examples, be sure to check out the [demos](https://github.com/mrtillman/grav.client/tree/master/demo).
-
- Sample method responses may be found [here](https://github.com/mrtillman/grav.client/tree/master/spec/responses).
 
 ## License
 [MIT](https://github.com/mrtillman/grav.client/blob/master/LICENSE.md)
