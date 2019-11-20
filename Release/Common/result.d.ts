@@ -1,4 +1,4 @@
-export default class Result<T> {
+export declare class Result<T> {
     constructor(DidSucceed: Boolean, ErrorMessage?: string);
     private didSucceed;
     get DidSucceed(): Boolean;

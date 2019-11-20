@@ -10,7 +10,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const md5_1 = require("ts-md5/dist/md5");
-const xml_js_1 = require("xml-js");
+const exists_method_response_1 = require("../Domain/exists.method-response");
+const result_1 = require("../Common/result");
+const test_method_response_1 = require("../Domain/test.method-response");
 class GravatarService {
     constructor(email, password) {
         this.email = email;
@@ -24,13 +26,13 @@ class GravatarService {
         return __awaiter(this, void 0, void 0, function* () {
             const message = this.xml.exists(this.hash, this._password);
             const response = yield this.http.rpc(message);
-            // TODO: incorporate result class
             if (response.ok) {
-                const data = yield response.text();
-                return xml_js_1.xml2js(data);
+                const xml = yield response.text();
+                const methodResponse = new exists_method_response_1.ExistsMethodResponse(xml);
+                return result_1.Result.Ok(methodResponse);
             }
             else {
-                return {};
+                return result_1.Result.Fail(response.statusText);
             }
         });
     }
@@ -39,11 +41,12 @@ class GravatarService {
             const message = this.xml.test(this._password);
             const response = yield this.http.rpc(message);
             if (response.ok) {
-                const data = yield response.text();
-                return xml_js_1.xml2js(data);
+                const xml = yield response.text();
+                const methodResponse = new test_method_response_1.TestMethodResponse(xml);
+                return result_1.Result.Ok(methodResponse);
             }
             else {
-                return {};
+                return result_1.Result.Fail(response.statusText);
             }
         });
     }

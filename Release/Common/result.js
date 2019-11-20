@@ -27,4 +27,4 @@ class Result {
         return new Result(false, ErrorMessage);
     }
 }
-exports.default = Result;
+exports.Result = Result;
