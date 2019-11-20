@@ -1,7 +1,9 @@
 import { Md5 } from 'ts-md5/dist/md5';
 import { HttpShim } from '../Infrastructure/http-shim';
 import { XmlService } from './xml.service';
-import { xml2js } from 'xml-js';
+import { ExistsMethodResponse } from '../Domain/exists.method-response';
+import { Result } from '../Common/result';
+import { TestMethodResponse } from '../Domain/test.method-response';
 
 export class GravatarService {
 
@@ -20,25 +22,26 @@ export class GravatarService {
     this.endpoint = `${this.origin}/xmlrpc?user=${this.hash}`;
     this._password = password;
   }
-  public async exists() : Promise<object> {
+  public async exists() : Promise<Result<ExistsMethodResponse>> {
     const message = this.xml.exists(this.hash, this._password);
     const response = await this.http.rpc(message);
-    // TODO: incorporate result class
     if(response.ok){
-      const data = await response.text();
-      return xml2js(data);
+      const xml = await response.text();
+      const methodResponse = new ExistsMethodResponse(xml)
+      return Result.Ok<ExistsMethodResponse>(methodResponse)
     } else {
-      return {};
+      return Result.Fail(response.statusText);
     }
   }
-  public async test() : Promise<object> {
+  public async test() : Promise<Result<TestMethodResponse>> {
     const message = this.xml.test(this._password);
     const response = await this.http.rpc(message);
     if(response.ok){
-      const data = await response.text();
-      return xml2js(data);
+      const xml = await response.text();
+      const methodResponse = new TestMethodResponse(xml)
+      return Result.Ok<TestMethodResponse>(methodResponse)
     } else {
-      return {};
+      return Result.Fail(response.statusText);
     }
   }
 };
