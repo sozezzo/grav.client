@@ -1,14 +1,14 @@
-import { Grav } from './index';
+import { Gravatar } from './index';
 
 describe('grav.client', function() {
-  let grav : Grav;
+  let gravatar : Gravatar;
   beforeEach(() => {
-    grav = new Grav();
+    gravatar = new Gravatar();
   })
   it('should have login method', function() {
-    expect(grav.login).toBeDefined();
+    expect(gravatar.login).toBeDefined();
   });
   it('should have test method', function() {
-    expect(grav.test).toBeDefined();
+    expect(gravatar.test).toBeDefined();
   });
 });
