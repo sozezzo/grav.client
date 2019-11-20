@@ -1,6 +1,6 @@
 import { UseCase } from './use-case.interface';
-
-export class SignInUseCase implements UseCase<boolean> {
+import { GravatarService } from '../Services/gravatar.service';
+export class SignInUseCase implements UseCase<GravatarService> {
 
   public email: string;
   public password: string;
@@ -10,7 +10,8 @@ export class SignInUseCase implements UseCase<boolean> {
     this.password = "";
   }
   
-  execute(): Promise<boolean> {
-    return Promise.resolve(true);
+  execute(): Promise<GravatarService> {
+    const gravatarService = new GravatarService(this.email, this.password);
+    return Promise.resolve(gravatarService);
   }
 }
