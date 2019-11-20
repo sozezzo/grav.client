@@ -27,7 +27,9 @@
   },
   "homepage": "https://github.com/mrtillman/grav.client#readme",
   "dependencies": {
+    "@types/node": "^12.12.11",
     "specification": "file:Specification",
+    "ts-md5": "^1.2.7",
     "typescript": "^3.7.2"
   },
   "devDependencies": {
