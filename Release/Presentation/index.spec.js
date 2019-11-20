@@ -2,14 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const index_1 = require("./index");
 describe('grav.client', function () {
-    let gravatar;
+    let client;
     beforeEach(() => {
-        gravatar = new index_1.Gravatar();
-    });
-    it('should have login method', function () {
-        expect(gravatar.login).toBeDefined();
+        const email = "peter.parker@example.com";
+        const password = "123";
+        client = new index_1.GravatarClient(email, password);
     });
     it('should have test method', function () {
-        expect(gravatar.test).toBeDefined();
+        expect(client.test).toBeDefined();
     });
 });
