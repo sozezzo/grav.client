@@ -7,6 +7,7 @@ class GravatarClient extends gravatar_service_1.GravatarService {
         super(email, password);
         this.email = email;
         this.http = new http_shim_1.HttpShim();
+        this.http.endpoint = this.endpoint;
     }
 }
 exports.GravatarClient = GravatarClient;

@@ -1,3 +1,4 @@
 export declare class HttpShim {
-    rpc(): any;
+    endpoint: string;
+    rpc(message: string): Promise<Response>;
 }
