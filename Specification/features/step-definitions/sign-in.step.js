@@ -15,5 +15,5 @@ When("I sign in", async function() {
 });
 
 Then("it works", function() {
-  expect(this.result).toBe(true);
+  expect(this.result).toBeDefined();
 });

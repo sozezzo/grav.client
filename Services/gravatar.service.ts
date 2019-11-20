@@ -1,18 +1,16 @@
+import { Md5 } from 'ts-md5/dist/md5';
+
 export class GravatarService {
 
-  private hash : string;
+  private hash : string | Int32Array;
+  private origin : string = "https://secure.gravatar.com";
   private endpoint : string;
 
   constructor(public email: string,
               public password: string) {
-    this.hash = "";
-    this.endpoint = "";     
+    const _email = `${email}`.trim().toLowerCase();
+    this.hash = Md5.hashStr(_email);
+    this.endpoint = `${this.origin}/xmlrpc?user=${this.hash}`;
   }
-
-//   this.hash = crypto.createHash('md5')
-//                   .update(email)
-//                   .digest("hex");
-// this.api_url = `${utils.api_origin}/xmlrpc?user=${this.hash}`;
-// this.autoParse = false;
 
 };
