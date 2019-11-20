@@ -1,9 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-class Grav {
-    login(email, password) { }
+const gravatar_service_1 = require("../Services/gravatar.service");
+class Gravatar {
+    login(email, password) {
+        this.client = new gravatar_service_1.GravatarService(email, password);
+        return this.client;
+    }
     test() {
-        return "this is a test from 2.2.9";
+        return "this is a test";
     }
 }
-exports.Grav = Grav;
+exports.Gravatar = Gravatar;

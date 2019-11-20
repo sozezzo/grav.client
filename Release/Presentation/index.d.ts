@@ -1,4 +1,6 @@
-export declare class Grav {
-    login(email: string, password: string): void;
+import { GravatarService } from '../Services/gravatar.service';
+export declare class Gravatar {
+    private client;
+    login(email: string, password: string): GravatarService;
     test(): string;
 }

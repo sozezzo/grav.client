@@ -1,7 +1,8 @@
 import { UseCase } from './use-case.interface';
-export declare class SignInUseCase implements UseCase<boolean> {
+import { GravatarService } from '../Services/gravatar.service';
+export declare class SignInUseCase implements UseCase<GravatarService> {
     email: string;
     password: string;
     constructor();
-    execute(): Promise<boolean>;
+    execute(): Promise<GravatarService>;
 }
