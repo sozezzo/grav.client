@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const md5_1 = require("ts-md5/dist/md5");
+const xml_js_1 = require("xml-js");
 class GravatarService {
     constructor(email, password) {
         this.email = email;
@@ -23,8 +24,13 @@ class GravatarService {
         return __awaiter(this, void 0, void 0, function* () {
             const message = this.xml.exists(this.hash, this._password);
             const response = yield this.http.rpc(message);
+            // TODO: incorporate result class
             if (response.ok) {
-                console.log(yield response.text());
+                const data = yield response.text();
+                return xml_js_1.xml2js(data);
+            }
+            else {
+                return {};
             }
         });
     }
@@ -33,7 +39,11 @@ class GravatarService {
             const message = this.xml.test(this._password);
             const response = yield this.http.rpc(message);
             if (response.ok) {
-                console.log(yield response.text());
+                const data = yield response.text();
+                return xml_js_1.xml2js(data);
+            }
+            else {
+                return {};
             }
         });
     }

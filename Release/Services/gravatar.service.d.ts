@@ -9,6 +9,6 @@ export declare class GravatarService {
     http: HttpShim;
     xml: XmlService;
     constructor(email: string, password: string);
-    exists(): Promise<void>;
-    test(): Promise<void>;
+    exists(): Promise<object>;
+    test(): Promise<object>;
 }
