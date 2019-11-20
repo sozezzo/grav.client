@@ -1,14 +1,11 @@
 import { GravatarService } from '../Services/gravatar.service';
-export class Gravatar {
-  
-  private client : GravatarService;
+import { HttpShim } from '../Infrastructure/http-shim';
 
-  login(email: string, password: string) : GravatarService { 
-    this.client = new GravatarService(email, password);
-    return this.client;
+export class GravatarClient extends GravatarService {
+  constructor(public email: string, public password: string){
+    super(email, password);
   }
-
-  test() : string {
-    return "this is a test";
+  test(): string {
+    return this.hash.toString();
   }
 }

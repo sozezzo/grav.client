@@ -1,14 +1,13 @@
-import { Gravatar } from './index';
+import { GravatarClient } from './index';
 
 describe('grav.client', function() {
-  let gravatar : Gravatar;
+  let client : GravatarClient;
   beforeEach(() => {
-    gravatar = new Gravatar();
+    const email = "peter.parker@example.com";
+    const password = "123";
+    client = new GravatarClient(email, password);
   })
-  it('should have login method', function() {
-    expect(gravatar.login).toBeDefined();
-  });
   it('should have test method', function() {
-    expect(gravatar.test).toBeDefined();
+    expect(client.test).toBeDefined();
   });
 });

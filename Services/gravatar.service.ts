@@ -2,9 +2,9 @@ import { Md5 } from 'ts-md5/dist/md5';
 
 export class GravatarService {
 
-  private hash : string | Int32Array;
-  private origin : string = "https://secure.gravatar.com";
-  private endpoint : string;
+  protected hash : string | Int32Array;
+  protected origin : string = "https://secure.gravatar.com";
+  protected endpoint : string;
 
   constructor(public email: string,
               public password: string) {
