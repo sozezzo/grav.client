@@ -30,11 +30,11 @@ To learn more, see the [unofficial API docs](https://documenter.getpostman.com/v
 
 ```javascript
  
-  const { Grav } = require('grav.client');
+const { GravatarClient } = require('grav.client');
 
-  const grav = Grav.login("user@example.com", "password");
+const client = new GravatarClient("user@example.com", "password");
 
-  grav.test().then(data => ... );
+client.test().then(data => ... );
 
  ```
  
@@ -42,16 +42,16 @@ To learn more, see the [unofficial API docs](https://documenter.getpostman.com/v
  
 |Method     | Description  |
 |-----------|--------------|
-| `grav.exists()` | returns a gravatar if the account exists |
-| `grav.addresses()` | returns all email addresses for this account |
-| `grav.userImages()` | returns all gravatar images for this account  |
-| `grav.saveImage(imageFilePath,rating)` | upload an image |
-| `grav.saveEncodedImage(base64String,mimetype,rating)` | upload a base64 encoded image |
-| `grav.saveUrl(imageUrl,rating)` | save image url |
-| `grav.useUserImage(imageName)` | set primary gravatar icon using an image from this account  |
-| `grav.removeImage()` | set default Gravatar logo as the primary icon for this account |
-| `grav.deleteUserImage(imageName)` | remove an image from this account |
-| `grav.test()` | sanity check |
+| `client.exists()` | check if the Gravatar account exists |
+| `client.addresses()` | get account email addresses |
+| `client.userImages()` | get account images |
+| `client.saveImage(imageFilePath,rating)` | upload an image |
+| `client.saveEncodedImage(base64String,mimetype,rating)` | upload an encoded image |
+| `client.saveUrl(imageUrl,rating)` | upload image from url |
+| `client.useUserImage(imageName)` | update primary image |
+| `client.removeImage()` | replace primary image with default |
+| `client.deleteUserImage(imageName)` | delete an image |
+| `client.test()` | sanity check |
 
 ## License
 [MIT](https://github.com/mrtillman/grav.client/blob/master/LICENSE.md)
