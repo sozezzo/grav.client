@@ -8,8 +8,10 @@ export class TestMethodResponse extends MethodResponse {
 
   constructor(public xml: string){
     super(xml2js(xml, { compact: true }));
-    const { name, value } = this.json.methodResponse.params.param.value.struct.member;
-    this.name = this.parseFieldValue(name);
-    this.value = this.parseFieldValue(value);
+    if(!this.json.methodResponse.fault){
+      const { name, value } = this.json.methodResponse.params.param.value.struct.member;
+      this.name = this.parseFieldValue(name);
+      this.value = this.parseFieldValue(value);
+    }
   }
 }
