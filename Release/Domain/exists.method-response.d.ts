@@ -1,6 +1,7 @@
 import { MethodResponse } from './method-response';
-export declare class ExistsMethodResponse implements MethodResponse {
+export declare class ExistsMethodResponse extends MethodResponse {
     xml: string;
-    json: any;
+    name: string;
+    value: number;
     constructor(xml: string);
 }

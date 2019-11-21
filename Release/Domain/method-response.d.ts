@@ -1,4 +1,5 @@
-export interface MethodResponse {
+export declare class MethodResponse {
     json: any;
-    xml: string;
+    constructor(json: any);
+    protected parseFieldValue<T>(fieldValue: any): T;
 }
