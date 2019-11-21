@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const md5_1 = require("ts-md5/dist/md5");
+const rpc_message_factory_1 = require("../Domain/rpc-message-factory");
 const exists_method_response_1 = require("../Domain/exists.method-response");
 const result_1 = require("../Common/result");
 const test_method_response_1 = require("../Domain/test.method-response");
@@ -24,11 +25,14 @@ class GravatarService {
     }
     exists() {
         return __awaiter(this, void 0, void 0, function* () {
-            const message = this.xml.exists(this.hash, this._password);
-            const response = yield this.http.rpc(message);
+            const message = rpc_message_factory_1.RpcMessageFactory.get(rpc_message_factory_1.RpcMessageType.EXISTS);
+            if (!message)
+                throw new Error('rpc method not found');
+            let xmlReq = message.xml(this.hash, this._password);
+            const response = yield this.http.rpc(xmlReq);
             if (response.ok) {
-                const xml = yield response.text();
-                const methodResponse = new exists_method_response_1.ExistsMethodResponse(xml);
+                const xmlRes = yield response.text();
+                const methodResponse = new exists_method_response_1.ExistsMethodResponse(xmlRes);
                 return result_1.Result.Ok(methodResponse);
             }
             else {
@@ -38,11 +42,14 @@ class GravatarService {
     }
     test() {
         return __awaiter(this, void 0, void 0, function* () {
-            const message = this.xml.test(this._password);
-            const response = yield this.http.rpc(message);
+            const message = rpc_message_factory_1.RpcMessageFactory.get(rpc_message_factory_1.RpcMessageType.TEST);
+            if (!message)
+                throw new Error('rpc method not found');
+            let xmlReq = message.xml(this._password);
+            const response = yield this.http.rpc(xmlReq);
             if (response.ok) {
-                const xml = yield response.text();
-                const methodResponse = new test_method_response_1.TestMethodResponse(xml);
+                const xmlRes = yield response.text();
+                const methodResponse = new test_method_response_1.TestMethodResponse(xmlRes);
                 return result_1.Result.Ok(methodResponse);
             }
             else {
