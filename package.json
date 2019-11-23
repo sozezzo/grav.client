@@ -8,7 +8,8 @@
     "build": "tsc",
     "test": "ts-node node_modules/jasmine/bin/jasmine --config=jasmine.json",
     "test:cov": "nyc -r text -e .ts -x \"**/*.spec.ts\" npm run test",
-    "test:spec": "npm test --prefix ./Specification/"
+    "test:spec": "npm test --prefix ./Specification/",
+    "postinstall": "npm run build"
   },
   "repository": {
     "type": "git",
