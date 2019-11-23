@@ -5,6 +5,7 @@
     "!_/**/*",
     "!Release/**/*",
     "!Specification/**/*",
-    "**/*[sS]pec.ts"
+    "**/*[sS]pec.ts",
+    "**/*e2e-[sS]pec.ts"
   ]
 }
