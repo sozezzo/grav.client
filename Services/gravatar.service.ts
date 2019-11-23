@@ -24,7 +24,6 @@ export class GravatarService {
   }
   public async exists() : Promise<Result<ExistsMethodResponse>> {
     const message = <RpcMessageExists>RpcMessageFactory.get(RpcMessageType.EXISTS);
-    if(!message) throw new Error('rpc method not found');
     let xmlReq = message.xml(this.hash, this._password);
     const response = await this.http.rpc(xmlReq);
     if(response.ok){
@@ -37,7 +36,6 @@ export class GravatarService {
   }
   public async test() : Promise<Result<TestMethodResponse>> {
     const message = <RpcMessageTest>RpcMessageFactory.get(RpcMessageType.TEST);
-    if(!message) throw new Error('rpc method not found');
     let xmlReq = message.xml(this._password);
     const response = await this.http.rpc(xmlReq);
     if(response.ok){
