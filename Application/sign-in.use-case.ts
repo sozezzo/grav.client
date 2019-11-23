@@ -1,6 +1,6 @@
 import { UseCase } from './use-case.interface';
-import { GravatarService } from '../Services/gravatar.service';
-export class SignInUseCase implements UseCase<GravatarService> {
+import { GravatarClient } from '../Presentation';
+export class SignInUseCase implements UseCase<GravatarClient> {
 
   public email: string;
   public password: string;
@@ -10,8 +10,8 @@ export class SignInUseCase implements UseCase<GravatarService> {
     this.password = "";
   }
   
-  execute(): Promise<GravatarService> {
-    const gravatarService = new GravatarService(this.email, this.password);
+  execute(): Promise<GravatarClient> {
+    const gravatarService = new GravatarClient(this.email, this.password);
     return Promise.resolve(gravatarService);
   }
 }
