@@ -6,12 +6,12 @@ const expect = require('expect');
 setWorldConstructor(SignInFeature);
 
 Given("email {string} and password {string}", function(email, password) {
-  this.usecase.email = email;
-  this.usecase.password = password;
+  this.useCase.email = email;
+  this.useCase.password = password;
 });
 
 When("I sign in", async function() {
-  this.result = await this.usecase.execute();
+  this.result = await this.useCase.execute();
 });
 
 Then("it works", function() {
