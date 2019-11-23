@@ -8,11 +8,18 @@ const password = process.env.PASSWORD as string;
 
 describe('GravatarClient', () => {
   let client: GravatarClient;
+
   beforeEach(() => {
     client = new GravatarClient(email, password);
   })
-  it('should invoke grav.exists', async () => {
+  
+  it(`should invoke grav.exists`, async () => {
     const result = await client.exists();
+    expect(result.DidSucceed).toBe(true);
+  })
+
+  it(`should invoke grav.test`, async () => {
+    const result = await client.test();
     expect(result.DidSucceed).toBe(true);
   })
 })
