@@ -1,6 +1,6 @@
 # grav.client
 
- A Gravatar API client for Node.js.
+ A Node.js client for the [Gravatar XML-RPC API](https://en.gravatar.com/site/implement/xmlrpc)
  
  ---
  
@@ -11,14 +11,9 @@
 
 [![NPM](https://nodei.co/npm/grav.client.png)](https://nodei.co/npm/grav.client/)
 
- Please refer to the official Gravatar XML-RPC API documentation for more details:
- https://en.gravatar.com/site/implement/xmlrpc. 
- 
- You can also try it out using [Postman](https://learning.getpostman.com/):
+ To learn more, see the [Postman docs](https://documenter.getpostman.com/view/1403721/Rztpr87i).
 
  [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/e27a4edf756f4cbe80b5)
-
-To learn more, see the [unofficial API docs](https://documenter.getpostman.com/view/1403721/Rztpr87i).
 
 ## Installation
 
@@ -29,13 +24,11 @@ To learn more, see the [unofficial API docs](https://documenter.getpostman.com/v
 ## Usage
 
 ```javascript
- 
-const { GravatarClient } = require('grav.client');
+import { GravatarClient } from 'grav.client';
 
 const client = new GravatarClient("user@example.com", "password");
 
 client.test().then(data => ... );
-
  ```
  
 ## Methods
