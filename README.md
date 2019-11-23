@@ -43,13 +43,13 @@ client.test().then(data => ... );
 |Method     | Description  |
 |-----------|--------------|
 | `client.exists()` | check if the Gravatar account exists |
-| `client.addresses()` | get account email addresses |
-| `client.userImages()` | get account images |
+| `client.addresses()` | list account email addresses |
+| `client.userImages()` | list account images |
 | `client.saveImage(imageFilePath,rating)` | upload an image |
 | `client.saveEncodedImage(base64String,mimetype,rating)` | upload an encoded image |
-| `client.saveUrl(imageUrl,rating)` | upload image from url |
+| `client.saveUrl(imageUrl,rating)` | upload image from URL |
 | `client.useUserImage(imageName)` | update primary image |
-| `client.removeImage()` | replace primary image with default |
+| `client.removeImage()` | remove primary image |
 | `client.deleteUserImage(imageName)` | delete an image |
 | `client.test()` | sanity check |
 
