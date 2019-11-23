@@ -11,7 +11,7 @@ export class MethodResponse {
       members.map(member => {
         if(member.name._text == "faultCode"){
           faultCode = this.parseFieldValue(member.value);
-        } else if(member.name._text == "faultString"){
+        } else if (member.name._text == "faultString"){
           faultString = this.parseFieldValue(member.value);
         }
       })

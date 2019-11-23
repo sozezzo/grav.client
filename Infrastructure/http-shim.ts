@@ -8,7 +8,7 @@ export class HttpShim {
     return await fetch(this.endpoint, {
       method: "POST",
       headers: { 'content-type' : 'text/xml' },
-      body:    message
+      body: message
     });
   }
 }
