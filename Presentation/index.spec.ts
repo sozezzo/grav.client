@@ -7,7 +7,7 @@ describe('grav.client', function() {
     const password = "123";
     client = new GravatarClient(email, password);
   })
-  it('should have test method', function() {
-    expect(client.test).toBeDefined();
+  it('should hash email', function() {
+    expect(client.emailHash).toBeDefined();
   });
 });
