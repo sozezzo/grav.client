@@ -1,5 +1,5 @@
 import { SignInUseCase } from './sign-in.use-case';
-import { email, password } from '../Common/TestDoubles/stubs';
+import { email, password } from '../Common/TestDoubles/primitive-stubs';
 
 describe('SignInUseCase', () => {
   let useCase : SignInUseCase;
