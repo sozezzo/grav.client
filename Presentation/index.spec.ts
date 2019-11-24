@@ -1,10 +1,9 @@
 import { GravatarClient } from './index';
+import { email, password } from '../Common/TestDoubles/primitive-stubs';
 
-describe('grav.client', function() {
+describe('GravatarClient', function() {
   let client : GravatarClient;
   beforeEach(() => {
-    const email = "peter.parker@example.com";
-    const password = "123";
     client = new GravatarClient(email, password);
   })
   it('should hash email', function() {
