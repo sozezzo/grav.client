@@ -1,17 +1,23 @@
 import { GravatarService } from './gravatar.service';
+import { HttpShim } from '../Infrastructure/http-shim';
+import { ExistsHttpResponseStub } from '../Common/TestDoubles/http-response-stubs';
+import { email, password } from '../Common/TestDoubles/primitive-stubs';
 
 describe('GravatarService', () => {
   
   let service : GravatarService;
 
-  beforeEach(() => {
-    const email = "tony.stark@examle.com";
-    const password = "123";    
+  beforeEach(() => {  
     service = new GravatarService(email, password);
   })
 
-  it('should work', () => {
-    expect(service).toBeDefined();
+  it('should invoke grav.exists', async () => {
+    const httpShim = new HttpShim(service.emailHash);
+    const responseStub = new ExistsHttpResponseStub(true, service.emailHash);
+    spyOn(httpShim, 'rpc').and.returnValue(responseStub.value);
+    service.http = httpShim;
+    const result = await service.exists();
+    expect(result.DidSucceed).toBe(true);
   })
 
 })
