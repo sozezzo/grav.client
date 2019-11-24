@@ -1,7 +1,4 @@
-export enum RpcMessageType {
-  EXISTS, 
-  TEST,
-};
+import { RpcMessageType } from './rpc-message-type';
 
 interface RpcMessage { }
 
@@ -52,7 +49,7 @@ export class RpcMessageTest implements RpcMessage {
 }
 
 export class RpcMessageFactory {
-  static get(messageType:RpcMessageType) : RpcMessage {
+  static get(messageType: RpcMessageType) : RpcMessage {
     switch (messageType) {
       case RpcMessageType.TEST:
           return new RpcMessageTest();
@@ -61,7 +58,7 @@ export class RpcMessageFactory {
         return new RpcMessageExists();
         break;
       default:
-        return new RpcMessageExists();
+        return new RpcMessageTest();
         break;
     }
   }
