@@ -21,6 +21,22 @@
   npm install grav.client
 ```
 
+## Tests
+
+```bash
+# unit tests
+$ npm run test
+
+# end-to-end tests
+$ npm run test:e2e
+
+# test coverage
+$ npm run test:cov
+
+# acceptance tests
+$ npm run test:spec
+```
+
 ## Usage
 
 ```javascript
