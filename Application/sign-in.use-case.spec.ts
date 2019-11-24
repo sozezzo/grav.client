@@ -1,5 +1,5 @@
 import { SignInUseCase } from './sign-in.use-case';
-import { GravatarService } from '../Services/gravatar.service';
+import { email, password } from '../Common/TestDoubles/stubs';
 
 describe('SignInUseCase', () => {
   let useCase : SignInUseCase;
@@ -12,8 +12,8 @@ describe('SignInUseCase', () => {
     expect(useCase.execute).toBeDefined();
   })
   it('should allow user to sign in', async () => {
-    useCase.email = "tony.stark@examle.com";
-    useCase.password = "123";
+    useCase.email = email;
+    useCase.password = password;
     const gravatar = await useCase.execute();
     expect(gravatar).toBeDefined();
   })
