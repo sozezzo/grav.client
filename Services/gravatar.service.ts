@@ -7,24 +7,19 @@ import { TestMethodResponse } from '../Domain/test.method-response';
 
 export class GravatarService {
 
-  protected hash : string;
-  protected origin : string = "https://secure.gravatar.com";
-  protected endpoint : string;
   protected _password : string;
-
+  public emailHash: string;
   public http: HttpShim;
-
 
   constructor(public email: string,
               password: string) {
     const _email = `${email}`.trim().toLowerCase();
-    this.hash = Md5.hashStr(_email).toString();
-    this.endpoint = `${this.origin}/xmlrpc?user=${this.hash}`;
+    this.emailHash = Md5.hashStr(_email).toString();
     this._password = password;
   }
   public async exists() : Promise<Result<ExistsMethodResponse>> {
     const message = <RpcMessageExists>RpcMessageFactory.get(RpcMessageType.EXISTS);
-    let xmlReq = message.xml(this.hash, this._password);
+    let xmlReq = message.xml(this.emailHash, this._password);
     const response = await this.http.rpc(xmlReq);
     if(response.ok){
       const xmlRes = await response.text();
