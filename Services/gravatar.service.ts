@@ -1,6 +1,7 @@
 import { Md5 } from 'ts-md5/dist/md5';
 import { HttpShim } from '../Infrastructure/http-shim';
-import { RpcMessageFactory, RpcMessageType, RpcMessageTest, RpcMessageExists } from '../Domain/rpc-message-factory';
+import { RpcMessageFactory, RpcMessageTest, RpcMessageExists } from '../Domain/rpc-message-factory';
+import { RpcMessageType } from '../Domain/rpc-message-type';
 import { ExistsMethodResponse } from '../Domain/exists.method-response';
 import { Result } from '../Common/result';
 import { TestMethodResponse } from '../Domain/test.method-response';
