@@ -26,7 +26,7 @@
 ```javascript
 import { GravatarClient } from 'grav.client';
 
-const client = new GravatarClient("user@example.com", "password");
+const client = new GravatarClient('user@example.com', 'password');
 
 client.test().then(data => ... );
  ```
