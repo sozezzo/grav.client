@@ -9,7 +9,7 @@
     "test": "ts-node node_modules/jasmine/bin/jasmine --config=jasmine.json",
     "test:cov": "nyc -r text -e .ts -x \"**/*.spec.ts\" npm run test",
     "test:e2e": "ts-node node_modules/jasmine/bin/jasmine --config=Tests/jasmine.e2e.json",
-    "test:spec": "npm test --prefix ./Specification/",
+    "test:spec": "cucumber-js Specification/Features/**/*.feature",
     "postinstall": "npm run build"
   },
   "repository": {
@@ -33,10 +33,11 @@
     "@types/node-fetch": "^2.5.3",
     "dotenv": "^8.2.0",
     "isomorphic-unfetch": "^3.0.0",
-    "specification": "file:Specification",
     "ts-md5": "^1.2.7",
     "typescript": "^3.7.2",
-    "xml-js": "^1.6.11"
+    "xml-js": "^1.6.11",
+    "cucumber": "^6.0.5",
+    "expect": "^24.9.0"
   },
   "devDependencies": {
     "@types/jasmine": "^3.4.6",
