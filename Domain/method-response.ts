@@ -10,7 +10,7 @@ export class MethodResponse {
       const members : Array<any> = fault.value.struct.member;
       members.map(member => {
         if(member.name._text == "faultCode"){
-          faultCode = this.parseFieldValue(member.value);
+          faultCode = Number(this.parseFieldValue(member.value));
         } else if (member.name._text == "faultString"){
           faultString = this.parseFieldValue(member.value);
         }
@@ -19,10 +19,10 @@ export class MethodResponse {
     }
   }
 
-  protected parseFieldValue<T>(fieldValue: any): T {
-    if(fieldValue.boolean) return fieldValue.boolean._text as T;
-    if(fieldValue.int) return fieldValue.int._text as T;
-    if(fieldValue.string) return fieldValue.string._text as T;
-    return fieldValue._text as T;
+  protected parseFieldValue(fieldValue: any): string {
+    if(fieldValue.boolean) return fieldValue.boolean._text;
+    if(fieldValue.int) return fieldValue.int._text;
+    if(fieldValue.string) return fieldValue.string._text;
+    return fieldValue._text;
   };
 }

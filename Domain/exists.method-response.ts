@@ -11,7 +11,7 @@ export class ExistsMethodResponse extends MethodResponse {
     if(!this.json.methodResponse.fault){
       const { name, value } = this.json.methodResponse.params.param.value.struct.member;
       this.name = this.parseFieldValue(name);
-      this.value = this.parseFieldValue(value);
+      this.value = Number(this.parseFieldValue(value));
     }
   }
 }
