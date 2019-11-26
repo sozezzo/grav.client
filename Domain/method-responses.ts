@@ -1,6 +1,7 @@
 import { FaultError } from './fault-error';
 import { xml2js } from 'xml-js';
 import { ImageRating } from './image-rating';
+import { UserImage } from './user-image';
 
 export class MethodResponse {
 
@@ -72,6 +73,33 @@ export class AddressesMethodResponse extends MethodResponse {
             break;
         }
       })
+    }
+  }
+}
+
+export class UserImagesMethodResponse extends MethodResponse {
+
+  public userImages: Array<UserImage>;
+
+  constructor(public xml: string){
+    super(xml2js(xml, { compact: true }));
+    if(!this.json.methodResponse.fault){
+      const rawUserImages = this.json.methodResponse.params.param.value.struct.member;
+      const self = this;
+      this.userImages = rawUserImages.map(function(img: any) {
+        const userImage = new UserImage();
+        userImage.name = self.parseFieldValue(img.name);
+        const members: Array<any> = img.value.array.data.value;
+        members.forEach(function(member){
+          const memberValue = member.string._text;
+          if(isNaN(memberValue)){
+            userImage.url = memberValue;
+          } else {
+            userImage.rating = Number(memberValue);
+          }
+        })
+        return userImage;
+      });
     }
   }
 }

@@ -58,6 +58,31 @@ export class AddressesMethodCall implements MethodCall {
   }
 }
 
+export class UserImagesMethodCall implements MethodCall {
+
+  constructor(public password: string){}
+
+  public get xml(): string {
+    return `<methodCall>
+                <methodName>grav.userimages</methodName>
+                <params>
+                    <param>
+                        <value>
+                            <struct>
+                                <member>
+                                    <name>password</name>
+                                    <value>
+                                        <string>${this.password}</string>
+                                    </value>
+                                </member>
+                            </struct>
+                        </value>
+                    </param>
+                </params>
+            </methodCall>`
+  }
+}
+
 export class TestMethodCall implements MethodCall {
 
   constructor(public password: string){}
