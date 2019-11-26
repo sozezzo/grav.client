@@ -20,8 +20,12 @@ describe('GravatarService', () => {
     expect(result.DidSucceed).toBe(true);
   })
 
-  it('should invoke grav.addresses', async () => {
+  it('should get user account email addresses', async () => {
     expect(service.addresses).toBeDefined();
+  })
+
+  it('should save image url', async () => {
+    expect(service.saveImageUrl).toBeDefined();
   })
 
   it('should invoke grav.test', async () => {

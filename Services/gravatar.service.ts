@@ -1,15 +1,16 @@
 import { Md5 } from 'ts-md5/dist/md5';
 import { HttpShim } from '../Infrastructure/http-shim';
 import { Result } from '../Common/result';
+import { ImageRating } from '../Domain/image-rating';
 
 import {
   AddressesMethodCall, ExistsMethodCall, UserImagesMethodCall,
-  TestMethodCall 
+  SaveImageUrlMethodCall, TestMethodCall 
 } from '../Domain/method-calls';
 
 import {
   AddressesMethodResponse, ExistsMethodResponse, UserImagesMethodResponse,
-  TestMethodResponse 
+  SaveImageUrlMethodResponse, TestMethodResponse 
 } from '../Domain/method-responses';
 
 export class GravatarService {
@@ -52,6 +53,17 @@ export class GravatarService {
     if(response.ok){
       const xmlRes = await response.text();
       const methodResponse = new UserImagesMethodResponse(xmlRes);
+      return Result.Ok(methodResponse);
+    } else {
+      return Result.Fail(response.statusText);
+    }
+  }
+  public async saveImageUrl(imageUrl: string, imageRating = ImageRating.G) : Promise<Result<SaveImageUrlMethodResponse>> {
+    const methodCall = new SaveImageUrlMethodCall(imageUrl, imageRating, this._password);
+    const response = await this.http.rpc(methodCall.xml);
+    if(response.ok){
+      const xmlRes = await response.text();
+      const methodResponse = new SaveImageUrlMethodResponse(xmlRes);
       return Result.Ok(methodResponse);
     } else {
       return Result.Fail(response.statusText);
