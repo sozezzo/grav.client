@@ -3,11 +3,13 @@ import { HttpShim } from '../Infrastructure/http-shim';
 import { Result } from '../Common/result';
 
 import {
-  AddressesMethodCall, ExistsMethodCall,TestMethodCall 
+  AddressesMethodCall, ExistsMethodCall, UserImagesMethodCall,
+  TestMethodCall 
 } from '../Domain/method-calls';
 
 import {
-  AddressesMethodResponse, ExistsMethodResponse, TestMethodResponse 
+  AddressesMethodResponse, ExistsMethodResponse, UserImagesMethodResponse,
+  TestMethodResponse 
 } from '../Domain/method-responses';
 
 export class GravatarService {
@@ -39,6 +41,17 @@ export class GravatarService {
     if(response.ok){
       const xmlRes = await response.text();
       const methodResponse = new AddressesMethodResponse(xmlRes);
+      return Result.Ok(methodResponse);
+    } else {
+      return Result.Fail(response.statusText);
+    }
+  }
+  public async userImages() : Promise<Result<UserImagesMethodResponse>> {
+    const methodCall = new UserImagesMethodCall(this._password);
+    const response = await this.http.rpc(methodCall.xml);
+    if(response.ok){
+      const xmlRes = await response.text();
+      const methodResponse = new UserImagesMethodResponse(xmlRes);
       return Result.Ok(methodResponse);
     } else {
       return Result.Fail(response.statusText);
