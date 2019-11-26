@@ -2,13 +2,13 @@ import { Md5 } from 'ts-md5/dist/md5';
 import { HttpShim } from '../Infrastructure/http-shim';
 import { Result } from '../Common/result';
 
-import { AddressesMethodCall } from '../Domain/addresses.method-call';
-import { ExistsMethodCall } from '../Domain/exists.method-call';
-import { TestMethodCall } from '../Domain/test.method-call';
+import {
+  AddressesMethodCall, ExistsMethodCall,TestMethodCall 
+} from '../Domain/method-calls';
 
-import { AddressesMethodResponse } from '../Domain/addresses.method-response';
-import { ExistsMethodResponse } from '../Domain/exists.method-response';
-import { TestMethodResponse } from '../Domain/test.method-response';
+import {
+  AddressesMethodResponse, ExistsMethodResponse, TestMethodResponse 
+} from '../Domain/method-responses';
 
 export class GravatarService {
 
