@@ -84,6 +84,17 @@ export class AddressesMethodResponse extends MethodResponse {
   }
 }
 
+export class SaveImageUrlMethodResponse extends MethodResponse {
+  public imageName: string;
+  constructor(public xml: string){
+    super(xml2js(xml, { compact: true }));
+    if(!this.json.methodResponse.fault){
+      const { value } = this.json.methodResponse.params.param;
+      this.imageName = this.parseFieldValue(value);
+    }
+  }
+}
+
 export class UserImagesMethodResponse extends MethodResponse {
 
   public userImages: Array<UserImage>;
