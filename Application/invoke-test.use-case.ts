@@ -1,6 +1,6 @@
 import { UseCase } from './use-case.interface';
 import { GravatarClient } from '../Presentation'
-import { TestMethodResponse } from '../Domain/test.method-response';
+import { TestMethodResponse } from '../Domain/method-responses';
 import { Result } from '../Common/result';
 
 export class InvokeTestUseCase implements UseCase<Result<TestMethodResponse>> {

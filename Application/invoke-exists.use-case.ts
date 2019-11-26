@@ -1,6 +1,6 @@
 import { UseCase } from './use-case.interface';
 import { GravatarClient } from '../Presentation'
-import { ExistsMethodResponse } from '../Domain/exists.method-response';
+import { ExistsMethodResponse } from '../Domain/method-responses';
 import { Result } from '../Common/result';
 
 export class InvokeExistsUseCase implements UseCase<Result<ExistsMethodResponse>> {
