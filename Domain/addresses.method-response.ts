@@ -1,10 +1,10 @@
 import { MethodResponse } from './method-response';
 import { xml2js } from 'xml-js';
-import { RATED } from './rated';
+import { ImageRating } from './image-rating';
 
 export class AddressesMethodResponse extends MethodResponse {
 
-  public imageRating: RATED;
+  public imageRating: ImageRating;
   public userEmail: string;
   public userImage: string;
   public userImageUrl: string;
