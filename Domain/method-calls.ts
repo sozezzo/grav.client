@@ -122,11 +122,42 @@ export class UserImagesMethodCall implements MethodCall {
   }
 }
 
+export class DeleteUserImageMethodCall implements MethodCall {
+
+  constructor(public imageName: string, public password: string){}
+
+  public get xml(): string {
+    return `<methodCall>
+                <methodName>grav.deleteUserimage</methodName>
+                <params>
+                    <param>
+                        <value>
+                            <struct>
+                                <member>
+                                    <name>userimage</name>
+                                    <value>
+                                        <string>${this.imageName}</string>
+                                    </value>
+                                </member>
+                                <member>
+                                    <name>password</name>
+                                    <value>
+                                        <string>${this.password}</string>
+                                    </value>
+                                </member>
+                            </struct>
+                        </value>
+                    </param>
+                </params>
+            </methodCall>`;
+  }
+}
+
 export class TestMethodCall implements MethodCall {
 
   constructor(public password: string){}
 
-  public get xml() : string  {
+  public get xml() : string {
     return `<methodCall>
               <methodName>grav.test</methodName>
               <params>
