@@ -1,7 +1,7 @@
 import { FaultError } from './fault-error';
 import { xml2js } from 'xml-js';
-import { ImageRating } from './image-rating';
 import { UserImage } from './user-image';
+import { UserAddress } from './user-address';
 
 export class MethodResponse {
 
@@ -47,33 +47,40 @@ export class ExistsMethodResponse extends MethodResponse {
 
 export class AddressesMethodResponse extends MethodResponse {
 
-  public imageRating: ImageRating;
-  public userEmail: string;
-  public userImage: string;
-  public userImageUrl: string;
+  public userAddresses: Array<UserAddress>;
 
   constructor(public xml: string){
     super(xml2js(xml, { compact: true }));
     if(!this.json.methodResponse.fault){
       const { member } = this.json.methodResponse.params.param.value.struct;
-      this.userEmail = this.parseFieldValue(member.name);
-      const members : Array<any> = member.value.struct.member;
-      members.forEach(member => {
-        switch (member.name._text) {
-          case "rating":
-            this.imageRating = Number(this.parseFieldValue(member.value));
-            break;
-          case "userimage":
-            this.userImage = this.parseFieldValue(member.value);
-            break;
-          case "userimage_url":
-            this.userImageUrl = this.parseFieldValue(member.value);
-            break;
-          default:
-            break;
-        }
-      })
+      if(Array.isArray(member)){
+        this.userAddresses = member.map(this.parseUserAddress.bind(this));
+      } else {
+        this.userAddresses = [this.parseUserAddress(member)];
+      }      
     }
+  }
+
+  private parseUserAddress(member: any): UserAddress{
+    const address = new UserAddress();
+    address.userEmail = this.parseFieldValue(member.name);
+    const members : Array<any> = member.value.struct.member;
+    members.forEach(member => {
+      switch (member.name._text) {
+        case "rating":
+          address.imageRating = Number(this.parseFieldValue(member.value));
+          break;
+        case "userimage":
+          address.userImage = this.parseFieldValue(member.value);
+          break;
+        case "userimage_url":
+          address.userImageUrl = this.parseFieldValue(member.value);
+          break;
+        default:
+          break;
+      }
+    })
+    return address;
   }
 }
 
