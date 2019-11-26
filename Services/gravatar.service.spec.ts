@@ -27,7 +27,9 @@ describe('GravatarService', () => {
   it('should save image url', async () => {
     expect(service.saveImageUrl).toBeDefined();
   })
-
+  it('should delete user image', async () => {
+    expect(service.deleteUserImage).toBeDefined();
+  })
   it('should invoke grav.test', async () => {
     expect(service.test).toBeDefined();
   })
