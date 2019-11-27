@@ -54,9 +54,9 @@ client.test().then(data => ... );
 | `client.exists()` | check if the Gravatar account exists |
 | `client.addresses()` | list account email addresses |
 | `client.userImages()` | list account images |
-| `client.saveImage(imageFilePath,rating)` | upload an image |
-| `client.saveEncodedImage(base64String,mimetype,rating)` | upload an encoded image |
-| `client.saveUrl(imageUrl,rating)` | upload image from URL |
+| `client.saveImage(imageFilePath,imageRating)` | upload an image |
+| `client.saveEncodedImage(base64String,mimetype,imageRating)` | upload an encoded image |
+| `client.saveUrl(imageUrl,imageRating)` | upload image from URL |
 | `client.useUserImage(imageName)` | update primary image |
 | `client.removeImage()` | remove primary image |
 | `client.deleteUserImage(imageName)` | delete an image |
