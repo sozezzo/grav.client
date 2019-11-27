@@ -28,4 +28,16 @@ export class HttpShim {
       body: <any>formData
     });
   }
+
+  async postEncodedImageData(base64string: string, mimetype: string) : Promise<Response> {
+    const avatar = {
+      data: base64string, 
+      mimetype
+    };
+    return await fetch('https://dailyavatar.io/api/v1/avatars/base64', {
+      method: "POST",
+      headers: { 'content-type' : 'application/json; charset=UTF-8' },
+      body:    JSON.stringify(avatar)
+    })
+  }
 }
