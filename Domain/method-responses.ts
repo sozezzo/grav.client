@@ -122,6 +122,15 @@ export class UserImagesMethodResponse extends MethodResponse {
   }
 }
 
+export class RemoveImageMethodResponse extends MethodResponse {
+  public success: boolean;
+  constructor(public xml: string){
+    super(xml2js(xml, { compact: true }));
+    const { value } = this.json.methodResponse.params.param.value.struct.member;
+    this.success = Number(this.parseFieldValue(value)) == 1;
+  }
+}
+
 export class DeleteUserImageMethodResponse extends MethodResponse {
   public success: boolean;
   constructor(public xml: string){
