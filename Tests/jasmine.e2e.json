@@ -1,10 +1,6 @@
 {
   "spec_dir": ".",
   "spec_files": [
-    "!node_modules/**/*",
-    "!_/**/*",
-    "!Release/**/*",
-    "!Specification/**/*",
     "**/*e2e-[sS]pec.ts"
   ]
 }
