@@ -23,7 +23,9 @@ describe('GravatarService', () => {
   it('should get user account email addresses', async () => {
     expect(service.addresses).toBeDefined();
   })
-
+  it('should save image file', async () => {
+    expect(service.saveImage).toBeDefined();
+  })
   it('should save image url', async () => {
     expect(service.saveImageUrl).toBeDefined();
   })

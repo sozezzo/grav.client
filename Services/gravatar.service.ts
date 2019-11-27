@@ -58,6 +58,15 @@ export class GravatarService {
       return Result.Fail(response.statusText);
     }
   }
+  public async saveImage(imageFilePath: string, imageRating = ImageRating.G): Promise<Result<SaveImageUrlMethodResponse>> {
+    const response = await this.http.postImageFile(imageFilePath);
+    if(response.ok){
+      const imageUrl = await response.text();
+      return this.saveImageUrl(imageUrl, imageRating);
+    } else {
+      return Result.Fail(response.statusText);
+    }
+  }
   public async saveImageUrl(imageUrl: string, imageRating = ImageRating.G) : Promise<Result<SaveImageUrlMethodResponse>> {
     const methodCall = new SaveImageUrlMethodCall(imageUrl, imageRating, this._password);
     const response = await this.http.rpc(methodCall.xml);
