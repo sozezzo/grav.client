@@ -127,6 +127,11 @@ export class UseUserImageMethodCall implements MethodCall {
   constructor(public imageName: string, public emailAddresses: Array<string>, public password: string){}
 
   public get xml(): string {
+    
+    const arrayValues: string = this.emailAddresses.reduce((prev,  address) => (
+        prev + `<value><string>${address}</string></value>`
+    ), '');
+
     return `<methodCall>
                 <methodName>grav.useUserimage</methodName>
                 <params>
@@ -144,9 +149,7 @@ export class UseUserImageMethodCall implements MethodCall {
                                     <value>
                                         <array>
                                             <data>
-                                                <value>
-                                                    <string>${this.emailAddresses[0]}</string>
-                                                </value>
+                                                ${arrayValues}
                                             </data>
                                         </array>
                                     </value>
@@ -170,6 +173,11 @@ export class RemoveImageMethodCall implements MethodCall {
   constructor(public emailAddresses: Array<string>, public password: string){}
 
   public get xml(): string {
+
+    const arrayValues: string = this.emailAddresses.reduce((prev,  address) => (
+        prev + `<value><string>${address}</string></value>`
+    ), '');
+
     return `<methodCall>
                 <methodName>grav.removeImage</methodName>
                 <params>
@@ -181,9 +189,7 @@ export class RemoveImageMethodCall implements MethodCall {
                                     <value>
                                         <array>
                                             <data>
-                                                <value>
-                                                    <string>${this.emailAddresses[0]}</string>
-                                                </value>
+                                                ${arrayValues}
                                             </data>
                                         </array>
                                     </value>

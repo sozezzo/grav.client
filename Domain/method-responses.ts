@@ -126,8 +126,12 @@ export class UseUserImageMethodResponse extends MethodResponse {
   public success: boolean;
   constructor(public xml: string){
     super(xml2js(xml, { compact: true }));
-    const { value } = this.json.methodResponse.params.param.value.struct.member;
-    this.success = Number(this.parseFieldValue(value)) == 1;
+    const { member } = this.json.methodResponse.params.param.value.struct;
+    if(Array.isArray(member)){
+      this.success = member.every(m => Number(this.parseFieldValue(m.value)) == 1);
+    } else {
+      this.success = Number(this.parseFieldValue(member.value)) == 1;
+    }
   }
 }
 
@@ -135,8 +139,12 @@ export class RemoveImageMethodResponse extends MethodResponse {
   public success: boolean;
   constructor(public xml: string){
     super(xml2js(xml, { compact: true }));
-    const { value } = this.json.methodResponse.params.param.value.struct.member;
-    this.success = Number(this.parseFieldValue(value)) == 1;
+    const { member } = this.json.methodResponse.params.param.value.struct;
+    if(Array.isArray(member)){
+      this.success = member.every(m => Number(this.parseFieldValue(m.value)) == 1);
+    } else {
+      this.success = Number(this.parseFieldValue(member.value)) == 1;
+    }
   }
 }
 

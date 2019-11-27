@@ -89,8 +89,9 @@ export class GravatarService {
       return Result.Fail(response.statusText);
     }
   }
-  public async useUserImage(imageName: string) : Promise<Result<UseUserImageMethodResponse>> {
-    const methodCall = new UseUserImageMethodCall(imageName, [this.email], this._password);
+  public async useUserImage(imageName: string, ... emailAddresses: string[]) : Promise<Result<UseUserImageMethodResponse>> {
+    const addresses = emailAddresses.length ? emailAddresses : [this.email];
+    const methodCall = new UseUserImageMethodCall(imageName, addresses, this._password);
     const response = await this.http.rpc(methodCall.xml);
     if(response.ok){
       const xmlRes = await response.text();
@@ -100,8 +101,9 @@ export class GravatarService {
       return Result.Fail(response.statusText);
     }
   }
-  public async removeImage() : Promise<Result<RemoveImageMethodResponse>> {
-    const methodCall = new RemoveImageMethodCall([this.email], this._password);
+  public async removeImage(... emailAddresses: string[]) : Promise<Result<RemoveImageMethodResponse>> {
+    const addresses = emailAddresses.length ? emailAddresses : [this.email];
+    const methodCall = new RemoveImageMethodCall(addresses, this._password);
     const response = await this.http.rpc(methodCall.xml);
     if(response.ok){
       const xmlRes = await response.text();
