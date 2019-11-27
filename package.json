@@ -29,15 +29,17 @@
   },
   "homepage": "https://github.com/mrtillman/grav.client#readme",
   "dependencies": {
+    "@types/isomorphic-form-data": "^2.0.0",
     "@types/node": "^12.12.11",
     "@types/node-fetch": "^2.5.3",
+    "cucumber": "^6.0.5",
     "dotenv": "^8.2.0",
+    "expect": "^24.9.0",
+    "isomorphic-form-data": "^2.0.0",
     "isomorphic-unfetch": "^3.0.0",
     "ts-md5": "^1.2.7",
     "typescript": "^3.7.2",
-    "xml-js": "^1.6.11",
-    "cucumber": "^6.0.5",
-    "expect": "^24.9.0"
+    "xml-js": "^1.6.11"
   },
   "devDependencies": {
     "@types/jasmine": "^3.4.6",
