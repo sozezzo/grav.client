@@ -5,14 +5,14 @@ import { ImageRating } from '../Domain/image-rating';
 
 import {
   AddressesMethodCall, ExistsMethodCall, UserImagesMethodCall,
-  SaveImageUrlMethodCall, RemoveImageMethodCall, DeleteUserImageMethodCall,
-  TestMethodCall 
+  SaveImageUrlMethodCall, UseUserImageMethodCall, RemoveImageMethodCall, 
+  DeleteUserImageMethodCall, TestMethodCall 
 } from '../Domain/method-calls';
 
 import {
   AddressesMethodResponse, ExistsMethodResponse, UserImagesMethodResponse,
-  SaveImageUrlMethodResponse, RemoveImageMethodResponse, DeleteUserImageMethodResponse,
-  TestMethodResponse 
+  SaveImageUrlMethodResponse, UseUserImageMethodResponse, RemoveImageMethodResponse, 
+  DeleteUserImageMethodResponse, TestMethodResponse 
 } from '../Domain/method-responses';
 
 export class GravatarService {
@@ -70,7 +70,6 @@ export class GravatarService {
     }
   }
   public async saveEncodedImage(base64String: string, mimetype: string, imageRating = ImageRating.G): Promise<Result<SaveImageUrlMethodResponse>> {
-    
     const response = await this.http.postEncodedImageData(base64String, mimetype);
     if(response.ok){
       const imageUrl = await response.text();
@@ -85,6 +84,17 @@ export class GravatarService {
     if(response.ok){
       const xmlRes = await response.text();
       const methodResponse = new SaveImageUrlMethodResponse(xmlRes);
+      return Result.Ok(methodResponse);
+    } else {
+      return Result.Fail(response.statusText);
+    }
+  }
+  public async useUserImage(imageName: string) : Promise<Result<UseUserImageMethodResponse>> {
+    const methodCall = new UseUserImageMethodCall(imageName, [this.email], this._password);
+    const response = await this.http.rpc(methodCall.xml);
+    if(response.ok){
+      const xmlRes = await response.text();
+      const methodResponse = new UseUserImageMethodResponse(xmlRes);
       return Result.Ok(methodResponse);
     } else {
       return Result.Fail(response.statusText);
