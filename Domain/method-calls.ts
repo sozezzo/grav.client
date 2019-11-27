@@ -122,15 +122,21 @@ export class UserImagesMethodCall implements MethodCall {
   }
 }
 
+function convertToXmlRpcArray(collection: Array<string>): string {
+    const initialValue = '';
+
+    const arrayValues = collection.reduce((accumulator, nextStringValue) => (
+        accumulator + `<value><string>${nextStringValue}</string></value>`
+    ), initialValue);
+
+    return `<array><data>${arrayValues}</data></array>`;
+}
+
 export class UseUserImageMethodCall implements MethodCall {
 
   constructor(public imageName: string, public emailAddresses: Array<string>, public password: string){}
 
   public get xml(): string {
-    
-    const arrayValues: string = this.emailAddresses.reduce((prev,  address) => (
-        prev + `<value><string>${address}</string></value>`
-    ), '');
 
     return `<methodCall>
                 <methodName>grav.useUserimage</methodName>
@@ -147,11 +153,7 @@ export class UseUserImageMethodCall implements MethodCall {
                                 <member>
                                     <name>addresses</name>
                                     <value>
-                                        <array>
-                                            <data>
-                                                ${arrayValues}
-                                            </data>
-                                        </array>
+                                        ${convertToXmlRpcArray(this.emailAddresses)}
                                     </value>
                                 </member>
                                 <member>
@@ -174,10 +176,6 @@ export class RemoveImageMethodCall implements MethodCall {
 
   public get xml(): string {
 
-    const arrayValues: string = this.emailAddresses.reduce((prev,  address) => (
-        prev + `<value><string>${address}</string></value>`
-    ), '');
-
     return `<methodCall>
                 <methodName>grav.removeImage</methodName>
                 <params>
@@ -187,11 +185,7 @@ export class RemoveImageMethodCall implements MethodCall {
                                 <member>
                                     <name>addresses</name>
                                     <value>
-                                        <array>
-                                            <data>
-                                                ${arrayValues}
-                                            </data>
-                                        </array>
+                                    ${convertToXmlRpcArray(this.emailAddresses)}
                                     </value>
                                 </member>
                                 <member>
