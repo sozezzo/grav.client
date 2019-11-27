@@ -5,12 +5,14 @@ import { ImageRating } from '../Domain/image-rating';
 
 import {
   AddressesMethodCall, ExistsMethodCall, UserImagesMethodCall,
-  SaveImageUrlMethodCall, DeleteUserImageMethodCall, TestMethodCall 
+  SaveImageUrlMethodCall, RemoveImageMethodCall, DeleteUserImageMethodCall,
+  TestMethodCall 
 } from '../Domain/method-calls';
 
 import {
   AddressesMethodResponse, ExistsMethodResponse, UserImagesMethodResponse,
-  SaveImageUrlMethodResponse, DeleteUserImageMethodResponse, TestMethodResponse 
+  SaveImageUrlMethodResponse, RemoveImageMethodResponse, DeleteUserImageMethodResponse,
+  TestMethodResponse 
 } from '../Domain/method-responses';
 
 export class GravatarService {
@@ -83,6 +85,17 @@ export class GravatarService {
     if(response.ok){
       const xmlRes = await response.text();
       const methodResponse = new SaveImageUrlMethodResponse(xmlRes);
+      return Result.Ok(methodResponse);
+    } else {
+      return Result.Fail(response.statusText);
+    }
+  }
+  public async removeImage() : Promise<Result<RemoveImageMethodResponse>> {
+    const methodCall = new RemoveImageMethodCall([this.email], this._password);
+    const response = await this.http.rpc(methodCall.xml);
+    if(response.ok){
+      const xmlRes = await response.text();
+      const methodResponse = new RemoveImageMethodResponse(xmlRes);
       return Result.Ok(methodResponse);
     } else {
       return Result.Fail(response.statusText);
