@@ -61,7 +61,7 @@ export class AddressesMethodResponse extends MethodResponse {
     }
   }
 
-  private parseUserAddress(member: any): UserAddress{
+  private parseUserAddress(member: any): UserAddress {
     const address = new UserAddress();
     address.userEmail = this.parseFieldValue(member.name);
     const members : Array<any> = member.value.struct.member;
@@ -119,6 +119,15 @@ export class UserImagesMethodResponse extends MethodResponse {
         return userImage;
       });
     }
+  }
+}
+
+export class UseUserImageMethodResponse extends MethodResponse {
+  public success: boolean;
+  constructor(public xml: string){
+    super(xml2js(xml, { compact: true }));
+    const { value } = this.json.methodResponse.params.param.value.struct.member;
+    this.success = Number(this.parseFieldValue(value)) == 1;
   }
 }
 
