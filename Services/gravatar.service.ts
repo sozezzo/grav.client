@@ -23,12 +23,17 @@ export class GravatarService {
 
   constructor(public email: string,
               password: string) {
-    const _email = `${email}`.trim().toLowerCase();
-    this.emailHash = Md5.hashStr(_email).toString();
+    this.emailHash = this.hashEmail(email);
     this._password = password;
   }
-  public async exists() : Promise<Result<ExistsMethodResponse>> {
-    const methodCall = new ExistsMethodCall(this.emailHash, this._password);
+  public hashEmail(email: string): string {
+    const _email = `${email}`.trim().toLowerCase();
+    return Md5.hashStr(_email).toString();
+  }
+  public async exists(... emailAddresses: string[]) : Promise<Result<ExistsMethodResponse>> {
+    const addresses = emailAddresses.length ? emailAddresses : [this.email];
+    const hashes = addresses.map(this.hashEmail);
+    const methodCall = new ExistsMethodCall(hashes, this._password);
     const response = await this.http.rpc(methodCall.xml);
     if(response.ok){
       const xmlResponse = await response.text();
