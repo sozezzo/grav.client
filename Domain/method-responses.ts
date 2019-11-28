@@ -32,16 +32,23 @@ export class MethodResponse {
 
 export class ExistsMethodResponse extends MethodResponse {
 
-  public name: string;
-  public value: number;
+  public exists: { [emailHash: string]: boolean } = {};
 
   constructor(public xml: string){
     super(xml2js(xml, { compact: true }));
     if(!this.json.methodResponse.fault){
-      const { name, value } = this.json.methodResponse.params.param.value.struct.member;
-      this.name = this.parseFieldValue(name);
-      this.value = Number(this.parseFieldValue(value));
+      const { member } = this.json.methodResponse.params.param.value.struct;
+      if(Array.isArray(member)){
+        member.forEach(this.parseExistsResult.bind(this))
+      } else {
+        this.parseExistsResult(member);
+      }
     }
+  }
+  private parseExistsResult(member: any){
+    const hashValue: string = this.parseFieldValue(member.name);
+    const hashExists: boolean = Number(this.parseFieldValue(member.value)) == 1;
+    this.exists[hashValue] = hashExists;
   }
 }
 

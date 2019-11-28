@@ -4,11 +4,21 @@ export interface MethodCall {
   xml: string;
 }
 
+function convertToXmlRpcArray(collection: Array<string>): string {
+  const initialValue = '';
+
+  const arrayValues = collection.reduce((accumulator, nextStringValue) => (
+      accumulator + `<value><string>${nextStringValue}</string></value>`
+  ), initialValue);
+
+  return `<array><data>${arrayValues}</data></array>`;
+}
+
 export class ExistsMethodCall implements MethodCall {
   
-  constructor(public hash:string, public password: string){}
+  constructor(public emailHashes: string[], public password: string){}
 
-  public get xml() : string  {
+  public get xml() : string {
     return `<methodCall>
               <methodName>grav.exists</methodName>
               <params>
@@ -16,11 +26,7 @@ export class ExistsMethodCall implements MethodCall {
                   <member>
                     <name>hashes</name>
                     <value>
-                      <array>
-                        <data>
-                          <value>${this.hash}</value>
-                        </data>
-                      </array>
+                      ${convertToXmlRpcArray(this.emailHashes)}
                     </value>
                   </member>
                   <member>
@@ -120,16 +126,6 @@ export class UserImagesMethodCall implements MethodCall {
                 </params>
             </methodCall>`
   }
-}
-
-function convertToXmlRpcArray(collection: Array<string>): string {
-    const initialValue = '';
-
-    const arrayValues = collection.reduce((accumulator, nextStringValue) => (
-        accumulator + `<value><string>${nextStringValue}</string></value>`
-    ), initialValue);
-
-    return `<array><data>${arrayValues}</data></array>`;
 }
 
 export class UseUserImageMethodCall implements MethodCall {
