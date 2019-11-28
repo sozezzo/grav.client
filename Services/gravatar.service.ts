@@ -31,8 +31,8 @@ export class GravatarService {
     const methodCall = new ExistsMethodCall(this.emailHash, this._password);
     const response = await this.http.rpc(methodCall.xml);
     if(response.ok){
-      const xmlRes = await response.text();
-      const methodResponse = new ExistsMethodResponse(xmlRes);
+      const xmlResponse = await response.text();
+      const methodResponse = new ExistsMethodResponse(xmlResponse);
       return Result.Ok(methodResponse);
     } else {
       return Result.Fail(response.statusText);
@@ -42,8 +42,8 @@ export class GravatarService {
     const methodCall = new AddressesMethodCall(this._password);
     const response = await this.http.rpc(methodCall.xml);
     if(response.ok){
-      const xmlRes = await response.text();
-      const methodResponse = new AddressesMethodResponse(xmlRes);
+      const xmlResponse = await response.text();
+      const methodResponse = new AddressesMethodResponse(xmlResponse);
       return Result.Ok(methodResponse);
     } else {
       return Result.Fail(response.statusText);
@@ -53,8 +53,8 @@ export class GravatarService {
     const methodCall = new UserImagesMethodCall(this._password);
     const response = await this.http.rpc(methodCall.xml);
     if(response.ok){
-      const xmlRes = await response.text();
-      const methodResponse = new UserImagesMethodResponse(xmlRes);
+      const xmlResponse = await response.text();
+      const methodResponse = new UserImagesMethodResponse(xmlResponse);
       return Result.Ok(methodResponse);
     } else {
       return Result.Fail(response.statusText);
@@ -82,8 +82,8 @@ export class GravatarService {
     const methodCall = new SaveImageUrlMethodCall(imageUrl, imageRating, this._password);
     const response = await this.http.rpc(methodCall.xml);
     if(response.ok){
-      const xmlRes = await response.text();
-      const methodResponse = new SaveImageUrlMethodResponse(xmlRes);
+      const xmlResponse = await response.text();
+      const methodResponse = new SaveImageUrlMethodResponse(xmlResponse);
       return Result.Ok(methodResponse);
     } else {
       return Result.Fail(response.statusText);
@@ -94,8 +94,8 @@ export class GravatarService {
     const methodCall = new UseUserImageMethodCall(imageName, addresses, this._password);
     const response = await this.http.rpc(methodCall.xml);
     if(response.ok){
-      const xmlRes = await response.text();
-      const methodResponse = new UseUserImageMethodResponse(xmlRes);
+      const xmlResponse = await response.text();
+      const methodResponse = new UseUserImageMethodResponse(xmlResponse);
       return Result.Ok(methodResponse);
     } else {
       return Result.Fail(response.statusText);
@@ -106,8 +106,8 @@ export class GravatarService {
     const methodCall = new RemoveImageMethodCall(addresses, this._password);
     const response = await this.http.rpc(methodCall.xml);
     if(response.ok){
-      const xmlRes = await response.text();
-      const methodResponse = new RemoveImageMethodResponse(xmlRes);
+      const xmlResponse = await response.text();
+      const methodResponse = new RemoveImageMethodResponse(xmlResponse);
       return Result.Ok(methodResponse);
     } else {
       return Result.Fail(response.statusText);
@@ -117,8 +117,8 @@ export class GravatarService {
     const methodCall = new DeleteUserImageMethodCall(imageName, this._password);
     const response = await this.http.rpc(methodCall.xml);
     if(response.ok){
-      const xmlRes = await response.text();
-      const methodResponse = new DeleteUserImageMethodResponse(xmlRes);
+      const xmlResponse = await response.text();
+      const methodResponse = new DeleteUserImageMethodResponse(xmlResponse);
       return Result.Ok(methodResponse);
     } else {
       return Result.Fail(response.statusText);
@@ -128,8 +128,8 @@ export class GravatarService {
     const methodCall = new TestMethodCall(this._password);
     const response = await this.http.rpc(methodCall.xml);
     if(response.ok){
-      const xmlRes = await response.text();
-      const methodResponse = new TestMethodResponse(xmlRes);
+      const xmlResponse = await response.text();
+      const methodResponse = new TestMethodResponse(xmlResponse);
       return Result.Ok(methodResponse);
     } else {
       return Result.Fail(response.statusText);
