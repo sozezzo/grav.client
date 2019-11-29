@@ -16,10 +16,14 @@ import {
 } from '../Domain/method-responses';
 
 export class GravatarService {
-
-  protected _password : string;
+  
+  private _password : string;
   public emailHash: string;
   public http: HttpShim;
+
+  public get avatarImage(): string {
+    return `https://www.gravatar.com/avatar/${this.emailHash}`;
+  }
 
   constructor(public email: string,
               password: string) {
