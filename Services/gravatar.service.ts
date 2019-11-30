@@ -21,7 +21,7 @@ export class GravatarService {
   public emailHash: string;
   public http: HttpShim;
 
-  public get avatarImage(): string {
+  public get gravatarImageUrl(): string {
     return `https://www.gravatar.com/avatar/${this.emailHash}`;
   }
 

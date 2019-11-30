@@ -5,11 +5,10 @@ export interface MethodCall {
 }
 
 function convertToXmlRpcArray(collection: Array<string>): string {
-  const initialValue = '';
 
   const arrayValues = collection.reduce((accumulator, nextStringValue) => (
       accumulator + `<value><string>${nextStringValue}</string></value>`
-  ), initialValue);
+  ), '');
 
   return `<array><data>${arrayValues}</data></array>`;
 }
