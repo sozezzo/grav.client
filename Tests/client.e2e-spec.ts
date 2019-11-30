@@ -5,21 +5,35 @@ import { readFileSync } from 'fs';
 
 config({ path: 'Tests/.env' });
 
-const imgPath = join(__dirname, '../Common/Assets/gump.jpg');
+let originalPrimaryImage: string;
 const email = process.env.EMAIL as string;
 const password = process.env.PASSWORD as string;
-const uploadedImageNames: Array<string> = [];
-const originalPrimaryImage: string = "4ddf23534256fb555cfbf10acd7728b2";
+const imageNames = { bubba:'', gump:'', temp:'' };
 
 describe('GravatarClient', () => {
 
   let client: GravatarClient;
 
-  beforeEach(() => {
+  beforeAll(() => {
     client = new GravatarClient(email, password);
+    client.addresses()
+    .then(result => result.Value.userAddresses)
+    .then(addresses => {
+      addresses.forEach(address => {
+        if(address.userEmail == client.email){
+          originalPrimaryImage = address.userImage;
+        }
+      })
+    })
   })
 
-  it('should invoke grav.exists', async () => {
+  afterAll(async () => {
+    await client.useUserImage(originalPrimaryImage);
+    await client.deleteUserImage(imageNames.bubba);
+    await client.deleteUserImage(imageNames.gump);
+  })
+
+  it('should check if account exists', async () => {
     const result = await client.exists();
     expect(result.DidSucceed).toBe(true);
   })
@@ -32,20 +46,22 @@ describe('GravatarClient', () => {
     expect(result.DidSucceed).toBe(true);
   })
   it('should upload image file', async () => {
+    const imgPath = join(__dirname, '../Common/Assets/bubba.jpg');
     const result = await client.saveImage(imgPath);
-    uploadedImageNames.push(result.Value.imageName);
+    imageNames.bubba = result.Value.imageName;
     expect(result.DidSucceed).toBe(true);
   })
   it('should upload encoded image', async () => {
+    const imgPath = join(__dirname, '../Common/Assets/gump.jpg');
     const bitmap = readFileSync(imgPath);
     const imageData = new Buffer(bitmap).toString('base64');
     const result = await client.saveEncodedImage(imageData, 'jpeg');
-    uploadedImageNames.push(result.Value.imageName);
+    imageNames.gump = result.Value.imageName;
     expect(result.DidSucceed).toBe(true);
   })
   it('should save image url', async () => {
     const result = await client.saveImageUrl("https://via.placeholder.com/150");
-    uploadedImageNames.push(result.Value.imageName);
+    imageNames.temp = result.Value.imageName;
     expect(result.DidSucceed).toBe(true);
   })
   it('should remove primary image', async () => {
@@ -57,10 +73,10 @@ describe('GravatarClient', () => {
     expect(result.DidSucceed).toBe(true);
   })
   it('should delete image', async () => {
-    const result = await client.deleteUserImage(uploadedImageNames[0]);
+    const result = await client.deleteUserImage(imageNames.temp);
     expect(result.DidSucceed).toBe(true);
   })
-  it('should invoke grav.test', async () => {
+  it('should do sanity check', async () => {
     const result = await client.test();
     expect(result.DidSucceed).toBe(true);
   })
