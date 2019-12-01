@@ -79,7 +79,7 @@ export class GravatarService {
     }
   }
   public async saveEncodedImage(base64String: string, mimetype: string, imageRating = ImageRating.G): Promise<Result<SaveImageUrlMethodResponse>> {
-    const response = await this.http.postEncodedImageData(base64String, mimetype);
+    const response = await this.http.postEncodedImage(base64String, mimetype);
     if(response.ok){
       const imageUrl = await response.text();
       return this.saveImageUrl(imageUrl, imageRating);

@@ -29,7 +29,7 @@ export class HttpShim {
     });
   }
 
-  async postEncodedImageData(base64string: string, mimetype: string) : Promise<Response> {
+  async postEncodedImage(base64string: string, mimetype: string) : Promise<Response> {
     const avatar = {
       data: base64string, 
       mimetype
