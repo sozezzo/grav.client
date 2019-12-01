@@ -1,8 +1,6 @@
-import * as fetchImport from 'isomorphic-unfetch';
+require('isomorphic-unfetch');
 import { createReadStream } from 'fs';
 import FormData from 'isomorphic-form-data';
-
-const fetch = (fetchImport.default || fetchImport) as typeof fetchImport.default;
 
 export class HttpShim {
   public endpoint: string;

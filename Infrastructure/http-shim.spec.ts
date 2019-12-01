@@ -2,6 +2,9 @@ import { HttpShim } from './http-shim';
 import { emailHash } from '../Common/TestDoubles/primitive-stubs';
 import { join } from 'path';
 import { readFileSync } from 'fs';
+import { mockHttpRequests } from '../Common/TestDoubles/fetch-mocks';
+
+mockHttpRequests();
 
 describe('HttpShim', () => {
   
@@ -14,7 +17,7 @@ describe('HttpShim', () => {
   it('should have endpoint', () => {
     expect(http.endpoint).toBeDefined();
   })
-  it('should make rpc call', async () => {
+  it('should make rpc call', async () => {  
     const response = await http.rpc("");
     expect(response.status).toBe(200);
   })
