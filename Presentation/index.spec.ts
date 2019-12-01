@@ -6,7 +6,7 @@ describe('GravatarClient', function() {
   beforeEach(() => {
     client = new GravatarClient(email, password);
   })
-  it('should hash email', function() {
+  it('should have email hash', function() {
     expect(client.emailHash).toBeDefined();
   });
 });
