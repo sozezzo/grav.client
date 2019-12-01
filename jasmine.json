@@ -1,4 +1,5 @@
 {
+  "random": false,
   "spec_dir": ".",
   "spec_files": [
     "!node_modules/**/*",
@@ -7,6 +8,8 @@
     "!Specification/**/*",
     "!**/*e2e-[sS]pec.ts",
     "Common/*[sS]pec.ts",
-    "Infrastructure/*[sS]pec.ts"
+    "Infrastructure/*[sS]pec.ts",
+    "Presentation/*[sS]pec.ts",
+    "Services/*[sS]pec.ts"
   ]
 }
