@@ -20,8 +20,8 @@ describe('GravatarClient', () => {
     .then(result => result.Value.userAddresses)
     .then(addresses => {
       addresses.forEach(address => {
-        if(address.userEmail == client.email){
-          originalPrimaryImage = address.userImage;
+        if(address.email == client.email){
+          originalPrimaryImage = address.imageName;
         }
       })
     })

@@ -70,7 +70,7 @@ export class AddressesMethodResponse extends MethodResponse {
 
   private parseUserAddress(member: any): UserAddress {
     const address = new UserAddress();
-    address.userEmail = this.parseFieldValue(member.name);
+    address.email = this.parseFieldValue(member.name);
     const members : Array<any> = member.value.struct.member;
     members.forEach(member => {
       switch (member.name._text) {
@@ -78,10 +78,10 @@ export class AddressesMethodResponse extends MethodResponse {
           address.imageRating = Number(this.parseFieldValue(member.value));
           break;
         case "userimage":
-          address.userImage = this.parseFieldValue(member.value);
+          address.imageName = this.parseFieldValue(member.value);
           break;
         case "userimage_url":
-          address.userImageUrl = this.parseFieldValue(member.value);
+          address.imageUrl = this.parseFieldValue(member.value);
           break;
         default:
           break;
