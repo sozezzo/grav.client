@@ -1,4 +1,30 @@
-export class ExistsHttpResponseStub {
+export interface ResponseStub {
+    value: Promise<Response>;
+}
+
+function rpcFaultXml(faultString: string){
+    return `
+    <?xml version="1.0"?>
+    <methodResponse>
+        <fault>
+            <value>
+            <struct>
+            <member>
+                <name>faultCode</name>
+                <value><int>-9</int></value>
+            </member>
+            <member>
+                <name>faultString</name>
+                <value><string>${faultString}</string></value>
+            </member>
+            </struct>
+        </value>
+        </fault>
+    </methodResponse>
+    `;
+}
+
+export class ExistsHttpResponseStub implements ResponseStub {
   private xml: string;
   constructor(success: boolean, emailHash: string, errorMessage: string = ""){
     this.xml = success ? `
@@ -30,7 +56,7 @@ export class ExistsHttpResponseStub {
   }
 }
 
-export class AddressesHttpResponseStub {
+export class AddressesHttpResponseStub implements ResponseStub {
   private xml: string;
   constructor(success: boolean, email: string, errorMessage: string = ""){
     this.xml = success ? `
@@ -81,7 +107,7 @@ export class AddressesHttpResponseStub {
   }
 }
 
-export class UserImagesHttpResponseStub {
+export class UserImagesHttpResponseStub implements ResponseStub {
   private xml: string;
   constructor(success: boolean, emailHash: string, errorMessage: string = ""){
     this.xml = success ? `
@@ -227,24 +253,43 @@ export class UserImagesHttpResponseStub {
   }
 }
 
-function rpcFaultXml(faultString: string){
-  return `
-  <?xml version="1.0"?>
-  <methodResponse>
-      <fault>
-        <value>
-        <struct>
-          <member>
-            <name>faultCode</name>
-            <value><int>-9</int></value>
-          </member>
-          <member>
-            <name>faultString</name>
-            <value><string>${faultString}</string></value>
-          </member>
-        </struct>
-      </value>
-      </fault>
-  </methodResponse>
-  `;
+export class SaveImageUrlHttpResponseStub implements ResponseStub {
+    protected xml: string;
+    constructor(success: boolean, errorMessage: string = ""){
+        this.xml = success ? `
+        <?xml version="1.0"?>
+        <methodResponse>
+        <params>
+            <param>
+                <value>
+                    <string>b13ef59e996c16dcc127df002dd4578b</string>
+                </value>
+            </param>
+        </params>
+        </methodResponse>
+    ` : rpcFaultXml(errorMessage);
+    }
+    public get value(): Promise<Response> {
+        return Promise.resolve({
+            ok: true,
+            status: 200,
+            text: () => Promise.resolve(this.xml)
+        } as Response);
+    }
+}
+
+export class SaveImageHttpResponseStub 
+       extends SaveImageUrlHttpResponseStub 
+       implements ResponseStub {
+    constructor(success: boolean, errorMessage: string = ""){
+        super(success, errorMessage);
+    }
+}
+
+export class SaveEncodedImageHttpResponseStub 
+       extends SaveImageUrlHttpResponseStub 
+       implements ResponseStub {
+    constructor(success: boolean, errorMessage: string = ""){
+        super(success, errorMessage);
+    }
 }
