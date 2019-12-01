@@ -3,11 +3,12 @@ import { GravatarClient } from '../Presentation'
 import { TestMethodResponse } from '../Domain/method-responses';
 import { Result } from '../Common/result';
 
-export class InvokeTestUseCase implements UseCase<Result<TestMethodResponse>> {
+export class SanityCheckUseCase implements UseCase<boolean> {
 
   public client: GravatarClient;
 
-  async execute(): Promise<Result<TestMethodResponse>> {
-    return await this.client.test();
+  async execute(): Promise<boolean> {
+    const result = await this.client.test();
+    return !!result.Value.value;
   }
 }
