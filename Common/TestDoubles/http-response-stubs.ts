@@ -25,7 +25,7 @@ function errorResponse(errorMessage: string){
 }
 
 export class ExistsHttpResponseStub implements ResponseStub {
-  private xml: string;
+  public xml: string;
   constructor(success: boolean, emailHash: string, errorMessage: string = ""){
     this.xml = success ? `
     <?xml version="1.0"?>
@@ -57,7 +57,7 @@ export class ExistsHttpResponseStub implements ResponseStub {
 }
 
 export class AddressesHttpResponseStub implements ResponseStub {
-  private xml: string;
+  public xml: string;
   constructor(success: boolean, email: string, errorMessage: string = ""){
     this.xml = success ? `
     <?xml version="1.0"?>
@@ -108,7 +108,7 @@ export class AddressesHttpResponseStub implements ResponseStub {
 }
 
 export class UserImagesHttpResponseStub implements ResponseStub {
-  private xml: string;
+  public xml: string;
   constructor(success: boolean, emailHash: string, errorMessage: string = ""){
     this.xml = success ? `
     <?xml version="1.0"?>
@@ -254,7 +254,7 @@ export class UserImagesHttpResponseStub implements ResponseStub {
 }
 
 export class SaveImageUrlHttpResponseStub implements ResponseStub {
-    protected xml: string;
+    public xml: string;
     constructor(success: boolean, errorMessage: string = ""){
         this.xml = success ? `
         <?xml version="1.0"?>
@@ -295,7 +295,7 @@ export class SaveEncodedImageHttpResponseStub
 }
 
 export class UseUserImageHttpResponseStub implements ResponseStub {
-    protected xml: string;
+    public xml: string;
     constructor(success: boolean, email: string, errorMessage: string = ""){
         this.xml = success ? `
             <?xml version="1.0"?>
@@ -327,7 +327,7 @@ export class UseUserImageHttpResponseStub implements ResponseStub {
 }
 
 export class RemoveImageHttpResponseStub implements ResponseStub {
-    protected xml: string;
+    public xml: string;
     constructor(success: boolean, email: string, errorMessage: string = ""){
         this.xml = success ? `
             <?xml version="1.0"?>
@@ -359,7 +359,7 @@ export class RemoveImageHttpResponseStub implements ResponseStub {
 }
 
 export class DeleteUserImageHttpResponseStub implements ResponseStub {
-    protected xml: string;
+    public xml: string;
     constructor(success: boolean, errorMessage: string = ""){
         this.xml = success ? `
             <?xml version="1.0"?>
@@ -384,7 +384,7 @@ export class DeleteUserImageHttpResponseStub implements ResponseStub {
 }
 
 export class TestHttpResponseStub implements ResponseStub {
-    protected xml: string;
+    public xml: string;
     constructor(success: boolean, errorMessage: string = ""){
         this.xml = success ? `
             <?xml version="1.0"?>
