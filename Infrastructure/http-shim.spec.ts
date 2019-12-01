@@ -22,7 +22,7 @@ describe('HttpShim', () => {
     expect(response.status).toBe(200);
   })
   it('should post image file', async () => {
-    const imageFilePath = join(__dirname, "../Common/Assets/gump.jpg");
+    const imageFilePath = join(__dirname, "../Common/Assets/bubba.jpg");
     const response = await http.postImageFile(imageFilePath);
     expect(response.status).toBe(200);
   })
