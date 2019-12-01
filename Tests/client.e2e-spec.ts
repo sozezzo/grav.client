@@ -2,6 +2,7 @@ import { GravatarClient } from '../Presentation';
 import { config } from 'dotenv';
 import { join } from 'path';
 import { readFileSync } from 'fs';
+import { imageUrl } from '../Common/TestDoubles/primitive-stubs';
 
 config({ path: 'Tests/.env' });
 
@@ -60,7 +61,7 @@ describe('GravatarClient', () => {
     expect(result.DidSucceed).toBe(true);
   })
   it('should save image url', async () => {
-    const result = await client.saveImageUrl("https://via.placeholder.com/150");
+    const result = await client.saveImageUrl(imageUrl);
     imageNames.temp = result.Value.imageName;
     expect(result.DidSucceed).toBe(true);
   })
