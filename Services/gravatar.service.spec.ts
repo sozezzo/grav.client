@@ -1,17 +1,22 @@
 import { GravatarService } from './gravatar.service';
 import { HttpShim } from '../Infrastructure/http-shim';
-import { ExistsHttpResponseStub, AddressesHttpResponseStub } from '../Common/TestDoubles/http-response-stubs';
-import { email, password } from '../Common/TestDoubles/primitive-stubs';
+
+import { 
+  ExistsHttpResponseStub, AddressesHttpResponseStub,
+  UserImagesHttpResponseStub
+} from '../Common/TestDoubles/http-response-stubs';
+
+import { email, emailHash, password } from '../Common/TestDoubles/primitive-stubs';
 
 describe('GravatarService', () => {
   
   let service : GravatarService;
 
-  beforeEach(() => {
+  beforeAll(() => {
     service = new GravatarService(email, password);
   })
 
-  it('should invoke grav.exists', async () => {
+  it('should check if account exists', async () => {
     const httpShim = new HttpShim(service.emailHash);
     const responseStub = new ExistsHttpResponseStub(true, service.emailHash);
     spyOn(httpShim, 'rpc').and.returnValue(responseStub.value);
@@ -30,6 +35,14 @@ describe('GravatarService', () => {
     spyOn(httpShim, 'rpc').and.returnValue(responseStub.value);
     service.http = httpShim;
     const result = await service.addresses();
+    expect(result.DidSucceed).toBeTrue();
+  })
+  it('should get user images', async () => {
+    const httpShim = new HttpShim(service.emailHash);
+    const responseStub = new UserImagesHttpResponseStub(true, emailHash);
+    spyOn(httpShim, 'rpc').and.returnValue(responseStub.value);
+    service.http = httpShim;
+    const result = await service.userImages();
     expect(result.DidSucceed).toBeTrue();
   })
   it('should save image file', async () => {
