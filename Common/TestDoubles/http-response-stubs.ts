@@ -2,7 +2,7 @@ export interface ResponseStub {
     value: Promise<Response>;
 }
 
-function rpcFaultXml(faultString: string){
+function errorResponse(errorMessage: string){
     return `
     <?xml version="1.0"?>
     <methodResponse>
@@ -15,7 +15,7 @@ function rpcFaultXml(faultString: string){
             </member>
             <member>
                 <name>faultString</name>
-                <value><string>${faultString}</string></value>
+                <value><string>${errorMessage}</string></value>
             </member>
             </struct>
         </value>
@@ -45,7 +45,7 @@ export class ExistsHttpResponseStub implements ResponseStub {
             </param>
         </params>
     </methodResponse>
-  ` : rpcFaultXml(errorMessage);
+  ` : errorResponse(errorMessage);
   }
   public get value(): Promise<Response> {
     return Promise.resolve({
@@ -96,7 +96,7 @@ export class AddressesHttpResponseStub implements ResponseStub {
             </param>
         </params>
     </methodResponse>
-  ` : rpcFaultXml(errorMessage);
+  ` : errorResponse(errorMessage);
   }
   public get value(): Promise<Response> {
     return Promise.resolve({
@@ -242,7 +242,7 @@ export class UserImagesHttpResponseStub implements ResponseStub {
             </param>
         </params>
     </methodResponse>
-  ` : rpcFaultXml(errorMessage);
+  ` : errorResponse(errorMessage);
   }
   public get value(): Promise<Response> {
     return Promise.resolve({
@@ -259,15 +259,15 @@ export class SaveImageUrlHttpResponseStub implements ResponseStub {
         this.xml = success ? `
         <?xml version="1.0"?>
         <methodResponse>
-        <params>
-            <param>
-                <value>
-                    <string>b13ef59e996c16dcc127df002dd4578b</string>
-                </value>
-            </param>
-        </params>
+            <params>
+                <param>
+                    <value>
+                        <string>b13ef59e996c16dcc127df002dd4578b</string>
+                    </value>
+                </param>
+            </params>
         </methodResponse>
-    ` : rpcFaultXml(errorMessage);
+    ` : errorResponse(errorMessage);
     }
     public get value(): Promise<Response> {
         return Promise.resolve({
@@ -291,5 +291,126 @@ export class SaveEncodedImageHttpResponseStub
        implements ResponseStub {
     constructor(success: boolean, errorMessage: string = ""){
         super(success, errorMessage);
+    }
+}
+
+export class UseUserImageHttpResponseStub implements ResponseStub {
+    protected xml: string;
+    constructor(success: boolean, email: string, errorMessage: string = ""){
+        this.xml = success ? `
+            <?xml version="1.0"?>
+            <methodResponse>
+                <params>
+                    <param>
+                        <value>
+                            <struct>
+                                <member>
+                                    <name>${email}</name>
+                                    <value>
+                                        <boolean>1</boolean>
+                                    </value>
+                                </member>
+                            </struct>
+                        </value>
+                    </param>
+                </params>
+            </methodResponse>
+        `: errorResponse(errorMessage);
+    }
+    public get value(): Promise<Response> {
+        return Promise.resolve({
+            ok: true,
+            status: 200,
+            text: () => Promise.resolve(this.xml)
+        } as Response);
+    }
+}
+
+export class RemoveImageHttpResponseStub implements ResponseStub {
+    protected xml: string;
+    constructor(success: boolean, email: string, errorMessage: string = ""){
+        this.xml = success ? `
+            <?xml version="1.0"?>
+            <methodResponse>
+                <params>
+                    <param>
+                        <value>
+                            <struct>
+                                <member>
+                                    <name>${email}</name>
+                                    <value>
+                                        <boolean>1</boolean>
+                                    </value>
+                                </member>
+                            </struct>
+                        </value>
+                    </param>
+                </params>
+            </methodResponse>
+        `: errorResponse(errorMessage);
+    }
+    public get value(): Promise<Response> {
+        return Promise.resolve({
+            ok: true,
+            status: 200,
+            text: () => Promise.resolve(this.xml)
+        } as Response);
+    }
+}
+
+export class DeleteUserImageHttpResponseStub implements ResponseStub {
+    protected xml: string;
+    constructor(success: boolean, errorMessage: string = ""){
+        this.xml = success ? `
+            <?xml version="1.0"?>
+            <methodResponse>
+                <params>
+                    <param>
+                        <value>
+                            <boolean>1</boolean>
+                        </value>
+                    </param>
+                </params>
+            </methodResponse>
+        `: errorResponse(errorMessage);
+    }
+    public get value(): Promise<Response> {
+        return Promise.resolve({
+            ok: true,
+            status: 200,
+            text: () => Promise.resolve(this.xml)
+        } as Response);
+    }
+}
+
+export class TestHttpResponseStub implements ResponseStub {
+    protected xml: string;
+    constructor(success: boolean, errorMessage: string = ""){
+        this.xml = success ? `
+            <?xml version="1.0"?>
+            <methodResponse>
+                <params>
+                    <param>
+                        <value>
+                            <struct>
+                                <member>
+                                    <name>response</name>
+                                    <value>
+                                        <int>1555198365</int>
+                                    </value>
+                                </member>
+                            </struct>
+                        </value>
+                    </param>
+                </params>
+            </methodResponse>
+        `: errorResponse(errorMessage);
+    }
+    public get value(): Promise<Response> {
+        return Promise.resolve({
+            ok: true,
+            status: 200,
+            text: () => Promise.resolve(this.xml)
+        } as Response);
     }
 }

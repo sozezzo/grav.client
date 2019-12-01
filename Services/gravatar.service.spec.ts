@@ -4,7 +4,7 @@ import { HttpShim } from '../Infrastructure/http-shim';
 import { 
   ResponseStub, ExistsHttpResponseStub, AddressesHttpResponseStub,
   UserImagesHttpResponseStub, SaveImageHttpResponseStub, 
-  SaveEncodedImageHttpResponseStub, SaveImageUrlHttpResponseStub
+  SaveEncodedImageHttpResponseStub, SaveImageUrlHttpResponseStub, UseUserImageHttpResponseStub, RemoveImageHttpResponseStub, DeleteUserImageHttpResponseStub, TestHttpResponseStub
 } from '../Common/TestDoubles/http-response-stubs';
 
 import { email, emailHash, password, imageUrl } from '../Common/TestDoubles/primitive-stubs';
@@ -77,20 +77,32 @@ describe('GravatarService', () => {
     expect(result.DidSucceed).toBeTrue();
   })
   it('should use user image', async () => {
-    // UseUserImageHttpResponseStub
-    expect(service.useUserImage).toBeDefined();
+    const responseStub = new UseUserImageHttpResponseStub(true, email);
+    const httpShim = mockHttpShim(responseStub);
+    service.http = httpShim;
+    const result = await service.saveImageUrl(imageUrl);
+    expect(result.DidSucceed).toBeTrue();
   })
   it('should remove image', async () => {
-    // RemoveImageHttpResponseStub
-    expect(service.removeImage).toBeDefined();
+    const responseStub = new RemoveImageHttpResponseStub(true, email);
+    const httpShim = mockHttpShim(responseStub);
+    service.http = httpShim;
+    const result = await service.saveImageUrl(imageUrl);
+    expect(result.DidSucceed).toBeTrue();
   })
   it('should delete user image', async () => {
-    // DeleteUserImageHttpResponseStub
-    expect(service.deleteUserImage).toBeDefined();
+    const responseStub = new DeleteUserImageHttpResponseStub(true);
+    const httpShim = mockHttpShim(responseStub);
+    service.http = httpShim;
+    const result = await service.saveImageUrl(imageUrl);
+    expect(result.DidSucceed).toBeTrue();
   })
-  it('should invoke grav.test', async () => {
-    // TestHttpResponseStub
-    expect(service.test).toBeDefined();
+  it('should do sanity check', async () => {
+    const responseStub = new TestHttpResponseStub(true);
+    const httpShim = mockHttpShim(responseStub);
+    service.http = httpShim;
+    const result = await service.saveImageUrl(imageUrl);
+    expect(result.DidSucceed).toBeTrue();
   })
 
 })
