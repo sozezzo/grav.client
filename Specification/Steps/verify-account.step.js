@@ -14,6 +14,7 @@ Given("I sign in successfully", async function() {
   this.signInUseCase.email = email;
   this.signInUseCase.password = password;
   this.verifyAccountUseCase.client = await this.signInUseCase.execute();
+  expect(this.verifyAccountUseCase.client).toBeDefined();
 });
 
 When("I check my account", async function() {
