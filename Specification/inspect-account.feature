@@ -4,7 +4,7 @@ Feature: InspectAccountFeature
        I want to inspect my account
 
 Scenario: Verify Account
-       Given I sign in successfully
+       Given a client
        When I check my account
        Then the account check passes
 

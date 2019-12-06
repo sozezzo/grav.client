@@ -1,20 +1,11 @@
 const { setWorldConstructor, Given, When, Then } = require('cucumber');
-const { config }  = require('dotenv');
 const expect = require('expect');
 const InspectAccountFeature = require('../inspect-account.feature.js');
-
-config({ path: 'Tests/.env' });
-
-const email = process.env.EMAIL;
-const password = process.env.PASSWORD;
 
 setWorldConstructor(InspectAccountFeature);
 
 Given("a list of two email addresses", async function(dataTable) {
   const emailAddresses = dataTable.rawTable.map(dataRow => dataRow[0]);
-  this.signInUseCase.email = email;
-  this.signInUseCase.password = password;
-  this.verifyEmailListUseCase.client = await this.signInUseCase.execute();
   this.verifyEmailListUseCase.emailAddresses = emailAddresses;
   expect(this.verifyEmailListUseCase.emailAddresses.length).toBe(2);
 });

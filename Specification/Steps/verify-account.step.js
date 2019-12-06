@@ -1,19 +1,10 @@
 const { setWorldConstructor, Given, When, Then } = require('cucumber');
-const { config }  = require('dotenv');
 const expect = require('expect');
 const InspectAccountFeature = require('../inspect-account.feature.js');
 
-config({ path: 'Tests/.env' });
-
-const email = process.env.EMAIL;
-const password = process.env.PASSWORD;
-
 setWorldConstructor(InspectAccountFeature);
 
-Given("I sign in successfully", async function() {
-  this.signInUseCase.email = email;
-  this.signInUseCase.password = password;
-  this.verifyAccountUseCase.client = await this.signInUseCase.execute();
+Given("a client", async function() {
   expect(this.verifyAccountUseCase.client).toBeDefined();
 });
 
