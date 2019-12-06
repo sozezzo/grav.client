@@ -76,28 +76,28 @@ describe('GravatarService', () => {
     const responseStub = new Stub.UseUserImageHttpResponseStub(true, email);
     const httpShim = mockHttpShim(responseStub);
     service.http = httpShim;
-    const result = await service.saveImageUrl(imageUrl);
+    const result = await service.useUserImage("asdf");
     expect(result.DidSucceed).toBeTrue();
   })
   it('should remove image', async () => {
     const responseStub = new Stub.RemoveImageHttpResponseStub(true, email);
     const httpShim = mockHttpShim(responseStub);
     service.http = httpShim;
-    const result = await service.saveImageUrl(imageUrl);
+    const result = await service.removeImage();
     expect(result.DidSucceed).toBeTrue();
   })
   it('should delete user image', async () => {
     const responseStub = new Stub.DeleteUserImageHttpResponseStub(true);
     const httpShim = mockHttpShim(responseStub);
     service.http = httpShim;
-    const result = await service.saveImageUrl(imageUrl);
+    const result = await service.deleteUserImage(imageUrl);
     expect(result.DidSucceed).toBeTrue();
   })
   it('should do sanity check', async () => {
     const responseStub = new Stub.TestHttpResponseStub(true);
     const httpShim = mockHttpShim(responseStub);
     service.http = httpShim;
-    const result = await service.saveImageUrl(imageUrl);
+    const result = await service.test();
     expect(result.DidSucceed).toBeTrue();
   })
 })
