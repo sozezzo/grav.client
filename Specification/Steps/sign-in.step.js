@@ -1,13 +1,10 @@
 const { setWorldConstructor, Given, When, Then } = require('cucumber');
-const SignInFeature = require('../sign-in.feature.js');
-const { SignInUseCase } = require('../../Release/Application/sign-in.use-case');
-
+const World = require('../world');
 const expect = require('expect');
 
-setWorldConstructor(SignInFeature);
+setWorldConstructor(World);
 
 Given("email {string} and password {string}", function(email, password) {
-  this.signInUseCase = new SignInUseCase();
   this.signInUseCase.email = email;
   this.signInUseCase.password = password;
 });

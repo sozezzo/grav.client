@@ -1,8 +1,5 @@
-const { setWorldConstructor, Given, When, Then } = require('cucumber');
+const { Given, When, Then } = require('cucumber');
 const expect = require('expect');
-const InspectAccountFeature = require('../inspect-account.feature.js');
-
-setWorldConstructor(InspectAccountFeature);
 
 Given("a list of two email addresses", async function(dataTable) {
   const emailAddresses = dataTable.rawTable.map(dataRow => dataRow[0]);
