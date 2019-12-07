@@ -1,5 +1,6 @@
 import { UseCase } from './use-case.interface';
 import { GravatarClient } from '../Presentation';
+
 export class SignInUseCase implements UseCase<GravatarClient> {
 
   public email: string;
