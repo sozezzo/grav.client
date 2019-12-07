@@ -3,6 +3,7 @@ import { config } from 'dotenv';
 import { join } from 'path';
 import { readFileSync } from 'fs';
 import { imageUrl } from '../Common/TestDoubles/primitive-stubs';
+import { GetPrimaryImageUseCase } from '../Application/get-primary-image.use-case';
 
 config({ path: 'Tests/.env' });
 
@@ -15,17 +16,11 @@ describe('GravatarClient', () => {
 
   let client: GravatarClient;
 
-  beforeAll(() => {
+  beforeAll(async () => {
     client = new GravatarClient(email, password);
-    client.addresses()
-    .then(result => result.Value.userAddresses)
-    .then(addresses => {
-      addresses.forEach(address => {
-        if(address.email == client.email){
-          originalPrimaryImage = address.imageName;
-        }
-      })
-    })
+    const getPrimaryImageUseCase = new GetPrimaryImageUseCase();
+    getPrimaryImageUseCase.client = client;
+    originalPrimaryImage = await getPrimaryImageUseCase.execute();
   })
 
   afterAll(async () => {
