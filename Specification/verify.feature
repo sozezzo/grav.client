@@ -1,12 +1,12 @@
-Feature: InspectAccountFeature
-       In order to verify account details
+Feature: VerifyFeature
        As a user
-       I want to inspect my account
+       I want to verify 
+       my account details
 
 Scenario: Verify Account
-       Given a client
-       When I check my account
+       Given a Gravatar client
        Then the account check passes
+       And I can get the primary gravatar image
 
 Scenario: Verify Email List
        Given a list of two email addresses

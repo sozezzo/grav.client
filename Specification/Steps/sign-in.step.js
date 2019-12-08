@@ -1,8 +1,5 @@
-const { setWorldConstructor, Given, When, Then } = require('cucumber');
-const World = require('../world');
+const { Given, When, Then } = require('cucumber');
 const expect = require('expect');
-
-setWorldConstructor(World);
 
 Given("email {string} and password {string}", function(email, password) {
   this.signInUseCase.email = email;
