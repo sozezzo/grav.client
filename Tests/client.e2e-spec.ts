@@ -3,7 +3,7 @@ import { config } from 'dotenv';
 import { join } from 'path';
 import { readFileSync } from 'fs';
 import { imageUrl } from '../Common/TestDoubles/primitive-stubs';
-import { GetPrimaryImageUseCase } from '../Application/get-primary-image.use-case';
+import { GetPrimaryImageUseCase } from '../Presentation';
 
 config({ path: 'Tests/.env' });
 
