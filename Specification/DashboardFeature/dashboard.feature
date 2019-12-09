@@ -3,7 +3,7 @@ Feature: Dashboard feature
   As a user, I want to perform basic 
   administrative operations
 
-  Scenario: Sign In
+  Scenario: Sign in
     Given email "peter.parker@example.com" and password "letmein"
     When I sign in
     Then I receive a client instance
