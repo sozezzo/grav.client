@@ -26,8 +26,8 @@ function errorResponse(errorMessage: string){
 
 export class ExistsHttpResponseStub implements ResponseStub {
   public xml: string;
-  constructor(success: boolean, emailHash: string, errorMessage: string = ""){
-    this.xml = success ? `
+  constructor(useSuccess: boolean, emailHash: string, errorMessage: string = ""){
+    this.xml = useSuccess ? `
     <?xml version="1.0"?>
     <methodResponse>
         <params>
@@ -58,8 +58,8 @@ export class ExistsHttpResponseStub implements ResponseStub {
 
 export class AddressesHttpResponseStub implements ResponseStub {
   public xml: string;
-  constructor(success: boolean, email: string, errorMessage: string = ""){
-    this.xml = success ? `
+  constructor(useSuccess: boolean, email: string, errorMessage: string = ""){
+    this.xml = useSuccess ? `
     <?xml version="1.0"?>
     <methodResponse>
         <params>
@@ -109,8 +109,8 @@ export class AddressesHttpResponseStub implements ResponseStub {
 
 export class UserImagesHttpResponseStub implements ResponseStub {
   public xml: string;
-  constructor(success: boolean, emailHash: string, errorMessage: string = ""){
-    this.xml = success ? `
+  constructor(useSuccess: boolean, emailHash: string, errorMessage: string = ""){
+    this.xml = useSuccess ? `
     <?xml version="1.0"?>
     <methodResponse>
         <params>
@@ -255,8 +255,8 @@ export class UserImagesHttpResponseStub implements ResponseStub {
 
 export class SaveImageUrlHttpResponseStub implements ResponseStub {
     public xml: string;
-    constructor(success: boolean, errorMessage: string = ""){
-        this.xml = success ? `
+    constructor(useSuccess: boolean, errorMessage: string = ""){
+        this.xml = useSuccess ? `
         <?xml version="1.0"?>
         <methodResponse>
             <params>
@@ -281,23 +281,23 @@ export class SaveImageUrlHttpResponseStub implements ResponseStub {
 export class SaveImageHttpResponseStub 
        extends SaveImageUrlHttpResponseStub 
        implements ResponseStub {
-    constructor(success: boolean, errorMessage: string = ""){
-        super(success, errorMessage);
+    constructor(useSuccess: boolean, errorMessage: string = ""){
+        super(useSuccess, errorMessage);
     }
 }
 
 export class SaveEncodedImageHttpResponseStub 
        extends SaveImageUrlHttpResponseStub 
        implements ResponseStub {
-    constructor(success: boolean, errorMessage: string = ""){
-        super(success, errorMessage);
+    constructor(useSuccess: boolean, errorMessage: string = ""){
+        super(useSuccess, errorMessage);
     }
 }
 
 export class UseUserImageHttpResponseStub implements ResponseStub {
     public xml: string;
-    constructor(success: boolean, email: string, errorMessage: string = ""){
-        this.xml = success ? `
+    constructor(useSuccess: boolean, email: string, errorMessage: string = ""){
+        this.xml = useSuccess ? `
             <?xml version="1.0"?>
             <methodResponse>
                 <params>
@@ -328,8 +328,8 @@ export class UseUserImageHttpResponseStub implements ResponseStub {
 
 export class RemoveImageHttpResponseStub implements ResponseStub {
     public xml: string;
-    constructor(success: boolean, email: string, errorMessage: string = ""){
-        this.xml = success ? `
+    constructor(useSuccess: boolean, email: string, errorMessage: string = ""){
+        this.xml = useSuccess ? `
             <?xml version="1.0"?>
             <methodResponse>
                 <params>
@@ -360,8 +360,8 @@ export class RemoveImageHttpResponseStub implements ResponseStub {
 
 export class DeleteUserImageHttpResponseStub implements ResponseStub {
     public xml: string;
-    constructor(success: boolean, errorMessage: string = ""){
-        this.xml = success ? `
+    constructor(useSuccess: boolean, errorMessage: string = ""){
+        this.xml = useSuccess ? `
             <?xml version="1.0"?>
             <methodResponse>
                 <params>
@@ -385,8 +385,8 @@ export class DeleteUserImageHttpResponseStub implements ResponseStub {
 
 export class TestHttpResponseStub implements ResponseStub {
     public xml: string;
-    constructor(success: boolean, errorMessage: string = ""){
-        this.xml = success ? `
+    constructor(useSuccess: boolean, errorMessage: string = ""){
+        this.xml = useSuccess ? `
             <?xml version="1.0"?>
             <methodResponse>
                 <params>

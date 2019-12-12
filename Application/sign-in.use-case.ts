@@ -12,7 +12,7 @@ export class SignInUseCase implements UseCase<GravatarClient> {
   }
   
   execute(): Promise<GravatarClient> {
-    const gravatarService = new GravatarClient(this.email, this.password);
-    return Promise.resolve(gravatarService);
+    const gravatarClient = new GravatarClient(this.email, this.password);
+    return Promise.resolve(gravatarClient);
   }
 }

@@ -10,7 +10,7 @@ config({ path: 'Tests/.env' });
 let originalPrimaryImage: string;
 const email = process.env.EMAIL as string;
 const password = process.env.PASSWORD as string;
-const imageNames = { bubba:'', gump:'', temp:'' };
+const imageNames = { bubba:'', gump:'', shrimp:'' };
 
 describe('GravatarClient', () => {
 
@@ -57,7 +57,7 @@ describe('GravatarClient', () => {
   })
   it('should save image url', async () => {
     const result = await client.saveImageUrl(imageUrl);
-    imageNames.temp = result.Value.imageName;
+    imageNames.shrimp = result.Value.imageName;
     expect(result.DidSucceed).toBe(true);
   })
   it('should remove primary image', async () => {
@@ -69,7 +69,7 @@ describe('GravatarClient', () => {
     expect(result.DidSucceed).toBe(true);
   })
   it('should delete image', async () => {
-    const result = await client.deleteUserImage(imageNames.temp);
+    const result = await client.deleteUserImage(imageNames.shrimp);
     expect(result.DidSucceed).toBe(true);
   })
   it('should do sanity check', async () => {
