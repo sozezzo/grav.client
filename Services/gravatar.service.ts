@@ -17,6 +17,7 @@ import {
 
 export class GravatarService {
   
+  public email: string;
   private _password : string;
   public emailHash: string;
   public http: HttpShim;
@@ -25,14 +26,14 @@ export class GravatarService {
     return `https://www.gravatar.com/avatar/${this.emailHash}`;
   }
 
-  constructor(public email: string,
-              password: string) {
-    this.emailHash = this.hashEmail(email);
-    this._password = password;
+  constructor(userEmail: string,
+              userPassword: string) {
+    this.email = `${userEmail}`.trim().toLowerCase();
+    this.emailHash = this.hashEmail(this.email);
+    this._password = userPassword;
   }
   public hashEmail(email: string): string {
-    const _email = `${email}`.trim().toLowerCase();
-    return Md5.hashStr(_email).toString();
+    return Md5.hashStr(email).toString();
   }
   public async exists(... emailAddresses: string[]) : Promise<Result<ExistsMethodResponse>> {
     const addresses = emailAddresses.length ? emailAddresses : [this.email];
