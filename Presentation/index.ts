@@ -12,8 +12,8 @@ export * from '../Application/verify-email-list.use-case';
 export { ImageRating } from '../Domain/image-rating';
 
 export class GravatarClient extends GravatarService {
-  constructor(public email: string, password: string){
-    super(email, password);
+  constructor(userEmail: string, userPassword: string){
+    super(userEmail, userPassword);
     this.http = new HttpShim(this.emailHash);
   }
 }
