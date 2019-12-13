@@ -14,3 +14,10 @@ Feature: Dashboard feature
   Scenario: Get basic info
     * get account status
     * get current Gravatar info
+
+  Scenario: Verify email addresses
+    Given a list of 2 email addresses
+      | askmrtillman@gmail.com |
+      | user@example.com       |
+    Then "askmrtillman@gmail.com" is valid
+    And "user@example.com" is invalid
