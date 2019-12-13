@@ -25,7 +25,7 @@ Then("an encoded image is uploaded", async function() {
 });
 
 Then("an image url is uploaded", async function() {
-  const result = await this.client.saveImageUrl(imageUrl)
+  const result = await this.client.saveImageUrl(imageUrl);
   imageNames.shrimp = result.Value.imageName;
   expect(result.DidSucceed).toBe(true);
 });

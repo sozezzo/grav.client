@@ -26,8 +26,7 @@ export class GravatarService {
     return `https://www.gravatar.com/avatar/${this.emailHash}`;
   }
 
-  constructor(userEmail: string,
-              userPassword: string) {
+  constructor(userEmail: string, userPassword: string) {
     this.email = `${userEmail}`.trim().toLowerCase();
     this.emailHash = this.hashEmail(this.email);
     this._password = userPassword;
