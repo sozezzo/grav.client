@@ -2,11 +2,13 @@ require('isomorphic-unfetch');
 import { createReadStream } from 'fs';
 import FormData from 'isomorphic-form-data';
 
+export const origin = "https://secure.gravatar.com";
+
 export class HttpShim {
   public endpoint: string;
 
   constructor(emailHash: string){
-    const origin = "https://secure.gravatar.com";
+    
     this.endpoint = `${origin}/xmlrpc?user=${emailHash}`;
   }
 
