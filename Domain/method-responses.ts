@@ -8,7 +8,7 @@ export class MethodResponse {
   constructor(public json: any) { 
     let faultCode: number = 0;
     let faultString: string = "";
-    const { fault } = this.json.methodResponse;
+    const { fault } = this.json ? this.json.methodResponse : { fault: false };
     if(fault){
       const members : Array<any> = fault.value.struct.member;
       members.map(member => {
@@ -30,13 +30,20 @@ export class MethodResponse {
   };
 }
 
+const xmlToJson = (xml: string): any => {
+  return xml.length ? xml2js(xml, { compact: true }) : false;
+}
+
 export class ExistsMethodResponse extends MethodResponse {
 
   public exists: { [emailHash: string]: boolean } = {};
 
   constructor(public xml: string){
-    super(xml2js(xml, { compact: true }));
-    if(!this.json.methodResponse.fault){
+    super(xmlToJson(xml));
+    this.parseMembers();
+  }
+  public parseMembers(){
+    if(this.json && !this.json.methodResponse.fault){
       const { member } = this.json.methodResponse.params.param.value.struct;
       if(Array.isArray(member)){
         member.forEach(this.parseExistsResult.bind(this))
@@ -170,8 +177,12 @@ export class TestMethodResponse extends MethodResponse {
   public value: number;
 
   constructor(public xml: string){
-    super(xml2js(xml, { compact: true }));
-    if(!this.json.methodResponse.fault){
+    super(xmlToJson(xml));
+    this.parseMembers();
+  }
+
+  public parseMembers() {
+    if(this.json && !this.json.methodResponse.fault){
       const { name, value } = this.json.methodResponse.params.param.value.struct.member;
       this.name = this.parseFieldValue(name);
       this.value = Number(this.parseFieldValue(value));
