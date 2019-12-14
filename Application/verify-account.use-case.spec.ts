@@ -6,13 +6,13 @@ describe('VerifyAccountUseCase', () => {
   
   let useCase: VerifyAccountUseCase;
 
-  beforeEach(() => {
+  beforeAll(() => {
     useCase = new VerifyAccountUseCase();
     useCase.client = mockClient(UseCaseType.VerifyAccount);
   })
 
   it('should work', async () => {
-    const result = await useCase.execute();
-    expect(result).toBeTrue();
+    const exists = await useCase.execute();
+    expect(exists).toBeTrue();
   })
 })
