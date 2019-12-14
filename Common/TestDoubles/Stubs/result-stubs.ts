@@ -3,14 +3,14 @@ import {
   AddressesMethodResponse,
   UserImagesMethodResponse,
   TestMethodResponse 
-} from "../../Domain/method-responses";
+} from "../../../Domain/method-responses";
 
-import * as existsJsonResponse from './JsonResponses/grav.exists.json';
-import * as userImagesJsonResponse from './JsonResponses/grav.userImages.json';
-import * as testJsonResponse from './JsonResponses/grav.test.json';
-import * as addressesJsonResponse from './JsonResponses/grav.addresses.json';
+import * as existsJsonResponse from '../JsonResponses/grav.exists.json';
+import * as userImagesJsonResponse from '../JsonResponses/grav.userImages.json';
+import * as testJsonResponse from '../JsonResponses/grav.test.json';
+import * as addressesJsonResponse from '../JsonResponses/grav.addresses.json';
 
-import { Result } from "../result";
+import { Result } from "../../result";
 
 export function ExistsResult(useSuccess: boolean){
   const response = new ExistsMethodResponse("");
