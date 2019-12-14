@@ -6,16 +6,11 @@ import { HttpShim } from '../Infrastructure/http-shim';
 import { email, password, imageUrl } from '../Common/TestDoubles/primitive-stubs';
 
 import * as Stub from '../Common/TestDoubles/http-response-stubs';
+import { mockHttpShim } from '../Common/TestDoubles/client-mock-factory';
 
 describe('GravatarService', () => {
   
   let service : GravatarService;
-
-  function mockHttpShim(responseStub: Stub.ResponseStub) : HttpShim {
-    const httpShim = new HttpShim(service.emailHash);
-    spyOn(httpShim, 'rpc').and.returnValue(responseStub.value);
-    return httpShim;
-  };
 
   beforeAll(() => {
     service = new GravatarService(email, password);
