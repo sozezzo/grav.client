@@ -1,6 +1,5 @@
 import { UseCase } from './use-case.interface';
 import { GravatarClient } from '../Presentation';
-import { imageUrl } from '../Common/TestDoubles/primitive-stubs';
 
 export class SetNewImageUseCase implements UseCase<string> {
 
