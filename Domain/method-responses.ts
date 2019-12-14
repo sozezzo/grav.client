@@ -64,8 +64,12 @@ export class AddressesMethodResponse extends MethodResponse {
   public userAddresses: Array<UserAddress>;
 
   constructor(public xml: string){
-    super(xml2js(xml, { compact: true }));
-    if(!this.json.methodResponse.fault){
+    super(xmlToJson(xml));
+    this.parseMembers();
+  }
+
+  public parseMembers(){
+    if(this.json && !this.json.methodResponse.fault){
       const { member } = this.json.methodResponse.params.param.value.struct;
       if(Array.isArray(member)){
         this.userAddresses = member.map(this.parseUserAddress.bind(this));
@@ -114,8 +118,12 @@ export class UserImagesMethodResponse extends MethodResponse {
   public userImages: Array<UserImage>;
 
   constructor(public xml: string){
-    super(xml2js(xml, { compact: true }));
-    if(!this.json.methodResponse.fault){
+    super(xmlToJson(xml));
+    this.parseMembers();
+  }
+
+  public parseMembers(){
+    if(this.json && !this.json.methodResponse.fault){
       const rawUserImages = this.json.methodResponse.params.param.value.struct.member;
       const self = this;
       this.userImages = rawUserImages.map(function(img: any) {
