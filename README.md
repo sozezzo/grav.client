@@ -51,7 +51,7 @@ client.test().then(data => ... );
  
 |Method     | Description  |
 |-----------|--------------|
-| `client.exists()` | check if the Gravatar account exists |
+| `client.exists()` | check if a primary image is set |
 | `client.addresses()` | list account email addresses |
 | `client.userImages()` | list account images |
 | `client.saveImage(imageFilePath)` | upload an image |
