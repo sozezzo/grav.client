@@ -2,15 +2,22 @@ require("jasmine");
 
 import { GravatarClient } from "../../Presentation";
 import { HttpShim } from "../../Infrastructure/http-shim";
-import { ExistsMethodResponse, TestMethodResponse } from "../../Domain/method-responses";
-import { post } from "fetch-mock";
+import { 
+  ExistsMethodResponse,
+  AddressesMethodResponse,
+  UserImagesMethodResponse,
+  TestMethodResponse 
+} from "../../Domain/method-responses";
 
 import { email, password, emailHash } from "./primitive-stubs";
+import { post } from "fetch-mock";
 import { origin } from '../../Infrastructure/http-shim';
 
 import * as Stub from './http-response-stubs';
 import * as existsJsonResponse from './JsonResponses/grav.exists.json';
+import * as userImagesJsonResponse from './JsonResponses/grav.userImages.json';
 import * as testJsonResponse from './JsonResponses/grav.test.json';
+import * as addressesJsonResponse from './JsonResponses/grav.addresses.json';
 
 import { Result } from "../result";
 import { UseCaseType } from "../../Common/use-case-type";
@@ -34,6 +41,20 @@ export function mockExistsResult(useSuccess: boolean){
   return Promise.resolve(Result.Ok(response));
 }
 
+export function mockUserImagesResult(useSuccess: boolean){
+  const response = new UserImagesMethodResponse("");
+  response.json = userImagesJsonResponse;
+  response.parseMembers();
+  return Promise.resolve(Result.Ok(response));
+}
+
+export function mockAddressesResult(useSuccess: boolean){
+  const response = new AddressesMethodResponse("");
+  response.json = addressesJsonResponse;
+  response.parseMembers();
+  return Promise.resolve(Result.Ok(response));
+}
+
 export function mockTestResult(useSuccess: boolean){
   const response = new TestMethodResponse("");
   response.json = testJsonResponse;
@@ -42,17 +63,17 @@ export function mockTestResult(useSuccess: boolean){
 }
 
 export function mockClient(type: UseCaseType = UseCaseType.None, useSuccess: boolean = true): GravatarClient {
-  let client: GravatarClient;
+  let client: GravatarClient = new GravatarClient(email, password);
   switch (type) {
+    case UseCaseType.GetPrimaryImage:
+        spyOn(client, 'addresses').and.returnValue(mockAddressesResult(useSuccess));
+        return client;
     case UseCaseType.VerifyAccount:
-        client = new GravatarClient(email, password);
         spyOn(client, 'exists').and.returnValue(mockExistsResult(useSuccess));
         spyOn(client, 'test').and.returnValue(mockTestResult(useSuccess));
         return client;
     default:
-        client = new GravatarClient(email, password);
         spyOn(client, 'exists').and.returnValue(mockExistsResult(useSuccess));
         return client;
-      break;
   }
 }
