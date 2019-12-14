@@ -1,4 +1,10 @@
 export enum UseCaseType {
+  GetPrimaryImage,
+  LoadNextImage,
+  LoadPreviousImage,
   None,
-  VerifyAccount
+  SetNewImage,
+  SignIn,
+  VerifyAccount,
+  VerifyEmailList
 }
