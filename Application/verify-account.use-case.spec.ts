@@ -1,4 +1,3 @@
-import * as _gravAddressesJson from '../Common/TestDoubles/JsonResponses/grav.addresses.json';
 import { VerifyAccountUseCase } from './verify-account.use-case';
 import { GravatarClientMockFactory } from '../Common/TestDoubles/client-mock-factory';
 import { UseCaseType } from './use-case-type';
