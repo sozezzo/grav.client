@@ -3,10 +3,10 @@ import { readFileSync } from 'fs';
 
 import { GravatarService } from './gravatar.service';
 import { HttpShim } from '../Infrastructure/http-shim';
-import { email, password, imageUrl } from '../Common/TestDoubles/primitive-stubs';
+import { email, password, imageUrl, imageName } from '../Common/TestDoubles/primitive-stubs';
 
 import * as Stub from '../Common/TestDoubles/http-response-stubs';
-import { mockHttpShim } from '../Common/TestDoubles/client-mock-factory';
+import { mockHttpShim } from '../Common/TestDoubles/mock-factory';
 
 describe('GravatarService', () => {
   
@@ -71,7 +71,7 @@ describe('GravatarService', () => {
     const responseStub = new Stub.UseUserImageHttpResponseStub(true, email);
     const httpShim = mockHttpShim(responseStub);
     service.http = httpShim;
-    const result = await service.useUserImage("asdf");
+    const result = await service.useUserImage(imageName);
     expect(result.DidSucceed).toBeTrue();
   })
   it('should remove image', async () => {
