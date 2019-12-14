@@ -1,6 +1,6 @@
 import { VerifyAccountUseCase } from './verify-account.use-case';
-import { GravatarClientMockFactory } from '../Common/TestDoubles/client-mock-factory';
-import { UseCaseType } from './use-case-type';
+import { mockClient } from '../Common/TestDoubles/mock-factory';
+import { UseCaseType } from '../Common/use-case-type';
 
 describe('VerifyAccountUseCase', () => {
   
@@ -8,7 +8,7 @@ describe('VerifyAccountUseCase', () => {
 
   beforeEach(() => {
     useCase = new VerifyAccountUseCase();
-    useCase.client = GravatarClientMockFactory.Mock(UseCaseType.VerifyAccount);
+    useCase.client = mockClient(UseCaseType.VerifyAccount);
   })
 
   it('should work', async () => {
