@@ -1,5 +1,5 @@
 import { HttpShim } from './http-shim';
-import { emailHash } from '../Common/TestDoubles/primitive-stubs';
+import { emailHash } from '../Common/TestDoubles/Stubs/primitive-stubs';
 import { join } from 'path';
 import { readFileSync } from 'fs';
 import { mockHttpRequests } from '../Common/TestDoubles/mock-factory';

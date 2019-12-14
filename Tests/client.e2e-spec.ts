@@ -2,7 +2,7 @@ import { GravatarClient } from '../Presentation';
 import { config } from 'dotenv';
 import { join } from 'path';
 import { readFileSync } from 'fs';
-import { imageUrl } from '../Common/TestDoubles/primitive-stubs';
+import { imageUrl } from '../Common/TestDoubles/Stubs/primitive-stubs';
 import { GetPrimaryImageUseCase } from '../Presentation';
 
 config({ path: 'Tests/.env' });

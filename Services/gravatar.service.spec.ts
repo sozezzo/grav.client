@@ -3,9 +3,9 @@ import { readFileSync } from 'fs';
 
 import { GravatarService } from './gravatar.service';
 import { HttpShim } from '../Infrastructure/http-shim';
-import { email, password, imageUrl, imageName } from '../Common/TestDoubles/primitive-stubs';
+import { email, password, imageUrl, imageName } from '../Common/TestDoubles/Stubs/primitive-stubs';
 
-import * as stub from '../Common/TestDoubles/http-response-stubs';
+import * as stub from '../Common/TestDoubles/Stubs/http-response-stubs';
 import { mockHttpShim } from '../Common/TestDoubles/mock-factory';
 
 describe('GravatarService', () => {

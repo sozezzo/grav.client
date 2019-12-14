@@ -1,6 +1,6 @@
 const { When, Then, AfterAll } = require('cucumber');
 const expect = require('expect');
-const { imageUrl } = require('../../../Release/Common/TestDoubles/primitive-stubs');
+const { imageUrl } = require('../../../Release/Common/TestDoubles/Stubs/primitive-stubs');
 const { join } = require('path');
 const { readFileSync } = require('fs');
 const World = require('../../world');
