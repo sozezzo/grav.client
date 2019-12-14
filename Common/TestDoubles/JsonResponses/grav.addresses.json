@@ -11,7 +11,7 @@
                   "struct": {
                       "member": {
                           "name": {
-                              "_text": "user@example.com"
+                              "_text": "peter.parker@example.com"
                           },
                           "value": {
                               "struct": {
