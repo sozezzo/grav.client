@@ -6,15 +6,14 @@ import { HttpShim } from "../../Infrastructure/http-shim";
 import { email, password, emailHash } from "./primitive-stubs";
 import { post } from "fetch-mock";
 import { origin } from '../../Infrastructure/http-shim';
-import { ResponseStub } from './http-response-stubs';
 
 import * as stub from './result-stubs';
 
 import { UseCaseType } from "../../Common/use-case-type";
 
-export function mockHttpShim(responseStub: ResponseStub) : HttpShim {
+export function mockHttpShim(responseStub: Promise<Response>) : HttpShim {
   const httpShim = new HttpShim(emailHash);
-  spyOn(httpShim, 'rpc').and.returnValue(responseStub.value);
+  spyOn(httpShim, 'rpc').and.returnValue(responseStub);
   return httpShim;
 };
 
