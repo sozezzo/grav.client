@@ -105,8 +105,11 @@ export class AddressesMethodResponse extends MethodResponse {
 export class SaveImageUrlMethodResponse extends MethodResponse {
   public imageName: string;
   constructor(public xml: string){
-    super(xml2js(xml, { compact: true }));
-    if(!this.json.methodResponse.fault){
+    super(xmlToJson(xml));
+    this.parseMembers();
+  }
+  public parseMembers(){
+    if(this.json && !this.json.methodResponse.fault){
       const { value } = this.json.methodResponse.params.param;
       this.imageName = this.parseFieldValue(value);
     }
