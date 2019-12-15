@@ -147,12 +147,17 @@ export class UserImagesMethodResponse extends MethodResponse {
 export class UseUserImageMethodResponse extends MethodResponse {
   public success: boolean;
   constructor(public xml: string){
-    super(xml2js(xml, { compact: true }));
-    const { member } = this.json.methodResponse.params.param.value.struct;
-    if(Array.isArray(member)){
-      this.success = member.every(m => Number(this.parseFieldValue(m.value)) == 1);
-    } else {
-      this.success = Number(this.parseFieldValue(member.value)) == 1;
+    super(xmlToJson(xml));
+    this.parseMembers();
+  }
+  public parseMembers(){
+    if(this.json && !this.json.methodResponse.fault){
+      const { member } = this.json.methodResponse.params.param.value.struct;
+      if(Array.isArray(member)){
+        this.success = member.every(m => Number(this.parseFieldValue(m.value)) == 1);
+      } else {
+        this.success = Number(this.parseFieldValue(member.value)) == 1;
+      }
     }
   }
 }
