@@ -1,7 +1,17 @@
-// import {  } from './';
+import { GravatarClient, SignInUseCase } from '../Presentation';
+import { email, password } from '../Common/TestDoubles/Stubs/primitive-stubs';
 
-describe('module',() => {
-  it('should work', () => {
-    expect(true).toBe(true);
+describe('LoadPreviousImageUseCase',() => {
+  let useCase: SignInUseCase;
+
+  beforeAll(() => {
+    useCase = new SignInUseCase();
+  })
+
+  it('should work', async () => {
+    useCase.email = email;
+    useCase.password = password;
+    const client = await useCase.execute();
+    expect(client).toBeInstanceOf(GravatarClient);
   })
 })
