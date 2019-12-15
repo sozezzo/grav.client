@@ -23,9 +23,9 @@ export function mockHttpRequests(){
  .post('https://dailyavatar.io/api/v1/avatars/base64', 200); 
 };
 
-export function mockClient(type: UseCaseType = UseCaseType.None, useSuccess: boolean = true): GravatarClient {
+export function mockClient(useCaseType: UseCaseType = UseCaseType.None, useSuccess: boolean = true): GravatarClient {
   let client: GravatarClient = new GravatarClient(email, password);
-  switch (type) {
+  switch (useCaseType) {
     case UseCaseType.GetPrimaryImage:
         spyOn(client, 'addresses').and.returnValue(stub.AddressesResult(useSuccess));
         return client;
@@ -38,8 +38,12 @@ export function mockClient(type: UseCaseType = UseCaseType.None, useSuccess: boo
         spyOn(client, 'addresses').and.returnValue(stub.AddressesResult(useSuccess));
         spyOn(client, 'userImages').and.returnValue(stub.UserImagesResult(useSuccess));
         spyOn(client, 'useUserImage').and.returnValue(stub.UseUserImageResult(useSuccess));
+        return client;
+    case UseCaseType.SetNewImage:
+        spyOn(client, 'saveImage').and.returnValue(stub.SaveImageUrlResult(useSuccess));
+        spyOn(client, 'useUserImage').and.returnValue(stub.UseUserImageResult(useSuccess));
     default:
-      spyOn(client, 'test').and.returnValue(stub.TestResult(useSuccess));
+        spyOn(client, 'test').and.returnValue(stub.TestResult(useSuccess));
         return client;
   }
 }
