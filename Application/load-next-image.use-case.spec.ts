@@ -2,7 +2,7 @@ import { LoadNextImageUseCase } from './load-next-image.use-case';
 import { mockClient } from '../Common/TestDoubles/mock-factory';
 import { UseCaseType } from '../Common/use-case-type';
 
-describe('GetPrimaryImageUseCase',() => {
+describe('LoadNextImageUseCase',() => {
   let useCase: LoadNextImageUseCase;
 
   beforeAll(() => {
