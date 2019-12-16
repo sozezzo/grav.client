@@ -11,9 +11,11 @@ import * as stub from '../Stubs/json-response-stubs';
 
 import { Result } from "../../result";
 
-export function ExistsResult(useSuccess: boolean){
+export function ExistsResult(useSuccess: boolean, useMultipleEmails: boolean = false){
   const response = new ExistsMethodResponse("");
-  response.json = stub.existsJsonResponse;
+  response.json = useMultipleEmails 
+                ? stub.existsJsonResponseMultiple 
+                : stub.existsJsonResponse;
   response.parseMembers();
   return Promise.resolve(Result.Ok(response));
 }
