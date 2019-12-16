@@ -33,6 +33,8 @@ export function mockClient(useCaseType: UseCaseType = UseCaseType.None, useSucce
         spyOn(client, 'exists').and.returnValue(stub.ExistsResult(useSuccess));
         spyOn(client, 'test').and.returnValue(stub.TestResult(useSuccess));
         return client;
+    case UseCaseType.VerifyEmailList:
+        spyOn(client, 'exists').and.returnValue(stub.ExistsResult(useSuccess, true));
     case UseCaseType.LoadNextImage:
     case UseCaseType.LoadPreviousImage:
         spyOn(client, 'addresses').and.returnValue(stub.AddressesResult(useSuccess));
