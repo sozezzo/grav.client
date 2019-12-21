@@ -5,8 +5,6 @@ Feature: Image slider
   next or previous image from my 
   Gravatar collection 
   
-Scenario: Load next image
+Scenario: Navigation
   * set primary Gravatar icon to the next image
-
-Scenario: Load previous image
   * set primary Gravatar icon to the previous image
