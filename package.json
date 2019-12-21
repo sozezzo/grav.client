@@ -10,7 +10,8 @@
     "test:cov": "nyc -r text -e .ts -x \"**/*.spec.ts\" npm run test",
     "test:e2e": "ts-node node_modules/jasmine/bin/jasmine --config=Tests/jasmine.e2e.json",
     "test:spec": "cucumber-js Specification/**/*.feature",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build",
+    "format": "prettier --write \"**/*.ts\""
   },
   "repository": {
     "type": "git",

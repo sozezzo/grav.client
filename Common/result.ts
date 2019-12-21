@@ -1,27 +1,27 @@
 export class Result<T> {
-  constructor(DidSucceed: Boolean, ErrorMessage: string = ""){
+  constructor(DidSucceed: Boolean, ErrorMessage: string = "") {
     this.didSucceed = DidSucceed;
     this.didFail = !DidSucceed;
     this.errorMessage = ErrorMessage;
   }
 
   private didSucceed: Boolean;
-  public get DidSucceed() : Boolean {
+  public get DidSucceed(): Boolean {
     return this.didSucceed;
   }
 
   private didFail: Boolean;
-  public get DidFail() : Boolean {
+  public get DidFail(): Boolean {
     return this.didFail;
   }
 
   private errorMessage: String;
-  public get ErrorMessage() : String {
+  public get ErrorMessage(): String {
     return this.errorMessage;
   }
 
   private value: T;
-  public get Value() : T {
+  public get Value(): T {
     return this.value;
   }
 

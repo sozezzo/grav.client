@@ -1,8 +1,7 @@
-import { UseCase } from '../Common/use-case.interface';
-import { GravatarClient } from '../Presentation'
+import { UseCase } from "../Common/use-case.interface";
+import { GravatarClient } from "../Presentation";
 
 export class VerifyAccountUseCase implements UseCase<boolean> {
-
   public client: GravatarClient;
 
   async execute(): Promise<boolean> {

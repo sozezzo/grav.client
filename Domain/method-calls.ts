@@ -5,19 +5,19 @@ export interface MethodCall {
 }
 
 function convertToXmlRpcArray(collection: Array<string>): string {
-
-  const arrayValues = collection.reduce((accumulator, nextStringValue) => (
-      accumulator + `<value><string>${nextStringValue}</string></value>`
-  ), '');
+  const arrayValues = collection.reduce(
+    (accumulator, nextStringValue) =>
+      accumulator + `<value><string>${nextStringValue}</string></value>`,
+    ""
+  );
 
   return `<array><data>${arrayValues}</data></array>`;
 }
 
 export class ExistsMethodCall implements MethodCall {
-  
-  constructor(public emailHashes: string[], public password: string){}
+  constructor(public emailHashes: string[], public password: string) {}
 
-  public get xml() : string {
+  public get xml(): string {
     return `<methodCall>
               <methodName>grav.exists</methodName>
               <params>
@@ -41,8 +41,7 @@ export class ExistsMethodCall implements MethodCall {
 }
 
 export class AddressesMethodCall implements MethodCall {
-
-  constructor(public password: string){}
+  constructor(public password: string) {}
 
   public get xml(): string {
     return `<methodCall>
@@ -66,8 +65,11 @@ export class AddressesMethodCall implements MethodCall {
 }
 
 export class SaveImageUrlMethodCall implements MethodCall {
-  
-  constructor(public imageUrl: string, public imageRating: ImageRating, public password: string){}
+  constructor(
+    public imageUrl: string,
+    public imageRating: ImageRating,
+    public password: string
+  ) {}
 
   public get xml(): string {
     return `<methodCall>
@@ -103,8 +105,7 @@ export class SaveImageUrlMethodCall implements MethodCall {
 }
 
 export class UserImagesMethodCall implements MethodCall {
-
-  constructor(public password: string){}
+  constructor(public password: string) {}
 
   public get xml(): string {
     return `<methodCall>
@@ -123,16 +124,18 @@ export class UserImagesMethodCall implements MethodCall {
                         </value>
                     </param>
                 </params>
-            </methodCall>`
+            </methodCall>`;
   }
 }
 
 export class UseUserImageMethodCall implements MethodCall {
-
-  constructor(public imageName: string, public emailAddresses: Array<string>, public password: string){}
+  constructor(
+    public imageName: string,
+    public emailAddresses: Array<string>,
+    public password: string
+  ) {}
 
   public get xml(): string {
-
     return `<methodCall>
                 <methodName>grav.useUserimage</methodName>
                 <params>
@@ -148,7 +151,9 @@ export class UseUserImageMethodCall implements MethodCall {
                                 <member>
                                     <name>addresses</name>
                                     <value>
-                                        ${convertToXmlRpcArray(this.emailAddresses)}
+                                        ${convertToXmlRpcArray(
+                                          this.emailAddresses
+                                        )}
                                     </value>
                                 </member>
                                 <member>
@@ -166,11 +171,9 @@ export class UseUserImageMethodCall implements MethodCall {
 }
 
 export class RemoveImageMethodCall implements MethodCall {
-  
-  constructor(public emailAddresses: Array<string>, public password: string){}
+  constructor(public emailAddresses: Array<string>, public password: string) {}
 
   public get xml(): string {
-
     return `<methodCall>
                 <methodName>grav.removeImage</methodName>
                 <params>
@@ -193,13 +196,12 @@ export class RemoveImageMethodCall implements MethodCall {
                         </value>
                     </param>
                 </params>
-            </methodCall>`
+            </methodCall>`;
   }
 }
 
 export class DeleteUserImageMethodCall implements MethodCall {
-
-  constructor(public imageName: string, public password: string){}
+  constructor(public imageName: string, public password: string) {}
 
   public get xml(): string {
     return `<methodCall>
@@ -229,10 +231,9 @@ export class DeleteUserImageMethodCall implements MethodCall {
 }
 
 export class TestMethodCall implements MethodCall {
+  constructor(public password: string) {}
 
-  constructor(public password: string){}
-
-  public get xml() : string {
+  public get xml(): string {
     return `<methodCall>
               <methodName>grav.test</methodName>
               <params>

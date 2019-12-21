@@ -1,18 +1,17 @@
-import { VerifyAccountUseCase } from './verify-account.use-case';
-import { mockClient } from '../Common/TestDoubles/mock-factory';
-import { UseCaseType } from '../Common/use-case-type';
+import { VerifyAccountUseCase } from "./verify-account.use-case";
+import { mockClient } from "../Common/TestDoubles/mock-factory";
+import { UseCaseType } from "../Common/use-case-type";
 
-describe('VerifyAccountUseCase', () => {
-  
+describe("VerifyAccountUseCase", () => {
   let useCase: VerifyAccountUseCase;
 
   beforeAll(() => {
     useCase = new VerifyAccountUseCase();
     useCase.client = mockClient(UseCaseType.VerifyAccount);
-  })
+  });
 
-  it('should work', async () => {
+  it("should work", async () => {
     const exists = await useCase.execute();
     expect(exists).toBeTrue();
-  })
-})
+  });
+});

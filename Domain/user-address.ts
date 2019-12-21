@@ -1,4 +1,4 @@
-import { ImageRating } from './image-rating';
+import { ImageRating } from "./image-rating";
 
 export class UserAddress {
   public imageRating: ImageRating;

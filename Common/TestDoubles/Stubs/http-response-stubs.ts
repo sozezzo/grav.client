@@ -1,5 +1,5 @@
-function errorResponse(errorMessage: string){
-    return `
+function errorResponse(errorMessage: string) {
+  return `
     <?xml version="1.0"?>
     <methodResponse>
         <fault>
@@ -20,8 +20,13 @@ function errorResponse(errorMessage: string){
     `;
 }
 
-export function ExistsHttpResponse(useSuccess: boolean, emailHash: string, errorMessage: string = ""){
-    let xml: string = useSuccess ? `
+export function ExistsHttpResponse(
+  useSuccess: boolean,
+  emailHash: string,
+  errorMessage: string = ""
+) {
+  let xml: string = useSuccess
+    ? `
         <?xml version="1.0"?>
         <methodResponse>
             <params>
@@ -39,17 +44,23 @@ export function ExistsHttpResponse(useSuccess: boolean, emailHash: string, error
                 </param>
             </params>
         </methodResponse>
-    ` : errorResponse(errorMessage);
+    `
+    : errorResponse(errorMessage);
 
-    return Promise.resolve({
-      ok: true,
-      status: 200,
-      text: () => Promise.resolve(xml)
-    } as Response);
+  return Promise.resolve({
+    ok: true,
+    status: 200,
+    text: () => Promise.resolve(xml)
+  } as Response);
 }
 
-export function AddressesHttpResponse(useSuccess: boolean, email: string, errorMessage: string = ""){
-    const xml = useSuccess ? `
+export function AddressesHttpResponse(
+  useSuccess: boolean,
+  email: string,
+  errorMessage: string = ""
+) {
+  const xml = useSuccess
+    ? `
           <?xml version="1.0"?>
           <methodResponse>
               <params>
@@ -86,7 +97,8 @@ export function AddressesHttpResponse(useSuccess: boolean, email: string, errorM
                   </param>
               </params>
           </methodResponse>
-        ` : errorResponse(errorMessage);
+        `
+    : errorResponse(errorMessage);
 
   return Promise.resolve({
     ok: true,
@@ -95,8 +107,13 @@ export function AddressesHttpResponse(useSuccess: boolean, email: string, errorM
   } as Response);
 }
 
-export function UserImagesHttpResponse(useSuccess: boolean, emailHash: string, errorMessage: string = ""){
-  const xml = useSuccess ? `
+export function UserImagesHttpResponse(
+  useSuccess: boolean,
+  emailHash: string,
+  errorMessage: string = ""
+) {
+  const xml = useSuccess
+    ? `
         <?xml version="1.0"?>
         <methodResponse>
             <params>
@@ -228,7 +245,8 @@ export function UserImagesHttpResponse(useSuccess: boolean, emailHash: string, e
                 </param>
             </params>
         </methodResponse>
-      ` : errorResponse(errorMessage);
+      `
+    : errorResponse(errorMessage);
   return Promise.resolve({
     ok: true,
     status: 200,
@@ -236,8 +254,12 @@ export function UserImagesHttpResponse(useSuccess: boolean, emailHash: string, e
   } as Response);
 }
 
-export function SaveImageUrlHttpResponse(useSuccess: boolean, errorMessage: string = ""){
-  const xml = useSuccess ? `
+export function SaveImageUrlHttpResponse(
+  useSuccess: boolean,
+  errorMessage: string = ""
+) {
+  const xml = useSuccess
+    ? `
         <?xml version="1.0"?>
         <methodResponse>
             <params>
@@ -248,25 +270,37 @@ export function SaveImageUrlHttpResponse(useSuccess: boolean, errorMessage: stri
                 </param>
             </params>
         </methodResponse>
-    ` : errorResponse(errorMessage);
+    `
+    : errorResponse(errorMessage);
 
   return Promise.resolve({
-      ok: true,
-      status: 200,
-      text: () => Promise.resolve(xml)
+    ok: true,
+    status: 200,
+    text: () => Promise.resolve(xml)
   } as Response);
 }
 
-export function SaveImageHttpResponse(useSuccess: boolean, errorMessage: string = ""){
+export function SaveImageHttpResponse(
+  useSuccess: boolean,
+  errorMessage: string = ""
+) {
   return SaveImageUrlHttpResponse(useSuccess, errorMessage);
 }
 
-export function SaveEncodedImageHttpResponse(useSuccess: boolean, errorMessage: string = ""){
+export function SaveEncodedImageHttpResponse(
+  useSuccess: boolean,
+  errorMessage: string = ""
+) {
   return SaveImageUrlHttpResponse(useSuccess, errorMessage);
 }
 
-export function UseUserImageHttpResponse(useSuccess: boolean, email: string, errorMessage: string = ""){
-  const xml = useSuccess ? `
+export function UseUserImageHttpResponse(
+  useSuccess: boolean,
+  email: string,
+  errorMessage: string = ""
+) {
+  const xml = useSuccess
+    ? `
         <?xml version="1.0"?>
         <methodResponse>
             <params>
@@ -284,17 +318,23 @@ export function UseUserImageHttpResponse(useSuccess: boolean, email: string, err
                 </param>
             </params>
         </methodResponse>
-    `: errorResponse(errorMessage);
+    `
+    : errorResponse(errorMessage);
 
   return Promise.resolve({
-      ok: true,
-      status: 200,
-      text: () => Promise.resolve(xml)
+    ok: true,
+    status: 200,
+    text: () => Promise.resolve(xml)
   } as Response);
 }
 
-export function RemoveImageHttpResponse(useSuccess: boolean, email: string, errorMessage: string = ""){
-  const xml = useSuccess ? `
+export function RemoveImageHttpResponse(
+  useSuccess: boolean,
+  email: string,
+  errorMessage: string = ""
+) {
+  const xml = useSuccess
+    ? `
         <?xml version="1.0"?>
         <methodResponse>
             <params>
@@ -312,17 +352,22 @@ export function RemoveImageHttpResponse(useSuccess: boolean, email: string, erro
                 </param>
             </params>
         </methodResponse>
-    `: errorResponse(errorMessage);
-    
+    `
+    : errorResponse(errorMessage);
+
   return Promise.resolve({
-      ok: true,
-      status: 200,
-      text: () => Promise.resolve(xml)
+    ok: true,
+    status: 200,
+    text: () => Promise.resolve(xml)
   } as Response);
 }
 
-export function DeleteUserImageHttpResponse(useSuccess: boolean, errorMessage: string = ""){
-    const xml = useSuccess ? `
+export function DeleteUserImageHttpResponse(
+  useSuccess: boolean,
+  errorMessage: string = ""
+) {
+  const xml = useSuccess
+    ? `
           <?xml version="1.0"?>
           <methodResponse>
               <params>
@@ -333,16 +378,21 @@ export function DeleteUserImageHttpResponse(useSuccess: boolean, errorMessage: s
                   </param>
               </params>
           </methodResponse>
-          `: errorResponse(errorMessage);
-    return Promise.resolve({
-        ok: true,
-        status: 200,
-        text: () => Promise.resolve(xml)
-    } as Response);
+          `
+    : errorResponse(errorMessage);
+  return Promise.resolve({
+    ok: true,
+    status: 200,
+    text: () => Promise.resolve(xml)
+  } as Response);
 }
 
-export function TestHttpResponse(useSuccess: boolean, errorMessage: string = ""){
-    const xml = useSuccess ? `
+export function TestHttpResponse(
+  useSuccess: boolean,
+  errorMessage: string = ""
+) {
+  const xml = useSuccess
+    ? `
           <?xml version="1.0"?>
           <methodResponse>
               <params>
@@ -360,10 +410,11 @@ export function TestHttpResponse(useSuccess: boolean, errorMessage: string = "")
                   </param>
               </params>
           </methodResponse>
-          `: errorResponse(errorMessage);
-    return Promise.resolve({
-      ok: true,
-      status: 200,
-      text: () => Promise.resolve(xml)
-    } as Response);
+          `
+    : errorResponse(errorMessage);
+  return Promise.resolve({
+    ok: true,
+    status: 200,
+    text: () => Promise.resolve(xml)
+  } as Response);
 }
