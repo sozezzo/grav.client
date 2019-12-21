@@ -11,47 +11,42 @@ import * as stub from "./json-response-stubs";
 
 import { Result } from "../result";
 
-export function ExistsResult(
-  useSuccess: boolean,
-  useMultipleEmails: boolean = false
-) {
+export function ExistsResult() {
   const response = new ExistsMethodResponse("");
-  response.json = useMultipleEmails
-    ? stub.existsJsonResponseMultiple
-    : stub.existsJsonResponse;
+  response.json = stub.existsJsonResponseMultiple;
   response.parseMembers();
   return Promise.resolve(Result.Ok(response));
 }
 
-export function AddressesResult(useSuccess: boolean) {
+export function AddressesResult() {
   const response = new AddressesMethodResponse("");
   response.json = stub.addressesJsonResponse;
   response.parseMembers();
   return Promise.resolve(Result.Ok(response));
 }
 
-export function UserImagesResult(useSuccess: boolean) {
+export function UserImagesResult() {
   const response = new UserImagesMethodResponse("");
   response.json = stub.userImagesJsonResponse;
   response.parseMembers();
   return Promise.resolve(Result.Ok(response));
 }
 
-export function SaveImageUrlResult(useSuccess: boolean) {
+export function SaveImageUrlResult() {
   const response = new SaveImageUrlMethodResponse("");
   response.json = stub.saveImageUrlResponse;
   response.parseMembers();
   return Promise.resolve(Result.Ok(response));
 }
 
-export function UseUserImageResult(useSuccess: boolean) {
+export function UseUserImageResult() {
   const response = new UseUserImageMethodResponse("");
   response.json = stub.useUserImageJsonResponse;
   response.parseMembers();
   return Promise.resolve(Result.Ok(response));
 }
 
-export function TestResult(useSuccess: boolean) {
+export function TestResult() {
   const response = new TestMethodResponse("");
   response.json = stub.testJsonResponse;
   response.parseMembers();
