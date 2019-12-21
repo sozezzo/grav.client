@@ -3,13 +3,13 @@ require("jasmine");
 import { GravatarClient } from "../../Presentation";
 import { HttpShim } from "../../Infrastructure/http-shim";
 
-import { email, password, emailHash } from "./Stubs/primitive-stubs";
+import { email, password, emailHash } from "./primitive-stubs";
 import { post } from "fetch-mock";
 import { origin } from "../../Infrastructure/http-shim";
 
-import * as stub from "./Stubs/result-stubs";
+import * as stub from "./result-stubs";
 
-import { UseCaseType } from "../../Common/use-case-type";
+import { UseCaseType } from "../../Application/use-case-type";
 
 export function mockHttpShim(responseStub: Promise<Response>): HttpShim {
   const httpShim = new HttpShim(emailHash);

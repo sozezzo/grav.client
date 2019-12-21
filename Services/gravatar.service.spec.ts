@@ -8,9 +8,9 @@ import {
   password,
   imageUrl,
   imageName
-} from "../Common/TestDoubles/Stubs/primitive-stubs";
+} from "../Common/TestDoubles/primitive-stubs";
 
-import * as stub from "../Common/TestDoubles/Stubs/http-response-stubs";
+import * as stub from "../Common/TestDoubles/http-response-stubs";
 import { mockHttpShim } from "../Common/TestDoubles/mock-factory";
 
 describe("GravatarService", () => {

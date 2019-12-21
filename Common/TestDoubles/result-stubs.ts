@@ -5,11 +5,11 @@ import {
   SaveImageUrlMethodResponse,
   UseUserImageMethodResponse,
   TestMethodResponse
-} from "../../../Domain/method-responses";
+} from "../../Domain/method-responses";
 
-import * as stub from "../Stubs/json-response-stubs";
+import * as stub from "./json-response-stubs";
 
-import { Result } from "../../result";
+import { Result } from "../result";
 
 export function ExistsResult(
   useSuccess: boolean,
