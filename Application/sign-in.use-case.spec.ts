@@ -1,5 +1,5 @@
 import { GravatarClient, SignInUseCase } from "../Presentation";
-import { email, password } from "../Common/TestDoubles/Stubs/primitive-stubs";
+import { email, password } from "../Common/TestDoubles/primitive-stubs";
 
 describe("LoadPreviousImageUseCase", () => {
   let useCase: SignInUseCase;

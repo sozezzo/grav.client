@@ -1,6 +1,6 @@
 import { GetPrimaryImageUseCase } from "./get-primary-image.use-case";
 import { mockClient } from "../Common/TestDoubles/mock-factory";
-import { UseCaseType } from "../Common/use-case-type";
+import { UseCaseType } from "./use-case-type";
 
 describe("GetPrimaryImageUseCase", () => {
   let useCase: GetPrimaryImageUseCase;

@@ -1,4 +1,4 @@
-import { UseCase } from "../Common/use-case.interface";
+import { UseCase } from "./use-case.interface";
 import { GravatarClient } from "../Presentation";
 
 export class VerifyEmailListUseCase

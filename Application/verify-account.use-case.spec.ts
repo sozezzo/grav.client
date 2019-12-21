@@ -1,6 +1,6 @@
 import { VerifyAccountUseCase } from "./verify-account.use-case";
 import { mockClient } from "../Common/TestDoubles/mock-factory";
-import { UseCaseType } from "../Common/use-case-type";
+import { UseCaseType } from "./use-case-type";
 
 describe("VerifyAccountUseCase", () => {
   let useCase: VerifyAccountUseCase;

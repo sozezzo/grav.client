@@ -1,7 +1,7 @@
 import { SetNewImageUseCase } from "./set-new-image.use-case";
 import { mockClient } from "../Common/TestDoubles/mock-factory";
-import { UseCaseType } from "../Common/use-case-type";
-import { imageFilePath } from "../Common/TestDoubles/Stubs/primitive-stubs";
+import { UseCaseType } from "./use-case-type";
+import { imageFilePath } from "../Common/TestDoubles/primitive-stubs";
 import { ImageRating } from "../Presentation";
 
 describe("SetNewImageUseCase", () => {

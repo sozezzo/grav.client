@@ -1,12 +1,12 @@
 import { VerifyEmailListUseCase } from "./verify-email-list.use-case";
 import { mockClient } from "../Common/TestDoubles/mock-factory";
-import { UseCaseType } from "../Common/use-case-type";
+import { UseCaseType } from "./use-case-type";
 import {
   email,
   emailHash,
   email2,
   email2Hash
-} from "../Common/TestDoubles/Stubs/primitive-stubs";
+} from "../Common/TestDoubles/primitive-stubs";
 
 describe("VerifyEmailListUseCase", () => {
   let useCase: VerifyEmailListUseCase;
