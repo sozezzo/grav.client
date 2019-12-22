@@ -20,6 +20,14 @@ function errorResponse(errorMessage: string) {
     `;
 }
 
+export function FaultHttpResponse(errorMessage: string) {
+  return Promise.resolve({
+    ok: true,
+    status: 200,
+    text: () => Promise.resolve(errorResponse(errorMessage))
+  } as Response);
+}
+
 export function ExistsHttpResponse(emailHash: string) {
   let xml: string = `
   <?xml version="1.0"?>
