@@ -2,7 +2,7 @@ import { GravatarClient } from "../Presentation";
 import { config } from "dotenv";
 import { join } from "path";
 import { readFileSync } from "fs";
-import { 
+import {
   email as bogusEmail,
   password as bogusPassword,
   imageUrl
@@ -84,10 +84,10 @@ describe("GravatarClient", () => {
     const client = new GravatarClient(bogusEmail, bogusPassword);
     try {
       await client.exists();
-    } catch(ex) {
+    } catch (ex) {
       error = ex as Error;
     } finally {
       expect(error).toBeDefined();
     }
-  })
+  });
 });
