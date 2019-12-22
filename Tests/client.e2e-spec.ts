@@ -2,7 +2,11 @@ import { GravatarClient } from "../Presentation";
 import { config } from "dotenv";
 import { join } from "path";
 import { readFileSync } from "fs";
-import { imageUrl } from "../Common/TestDoubles/primitive-stubs";
+import { 
+  email as bogusEmail,
+  password as bogusPassword,
+  imageUrl
+} from "../Common/TestDoubles/primitive-stubs";
 import { GetPrimaryImageUseCase } from "../Presentation";
 
 config({ path: "Tests/.env" });
@@ -75,4 +79,15 @@ describe("GravatarClient", () => {
     const result = await client.test();
     expect(result.DidSucceed).toBe(true);
   });
+  it("should catch error", async () => {
+    let error: Error = null as any;
+    const client = new GravatarClient(bogusEmail, bogusPassword);
+    try {
+      await client.exists();
+    } catch(ex) {
+      error = ex as Error;
+    } finally {
+      expect(error).toBeDefined();
+    }
+  })
 });

@@ -21,14 +21,16 @@ describe("GravatarService", () => {
     service = new GravatarService(email, password);
   });
   it("should throw fault response error", async () => {
+    let error: Error = null as any;
     const responseStub = stub.FaultHttpResponse(errorMessage);
     const httpShim = mockHttpShim(responseStub);
     service.http = httpShim;
     try {
       await service.exists();
     } catch (ex) {
-      const faultError: Error = ex as Error;
-      expect(faultError.message.indexOf(errorMessage)).toBeGreaterThan(-1);
+      error = ex as Error;
+    } finally {
+      expect(error).toBeDefined();
     }
   });
   it("should check if account exists", async () => {
