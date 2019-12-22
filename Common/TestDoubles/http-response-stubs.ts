@@ -20,9 +20,7 @@ function errorResponse(errorMessage: string) {
     `;
 }
 
-export function ExistsHttpResponse(
-  emailHash: string
-) {
+export function ExistsHttpResponse(emailHash: string) {
   let xml: string = `
   <?xml version="1.0"?>
   <methodResponse>
@@ -50,9 +48,7 @@ export function ExistsHttpResponse(
   } as Response);
 }
 
-export function AddressesHttpResponse(
-    email: string
-) {
+export function AddressesHttpResponse(email: string) {
   const xml = `
   <?xml version="1.0"?>
   <methodResponse>
@@ -90,7 +86,7 @@ export function AddressesHttpResponse(
           </param>
       </params>
   </methodResponse>
-`
+`;
 
   return Promise.resolve({
     ok: true,
@@ -232,7 +228,7 @@ export function UserImagesHttpResponse() {
           </param>
       </params>
   </methodResponse>
-`
+`;
   return Promise.resolve({
     ok: true,
     status: 200,
@@ -252,7 +248,7 @@ export function SaveImageUrlHttpResponse() {
           </param>
       </params>
   </methodResponse>
-`
+`;
 
   return Promise.resolve({
     ok: true,
@@ -269,9 +265,7 @@ export function SaveEncodedImageHttpResponse() {
   return SaveImageUrlHttpResponse();
 }
 
-export function UseUserImageHttpResponse(
-    email: string
-) {
+export function UseUserImageHttpResponse(email: string) {
   const xml = `
   <?xml version="1.0"?>
   <methodResponse>
@@ -290,7 +284,7 @@ export function UseUserImageHttpResponse(
           </param>
       </params>
   </methodResponse>
-`
+`;
 
   return Promise.resolve({
     ok: true,
@@ -299,9 +293,7 @@ export function UseUserImageHttpResponse(
   } as Response);
 }
 
-export function RemoveImageHttpResponse(
-    email: string
-) {
+export function RemoveImageHttpResponse(email: string) {
   const xml = `
   <?xml version="1.0"?>
   <methodResponse>
@@ -320,7 +312,7 @@ export function RemoveImageHttpResponse(
           </param>
       </params>
   </methodResponse>
-`
+`;
 
   return Promise.resolve({
     ok: true,
@@ -368,7 +360,7 @@ export function TestHttpResponse() {
             </param>
         </params>
     </methodResponse>
-  `
+  `;
   return Promise.resolve({
     ok: true,
     status: 200,
