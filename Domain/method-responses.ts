@@ -42,18 +42,16 @@ export class ExistsMethodResponse extends MethodResponse {
   }
   public parseMembers() {
     if (this.json && !this.json.methodResponse.fault) {
+      let _members = null;
       const { member } = this.json.methodResponse.params.param.value.struct;
-      if (Array.isArray(member)) {
-        member.forEach(this.parseExistsResult.bind(this));
-      } else {
-        this.parseExistsResult(member);
-      }
+      _members = Array.isArray(member) ? member : [member];
+      _members.forEach(member => {
+        const hashValue: string = this.parseFieldValue(member.name);
+        const hashExists: boolean =
+          Number(this.parseFieldValue(member.value)) == 1;
+        this.exists[hashValue] = hashExists;
+      });
     }
-  }
-  private parseExistsResult(member: any) {
-    const hashValue: string = this.parseFieldValue(member.name);
-    const hashExists: boolean = Number(this.parseFieldValue(member.value)) == 1;
-    this.exists[hashValue] = hashExists;
   }
 }
 
@@ -68,11 +66,8 @@ export class AddressesMethodResponse extends MethodResponse {
   public parseMembers() {
     if (this.json && !this.json.methodResponse.fault) {
       const { member } = this.json.methodResponse.params.param.value.struct;
-      if (Array.isArray(member)) {
-        this.userAddresses = member.map(this.parseUserAddress.bind(this));
-      } else {
-        this.userAddresses = [this.parseUserAddress(member)];
-      }
+      const _members = Array.isArray(member) ? member : [member];
+      this.userAddresses = _members.map(this.parseUserAddress.bind(this));
     }
   }
 
@@ -90,8 +85,6 @@ export class AddressesMethodResponse extends MethodResponse {
           break;
         case "userimage_url":
           address.imageUrl = this.parseFieldValue(member.value);
-          break;
-        default:
           break;
       }
     });
@@ -153,13 +146,10 @@ export class UseUserImageMethodResponse extends MethodResponse {
   public parseMembers() {
     if (this.json && !this.json.methodResponse.fault) {
       const { member } = this.json.methodResponse.params.param.value.struct;
-      if (Array.isArray(member)) {
-        this.success = member.every(
-          m => Number(this.parseFieldValue(m.value)) == 1
-        );
-      } else {
-        this.success = Number(this.parseFieldValue(member.value)) == 1;
-      }
+      const _members = Array.isArray(member) ? member : [member];
+      this.success = _members.every(
+        member => Number(this.parseFieldValue(member.value)) == 1
+      );
     }
   }
 }
@@ -169,13 +159,10 @@ export class RemoveImageMethodResponse extends MethodResponse {
   constructor(public xml: string) {
     super(xml2js(xml, { compact: true }));
     const { member } = this.json.methodResponse.params.param.value.struct;
-    if (Array.isArray(member)) {
-      this.success = member.every(
-        m => Number(this.parseFieldValue(m.value)) == 1
-      );
-    } else {
-      this.success = Number(this.parseFieldValue(member.value)) == 1;
-    }
+    const _members = Array.isArray(member) ? member : [member];
+    this.success = _members.every(
+      member => Number(this.parseFieldValue(member.value)) == 1
+    );
   }
 }
 
