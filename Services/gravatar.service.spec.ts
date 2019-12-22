@@ -7,7 +7,8 @@ import {
   email,
   password,
   imageUrl,
-  imageName
+  imageName,
+  errorMessage
 } from "../Common/TestDoubles/primitive-stubs";
 
 import * as stub from "../Common/TestDoubles/http-response-stubs";
@@ -19,7 +20,17 @@ describe("GravatarService", () => {
   beforeAll(() => {
     service = new GravatarService(email, password);
   });
-
+  it("should throw fault response error", async () => {
+    const responseStub = stub.FaultHttpResponse(errorMessage);
+    const httpShim = mockHttpShim(responseStub);
+    service.http = httpShim;
+    try {
+      await service.exists();
+    } catch (ex) {
+      const faultError: Error = ex as Error;
+      expect(faultError.message.indexOf(errorMessage)).toBeGreaterThan(-1);
+    }
+  });
   it("should check if account exists", async () => {
     const responseStub = stub.ExistsHttpResponse(service.emailHash);
     const httpShim = mockHttpShim(responseStub);
