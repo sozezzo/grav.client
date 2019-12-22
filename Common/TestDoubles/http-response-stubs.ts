@@ -1,23 +1,11 @@
+import { compile } from "handlebars";
+import * as xml from "../TestDoubles/xml-response-stubs";
+
+const faultResponse = compile(xml.faultXml);
+const existsResponse = compile(xml.existsXml);
+
 function errorResponse(errorMessage: string) {
-  return `
-    <?xml version="1.0"?>
-    <methodResponse>
-        <fault>
-            <value>
-            <struct>
-            <member>
-                <name>faultCode</name>
-                <value><int>-9</int></value>
-            </member>
-            <member>
-                <name>faultString</name>
-                <value><string>${errorMessage}</string></value>
-            </member>
-            </struct>
-        </value>
-        </fault>
-    </methodResponse>
-    `;
+  return faultResponse({ errorMessage });
 }
 
 export function FaultHttpResponse(errorMessage: string) {
@@ -29,26 +17,7 @@ export function FaultHttpResponse(errorMessage: string) {
 }
 
 export function ExistsHttpResponse(emailHash: string) {
-  let xml: string = `
-  <?xml version="1.0"?>
-  <methodResponse>
-      <params>
-          <param>
-              <value>
-                  <struct>
-                      <member>
-                          <name>${emailHash}</name>
-                          <value>
-                              <int>1</int>
-                          </value>
-                      </member>
-                  </struct>
-              </value>
-          </param>
-      </params>
-  </methodResponse>
-`;
-
+  let xml: string = existsResponse({ emailHash });
   return Promise.resolve({
     ok: true,
     status: 200,
