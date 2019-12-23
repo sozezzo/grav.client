@@ -99,7 +99,7 @@ describe("GravatarService", () => {
     const result = await service.useUserImage(imageName);
     expect(result.DidSucceed).toBeTrue();
   });
-  it("should use user image for multiple emails", async () => {
+  it("should use user image for multiple email addresses", async () => {
     const responseStub = stub.UseUserImageMultipleHttpResponse(email, email2);
     const httpShim = mockHttpShim(responseStub);
     service.http = httpShim;
@@ -108,6 +108,13 @@ describe("GravatarService", () => {
   });
   it("should remove image", async () => {
     const responseStub = stub.RemoveImageHttpResponse(email);
+    const httpShim = mockHttpShim(responseStub);
+    service.http = httpShim;
+    const result = await service.removeImage();
+    expect(result.DidSucceed).toBeTrue();
+  });
+  it("should remove image for multiple email addresses", async () => {
+    const responseStub = stub.RemoveImageMultipleHttpResponse(email, email2);
     const httpShim = mockHttpShim(responseStub);
     service.http = httpShim;
     const result = await service.removeImage();
