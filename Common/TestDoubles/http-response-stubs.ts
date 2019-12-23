@@ -247,7 +247,7 @@ export function RemoveImageHttpResponse(email: string) {
 }
 
 export function RemoveImageMultipleHttpResponse(email1: string, email2: string) {
-    const xml: string = removeImageResponse({ email1, email2 });
+    const xml: string = removeImageMultipleResponse({ email1, email2 });
     return Promise.resolve({
       ok: true,
       status: 200,
