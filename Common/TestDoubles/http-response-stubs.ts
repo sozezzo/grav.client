@@ -5,6 +5,8 @@ const faultResponse = compile(xml.faultXml);
 const existsResponse = compile(xml.existsXml);
 const addressesResponse = compile(xml.addressesXml);
 const addressesMultipleResponse = compile(xml.addressesMultipleXml);
+const useImageResponse = compile(xml.useImageXml);
+const useImageMultipleResponse = compile(xml.useImageMultipleXml);
 
 function errorResponse(errorMessage: string) {
   return faultResponse({ errorMessage });
@@ -216,32 +218,22 @@ export function SaveEncodedImageHttpResponse() {
 }
 
 export function UseUserImageHttpResponse(email: string) {
-  const xml = `
-  <?xml version="1.0"?>
-  <methodResponse>
-      <params>
-          <param>
-              <value>
-                  <struct>
-                      <member>
-                          <name>${email}</name>
-                          <value>
-                              <boolean>1</boolean>
-                          </value>
-                      </member>
-                  </struct>
-              </value>
-          </param>
-      </params>
-  </methodResponse>
-`;
-
+  const xml: string = useImageResponse({ email });
   return Promise.resolve({
     ok: true,
     status: 200,
     text: () => Promise.resolve(xml)
   } as Response);
 }
+
+export function UseUserImageMultipleHttpResponse(email1: string, email2: string) {
+    const xml: string = useImageMultipleResponse({ email1, email2 });
+    return Promise.resolve({
+      ok: true,
+      status: 200,
+      text: () => Promise.resolve(xml)
+    } as Response);
+  }
 
 export function RemoveImageHttpResponse(email: string) {
   const xml = `
