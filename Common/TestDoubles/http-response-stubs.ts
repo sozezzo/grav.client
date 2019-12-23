@@ -3,6 +3,8 @@ import * as xml from "../TestDoubles/xml-response-stubs";
 
 const faultResponse = compile(xml.faultXml);
 const existsResponse = compile(xml.existsXml);
+const addressesResponse = compile(xml.addressesXml);
+const addressesMultipleResponse = compile(xml.addressesMultipleXml);
 
 function errorResponse(errorMessage: string) {
   return faultResponse({ errorMessage });
@@ -26,50 +28,21 @@ export function ExistsHttpResponse(emailHash: string) {
 }
 
 export function AddressesHttpResponse(email: string) {
-  const xml = `
-  <?xml version="1.0"?>
-  <methodResponse>
-      <params>
-          <param>
-              <value>
-                  <struct>
-                      <member>
-                          <name>${email}</name>
-                          <value>
-                              <struct>
-                                  <member>
-                                      <name>rating</name>
-                                      <value>
-                                          <int>0</int>
-                                      </value>
-                                  </member>
-                                  <member>
-                                      <name>userimage</name>
-                                      <value>
-                                          <string>4ddf23534256fb555cfbf10acd7728b2</string>
-                                      </value>
-                                  </member>
-                                  <member>
-                                      <name>userimage_url</name>
-                                      <value>
-                                          <string>http://en.gravatar.com/userimage/150849239/4ddf23534256fb555cfbf10acd7728b2.jpg</string>
-                                      </value>
-                                  </member>
-                              </struct>
-                          </value>
-                      </member>
-                  </struct>
-              </value>
-          </param>
-      </params>
-  </methodResponse>
-`;
+    let xml: string = addressesResponse({ email });
+    return Promise.resolve({
+      ok: true,
+      status: 200,
+      text: () => Promise.resolve(xml)
+    } as Response);
+}
 
-  return Promise.resolve({
-    ok: true,
-    status: 200,
-    text: () => Promise.resolve(xml)
-  } as Response);
+export function AddressesMultipleHttpResponse(email1: string, email2: string) {
+    let xml: string = addressesMultipleResponse({ email1, email2 });
+    return Promise.resolve({
+      ok: true,
+      status: 200,
+      text: () => Promise.resolve(xml)
+    } as Response);
 }
 
 export function UserImagesHttpResponse() {
