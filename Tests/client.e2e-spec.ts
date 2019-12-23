@@ -79,15 +79,4 @@ describe("GravatarClient", () => {
     const result = await client.test();
     expect(result.DidSucceed).toBe(true);
   });
-  it("should catch error", async () => {
-    let error: Error = null as any;
-    const client = new GravatarClient(bogusEmail, bogusPassword);
-    try {
-      await client.exists();
-    } catch (ex) {
-      error = ex as Error;
-    } finally {
-      expect(error).toBeDefined();
-    }
-  });
 });
