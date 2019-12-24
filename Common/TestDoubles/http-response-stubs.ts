@@ -1,5 +1,6 @@
 import { compile } from "handlebars";
 import * as xml from "../TestDoubles/xml-response-stubs";
+import { errorMessage } from "../TestDoubles/primitive-stubs";
 
 const faultResponse = compile(xml.faultXml);
 const existsResponse = compile(xml.existsXml);
@@ -22,6 +23,14 @@ export function FaultHttpResponse(errorMessage: string) {
   } as Response);
 }
 
+export function BadRequestHttpResponse(errorMessage: string) {
+  return Promise.resolve({
+    ok: false,
+    status: 400,
+    statusText: errorMessage
+  } as Response);
+}
+
 export function ExistsHttpResponse(emailHash: string) {
   let xml: string = existsResponse({ emailHash });
   return Promise.resolve({
@@ -32,21 +41,21 @@ export function ExistsHttpResponse(emailHash: string) {
 }
 
 export function AddressesHttpResponse(email: string) {
-    let xml: string = addressesResponse({ email });
-    return Promise.resolve({
-      ok: true,
-      status: 200,
-      text: () => Promise.resolve(xml)
-    } as Response);
+  let xml: string = addressesResponse({ email });
+  return Promise.resolve({
+    ok: true,
+    status: 200,
+    text: () => Promise.resolve(xml)
+  } as Response);
 }
 
 export function AddressesMultipleHttpResponse(email1: string, email2: string) {
-    let xml: string = addressesMultipleResponse({ email1, email2 });
-    return Promise.resolve({
-      ok: true,
-      status: 200,
-      text: () => Promise.resolve(xml)
-    } as Response);
+  let xml: string = addressesMultipleResponse({ email1, email2 });
+  return Promise.resolve({
+    ok: true,
+    status: 200,
+    text: () => Promise.resolve(xml)
+  } as Response);
 }
 
 export function UserImagesHttpResponse() {
@@ -228,14 +237,17 @@ export function UseUserImageHttpResponse(email: string) {
   } as Response);
 }
 
-export function UseUserImageMultipleHttpResponse(email1: string, email2: string) {
-    const xml: string = useImageMultipleResponse({ email1, email2 });
-    return Promise.resolve({
-      ok: true,
-      status: 200,
-      text: () => Promise.resolve(xml)
-    } as Response);
-  }
+export function UseUserImageMultipleHttpResponse(
+  email1: string,
+  email2: string
+) {
+  const xml: string = useImageMultipleResponse({ email1, email2 });
+  return Promise.resolve({
+    ok: true,
+    status: 200,
+    text: () => Promise.resolve(xml)
+  } as Response);
+}
 
 export function RemoveImageHttpResponse(email: string) {
   const xml: string = removeImageResponse({ email });
@@ -246,14 +258,17 @@ export function RemoveImageHttpResponse(email: string) {
   } as Response);
 }
 
-export function RemoveImageMultipleHttpResponse(email1: string, email2: string) {
-    const xml: string = removeImageMultipleResponse({ email1, email2 });
-    return Promise.resolve({
-      ok: true,
-      status: 200,
-      text: () => Promise.resolve(xml)
-    } as Response);
-  }
+export function RemoveImageMultipleHttpResponse(
+  email1: string,
+  email2: string
+) {
+  const xml: string = removeImageMultipleResponse({ email1, email2 });
+  return Promise.resolve({
+    ok: true,
+    status: 200,
+    text: () => Promise.resolve(xml)
+  } as Response);
+}
 export function DeleteUserImageHttpResponse() {
   const xml = `
     <?xml version="1.0"?>
