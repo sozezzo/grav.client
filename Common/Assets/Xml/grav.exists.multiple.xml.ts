@@ -1,4 +1,4 @@
-export const existsXmlResponse = `
+export const existsMultipleXmlResponse = `
 <methodResponse>
   <params>
     <param>

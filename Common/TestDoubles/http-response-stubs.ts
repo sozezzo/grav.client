@@ -6,8 +6,8 @@ const faultResponse = compile(xml.faultXml);
 const existsResponse = compile(xml.existsXml);
 const addressesResponse = compile(xml.addressesXml);
 const addressesMultipleResponse = compile(xml.addressesMultipleXml);
-const useImageResponse = compile(xml.useImageXml);
-const useImageMultipleResponse = compile(xml.useImageMultipleXml);
+const useImageResponse = compile(xml.useUserImageXml);
+const useImageMultipleResponse = compile(xml.useUserImageMultipleXml);
 const removeImageResponse = compile(xml.removeImageXml);
 const removeImageMultipleResponse = compile(xml.removeImageMultipleXml);
 
