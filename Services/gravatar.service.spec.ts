@@ -12,7 +12,9 @@ import {
   imageData,
   mimeType,
   errorMessage,
-  imageFilePath
+  imageFilePath,
+  emailHash,
+  email2Hash
 } from "../Common/TestDoubles/primitive-stubs";
 
 import * as stub from "../Common/TestDoubles/http-response-stubs";
@@ -30,13 +32,12 @@ describe("GravatarService", () => {
     const result = await service.exists();
     expect(result.DidSucceed).toBe(true);
   });
-  // TODO: test for multiple accounts
-  // it("should check if multiple accounts exist", async () => {
-  //   const responseStub = stub.ExistsHttpResponse(service.emailHash);
-  //   service.http = mockHttpShim(responseStub);
-  //   const result = await service.exists();
-  //   expect(result.DidSucceed).toBe(true);
-  // });
+  it("should check if multiple accounts exist", async () => {
+    const responseStub = stub.ExistsMultipleHttpResponse(emailHash, email2Hash);
+    service.http = mockHttpShim(responseStub);
+    const result = await service.exists();
+    expect(result.DidSucceed).toBe(true);
+  });
   it("should have gravatar image url", () => {
     service.http = new HttpShim(service.emailHash);
     const rgx = new RegExp("^https://www.gravatar.com/avatar/(.*)$");
@@ -91,7 +92,7 @@ describe("GravatarService", () => {
   it("should use user image for multiple email addresses", async () => {
     const responseStub = stub.UseUserImageMultipleHttpResponse(email, email2);
     service.http = mockHttpShim(responseStub);
-    const result = await service.useUserImage(imageName);
+    const result = await service.useUserImage(imageName, email, email2);
     expect(result.DidSucceed).toBeTrue();
   });
   it("should remove image", async () => {
@@ -103,7 +104,7 @@ describe("GravatarService", () => {
   it("should remove image for multiple email addresses", async () => {
     const responseStub = stub.RemoveImageMultipleHttpResponse(email, email2);
     service.http = mockHttpShim(responseStub);
-    const result = await service.removeImage();
+    const result = await service.removeImage(email, email2);
     expect(result.DidSucceed).toBeTrue();
   });
   it("should delete user image", async () => {
@@ -148,13 +149,12 @@ describe("GravatarService", () => {
       { methodName: "test", args: [] }
     ].forEach(async row => {
       const testData: TestData = row as TestData;
-      const _service = new GravatarService(email, password);
       const responseStub = stub.BadRequestHttpResponse(errorMessage);
       const httpShim = mockHttpShim(responseStub);
       spyOn(httpShim, "postImageFile").and.returnValue(responseStub);
       spyOn(httpShim, "postEncodedImage").and.returnValue(responseStub);
-      _service.http = httpShim;
-      const method = (_service as any)[testData.methodName].bind(_service);
+      service.http = httpShim;
+      const method = (service as any)[testData.methodName].bind(service);
       const result = await method(...testData.args);
       expect(result.DidFail).toBe(true);
     });
