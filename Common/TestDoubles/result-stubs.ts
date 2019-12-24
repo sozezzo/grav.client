@@ -1,9 +1,19 @@
 import {
   ExistsMethodResponse,
+  // TODO:
+  // ExistsMultipleMethodResponse,
   AddressesMethodResponse,
+  // TODO:
+  // AddressesMultipleMethodResponse,
   UserImagesMethodResponse,
+  // TODO:
+  // SaveImageMethodResponse,
+  // SaveEncodedImageMethodResponse,
   SaveImageUrlMethodResponse,
   UseUserImageMethodResponse,
+  // TODO:
+  // RemoveImageMethodResponse,
+  // DeleteImageMethodResponse,
   TestMethodResponse
 } from "../../Domain/method-responses";
 
@@ -32,6 +42,10 @@ export function UserImagesResult() {
   return Promise.resolve(Result.Ok(response));
 }
 
+// TODO:
+// export function SaveImageResult()
+// export function SaveEncodedImageResult()
+
 export function SaveImageUrlResult() {
   const response = new SaveImageUrlMethodResponse("");
   response.json = stub.saveImageUrlResponse;
@@ -45,6 +59,10 @@ export function UseUserImageResult() {
   response.parseMembers();
   return Promise.resolve(Result.Ok(response));
 }
+
+// TODO:
+// export function RemoveImageResult()
+// export function DeleteImageResult()
 
 export function TestResult() {
   const response = new TestMethodResponse("");
