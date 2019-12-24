@@ -49,7 +49,6 @@ export function mockClient(
       spyOn(client, "useUserImage").and.returnValue(stub.UseUserImageResult());
       return client;
     default:
-      spyOn(client, "test").and.returnValue(stub.TestResult());
       return client;
   }
 }
