@@ -1,4 +1,4 @@
-export const addressesMultipleXmlResponse = `
+export const addressesMultipleXml = `
 <?xml version="1.0" encoding="UTF-8"?>
 <methodResponse>
    <params>

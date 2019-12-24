@@ -1,4 +1,4 @@
-export const useUserImageXmlResponse = `
+export const useUserImageXml = `
 <?xml version="1.0"?>
 <methodResponse>
     <params>

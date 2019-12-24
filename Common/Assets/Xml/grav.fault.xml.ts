@@ -1,4 +1,4 @@
-export const faultXmlResponse = `
+export const faultXml = `
 <?xml version="1.0"?>
 <methodResponse>
     <fault>

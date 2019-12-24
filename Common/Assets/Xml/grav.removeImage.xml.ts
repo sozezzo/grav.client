@@ -1,4 +1,4 @@
-export const removeImageXmlResponse = `
+export const removeImageXml = `
 <?xml version="1.0"?>
 <methodResponse>
     <params>

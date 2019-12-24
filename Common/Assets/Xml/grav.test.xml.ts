@@ -1,4 +1,4 @@
-export const existsXml = `
+export const testXml = `
 <?xml version="1.0"?>
 <methodResponse>
     <params>
@@ -6,9 +6,9 @@ export const existsXml = `
             <value>
                 <struct>
                     <member>
-                        <name>{{emailHash}}</name>
+                        <name>response</name>
                         <value>
-                            <int>1</int>
+                            <int>1555198365</int>
                         </value>
                     </member>
                 </struct>

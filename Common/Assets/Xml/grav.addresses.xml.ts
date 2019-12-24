@@ -1,4 +1,4 @@
-export const addressesXmlResponse = `
+export const addressesXml = `
 <?xml version="1.0" encoding="UTF-8"?>
 <methodResponse>
    <params>
