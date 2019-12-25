@@ -10,9 +10,7 @@
 
 [![NPM](https://nodei.co/npm/grav.client.png)](https://nodei.co/npm/grav.client/)
 
-[Wiki Page](https://github.com/mrtillman/grav.client/wiki)
-
-[API docs](https://documenter.getpostman.com/view/1403721/Rztpr87i)
+If you are just getting started, be sure to see the [Wiki](https://github.com/mrtillman/grav.client/wiki) and [API docs](https://documenter.getpostman.com/view/1403721/Rztpr87i).
 
  [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/e27a4edf756f4cbe80b5)
 
