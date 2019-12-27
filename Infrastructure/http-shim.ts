@@ -36,7 +36,7 @@ export class HttpShim {
       data: base64string,
       mimetype
     };
-    return await fetch("https://dailyavatar.io/api/v1/avatars/base64", {
+    return await fetch("https://dailyavatar.io/api/v1/avatars", {
       method: "POST",
       headers: { "content-type": "application/json; charset=UTF-8" },
       body: JSON.stringify(avatar)

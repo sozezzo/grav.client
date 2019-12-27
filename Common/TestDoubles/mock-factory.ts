@@ -19,8 +19,7 @@ export function mockHttpShim(responseStub: Promise<Response>): HttpShim {
 
 export function mockHttpRequests() {
   post(`${origin}/xmlrpc?user=${emailHash}`, 200)
-    .post("https://dailyavatar.io/api/v1/avatars", 200)
-    .post("https://dailyavatar.io/api/v1/avatars/base64", 200);
+    .post("https://dailyavatar.io/api/v1/avatars", 200);
 }
 
 export function mockClient(
