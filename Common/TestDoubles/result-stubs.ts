@@ -13,6 +13,13 @@ import { Result } from "../result";
 
 export function ExistsResult() {
   const response = new ExistsMethodResponse("");
+  response.json = stub.existsJsonResponse;
+  response.parseMembers();
+  return Promise.resolve(Result.Ok(response));
+}
+
+export function ExistsResultMultiple() {
+  const response = new ExistsMethodResponse("");
   response.json = stub.existsJsonResponseMultiple;
   response.parseMembers();
   return Promise.resolve(Result.Ok(response));
