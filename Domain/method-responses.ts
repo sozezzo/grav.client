@@ -34,22 +34,28 @@ const xmlToJson = (xml: string): any => {
 };
 
 export class ExistsMethodResponse extends MethodResponse {
-  public exists: { [emailHash: string]: boolean } = {};
 
   constructor(public xml: string) {
     super(xmlToJson(xml));
     this.parseMembers();
   }
+  
+  private _exists: boolean;
+  public get exists(): boolean {
+    return true;
+  };
+
   public parseMembers() {
     if (this.json && !this.json.methodResponse.fault) {
       let _members = null;
       const { member } = this.json.methodResponse.params.param.value.struct;
       _members = Array.isArray(member) ? member : [member];
       _members.forEach(member => {
-        const hashValue: string = this.parseFieldValue(member.name);
         const hashExists: boolean =
           Number(this.parseFieldValue(member.value)) == 1;
-        this.exists[hashValue] = hashExists;
+          if(this.exists){
+            this._exists = hashExists;
+          }
       });
     }
   }

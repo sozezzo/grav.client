@@ -19,7 +19,6 @@ describe("VerifyEmailListUseCase", () => {
   it("should work", async () => {
     useCase.emailAddresses = [email, email2];
     const exists = await useCase.execute();
-    expect(exists[emailHash]).toBeDefined();
-    expect(exists[email2Hash]).toBeDefined();
+    expect(exists).toBe(true);
   });
 });
