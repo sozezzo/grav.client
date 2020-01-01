@@ -42,7 +42,10 @@ export class ExistsMethodResponse extends MethodResponse {
   
   private _exists: boolean;
   public get exists(): boolean {
-    return true;
+    return this._exists;
+  };
+  public set exists(value:boolean) {
+    this._exists = value;
   };
 
   public parseMembers() {

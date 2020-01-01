@@ -15,6 +15,7 @@ export function ExistsResult() {
   const response = new ExistsMethodResponse("");
   response.json = stub.existsJsonResponse;
   response.parseMembers();
+  response.exists = true;
   return Promise.resolve(Result.Ok(response));
 }
 
@@ -22,6 +23,7 @@ export function ExistsResultMultiple() {
   const response = new ExistsMethodResponse("");
   response.json = stub.existsJsonResponseMultiple;
   response.parseMembers();
+  response.exists = true;
   return Promise.resolve(Result.Ok(response));
 }
 
