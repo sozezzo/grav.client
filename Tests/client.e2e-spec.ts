@@ -3,8 +3,6 @@ import { config } from "dotenv";
 import { join } from "path";
 import { readFileSync } from "fs";
 import {
-  email as bogusEmail,
-  password as bogusPassword,
   imageUrl
 } from "../Common/TestDoubles/primitive-stubs";
 import { GetPrimaryImageUseCase } from "../Presentation";
