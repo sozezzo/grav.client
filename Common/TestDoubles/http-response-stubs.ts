@@ -40,7 +40,10 @@ export function ExistsHttpResponse(emailHash: string) {
   } as Response);
 }
 
-export function ExistsMultipleHttpResponse(emailHash: string, email2Hash: string) {
+export function ExistsMultipleHttpResponse(
+  emailHash: string,
+  email2Hash: string
+) {
   let xml: string = existsMultipleResponse({ emailHash, email2Hash });
   return Promise.resolve({
     ok: true,

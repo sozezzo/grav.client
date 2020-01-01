@@ -1,8 +1,7 @@
 import { UseCase } from "./use-case.interface";
 import { GravatarClient } from "../Presentation";
 
-export class VerifyEmailListUseCase
-  implements UseCase<boolean> {
+export class VerifyEmailListUseCase implements UseCase<boolean> {
   public client: GravatarClient;
 
   public emailAddresses: Array<string>;
