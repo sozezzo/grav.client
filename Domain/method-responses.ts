@@ -88,7 +88,7 @@ export class AddressesMethodResponse extends MethodResponse {
           address.imageName = this.parseFieldValue(member.value);
           break;
         case "userimage_url":
-          address.imageUrl = this.parseFieldValue(member.value);
+          address.imageUrl = (address.imageName && this.parseFieldValue(member.value));
           break;
       }
     });
