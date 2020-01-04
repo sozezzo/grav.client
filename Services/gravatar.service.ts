@@ -24,9 +24,8 @@ import {
   DeleteUserImageMethodResponse,
   TestMethodResponse
 } from "../Domain/method-responses";
-import { GravatarInterface } from "../Common/gravatar.interface";
 
-export class GravatarService implements GravatarInterface {
+export class GravatarService {
   public email: string;
   private _password: string;
   public emailHash: string;
