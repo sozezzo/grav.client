@@ -111,7 +111,14 @@ export class SaveImageUrlMethodResponse extends MethodResponse {
 }
 
 export class UserImagesMethodResponse extends MethodResponse {
-  public userImages: Array<UserImage>;
+
+  private _userImages: Array<UserImage>;
+  public get userImages(): Array<UserImage> {
+    return this._userImages;
+  }
+  public set userImages(value: Array<UserImage>) {
+    this._userImages = value;
+  }
 
   constructor(public xml: string) {
     super(xmlToJson(xml));
