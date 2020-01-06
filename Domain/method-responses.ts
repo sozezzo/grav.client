@@ -88,7 +88,8 @@ export class AddressesMethodResponse extends MethodResponse {
           address.imageName = this.parseFieldValue(member.value);
           break;
         case "userimage_url":
-          address.imageUrl = (address.imageName && this.parseFieldValue(member.value));
+          address.imageUrl =
+            address.imageName && this.parseFieldValue(member.value);
           break;
       }
     });
@@ -111,7 +112,6 @@ export class SaveImageUrlMethodResponse extends MethodResponse {
 }
 
 export class UserImagesMethodResponse extends MethodResponse {
-
   private _userImages: Array<UserImage>;
   public get userImages(): Array<UserImage> {
     return this._userImages;
@@ -185,9 +185,14 @@ export class RemoveImageMethodResponse extends MethodResponse {
 export class DeleteUserImageMethodResponse extends MethodResponse {
   public success: boolean;
   constructor(public xml: string) {
-    super(xml2js(xml, { compact: true }));
-    const { value } = this.json.methodResponse.params.param;
-    this.success = Number(this.parseFieldValue(value)) == 1;
+    super(xmlToJson(xml));
+    this.parseMembers();
+  }
+  public parseMembers() {
+    if (this.json && !this.json.methodResponse.fault) {
+      const { value } = this.json.methodResponse.params.param;
+      this.success = Number(this.parseFieldValue(value)) == 1;
+    }
   }
 }
 
