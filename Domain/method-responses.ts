@@ -39,12 +39,12 @@ export class ExistsMethodResponse extends MethodResponse {
     this.parseMembers();
   }
 
-  private _exists: boolean;
-  public get exists(): boolean {
-    return this._exists;
+  private _success: boolean;
+  public get success(): boolean {
+    return this._success;
   }
-  public set exists(value: boolean) {
-    this._exists = value;
+  public set success(value: boolean) {
+    this._success = value;
   }
 
   public parseMembers() {
@@ -52,7 +52,7 @@ export class ExistsMethodResponse extends MethodResponse {
       let _members = null;
       const { member } = this.json.methodResponse.params.param.value.struct;
       _members = Array.isArray(member) ? member : [member];
-      this._exists = _members.every(member => {
+      this._success = _members.every(member => {
         return Number(this.parseFieldValue(member.value)) == 1;
       });
     }
@@ -197,8 +197,7 @@ export class DeleteUserImageMethodResponse extends MethodResponse {
 }
 
 export class TestMethodResponse extends MethodResponse {
-  public name: string;
-  public value: number;
+  public response: number;
 
   constructor(public xml: string) {
     super(xmlToJson(xml));
@@ -211,8 +210,7 @@ export class TestMethodResponse extends MethodResponse {
         name,
         value
       } = this.json.methodResponse.params.param.value.struct.member;
-      this.name = this.parseFieldValue(name);
-      this.value = Number(this.parseFieldValue(value));
+      this.response = Number(this.parseFieldValue(value));
     }
   }
 }
