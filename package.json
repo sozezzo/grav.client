@@ -12,7 +12,7 @@
     "test:spec": "cucumber-js Specification/**/*.feature",
     "postinstall": "npm run build",
     "format": "prettier --write \"**/*.ts\"",
-    "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
+    "coverage": "NODE_ENV=test nyc -r text-lcov -e .ts -x \"**/*.spec.ts\" npm run test | coveralls"
   },
   "repository": {
     "type": "git",

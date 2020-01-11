@@ -74,7 +74,7 @@ client.test().then(data => ... );
 - `VerifyAccountUseCase`
 - `VerifyEmailListUseCase`
 
-Use Case Demo:
+### Example:
 
 ```js
 import { 
