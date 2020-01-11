@@ -8,6 +8,6 @@ export class VerifyEmailListUseCase implements UseCase<boolean> {
 
   async execute(): Promise<boolean> {
     const result = await this.client.exists(...this.emailAddresses);
-    return result.Value.exists;
+    return result.Value.success;
   }
 }

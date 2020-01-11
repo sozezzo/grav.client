@@ -7,8 +7,8 @@ export class VerifyAccountUseCase implements UseCase<boolean> {
   async execute(): Promise<boolean> {
     const existsResult = await this.client.exists();
     const testResult = await this.client.test();
-    const emailExists = existsResult.Value.exists;
-    const sanityCheckPasses = !!testResult.Value.value;
+    const emailExists = existsResult.Value.success;
+    const sanityCheckPasses = !!testResult.Value.response;
     return emailExists && sanityCheckPasses;
   }
 }

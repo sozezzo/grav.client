@@ -11,10 +11,10 @@ Given("a list of 2 email addresses",
 
 Then("{string} is valid", async function(validEmail) {
   const result = await this.client.exists(validEmail);
-  expect(result.Value.exists).toBe(true);
+  expect(result.Value.success).toBe(true);
 });
 
 Then("{string} is invalid", async function(invalidEmail) {
   const result = await this.client.exists(invalidEmail);
-  expect(result.Value.exists).toBe(false);
+  expect(result.Value.success).toBe(false);
 });
