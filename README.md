@@ -55,7 +55,7 @@ client.test().then(data => ... );
 | `client.userImages()` | list account images |
 | `client.saveImage(imageFilePath)` | upload an image |
 | `client.saveEncodedImage(base64String,mimetype)` | upload an encoded image |
-| `client.saveUrl(imageUrl)` | upload image from URL |
+| `client.saveImageUrl(imageUrl)` | upload image from URL |
 | `client.useUserImage(imageName)` | update primary image |
 | `client.removeImage()` | remove primary image |
 | `client.deleteUserImage(imageName)` | delete an image |
@@ -74,7 +74,7 @@ client.test().then(data => ... );
 - `VerifyAccountUseCase`
 - `VerifyEmailListUseCase`
 
-### Example:
+Example:
 
 ```js
 import { 
