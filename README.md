@@ -61,5 +61,38 @@ client.test().then(data => ... );
 | `client.deleteUserImage(imageName)` | delete an image |
 | `client.test()` | sanity check |
 
+
+# Use Cases
+
+**`grav.client`** ships with several [use case classes](https://github.com/mrtillman/grav.client/wiki/Project-Structure#Application) that model different programming scenarios:
+
+- `GetPrimaryImageUseCase`
+- `LoadNextImageUseCase`
+- `LoadPreviousImageUseCase`
+- `SetNewImageUseCase`
+- `SignInUseCase`
+- `VerifyAccountUseCase`
+- `VerifyEmailListUseCase`
+
+Use Case Demo:
+
+```js
+import { 
+  GravatarClient,
+  GetPrimaryImageUseCase
+} from 'grav.client';
+
+...
+
+// create use case
+const getPrimaryImageUseCase = new GetPrimaryImageUseCase();
+
+// connect cilent
+getPrimaryImageUseCase.client = new GravatarClient(email, password);
+
+// let it rip
+const currentPrimaryImage = await getPrimaryImageUseCase.execute();
+```
+
 ## License
 [MIT](https://github.com/mrtillman/grav.client/blob/master/LICENSE.md)
