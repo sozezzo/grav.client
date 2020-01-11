@@ -11,7 +11,8 @@
     "test:e2e": "ts-node node_modules/jasmine/bin/jasmine --config=Tests/jasmine.e2e.json",
     "test:spec": "cucumber-js Specification/**/*.feature",
     "postinstall": "npm run build",
-    "format": "prettier --write \"**/*.ts\""
+    "format": "prettier --write \"**/*.ts\"",
+    "coverage": "nyc report --reporter=text-lcov | ./node_modules/coveralls/bin/coveralls.js"
   },
   "repository": {
     "type": "git",
@@ -33,6 +34,7 @@
     "@types/isomorphic-form-data": "^2.0.0",
     "@types/node": "^12.12.11",
     "@types/node-fetch": "^2.5.3",
+    "babel-register": "^6.26.0",
     "cucumber": "^6.0.5",
     "dotenv": "^8.2.0",
     "expect": "^24.9.0",
@@ -46,6 +48,7 @@
   },
   "devDependencies": {
     "@types/jasmine": "^3.4.6",
+    "coveralls": "^3.0.9",
     "jasmine": "^3.5.0",
     "nyc": "^14.1.1",
     "ts-node": "^8.5.2"
