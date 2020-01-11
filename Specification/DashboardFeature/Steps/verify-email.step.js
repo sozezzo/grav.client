@@ -3,23 +3,18 @@ const { VerifyEmailListUseCase } = require('../../../Release/Application/verify-
 
 const expect = require('expect');
 const World = require('../../world');
-const verifyEmailList = new VerifyEmailListUseCase();
-let exists = null;
 
 setWorldConstructor(World);
 
-Given("a list of 2 email addresses", async function(emailAddresses) {
-  verifyEmailList.client = this.client;
-  verifyEmailList.emailAddresses = emailAddresses.rawTable.map(address => address[0]);
-  exists = await verifyEmailList.execute();
-});
+Given("a list of 2 email addresses", 
+  async function(emailAddresses) { });
 
 Then("{string} is valid", async function(validEmail) {
-  const emailHash = await this.client.hashEmail(validEmail);
-  expect(exists[emailHash]).toBe(true);
+  const result = await this.client.exists(validEmail);
+  expect(result.Value.exists).toBe(true);
 });
 
 Then("{string} is invalid", async function(invalidEmail) {
-  const emailHash = await this.client.hashEmail(invalidEmail);
-  expect(exists[emailHash]).toBe(false);
+  const result = await this.client.exists(invalidEmail);
+  expect(result.Value.exists).toBe(false);
 });
