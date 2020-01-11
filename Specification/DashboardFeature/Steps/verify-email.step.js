@@ -1,5 +1,4 @@
 const { setWorldConstructor, Given, Then } = require('cucumber');
-const { VerifyEmailListUseCase } = require('../../../Release/Application/verify-email-list.use-case');
 
 const expect = require('expect');
 const World = require('../../world');

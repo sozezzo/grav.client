@@ -7,7 +7,6 @@ export * from "../Application/load-previous-image.use-case";
 export * from "../Application/set-new-image.use-case";
 export * from "../Application/sign-in.use-case";
 export * from "../Application/verify-account.use-case";
-export * from "../Application/verify-email-list.use-case";
 
 export { ImageRating } from "../Domain/image-rating";
 

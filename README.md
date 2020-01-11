@@ -72,7 +72,6 @@ client.test().then(data => ... );
 - `SetNewImageUseCase`
 - `SignInUseCase`
 - `VerifyAccountUseCase`
-- `VerifyEmailListUseCase`
 
 Example:
 
