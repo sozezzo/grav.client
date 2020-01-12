@@ -64,7 +64,7 @@ client.test().then(data => ... );
 
 # Use Cases
 
-**`grav.client`** ships with several [use case classes](https://github.com/mrtillman/grav.client/wiki/Project-Structure#Application) that model different programming scenarios:
+**`grav.client`** ships with several [use case classes](https://github.com/mrtillman/grav.client/wiki/Use-Cases) that model different programming scenarios:
 
 - `GetPrimaryImageUseCase`
 - `LoadNextImageUseCase`
