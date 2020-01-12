@@ -1,3 +1,4 @@
+require("jasmine");
 const { setWorldConstructor, Given, When, Then } = require('cucumber');
 const expect = require('expect');
 const World = require('../../world');

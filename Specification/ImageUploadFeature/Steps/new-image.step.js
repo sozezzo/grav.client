@@ -1,3 +1,4 @@
+require("jasmine");
 const { When, Then, AfterAll } = require('cucumber');
 const expect = require('expect');
 const { imageUrl } = require('../../../Release/Common/TestDoubles/primitive-stubs');

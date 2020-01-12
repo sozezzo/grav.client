@@ -1,3 +1,4 @@
+require("jasmine");
 import { Result } from "./result";
 
 describe("Result", () => {

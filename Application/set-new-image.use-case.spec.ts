@@ -1,3 +1,4 @@
+require("jasmine");
 import { SetNewImageUseCase } from "./set-new-image.use-case";
 import { mockClient } from "../Common/TestDoubles/mock-factory";
 import { UseCaseType } from "./use-case-type";

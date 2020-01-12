@@ -1,3 +1,4 @@
+require("jasmine");
 import { VerifyAccountUseCase } from "./verify-account.use-case";
 import { mockClient } from "../Common/TestDoubles/mock-factory";
 import { UseCaseType } from "./use-case-type";

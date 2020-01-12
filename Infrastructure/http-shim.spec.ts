@@ -1,3 +1,4 @@
+require("jasmine");
 import { HttpShim } from "./http-shim";
 import { emailHash } from "../Common/TestDoubles/primitive-stubs";
 import { join } from "path";

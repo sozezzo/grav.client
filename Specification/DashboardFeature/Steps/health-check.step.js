@@ -1,3 +1,4 @@
+require("jasmine");
 const { Then } = require('cucumber');
 const expect = require('expect');
 

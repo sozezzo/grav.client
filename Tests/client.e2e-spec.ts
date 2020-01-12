@@ -1,3 +1,4 @@
+require("jasmine");
 import { GravatarClient } from "../Presentation";
 import { config } from "dotenv";
 import { join } from "path";

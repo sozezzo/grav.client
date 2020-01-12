@@ -1,3 +1,4 @@
+require("jasmine");
 import { join } from "path";
 import { readFileSync } from "fs";
 

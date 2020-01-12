@@ -1,3 +1,4 @@
+require("jasmine");
 const { When, Then, BeforeAll, AfterAll } = require('cucumber');
 const expect = require('expect');
 const World = require('../../world');

@@ -1,3 +1,4 @@
+require("jasmine");
 import { GravatarClient } from "./index";
 import { email, password } from "../Common/TestDoubles/primitive-stubs";
 
