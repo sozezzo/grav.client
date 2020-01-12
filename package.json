@@ -1,6 +1,6 @@
 {
   "name": "grav.client",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "description": "a node.js client for the gravatar xml-rpc api",
   "main": "Release/Presentation/index.js",
   "types": "Release/Presentation/index.d.ts",
