@@ -90,7 +90,7 @@ const getPrimaryImageUseCase = new GetPrimaryImageUseCase();
 getPrimaryImageUseCase.client = new GravatarClient(email, password);
 
 // let it rip
-const currentPrimaryImage = await getPrimaryImageUseCase.execute();
+const primaryImageName = await getPrimaryImageUseCase.execute();
 ```
 
 ## License
