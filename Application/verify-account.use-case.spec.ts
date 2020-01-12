@@ -13,6 +13,6 @@ describe("VerifyAccountUseCase", () => {
 
   it("should work", async () => {
     const exists = await useCase.execute();
-    expect(exists).toBeTrue();
+    expect(exists).toBe(true);
   });
 });
