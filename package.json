@@ -35,6 +35,7 @@
     "@types/node": "^12.12.11",
     "@types/node-fetch": "^2.5.3",
     "babel-register": "^6.26.0",
+    "core-js": "^3.6.4",
     "cucumber": "^6.0.5",
     "dotenv": "^8.2.0",
     "expect": "^24.9.0",
