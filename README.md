@@ -86,7 +86,7 @@ import {
 // create use case
 const getPrimaryImageUseCase = new GetPrimaryImageUseCase();
 
-// connect cilent
+// connect client
 getPrimaryImageUseCase.client = new GravatarClient(email, password);
 
 // let it rip
