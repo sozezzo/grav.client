@@ -1,6 +1,6 @@
 {
   "name": "grav.client",
-  "version": "2.2.5",
+  "version": "2.2.6",
   "description": "a node.js client for the gravatar xml-rpc api",
   "main": "Release/Presentation/index.js",
   "types": "Release/Presentation/index.d.ts",
@@ -10,7 +10,7 @@
     "test:cov": "nyc -r text -e .ts -x \"**/*.spec.ts\" npm run test",
     "test:e2e": "ts-node node_modules/jasmine/bin/jasmine --config=Tests/jasmine.e2e.json",
     "test:spec": "cucumber-js Specification/**/*.feature",
-    "postinstall": "npm run build",
+    "postinstall": "npm install -D @jest/types && npm run build",
     "format": "prettier --write \"**/*.ts\"",
     "coverage": "NODE_ENV=test nyc -r text-lcov -e .ts -x \"**/*.spec.ts\" npm run test | coveralls"
   },
@@ -35,7 +35,6 @@
     "@types/node": "^12.12.11",
     "@types/node-fetch": "^2.5.3",
     "babel-register": "^6.26.0",
-    "core-js": "^3.6.4",
     "cucumber": "^6.0.5",
     "dotenv": "^8.2.0",
     "expect": "^24.9.0",
@@ -51,6 +50,7 @@
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@jest/types": "^24.9.0",
     "@types/jasmine": "^3.4.6",
+    "core-js": "^3.6.4",
     "coveralls": "^3.0.9",
     "jasmine": "^3.5.0",
     "nyc": "^14.1.1",
