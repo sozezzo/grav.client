@@ -6,7 +6,7 @@
  
 [![Build Status](https://travis-ci.com/mrtillman/grav.client.svg?branch=master)](https://travis-ci.com/mrtillman/grav.client)
 [![Coverage Status](https://coveralls.io/repos/github/mrtillman/grav.client/badge.svg?branch=master)](https://coveralls.io/github/mrtillman/grav.client?branch=master)
-[![npm version](https://badge.fury.io/js/grav.client.svg)](https://github.com/mrtillman/grav.client/releases/tag/v2.2.4)
+[![npm version](https://badge.fury.io/js/grav.client.svg)](https://github.com/mrtillman/grav.client/releases/tag/v2.2.5)
 
 [![NPM](https://nodei.co/npm/grav.client.png)](https://www.npmjs.com/package/grav.client)
 
