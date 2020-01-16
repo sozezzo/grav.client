@@ -1,6 +1,6 @@
 {
   "name": "grav.client",
-  "version": "2.2.10",
+  "version": "2.2.11",
   "description": "a node.js client for the gravatar xml-rpc api",
   "main": "Release/Presentation/index.js",
   "types": "Release/Presentation/index.d.ts",
@@ -52,6 +52,7 @@
     "coveralls": "^3.0.9",
     "jasmine-ts": "^0.3.0",
     "nyc": "^15.0.0",
-    "ts-node": "^8.6.2"
+    "ts-node": "^8.6.2",
+    "mem": ">=4.0.0"
   }
 }
