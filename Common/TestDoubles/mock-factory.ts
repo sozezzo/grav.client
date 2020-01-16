@@ -4,7 +4,9 @@ import { GravatarClient } from "../../Presentation";
 import { HttpShim } from "../../Infrastructure/http-shim";
 
 import { email, password, emailHash } from "./primitive-stubs";
-import { post } from "fetch-mock";
+
+import nock from 'nock';
+
 import { origin } from "../../Infrastructure/http-shim";
 
 import * as stub from "./result-stubs";
@@ -18,10 +20,8 @@ export function mockHttpShim(responseStub: Promise<Response>): HttpShim {
 }
 
 export function mockHttpRequests() {
-  post(`${origin}/xmlrpc?user=${emailHash}`, 200).post(
-    "https://dailyavatar.io/api/v1/avatars",
-    200
-  );
+  nock(origin).post(`/xmlrpc?user=${emailHash}`).reply(200);
+  nock("https://dailyavatar.io").post(`/api/v1/avatars`).reply(200).persist();
 }
 
 export function mockClient(
