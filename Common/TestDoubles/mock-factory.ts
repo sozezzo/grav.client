@@ -5,7 +5,7 @@ import { HttpShim } from "../../Infrastructure/http-shim";
 
 import { email, password, emailHash } from "./primitive-stubs";
 
-import nock from 'nock';
+import nock from "nock";
 
 import { origin } from "../../Infrastructure/http-shim";
 
@@ -20,8 +20,13 @@ export function mockHttpShim(responseStub: Promise<Response>): HttpShim {
 }
 
 export function mockHttpRequests() {
-  nock(origin).post(`/xmlrpc?user=${emailHash}`).reply(200);
-  nock("https://dailyavatar.io").post(`/api/v1/avatars`).reply(200).persist();
+  nock(origin)
+    .post(`/xmlrpc?user=${emailHash}`)
+    .reply(200);
+  nock("https://dailyavatar.io")
+    .post(`/api/v1/avatars`)
+    .reply(200)
+    .persist();
 }
 
 export function mockClient(
