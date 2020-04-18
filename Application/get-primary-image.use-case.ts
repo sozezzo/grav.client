@@ -1,17 +1,21 @@
 import { UseCase } from "./use-case.interface";
 import { GravatarClient } from "../Presentation";
-import { UserAddress } from "../Domain/user-address";
+import { UserImage } from "../Domain/user-image";
 
-export class GetPrimaryImageUseCase implements UseCase<string> {
+export class GetPrimaryImageUseCase implements UseCase<UserImage> {
   public client: GravatarClient;
 
-  execute(): Promise<string> {
+  execute(): Promise<UserImage> {
     return this.client
       .addresses()
       .then(result => result.Value.userAddresses)
       .then(addresses => {
         return addresses.find(address => address.email == this.client.email);
       })
-      .then(address => (<UserAddress>address).imageName);
+      .then(address => ({
+        name: address?.imageName,
+        rating: address?.imageRating,
+        url: address?.imageUrl
+      } as UserImage));
   }
 }
