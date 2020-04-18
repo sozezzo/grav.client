@@ -49,34 +49,34 @@ describe("GravatarClient", () => {
     imageNames.bubba = result.Value.imageName;
     expect(result.DidSucceed).toBe(true);
   });
-  // it("should upload encoded image", async () => {
-  //   const imgPath = join(__dirname, "../Common/Assets/gump.jpg");
-  //   console.log(imgPath);
-  //   const bitmap = readFileSync(imgPath);
-  //   const imageData = Buffer.from(bitmap).toString("base64");
-  //   const result = await client.saveEncodedImage(imageData, "jpeg");
-  //   imageNames.gump = result.Value.imageName;
-  //   expect(result.DidSucceed).toBe(true);
-  // });
-  // it("should save image url", async () => {
-  //   const result = await client.saveImageUrl(imageUrl);
-  //   imageNames.shrimp = result.Value.imageName;
-  //   expect(result.DidSucceed).toBe(true);
-  // });
-  // it("should remove primary image", async () => {
-  //   const result = await client.removeImage();
-  //   expect(result.DidSucceed).toBe(true);
-  // });
-  // it("should update primary image", async () => {
-  //   const result = await client.useUserImage(originalPrimaryImage.name);
-  //   expect(result.DidSucceed).toBe(true);
-  // });
-  // it("should delete image", async () => {
-  //   const result = await client.deleteUserImage(imageNames.shrimp);
-  //   expect(result.DidSucceed).toBe(true);
-  // });
-  // it("should do sanity check", async () => {
-  //   const result = await client.test();
-  //   expect(result.DidSucceed).toBe(true);
-  // });
+  it("should upload encoded image", async () => {
+    const imgPath = join(__dirname, "../Common/Assets/gump.jpg");
+    console.log(imgPath);
+    const bitmap = readFileSync(imgPath);
+    const imageData = Buffer.from(bitmap).toString("base64");
+    const result = await client.saveEncodedImage(imageData, "jpeg");
+    imageNames.gump = result.Value.imageName;
+    expect(result.DidSucceed).toBe(true);
+  });
+  it("should save image url", async () => {
+    const result = await client.saveImageUrl(imageUrl);
+    imageNames.shrimp = result.Value.imageName;
+    expect(result.DidSucceed).toBe(true);
+  });
+  it("should remove primary image", async () => {
+    const result = await client.removeImage();
+    expect(result.DidSucceed).toBe(true);
+  });
+  it("should update primary image", async () => {
+    const result = await client.useUserImage(originalPrimaryImage.name);
+    expect(result.DidSucceed).toBe(true);
+  });
+  it("should delete image", async () => {
+    const result = await client.deleteUserImage(imageNames.shrimp);
+    expect(result.DidSucceed).toBe(true);
+  });
+  it("should do sanity check", async () => {
+    const result = await client.test();
+    expect(result.DidSucceed).toBe(true);
+  });
 });
