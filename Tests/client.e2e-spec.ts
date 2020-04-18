@@ -44,14 +44,12 @@ describe("GravatarClient", () => {
   });
   it("should upload image file", async () => {
     const imgPath = join(__dirname, "../Common/Assets/bubba.jpg");
-    console.log(imgPath);
     const result = await client.saveImage(imgPath);
     imageNames.bubba = result.Value.imageName;
     expect(result.DidSucceed).toBe(true);
   });
   it("should upload encoded image", async () => {
     const imgPath = join(__dirname, "../Common/Assets/gump.jpg");
-    console.log(imgPath);
     const bitmap = readFileSync(imgPath);
     const imageData = Buffer.from(bitmap).toString("base64");
     const result = await client.saveEncodedImage(imageData, "jpeg");
