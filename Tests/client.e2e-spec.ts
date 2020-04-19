@@ -52,7 +52,7 @@ describe("GravatarClient", () => {
     const imgPath = join(__dirname, "../Common/Assets/gump.jpg");
     const bitmap = readFileSync(imgPath);
     const imageData = Buffer.from(bitmap).toString("base64");
-    const result = await client.saveEncodedImage(imageData, "jpeg");
+    const result = await client.saveEncodedImage(imageData);
     imageNames.gump = result.Value.imageName;
     expect(result.DidSucceed).toBe(true);
   });
