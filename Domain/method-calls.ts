@@ -87,7 +87,7 @@ export class SaveDataMethodCall implements MethodCall {
                               <member>
                                   <name>rating</name>
                                   <value>
-                                      <int>${this.imageData}</int>
+                                      <int>${this.imageRating}</int>
                                   </value>
                               </member>
                               <member>
