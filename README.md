@@ -59,7 +59,7 @@ client.test().then(data => ... );
 | `client.saveImageUrl(imageUrl)` | upload image from URL |
 | `client.useUserImage(imageName)` | update primary image |
 | `client.removeImage()` | remove primary image |
-| `client.deleteUserImage(imageName)` | delete an image |
+| `client.deleteUserImage(imageName)` | delete an image forever |
 | `client.test()` | sanity check |
 
 
