@@ -9,12 +9,12 @@ describe("FindImageUseCase", () => {
 
   beforeAll(() => {
     useCase = new FindImageUseCase();
-    useCase.imageName = imageName;
     useCase.client = mockClient(UseCaseType.FindImage);
   });
 
   it("should work", async () => {
-    const primaryImage = await useCase.execute();
-    expect(primaryImage).toBeDefined();
+    useCase.imageName = imageName;
+    const foundImage = await useCase.execute();
+    expect(foundImage).toBeDefined();
   });
 });
