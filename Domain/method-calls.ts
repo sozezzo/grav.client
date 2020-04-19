@@ -64,6 +64,46 @@ export class AddressesMethodCall implements MethodCall {
   }
 }
 
+export class SaveDataMethodCall implements MethodCall {
+  constructor(
+    public imageData: string,
+    public imageRating: ImageRating,
+    public password: string
+  ) {}
+
+  public get xml(): string {
+    return `<methodCall>
+              <methodName>grav.saveData</methodName>
+              <params>
+                  <param>
+                      <value>
+                          <struct>
+                              <member>
+                                  <name>data</name>
+                                  <value>
+                                      <string>${this.imageData}</string>
+                                  </value>
+                              </member>
+                              <member>
+                                  <name>rating</name>
+                                  <value>
+                                      <int>${this.imageData}</int>
+                                  </value>
+                              </member>
+                              <member>
+                                  <name>password</name>
+                                  <value>
+                                      <string>${this.password}</string>
+                                  </value>
+                              </member>
+                          </struct>
+                      </value>
+                  </param>
+              </params>
+          </methodCall>`;
+  }
+}
+
 export class SaveImageUrlMethodCall implements MethodCall {
   constructor(
     public imageUrl: string,
