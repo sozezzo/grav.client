@@ -1,5 +1,5 @@
 require("isomorphic-unfetch");
-import { createReadStream } from "fs";
+import { createReadStream, existsSync } from "fs";
 import FormData from "isomorphic-form-data";
 
 export const origin = "https://secure.gravatar.com";
@@ -21,6 +21,9 @@ export class HttpShim {
 
   async postImageFile(imageFilePath: string): Promise<Response> {
     const formData = new FormData();
+    if(!existsSync(imageFilePath)) {
+      throw new Error(`file not found: ${imageFilePath}`);
+    }
     formData.append("avatar", createReadStream(imageFilePath));
     return await fetch("https://dailyavatar.io/api/v1/avatars", {
       method: "POST",
