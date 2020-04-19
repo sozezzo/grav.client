@@ -15,7 +15,6 @@ export class SetNewImageUseCase implements UseCase<string> {
       return this.client.saveImage(this.imageFilePath)
                  .then(this._handleResult.bind(this));
     }
-
     if(this.imageUrl){
       return this.client.saveImageUrl(this.imageUrl)
           .then(this._handleResult.bind(this));
@@ -26,6 +25,6 @@ export class SetNewImageUseCase implements UseCase<string> {
   private _handleResult(result: Result<SaveImageUrlMethodResponse>){
     const { imageName } = result.Value;
     this.client.useUserImage(imageName);
-    return imageName
+    return imageName;
   }
 }
