@@ -1,6 +1,7 @@
 import { GravatarService } from "../Services/gravatar.service";
 import { HttpShim } from "../Infrastructure/http-shim";
 
+export * from "../Application/find-image.use-case";
 export * from "../Application/get-primary-image.use-case";
 export * from "../Application/load-next-image.use-case";
 export * from "../Application/load-previous-image.use-case";
