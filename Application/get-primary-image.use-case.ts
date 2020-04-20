@@ -10,12 +10,12 @@ export class GetPrimaryImageUseCase implements UseCase<UserImage> {
       .addresses()
       .then(result => result.Value.userAddresses)
       .then(addresses => {
-        return addresses.find(address => address.email == this.client.email);
+        return addresses.find(address => address.email == this.client.email) as any;
       })
       .then(address => ({
-        name: address?.imageName,
-        rating: address?.imageRating,
-        url: address?.imageUrl
+        name: address.imageName,
+        rating: address.imageRating,
+        url: address.imageUrl
       } as UserImage));
   }
 }

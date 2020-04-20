@@ -1,6 +1,6 @@
 require("jasmine");
 import { SetNewImageUseCase } from "./set-new-image.use-case";
-import { mockClient } from "../Common/TestDoubles/mock-factory";
+import { mockClient, mockHttpRequests } from "../Common/TestDoubles/mock-factory";
 import { UseCaseType } from "./use-case-type";
 import { imageFilePath, imageUrl } from "../Common/TestDoubles/primitive-stubs";
 import { ImageRating } from "../Presentation";
@@ -8,7 +8,8 @@ import { ImageRating } from "../Presentation";
 describe("SetNewImageUseCase", () => {
   let useCase: SetNewImageUseCase;
 
-  beforeAll(() => {
+  beforeEach(() => {
+    mockHttpRequests();
     useCase = new SetNewImageUseCase();
     useCase.client = mockClient(UseCaseType.SetNewImage);
   });
@@ -25,5 +26,15 @@ describe("SetNewImageUseCase", () => {
     useCase.imageRating = ImageRating.G;
     const newImageName = await useCase.execute();
     expect(newImageName).toBeDefined();
+  });
+
+  it("should throw if image not provided", async () => {
+    let message = false;
+    try {
+      await useCase.execute();
+    } catch (ex) {
+      message = ex.message;
+    }
+    expect(message).toBeTruthy();
   });
 });

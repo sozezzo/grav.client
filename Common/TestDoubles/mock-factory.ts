@@ -52,6 +52,7 @@ export function mockClient(
       return client;
     case UseCaseType.SetNewImage:
       spyOn(client, "saveImage").and.returnValue(stub.SaveImageUrlResult());
+      spyOn(client, "saveImageUrl").and.returnValue(stub.SaveImageUrlResult());
       spyOn(client, "useUserImage").and.returnValue(stub.UseUserImageResult());
       return client;
     default:

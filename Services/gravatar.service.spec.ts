@@ -1,7 +1,6 @@
 require("jasmine");
 import { join } from "path";
 import { readFileSync } from "fs";
-
 import { GravatarService } from "./gravatar.service";
 import { HttpShim } from "../Infrastructure/http-shim";
 import {
@@ -11,7 +10,6 @@ import {
   imageUrl,
   imageName,
   imageData,
-  mimeType,
   errorMessage,
   imageFilePath,
   emailHash,
@@ -20,6 +18,7 @@ import {
 
 import * as stub from "../Common/TestDoubles/http-response-stubs";
 import { mockHttpShim } from "../Common/TestDoubles/mock-factory";
+import { ImageRating } from "../Presentation";
 
 describe("GravatarService", () => {
   let service: GravatarService;
@@ -111,7 +110,7 @@ describe("GravatarService", () => {
   it("should delete user image", async () => {
     const responseStub = stub.DeleteUserImageHttpResponse();
     service.http = mockHttpShim(responseStub);
-    const result = await service.deleteUserImage(imageUrl);
+    const result = await service.deleteUserImage(imageName);
     expect(result.DidSucceed).toBe(true);
   });
   it("should do sanity check", async () => {
@@ -132,6 +131,7 @@ describe("GravatarService", () => {
       expect(error).toBeDefined();
     }
   });
+
   interface TestData {
     methodName: string;
     args: Array<string>;
