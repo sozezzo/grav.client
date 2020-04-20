@@ -60,7 +60,13 @@ export class ExistsMethodResponse extends MethodResponse {
 }
 
 export class AddressesMethodResponse extends MethodResponse {
-  public userAddresses: Array<UserAddress>;
+  private _userAddresses: Array<UserAddress>;
+  get userAddresses(){
+    return this._userAddresses;
+  }
+  set userAddresses(value){
+    this._userAddresses = value;
+  }
 
   constructor(public xml: string) {
     super(xmlToJson(xml));
