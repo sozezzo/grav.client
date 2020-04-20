@@ -6,12 +6,18 @@ import { UseCaseType } from "./use-case-type";
 describe("LoadNextImageUseCase", () => {
   let useCase: LoadNextImageUseCase;
 
-  beforeAll(() => {
+  beforeEach(() => {
     useCase = new LoadNextImageUseCase();
-    useCase.client = mockClient(UseCaseType.LoadNextImage);
   });
 
   it("should work", async () => {
+    useCase.client = mockClient(UseCaseType.LoadNextImage);
+    const nextImage = await useCase.execute();
+    expect(nextImage).toBeDefined();
+  });
+
+  it("should work with a single image", async () => {
+    useCase.client = mockClient(UseCaseType.LoadNextImage + 100);
     const nextImage = await useCase.execute();
     expect(nextImage).toBeDefined();
   });

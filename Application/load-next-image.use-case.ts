@@ -21,9 +21,9 @@ export class LoadNextImageUseCase implements UseCase<UserImage> {
       })
       .then(primaryImageIndex => primaryImageIndex + 1)
       .then(nextImageIndex => {
-        return nextImageIndex <= _userImages.length
-          ? _userImages[nextImageIndex]
-          : _userImages[0];
+        return nextImageIndex >= _userImages.length
+          ? _userImages[0]
+          : _userImages[nextImageIndex];
       })
       .then(async image => {
         await this.client.useUserImage(image.name);

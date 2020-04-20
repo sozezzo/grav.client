@@ -8,6 +8,7 @@ import {
 } from "../../Domain/method-responses";
 
 import * as stub from "./json-response-stubs";
+import { primaryImageName } from './primitive-stubs';
 
 import { Result } from "../result";
 
@@ -34,10 +35,15 @@ export function AddressesResult() {
   return Promise.resolve(Result.Ok(response));
 }
 
-export function UserImagesResult() {
+export function UserImagesResult(useSingleImage: boolean = false) {
   const response = new UserImagesMethodResponse("");
   response.json = stub.userImagesJsonResponse;
   response.parseMembers();
+  if(useSingleImage){
+    response.userImages = response.userImages.filter(
+      image => image.name == primaryImageName
+    );
+  }
   return Promise.resolve(Result.Ok(response));
 }
 
