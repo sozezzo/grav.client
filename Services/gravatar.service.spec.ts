@@ -74,8 +74,8 @@ describe("GravatarService", () => {
     service.http = mockHttpShim(responseStub);
     const imgPath = join(__dirname, "../Common/Assets/gump.jpg");
     const bitmap = readFileSync(imgPath);
-    const imageData = new Buffer(bitmap).toString("base64");
-    const result = await service.saveEncodedImage(imageData, "jpeg");
+    const imageData = Buffer.from(bitmap).toString("base64");
+    const result = await service.saveEncodedImage(imageData);
     expect(result.DidSucceed).toBe(true);
   });
   it("should save image url", async () => {
@@ -142,7 +142,7 @@ describe("GravatarService", () => {
       { methodName: "addresses", args: [] },
       { methodName: "userImages", args: [] },
       { methodName: "saveImage", args: [imageFilePath] },
-      { methodName: "saveEncodedImage", args: [imageData, mimeType] },
+      { methodName: "saveEncodedImage", args: [imageData] },
       { methodName: "saveImageUrl", args: [imageFilePath] },
       { methodName: "useUserImage", args: [imageName] },
       { methodName: "removeImage", args: [] },
@@ -152,8 +152,6 @@ describe("GravatarService", () => {
       const testData: TestData = row as TestData;
       const responseStub = stub.BadRequestHttpResponse(errorMessage);
       const httpShim = mockHttpShim(responseStub);
-      spyOn(httpShim, "postImageFile").and.returnValue(responseStub);
-      spyOn(httpShim, "postEncodedImage").and.returnValue(responseStub);
       service.http = httpShim;
       const method = (service as any)[testData.methodName].bind(service);
       const result = await method(...testData.args);

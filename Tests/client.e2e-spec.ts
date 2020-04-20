@@ -5,10 +5,11 @@ import { join } from "path";
 import { readFileSync } from "fs";
 import { imageUrl } from "../Common/TestDoubles/primitive-stubs";
 import { GetPrimaryImageUseCase } from "../Presentation";
+import { UserImage } from "../Domain/user-image";
 
 config({ path: "Tests/.env" });
 
-let originalPrimaryImage: string;
+let originalPrimaryImage: UserImage;
 const email = process.env.EMAIL as string;
 const password = process.env.PASSWORD as string;
 const imageNames = { bubba: "", gump: "", shrimp: "" };
@@ -24,7 +25,7 @@ describe("GravatarClient", () => {
   });
 
   afterAll(async () => {
-    await client.useUserImage(originalPrimaryImage);
+    await client.useUserImage(originalPrimaryImage.name);
     await client.deleteUserImage(imageNames.bubba);
     await client.deleteUserImage(imageNames.gump);
   });
@@ -50,8 +51,8 @@ describe("GravatarClient", () => {
   it("should upload encoded image", async () => {
     const imgPath = join(__dirname, "../Common/Assets/gump.jpg");
     const bitmap = readFileSync(imgPath);
-    const imageData = new Buffer(bitmap).toString("base64");
-    const result = await client.saveEncodedImage(imageData, "jpeg");
+    const imageData = Buffer.from(bitmap).toString("base64");
+    const result = await client.saveEncodedImage(imageData);
     imageNames.gump = result.Value.imageName;
     expect(result.DidSucceed).toBe(true);
   });
@@ -65,7 +66,7 @@ describe("GravatarClient", () => {
     expect(result.DidSucceed).toBe(true);
   });
   it("should update primary image", async () => {
-    const result = await client.useUserImage(originalPrimaryImage);
+    const result = await client.useUserImage(originalPrimaryImage.name);
     expect(result.DidSucceed).toBe(true);
   });
   it("should delete image", async () => {

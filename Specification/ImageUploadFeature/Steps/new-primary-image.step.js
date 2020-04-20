@@ -4,33 +4,32 @@ const expect = require('expect');
 const World = require('../../world');
 const { join }= require('path');
 
-let originalPrimaryImageName = "";
-let newImageName = "";
+let originalPrimaryImage;
+let newImage = { name: null };
 
 BeforeAll(async () => {
   const _world = new World();
-  const imageName = await _world.getPrimaryImageUseCase.execute();
-  originalPrimaryImageName = imageName;
+  originalPrimaryImage = await _world.getPrimaryImageUseCase.execute();
 })
 
 When("an image is uploaded", async function() {
   const imagePath = join(__dirname, '../../../Common/Assets/shrimp.jpg');
-  this.setNewImageUseCase.imagePath = imagePath;
-  newImageName = await this.setNewImageUseCase.execute();
-  expect(newImageName).toBeDefined();
+  this.setNewImageUseCase.imageFilePath = imagePath;
+  newImage.name = await this.setNewImageUseCase.execute();
+  expect(newImage.name).toBeDefined();
 });
 
 Then("the primary image is updated", async function() {
   setTimeout(async () => {
-    const primaryImageName = await this.getPrimaryImageUseCase.execute();
-    expect(newImageName).toEqual(primaryImageName);
+    const primaryImage = await this.getPrimaryImageUseCase.execute();
+    expect(newImage.name).toEqual(primaryImage.name);
   }, 2000);
 });
 
 AfterAll(() => {
   const world = new World();
   setTimeout(async () => {
-    await world.client.useUserImage(originalPrimaryImageName);
-    await world.client.deleteUserImage(newImageName);
+    await world.client.useUserImage(originalPrimaryImage.name);
+    await world.client.deleteUserImage(newImage.name);
   }, 3000);
 })

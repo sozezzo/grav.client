@@ -12,7 +12,7 @@ describe("GetPrimaryImageUseCase", () => {
   });
 
   it("should work", async () => {
-    const primaryImageName = await useCase.execute();
-    expect(primaryImageName).toBeDefined();
+    const primaryImage = await useCase.execute();
+    expect(primaryImage).toBeDefined();
   });
 });

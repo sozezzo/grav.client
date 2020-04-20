@@ -6,7 +6,8 @@
  
 [![Build Status](https://travis-ci.com/mrtillman/grav.client.svg?branch=master)](https://travis-ci.com/mrtillman/grav.client)
 [![Coverage Status](https://coveralls.io/repos/github/mrtillman/grav.client/badge.svg?branch=master)](https://coveralls.io/github/mrtillman/grav.client?branch=master)
-[![npm version](https://badge.fury.io/js/grav.client.svg)](https://github.com/mrtillman/grav.client/releases/tag/v2.2.12)
+[![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/mrtillman/grav.client?sort=semver)](https://github.com/mrtillman/grav.client/releases/tag/v2.3.12)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/mrtillman/grav.client/blob/master/LICENSE.md)
 
 [![NPM](https://nodei.co/npm/grav.client.png)](https://www.npmjs.com/package/grav.client)
 
@@ -58,7 +59,7 @@ client.test().then(data => ... );
 | `client.saveImageUrl(imageUrl)` | upload image from URL |
 | `client.useUserImage(imageName)` | update primary image |
 | `client.removeImage()` | remove primary image |
-| `client.deleteUserImage(imageName)` | delete an image |
+| `client.deleteUserImage(imageName)` | delete an image forever |
 | `client.test()` | sanity check |
 
 
@@ -66,6 +67,7 @@ client.test().then(data => ... );
 
 **`grav.client`** ships with several [use case classes](https://github.com/mrtillman/grav.client/wiki/Use-Cases) that model different programming scenarios:
 
+- `FindImageUseCase`
 - `GetPrimaryImageUseCase`
 - `LoadNextImageUseCase`
 - `LoadPreviousImageUseCase`
@@ -90,7 +92,7 @@ const getPrimaryImageUseCase = new GetPrimaryImageUseCase();
 getPrimaryImageUseCase.client = new GravatarClient(email, password);
 
 // let it rip
-const primaryImageName = await getPrimaryImageUseCase.execute();
+const primaryImage = await getPrimaryImageUseCase.execute();
 ```
 
 ## License

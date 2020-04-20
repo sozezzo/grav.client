@@ -2,11 +2,13 @@ import { Md5 } from "ts-md5/dist/md5";
 import { HttpShim } from "../Infrastructure/http-shim";
 import { Result } from "../Common/result";
 import { ImageRating } from "../Domain/image-rating";
+import { readFileSync, existsSync } from "fs";
 
 import {
   AddressesMethodCall,
   ExistsMethodCall,
   UserImagesMethodCall,
+  SaveDataMethodCall,
   SaveImageUrlMethodCall,
   UseUserImageMethodCall,
   RemoveImageMethodCall,
@@ -84,23 +86,39 @@ export class GravatarService {
     imageFilePath: string,
     imageRating = ImageRating.G
   ): Promise<Result<SaveImageUrlMethodResponse>> {
-    const response = await this.http.postImageFile(imageFilePath);
+    if(!existsSync(imageFilePath)){
+      return Result.Fail(`file not found: ${imageFilePath}`);
+    }
+    const bitmap = readFileSync(imageFilePath);
+    const imageData = Buffer.from(bitmap).toString("base64");
+    const methodCall = new SaveDataMethodCall(
+      imageData,
+      imageRating,
+      this._password
+    );
+    const response = await this.http.rpc(methodCall.xml);
     if (response.ok) {
-      const imageUrl = await response.text();
-      return this.saveImageUrl(imageUrl, imageRating);
+      const xmlResponse = await response.text();
+      const methodResponse = new SaveImageUrlMethodResponse(xmlResponse);
+      return Result.Ok(methodResponse);
     } else {
       return Result.Fail(response.statusText);
     }
   }
   public async saveEncodedImage(
     base64String: string,
-    mimetype: string,
     imageRating = ImageRating.G
   ): Promise<Result<SaveImageUrlMethodResponse>> {
-    const response = await this.http.postEncodedImage(base64String, mimetype);
+    const methodCall = new SaveDataMethodCall(
+      base64String,
+      imageRating,
+      this._password
+    );
+    const response = await this.http.rpc(methodCall.xml);
     if (response.ok) {
-      const imageUrl = await response.text();
-      return this.saveImageUrl(imageUrl, imageRating);
+      const xmlResponse = await response.text();
+      const methodResponse = new SaveImageUrlMethodResponse(xmlResponse);
+      return Result.Ok(methodResponse);
     } else {
       return Result.Fail(response.statusText);
     }

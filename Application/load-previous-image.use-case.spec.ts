@@ -12,7 +12,7 @@ describe("LoadPreviousImageUseCase", () => {
   });
 
   it("should work", async () => {
-    const previousImageName = await useCase.execute();
-    expect(previousImageName).toBeDefined();
+    const previousImage = await useCase.execute();
+    expect(previousImage).toBeDefined();
   });
 });

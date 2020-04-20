@@ -12,7 +12,7 @@ describe("LoadNextImageUseCase", () => {
   });
 
   it("should work", async () => {
-    const nextImageName = await useCase.execute();
-    expect(nextImageName).toBeDefined();
+    const nextImage = await useCase.execute();
+    expect(nextImage).toBeDefined();
   });
 });

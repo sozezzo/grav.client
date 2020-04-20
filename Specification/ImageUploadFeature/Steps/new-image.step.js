@@ -19,7 +19,7 @@ When("an image file is uploaded", async function() {
 Then("an encoded image is uploaded", async function() {
   const imgPath = join(__dirname, '../../../Common/Assets/gump.jpg');
   const bitmap = readFileSync(imgPath);
-  const imageData = new Buffer(bitmap).toString('base64');
+  const imageData = Buffer.from(bitmap).toString('base64');
   const result = await this.client.saveEncodedImage(imageData, 'jpeg');
   imageNames.gump = result.Value.imageName;
   expect(result.DidSucceed).toBe(true);

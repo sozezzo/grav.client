@@ -34,6 +34,9 @@ export function mockClient(
 ): GravatarClient {
   let client: GravatarClient = new GravatarClient(email, password);
   switch (useCaseType) {
+    case UseCaseType.FindImage:
+      spyOn(client, "userImages").and.returnValue(stub.UserImagesResult());
+      return client;
     case UseCaseType.GetPrimaryImage:
       spyOn(client, "addresses").and.returnValue(stub.AddressesResult());
       return client;
