@@ -35,15 +35,20 @@ export function AddressesResult() {
   return Promise.resolve(Result.Ok(response));
 }
 
-export function UserImagesResult(useSingleImage: boolean = false) {
+export function UserImagesResult() {
   const response = new UserImagesMethodResponse("");
   response.json = stub.userImagesJsonResponse;
   response.parseMembers();
-  if(useSingleImage){
-    response.userImages = response.userImages.filter(
-      image => image.name == primaryImageName
-    );
-  }
+  return Promise.resolve(Result.Ok(response));
+}
+
+export function UserImagesResultSingleImage() {
+  const response = new UserImagesMethodResponse("");
+  response.json = stub.userImagesJsonResponse;
+  response.parseMembers();
+  response.userImages = response.userImages.filter(
+    image => image.name == primaryImageName
+  );
   return Promise.resolve(Result.Ok(response));
 }
 

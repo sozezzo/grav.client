@@ -1,6 +1,6 @@
 require("jasmine");
 import { LoadPreviousImageUseCase } from "./load-previous-image.use-case";
-import { mockClient } from "../Common/TestDoubles/mock-factory";
+import { mockClient, mockClientHavingASingleImage } from "../Common/TestDoubles/mock-factory";
 import { UseCaseType } from "./use-case-type";
 
 describe("LoadPreviousImageUseCase", () => {
@@ -17,7 +17,7 @@ describe("LoadPreviousImageUseCase", () => {
   });
 
   it("should work with a single image", async () => {
-    useCase.client = mockClient(UseCaseType.LoadPreviousImage + 100);
+    useCase.client = mockClientHavingASingleImage();
     const previousImage = await useCase.execute();
     expect(previousImage).toBeDefined();
   });
