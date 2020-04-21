@@ -11,7 +11,7 @@ import {
   imageName,
   imageData,
   errorMessage,
-  imageFilePath,
+  fakeImageFilePath,
   emailHash,
   email2Hash,
 } from "../Common/TestDoubles/primitive-stubs";
@@ -35,7 +35,7 @@ describe("GravatarService", () => {
   it("should check if multiple accounts exist", async () => {
     const responseStub = stub.ExistsMultipleHttpResponse(emailHash, email2Hash);
     service.http = mockHttpShim(responseStub);
-    const result = await service.exists();
+    const result = await service.exists(email, email2);
     expect(result.DidSucceed).toBe(true);
   });
   it("should have gravatar image url", () => {
@@ -137,13 +137,15 @@ describe("GravatarService", () => {
     args: Array<string>;
   }
   it("should fail", () => {
+    const validImageFilePath = join(__dirname, "../Common/Assets/bubba.jpg");
     [
       { methodName: "exists", args: [] },
       { methodName: "addresses", args: [] },
       { methodName: "userImages", args: [] },
-      { methodName: "saveImage", args: [imageFilePath] },
+      { methodName: "saveImage", args: [fakeImageFilePath] },
+      { methodName: "saveImage", args: [validImageFilePath] },
       { methodName: "saveEncodedImage", args: [imageData] },
-      { methodName: "saveImageUrl", args: [imageFilePath] },
+      { methodName: "saveImageUrl", args: [imageUrl] },
       { methodName: "useUserImage", args: [imageName] },
       { methodName: "removeImage", args: [] },
       { methodName: "deleteUserImage", args: [imageName] },

@@ -2,10 +2,10 @@ require("jasmine");
 import { SetNewImageUseCase } from "./set-new-image.use-case";
 import {
   mockClient,
-  mockHttpRequests,
+  mockHttpRequests
 } from "../Common/TestDoubles/mock-factory";
 import { UseCaseType } from "./use-case-type";
-import { imageFilePath, imageUrl } from "../Common/TestDoubles/primitive-stubs";
+import { fakeImageFilePath, imageUrl } from "../Common/TestDoubles/primitive-stubs";
 import { ImageRating } from "../Presentation";
 
 describe("SetNewImageUseCase", () => {
@@ -18,7 +18,7 @@ describe("SetNewImageUseCase", () => {
   });
 
   it("should upload image file", async () => {
-    useCase.imageFilePath = imageFilePath;
+    useCase.imageFilePath = fakeImageFilePath;
     useCase.imageRating = ImageRating.G;
     const newImageName = await useCase.execute();
     expect(newImageName).toBeDefined();
