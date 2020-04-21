@@ -1,6 +1,9 @@
 require("jasmine");
 import { LoadNextImageUseCase } from "./load-next-image.use-case";
-import { mockClient, mockClientHavingASingleImage } from "../Common/TestDoubles/mock-factory";
+import {
+  mockClient,
+  mockClientHavingASingleImage,
+} from "../Common/TestDoubles/mock-factory";
 import { UseCaseType } from "./use-case-type";
 
 describe("LoadNextImageUseCase", () => {

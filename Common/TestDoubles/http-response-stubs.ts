@@ -19,7 +19,7 @@ export function FaultHttpResponse(errorMessage: string) {
   return Promise.resolve({
     ok: true,
     status: 200,
-    text: () => Promise.resolve(errorResponse(errorMessage))
+    text: () => Promise.resolve(errorResponse(errorMessage)),
   } as Response);
 }
 
@@ -27,7 +27,7 @@ export function BadRequestHttpResponse(errorMessage: string) {
   return Promise.resolve({
     ok: false,
     status: 400,
-    statusText: errorMessage
+    statusText: errorMessage,
   } as Response);
 }
 
@@ -36,7 +36,7 @@ export function ExistsHttpResponse(emailHash: string) {
   return Promise.resolve({
     ok: true,
     status: 200,
-    text: () => Promise.resolve(xml)
+    text: () => Promise.resolve(xml),
   } as Response);
 }
 
@@ -48,7 +48,7 @@ export function ExistsMultipleHttpResponse(
   return Promise.resolve({
     ok: true,
     status: 200,
-    text: () => Promise.resolve(xml)
+    text: () => Promise.resolve(xml),
   } as Response);
 }
 
@@ -57,7 +57,7 @@ export function AddressesHttpResponse(email: string) {
   return Promise.resolve({
     ok: true,
     status: 200,
-    text: () => Promise.resolve(xml)
+    text: () => Promise.resolve(xml),
   } as Response);
 }
 
@@ -66,7 +66,7 @@ export function AddressesMultipleHttpResponse(email1: string, email2: string) {
   return Promise.resolve({
     ok: true,
     status: 200,
-    text: () => Promise.resolve(xml)
+    text: () => Promise.resolve(xml),
   } as Response);
 }
 
@@ -74,7 +74,7 @@ export function UserImagesHttpResponse() {
   return Promise.resolve({
     ok: true,
     status: 200,
-    text: () => Promise.resolve(stub.userImagesXml)
+    text: () => Promise.resolve(stub.userImagesXml),
   } as Response);
 }
 
@@ -82,7 +82,7 @@ export function SaveImageUrlHttpResponse() {
   return Promise.resolve({
     ok: true,
     status: 200,
-    text: () => Promise.resolve(stub.saveUrlXml)
+    text: () => Promise.resolve(stub.saveUrlXml),
   } as Response);
 }
 
@@ -99,7 +99,7 @@ export function UseUserImageHttpResponse(email: string) {
   return Promise.resolve({
     ok: true,
     status: 200,
-    text: () => Promise.resolve(xml)
+    text: () => Promise.resolve(xml),
   } as Response);
 }
 
@@ -111,7 +111,7 @@ export function UseUserImageMultipleHttpResponse(
   return Promise.resolve({
     ok: true,
     status: 200,
-    text: () => Promise.resolve(xml)
+    text: () => Promise.resolve(xml),
   } as Response);
 }
 
@@ -120,7 +120,7 @@ export function RemoveImageHttpResponse(email: string) {
   return Promise.resolve({
     ok: true,
     status: 200,
-    text: () => Promise.resolve(xml)
+    text: () => Promise.resolve(xml),
   } as Response);
 }
 
@@ -132,14 +132,14 @@ export function RemoveImageMultipleHttpResponse(
   return Promise.resolve({
     ok: true,
     status: 200,
-    text: () => Promise.resolve(xml)
+    text: () => Promise.resolve(xml),
   } as Response);
 }
 export function DeleteUserImageHttpResponse() {
   return Promise.resolve({
     ok: true,
     status: 200,
-    text: () => Promise.resolve(stub.deleteUserImageXml)
+    text: () => Promise.resolve(stub.deleteUserImageXml),
   } as Response);
 }
 
@@ -147,6 +147,6 @@ export function TestHttpResponse() {
   return Promise.resolve({
     ok: true,
     status: 200,
-    text: () => Promise.resolve(stub.testXml)
+    text: () => Promise.resolve(stub.testXml),
   } as Response);
 }

@@ -20,13 +20,8 @@ export function mockHttpShim(responseStub: Promise<Response>): HttpShim {
 }
 
 export function mockHttpRequests() {
-  nock(origin)
-    .post(`/xmlrpc?user=${emailHash}`)
-    .reply(200);
-  nock("https://dailyavatar.io")
-    .post(`/api/v1/avatars`)
-    .reply(200)
-    .persist();
+  nock(origin).post(`/xmlrpc?user=${emailHash}`).reply(200);
+  nock("https://dailyavatar.io").post(`/api/v1/avatars`).reply(200).persist();
 }
 
 export function mockClient(
@@ -60,10 +55,12 @@ export function mockClient(
   }
 }
 
-export function mockClientHavingASingleImage(){
+export function mockClientHavingASingleImage() {
   let client: GravatarClient = new GravatarClient(email, password);
   spyOn(client, "addresses").and.returnValue(stub.AddressesResult());
-  spyOn(client, "userImages").and.returnValue(stub.UserImagesResultSingleImage());
+  spyOn(client, "userImages").and.returnValue(
+    stub.UserImagesResultSingleImage()
+  );
   spyOn(client, "useUserImage").and.returnValue(stub.UseUserImageResult());
   return client;
 }

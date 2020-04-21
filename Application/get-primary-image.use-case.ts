@@ -8,14 +8,19 @@ export class GetPrimaryImageUseCase implements UseCase<UserImage> {
   execute(): Promise<UserImage> {
     return this.client
       .addresses()
-      .then(result => result.Value.userAddresses)
-      .then(addresses => {
-        return addresses.find(address => address.email == this.client.email) as any;
+      .then((result) => result.Value.userAddresses)
+      .then((addresses) => {
+        return addresses.find(
+          (address) => address.email == this.client.email
+        ) as any;
       })
-      .then(address => ({
-        name: address.imageName,
-        rating: address.imageRating,
-        url: address.imageUrl
-      } as UserImage));
+      .then(
+        (address) =>
+          ({
+            name: address.imageName,
+            rating: address.imageRating,
+            url: address.imageUrl,
+          } as UserImage)
+      );
   }
 }

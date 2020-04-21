@@ -13,7 +13,7 @@ import {
   UseUserImageMethodCall,
   RemoveImageMethodCall,
   DeleteUserImageMethodCall,
-  TestMethodCall
+  TestMethodCall,
 } from "../Domain/method-calls";
 
 import {
@@ -24,7 +24,7 @@ import {
   UseUserImageMethodResponse,
   RemoveImageMethodResponse,
   DeleteUserImageMethodResponse,
-  TestMethodResponse
+  TestMethodResponse,
 } from "../Domain/method-responses";
 
 export class GravatarService {
@@ -86,7 +86,7 @@ export class GravatarService {
     imageFilePath: string,
     imageRating = ImageRating.G
   ): Promise<Result<SaveImageUrlMethodResponse>> {
-    if(!existsSync(imageFilePath)){
+    if (!existsSync(imageFilePath)) {
       return Result.Fail(`file not found: ${imageFilePath}`);
     }
     const bitmap = readFileSync(imageFilePath);

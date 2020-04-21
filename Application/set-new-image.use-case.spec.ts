@@ -1,6 +1,9 @@
 require("jasmine");
 import { SetNewImageUseCase } from "./set-new-image.use-case";
-import { mockClient, mockHttpRequests } from "../Common/TestDoubles/mock-factory";
+import {
+  mockClient,
+  mockHttpRequests,
+} from "../Common/TestDoubles/mock-factory";
 import { UseCaseType } from "./use-case-type";
 import { imageFilePath, imageUrl } from "../Common/TestDoubles/primitive-stubs";
 import { ImageRating } from "../Presentation";

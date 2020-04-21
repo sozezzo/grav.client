@@ -11,18 +11,20 @@ export class SetNewImageUseCase implements UseCase<string> {
   public imageRating: ImageRating;
 
   public execute(): Promise<string> {
-    if(this.imageFilePath){
-      return this.client.saveImage(this.imageFilePath)
-                 .then(this._handleResult.bind(this));
+    if (this.imageFilePath) {
+      return this.client
+        .saveImage(this.imageFilePath)
+        .then(this._handleResult.bind(this));
     }
-    if(this.imageUrl){
-      return this.client.saveImageUrl(this.imageUrl)
-          .then(this._handleResult.bind(this));
+    if (this.imageUrl) {
+      return this.client
+        .saveImageUrl(this.imageUrl)
+        .then(this._handleResult.bind(this));
     }
     throw new Error("Please provide an image URL or file path");
   }
 
-  private _handleResult(result: Result<SaveImageUrlMethodResponse>){
+  private _handleResult(result: Result<SaveImageUrlMethodResponse>) {
     const { imageName } = result.Value;
     this.client.useUserImage(imageName);
     return imageName;

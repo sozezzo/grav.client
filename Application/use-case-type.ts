@@ -6,5 +6,5 @@ export enum UseCaseType {
   None,
   SetNewImage,
   SignIn,
-  VerifyAccount
+  VerifyAccount,
 }

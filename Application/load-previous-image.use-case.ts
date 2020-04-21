@@ -14,18 +14,20 @@ export class LoadPreviousImageUseCase implements UseCase<UserImage> {
 
     return getPrimaryImage
       .execute()
-      .then(async primaryImage => {
+      .then(async (primaryImage) => {
         const result = await this.client.userImages();
         _userImages = result.Value.userImages;
-        return _userImages.findIndex(image => image.name == primaryImage.name);
+        return _userImages.findIndex(
+          (image) => image.name == primaryImage.name
+        );
       })
-      .then(primaryImageIndex => primaryImageIndex - 1)
-      .then(previousImageIndex => {
+      .then((primaryImageIndex) => primaryImageIndex - 1)
+      .then((previousImageIndex) => {
         return previousImageIndex < 0
           ? _userImages[_userImages.length - 1]
           : _userImages[previousImageIndex];
       })
-      .then(async image => {
+      .then(async (image) => {
         await this.client.useUserImage(image.name);
         return image;
       });

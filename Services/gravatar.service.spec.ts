@@ -13,7 +13,7 @@ import {
   errorMessage,
   imageFilePath,
   emailHash,
-  email2Hash
+  email2Hash,
 } from "../Common/TestDoubles/primitive-stubs";
 
 import * as stub from "../Common/TestDoubles/http-response-stubs";
@@ -147,8 +147,8 @@ describe("GravatarService", () => {
       { methodName: "useUserImage", args: [imageName] },
       { methodName: "removeImage", args: [] },
       { methodName: "deleteUserImage", args: [imageName] },
-      { methodName: "test", args: [] }
-    ].forEach(async row => {
+      { methodName: "test", args: [] },
+    ].forEach(async (row) => {
       const testData: TestData = row as TestData;
       const responseStub = stub.BadRequestHttpResponse(errorMessage);
       const httpShim = mockHttpShim(responseStub);

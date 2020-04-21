@@ -10,7 +10,7 @@ export class MethodResponse {
     const { fault } = this.json ? this.json.methodResponse : { fault: false };
     if (fault) {
       const members: Array<any> = fault.value.struct.member;
-      members.map(member => {
+      members.map((member) => {
         if (member.name._text == "faultCode") {
           faultCode = Number(this.parseFieldValue(member.value));
         } else if (member.name._text == "faultString") {
@@ -52,7 +52,7 @@ export class ExistsMethodResponse extends MethodResponse {
       let _members = null;
       const { member } = this.json.methodResponse.params.param.value.struct;
       _members = Array.isArray(member) ? member : [member];
-      this._success = _members.every(member => {
+      this._success = _members.every((member) => {
         return Number(this.parseFieldValue(member.value)) == 1;
       });
     }
@@ -61,10 +61,10 @@ export class ExistsMethodResponse extends MethodResponse {
 
 export class AddressesMethodResponse extends MethodResponse {
   private _userAddresses: Array<UserAddress>;
-  get userAddresses(){
+  get userAddresses() {
     return this._userAddresses;
   }
-  set userAddresses(value){
+  set userAddresses(value) {
     this._userAddresses = value;
   }
 
@@ -85,7 +85,7 @@ export class AddressesMethodResponse extends MethodResponse {
     const address = new UserAddress();
     address.email = this.parseFieldValue(member.name);
     const members: Array<any> = member.value.struct.member;
-    members.forEach(member => {
+    members.forEach((member) => {
       switch (member.name._text) {
         case "rating":
           address.imageRating = Number(this.parseFieldValue(member.value));
@@ -136,11 +136,11 @@ export class UserImagesMethodResponse extends MethodResponse {
       const rawUserImages = this.json.methodResponse.params.param.value.struct
         .member;
       const self = this;
-      this.userImages = rawUserImages.map(function(img: any) {
+      this.userImages = rawUserImages.map(function (img: any) {
         const userImage = new UserImage();
         userImage.name = self.parseFieldValue(img.name);
         const members: Array<any> = img.value.array.data.value;
-        members.forEach(function(member) {
+        members.forEach(function (member) {
           const memberValue = member.string._text;
           if (isNaN(memberValue)) {
             userImage.url = memberValue;
@@ -165,7 +165,7 @@ export class UseUserImageMethodResponse extends MethodResponse {
       const { member } = this.json.methodResponse.params.param.value.struct;
       const _members = Array.isArray(member) ? member : [member];
       this.success = _members.every(
-        member => Number(this.parseFieldValue(member.value)) == 1
+        (member) => Number(this.parseFieldValue(member.value)) == 1
       );
     }
   }
@@ -182,7 +182,7 @@ export class RemoveImageMethodResponse extends MethodResponse {
       const { member } = this.json.methodResponse.params.param.value.struct;
       const _members = Array.isArray(member) ? member : [member];
       this.success = _members.every(
-        member => Number(this.parseFieldValue(member.value)) == 1
+        (member) => Number(this.parseFieldValue(member.value)) == 1
       );
     }
   }
@@ -214,7 +214,7 @@ export class TestMethodResponse extends MethodResponse {
     if (this.json && !this.json.methodResponse.fault) {
       const {
         name,
-        value
+        value,
       } = this.json.methodResponse.params.param.value.struct.member;
       this.response = Number(this.parseFieldValue(value));
     }

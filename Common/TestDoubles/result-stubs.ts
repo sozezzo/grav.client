@@ -4,11 +4,11 @@ import {
   UserImagesMethodResponse,
   SaveImageUrlMethodResponse,
   UseUserImageMethodResponse,
-  TestMethodResponse
+  TestMethodResponse,
 } from "../../Domain/method-responses";
 
 import * as stub from "./json-response-stubs";
-import { primaryImageName } from './primitive-stubs';
+import { primaryImageName } from "./primitive-stubs";
 
 import { Result } from "../result";
 
@@ -47,7 +47,7 @@ export function UserImagesResultSingleImage() {
   response.json = stub.userImagesJsonResponse;
   response.parseMembers();
   response.userImages = response.userImages.filter(
-    image => image.name == primaryImageName
+    (image) => image.name == primaryImageName
   );
   return Promise.resolve(Result.Ok(response));
 }
