@@ -55,11 +55,11 @@ client.test().then(data => ... );
 | `client.addresses()` | list account email addresses |
 | `client.userImages()` | list account images |
 | `client.saveImage(imageFilePath)` | upload an image |
-| `client.saveEncodedImage(base64String,mimetype)` | upload an encoded image |
+| `client.saveEncodedImage(base64String)` | upload an encoded image |
 | `client.saveImageUrl(imageUrl)` | upload image from URL |
 | `client.useUserImage(imageName)` | update primary image |
 | `client.removeImage()` | remove primary image |
-| `client.deleteUserImage(imageName)` | delete an image forever |
+| `client.deleteUserImage(imageName)` | delete an image |
 | `client.test()` | sanity check |
 
 

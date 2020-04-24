@@ -12,4 +12,3 @@ export const primaryImageName = "0fa6e24a27f544abb2536746b5b9d5f0";
 export const imageUrl = "https://via.placeholder.com/150";
 export const password = "letmein";
 export const imageData = "c2hvcnQ=";
-export const mimeType = "jpg";
