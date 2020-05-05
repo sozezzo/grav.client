@@ -1,3 +1,4 @@
+// TODO: remove + fix breaking changes
 export class Result<T> {
   constructor(DidSucceed: Boolean, ErrorMessage: string = "") {
     this.didSucceed = DidSucceed;

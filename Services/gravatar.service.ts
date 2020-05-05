@@ -47,17 +47,16 @@ export class GravatarService {
   }
   public async exists(
     ...emailAddresses: string[]
-  ): Promise<Result<ExistsMethodResponse>> {
+  ): Promise<ExistsMethodResponse> {
     const addresses = emailAddresses.length ? emailAddresses : [this.email];
     const hashes = addresses.map(this.hashEmail);
     const methodCall = new ExistsMethodCall(hashes, this._password);
     const response = await this.http.rpc(methodCall.xml);
     if (response.ok) {
       const xmlResponse = await response.text();
-      const methodResponse = new ExistsMethodResponse(xmlResponse);
-      return Result.Ok(methodResponse);
+      return new ExistsMethodResponse(xmlResponse);
     } else {
-      return Result.Fail(response.statusText);
+      throw response.statusText;
     }
   }
   public async addresses(): Promise<Result<AddressesMethodResponse>> {

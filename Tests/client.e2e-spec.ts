@@ -32,7 +32,7 @@ describe("GravatarClient", () => {
 
   it("should check if account exists", async () => {
     const result = await client.exists();
-    expect(result.DidSucceed).toBe(true);
+    expect(result.success).toBe(true);
   });
   it("should get account email addresses", async () => {
     const result = await client.addresses();

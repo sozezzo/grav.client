@@ -17,7 +17,7 @@ export function ExistsResult() {
   response.json = stub.existsJsonResponse;
   response.parseMembers();
   response.success = true;
-  return Promise.resolve(Result.Ok(response));
+  return Promise.resolve(response);
 }
 
 export function ExistsResultMultiple() {
