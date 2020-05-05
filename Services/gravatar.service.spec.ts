@@ -58,13 +58,13 @@ describe("GravatarService", () => {
     const responseStub = stub.UserImagesHttpResponse();
     service.http = mockHttpShim(responseStub);
     const result = await service.userImages();
-    expect(result.DidSucceed).toBe(true);
+    expect(result.userImages).toBeDefined();
   });
   it("should get single user image", async () => {
     const responseStub = stub.UserImageHttpResponse();
     service.http = mockHttpShim(responseStub);
     const result = await service.userImages();
-    expect(result.DidSucceed).toBe(true);
+    expect(result.userImages.length).toBe(1);
   });
   it("should save image file", async () => {
     const responseStub = stub.SaveImageHttpResponse();

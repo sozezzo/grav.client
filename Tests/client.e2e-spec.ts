@@ -42,7 +42,7 @@ describe("GravatarClient", () => {
   });
   it("should get user images", async () => {
     const result = await client.userImages();
-    expect(result.DidSucceed).toBe(true);
+    expect(result.userImages).toBeDefined();
   });
   it("should upload image file", async () => {
     const imgPath = join(__dirname, "../Common/Assets/bubba.jpg");

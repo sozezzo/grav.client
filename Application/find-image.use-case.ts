@@ -10,7 +10,7 @@ export class FindImageUseCase implements UseCase<UserImage | undefined> {
   execute(): Promise<UserImage | undefined> {
     return this.client
       .userImages()
-      .then((result) => result.Value.userImages)
+      .then((result) => result.userImages)
       .then((userImages) =>
         userImages.find((image) => image.name == this.imageName)
       );

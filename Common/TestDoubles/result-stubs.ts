@@ -36,17 +36,17 @@ export function AddressesResult() {
 }
 
 export function UserImagesResult() {
-  const response = new UserImagesMethodResponse("");
+  const response = new UserImagesMethodResponse(xml.userImagesXml);
   response.json = stub.userImagesJsonResponse;
   response.parseMembers();
-  return Promise.resolve(Result.Ok(response));
+  return Promise.resolve(response);
 }
 
 export function UserImagesResultSingleImage() {
-  const response = new UserImagesMethodResponse("");
+  const response = new UserImagesMethodResponse(xml.userImagesSingleXml);
   response.json = stub.userImagesSingleJsonResponse;
   response.parseMembers();
-  return Promise.resolve(Result.Ok(response));
+  return Promise.resolve(response);
 }
 
 export function SaveImageUrlResult() {

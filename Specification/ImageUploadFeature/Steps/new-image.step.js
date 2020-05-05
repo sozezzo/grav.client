@@ -33,7 +33,7 @@ Then("an image url is uploaded", async function() {
 
 Then("the image file is found", async function() {
   const result = await this.client.userImages();
-  _userImages = result.Value.userImages;
+  _userImages = result.userImages;
   const image = _userImages.find(image => image.name == imageNames.bubba);
   expect(image).toBeDefined();
 });

@@ -16,7 +16,7 @@ export class LoadNextImageUseCase implements UseCase<UserImage> {
       .execute()
       .then(async (primaryImage) => {
         const result = await this.client.userImages();
-        _userImages = result.Value.userImages;
+        _userImages = result.userImages;
         return _userImages.findIndex(
           (image) => image.name == primaryImage.name
         );
