@@ -8,7 +8,7 @@ import {
 } from "../../Domain/method-responses";
 
 import * as stub from "./json-response-stubs";
-import { primaryImageName } from "./primitive-stubs";
+import * as xml from "./xml-response-stubs";
 
 import { Result } from "../result";
 
@@ -29,10 +29,10 @@ export function ExistsResultMultiple() {
 }
 
 export function AddressesResult() {
-  const response = new AddressesMethodResponse("");
+  const response = new AddressesMethodResponse(xml.addressesXml);
   response.json = stub.addressesJsonResponse;
   response.parseMembers();
-  return Promise.resolve(Result.Ok(response));
+  return Promise.resolve(response);
 }
 
 export function UserImagesResult() {

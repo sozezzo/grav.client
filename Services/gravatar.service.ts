@@ -59,15 +59,14 @@ export class GravatarService {
       throw response.statusText;
     }
   }
-  public async addresses(): Promise<Result<AddressesMethodResponse>> {
+  public async addresses(): Promise<AddressesMethodResponse> {
     const methodCall = new AddressesMethodCall(this._password);
     const response = await this.http.rpc(methodCall.xml);
     if (response.ok) {
       const xmlResponse = await response.text();
-      const methodResponse = new AddressesMethodResponse(xmlResponse);
-      return Result.Ok(methodResponse);
+      return new AddressesMethodResponse(xmlResponse);
     } else {
-      return Result.Fail(response.statusText);
+      throw response.statusText;
     }
   }
   public async userImages(): Promise<Result<UserImagesMethodResponse>> {

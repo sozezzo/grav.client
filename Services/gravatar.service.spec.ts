@@ -46,13 +46,13 @@ describe("GravatarService", () => {
     const responseStub = stub.AddressesHttpResponse(service.emailHash);
     service.http = mockHttpShim(responseStub);
     const result = await service.addresses();
-    expect(result.DidSucceed).toBe(true);
+    expect(result.userAddresses).toBeDefined();
   });
   it("should get user email addresses", async () => {
     const responseStub = stub.AddressesMultipleHttpResponse(email, email2);
     service.http = mockHttpShim(responseStub);
     const result = await service.addresses();
-    expect(result.DidSucceed).toBe(true);
+    expect(result.userAddresses).toBeDefined();
   });
   it("should get user images", async () => {
     const responseStub = stub.UserImagesHttpResponse();

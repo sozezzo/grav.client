@@ -8,7 +8,7 @@ export class GetPrimaryImageUseCase implements UseCase<UserImage> {
   execute(): Promise<UserImage> {
     return this.client
       .addresses()
-      .then((result) => result.Value.userAddresses)
+      .then((result) => result.userAddresses)
       .then((addresses) => {
         return addresses.find(
           (address) => address.email == this.client.email

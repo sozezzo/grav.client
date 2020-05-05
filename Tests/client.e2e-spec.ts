@@ -38,7 +38,7 @@ describe("GravatarClient", () => {
   });
   it("should get account email addresses", async () => {
     const result = await client.addresses();
-    expect(result.DidSucceed).toBe(true);
+    expect(result.userAddresses).toBeDefined();
   });
   it("should get user images", async () => {
     const result = await client.userImages();
