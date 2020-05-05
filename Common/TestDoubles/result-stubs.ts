@@ -67,5 +67,5 @@ export function TestResult() {
   const response = new TestMethodResponse("");
   response.json = stub.testJsonResponse;
   response.parseMembers();
-  return Promise.resolve(Result.Ok(response));
+  return Promise.resolve(response);
 }

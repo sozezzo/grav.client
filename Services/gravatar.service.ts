@@ -186,15 +186,14 @@ export class GravatarService {
       return Result.Fail(response.statusText);
     }
   }
-  public async test(): Promise<Result<TestMethodResponse>> {
+  public async test(): Promise<TestMethodResponse> {
     const methodCall = new TestMethodCall(this._password);
     const response = await this.http.rpc(methodCall.xml);
     if (response.ok) {
       const xmlResponse = await response.text();
-      const methodResponse = new TestMethodResponse(xmlResponse);
-      return Result.Ok(methodResponse);
+      return new TestMethodResponse(xmlResponse);
     } else {
-      return Result.Fail(response.statusText);
+      throw response.statusText;
     }
   }
 }

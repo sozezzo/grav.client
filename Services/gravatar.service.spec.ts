@@ -122,7 +122,7 @@ describe("GravatarService", () => {
     const responseStub = stub.TestHttpResponse();
     service.http = mockHttpShim(responseStub);
     const result = await service.test();
-    expect(result.DidSucceed).toBe(true);
+    expect(result.response).toBeDefined();
   });
   it("should throw", async () => {
     let error: Error = null as any;

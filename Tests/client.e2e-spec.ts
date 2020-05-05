@@ -31,8 +31,8 @@ describe("GravatarClient", () => {
   });
 
   it("should check if account exists", async () => {
-    const result = await client.exists();
-    expect(result.success).toBe(true);
+    const response = await client.exists();
+    expect(response.success).toBe(true);
   });
   it("should get account email addresses", async () => {
     const result = await client.addresses();
@@ -74,7 +74,7 @@ describe("GravatarClient", () => {
     expect(result.DidSucceed).toBe(true);
   });
   it("should do sanity check", async () => {
-    const result = await client.test();
-    expect(result.DidSucceed).toBe(true);
+    const response = await client.test();
+    expect(response.response).toBeDefined();
   });
 });

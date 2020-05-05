@@ -5,10 +5,10 @@ export class VerifyAccountUseCase implements UseCase<boolean> {
   public client: GravatarClient;
 
   async execute(): Promise<boolean> {
-    const existsResult = await this.client.exists();
-    const testResult = await this.client.test();
-    const emailExists = existsResult.success;
-    const sanityCheckPasses = !!testResult.Value.response;
+    const existsResponse = await this.client.exists();
+    const testResponse = await this.client.test();
+    const emailExists = existsResponse.success;
+    const sanityCheckPasses = !!testResponse.response;
     return emailExists && sanityCheckPasses;
   }
 }
