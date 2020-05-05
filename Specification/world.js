@@ -5,7 +5,6 @@ const {
   LoadNextImageUseCase, 
   LoadPreviousImageUseCase,
   SetNewImageUseCase,
-  SignInUseCase,
 } = require('../Release/Presentation/index');
 
 config({ path: 'Tests/.env' });
@@ -21,11 +20,9 @@ module.exports = class World {
     this.loadNextImageUseCase = new LoadNextImageUseCase();
     this.loadPreviousImageUseCase = new LoadPreviousImageUseCase();
     this.setNewImageUseCase = new SetNewImageUseCase();
-    this.signInUseCase = new SignInUseCase();
     this.getPrimaryImageUseCase.client = newClient();
     this.loadNextImageUseCase.client = newClient();
     this.loadPreviousImageUseCase.client = newClient();
     this.setNewImageUseCase.client = newClient();
-    this.signInUseCase.client = newClient();
   }
 };
