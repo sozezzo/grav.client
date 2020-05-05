@@ -18,7 +18,6 @@ import {
 
 import * as stub from "../Common/TestDoubles/http-response-stubs";
 import { mockHttpShim } from "../Common/TestDoubles/mock-factory";
-import { ImageRating } from "../Presentation";
 
 describe("GravatarService", () => {
   let service: GravatarService;
@@ -57,6 +56,12 @@ describe("GravatarService", () => {
   });
   it("should get user images", async () => {
     const responseStub = stub.UserImagesHttpResponse();
+    service.http = mockHttpShim(responseStub);
+    const result = await service.userImages();
+    expect(result.DidSucceed).toBe(true);
+  });
+  it("should get single user image", async () => {
+    const responseStub = stub.UserImageHttpResponse();
     service.http = mockHttpShim(responseStub);
     const result = await service.userImages();
     expect(result.DidSucceed).toBe(true);

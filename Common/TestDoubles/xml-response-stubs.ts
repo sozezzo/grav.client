@@ -10,6 +10,7 @@ export * from "../Assets/Xml/grav.saveEncodedImage.xml";
 export * from "../Assets/Xml/grav.saveImage.xml";
 export * from "../Assets/Xml/grav.saveUrl.xml";
 export * from "../Assets/Xml/grav.userImages.xml";
+export * from "../Assets/Xml/grav.userImages.single.xml";
 export * from "../Assets/Xml/grav.useUserImage.xml";
 export * from "../Assets/Xml/grav.useUserImage.multiple.xml";
 export * from "../Assets/Xml/grav.test.xml";

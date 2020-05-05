@@ -44,11 +44,8 @@ export function UserImagesResult() {
 
 export function UserImagesResultSingleImage() {
   const response = new UserImagesMethodResponse("");
-  response.json = stub.userImagesJsonResponse;
+  response.json = stub.userImagesSingleJsonResponse;
   response.parseMembers();
-  response.userImages = response.userImages.filter(
-    (image) => image.name == primaryImageName
-  );
   return Promise.resolve(Result.Ok(response));
 }
 

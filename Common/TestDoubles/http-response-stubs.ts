@@ -70,6 +70,14 @@ export function AddressesMultipleHttpResponse(email1: string, email2: string) {
   } as Response);
 }
 
+export function UserImageHttpResponse() {
+  return Promise.resolve({
+    ok: true,
+    status: 200,
+    text: () => Promise.resolve(stub.userImagesSingleXml),
+  } as Response);
+}
+
 export function UserImagesHttpResponse() {
   return Promise.resolve({
     ok: true,
