@@ -82,9 +82,9 @@ export class GravatarService {
   public async saveImage(
     imageFilePath: string,
     imageRating = ImageRating.G
-  ): Promise<Result<SaveImageUrlMethodResponse>> {
+  ): Promise<SaveImageUrlMethodResponse> {
     if (!existsSync(imageFilePath)) {
-      return Result.Fail(`file not found: ${imageFilePath}`);
+      throw `file not found: ${imageFilePath}`;
     }
     const bitmap = readFileSync(imageFilePath);
     const imageData = Buffer.from(bitmap).toString("base64");
@@ -96,16 +96,15 @@ export class GravatarService {
     const response = await this.http.rpc(methodCall.xml);
     if (response.ok) {
       const xmlResponse = await response.text();
-      const methodResponse = new SaveImageUrlMethodResponse(xmlResponse);
-      return Result.Ok(methodResponse);
+      return new SaveImageUrlMethodResponse(xmlResponse);
     } else {
-      return Result.Fail(response.statusText);
+      throw response.statusText;
     }
   }
   public async saveEncodedImage(
     base64String: string,
     imageRating = ImageRating.G
-  ): Promise<Result<SaveImageUrlMethodResponse>> {
+  ): Promise<SaveImageUrlMethodResponse> {
     const methodCall = new SaveDataMethodCall(
       base64String,
       imageRating,
@@ -114,16 +113,15 @@ export class GravatarService {
     const response = await this.http.rpc(methodCall.xml);
     if (response.ok) {
       const xmlResponse = await response.text();
-      const methodResponse = new SaveImageUrlMethodResponse(xmlResponse);
-      return Result.Ok(methodResponse);
+      return new SaveImageUrlMethodResponse(xmlResponse);
     } else {
-      return Result.Fail(response.statusText);
+      throw response.statusText;
     }
   }
   public async saveImageUrl(
     imageUrl: string,
     imageRating = ImageRating.G
-  ): Promise<Result<SaveImageUrlMethodResponse>> {
+  ): Promise<SaveImageUrlMethodResponse> {
     const methodCall = new SaveImageUrlMethodCall(
       imageUrl,
       imageRating,
@@ -132,10 +130,9 @@ export class GravatarService {
     const response = await this.http.rpc(methodCall.xml);
     if (response.ok) {
       const xmlResponse = await response.text();
-      const methodResponse = new SaveImageUrlMethodResponse(xmlResponse);
-      return Result.Ok(methodResponse);
+      return new SaveImageUrlMethodResponse(xmlResponse);
     } else {
-      return Result.Fail(response.statusText);
+      throw response.statusText;
     }
   }
   public async useUserImage(

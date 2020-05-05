@@ -12,8 +12,8 @@ let _userImages = [];
 When("an image file is uploaded", async function() {
   const imagePath = join(__dirname, '../../../Common/Assets/bubba.jpg');
   const result = await this.client.saveImage(imagePath);
-  imageNames.bubba = result.Value.imageName;
-  expect(result.DidSucceed).toBe(true);
+  imageNames.bubba = result.imageName;
+  expect(result.imageName).toBeDefined();
 });
 
 Then("an encoded image is uploaded", async function() {
@@ -21,14 +21,14 @@ Then("an encoded image is uploaded", async function() {
   const bitmap = readFileSync(imgPath);
   const imageData = Buffer.from(bitmap).toString('base64');
   const result = await this.client.saveEncodedImage(imageData, 'jpeg');
-  imageNames.gump = result.Value.imageName;
-  expect(result.DidSucceed).toBe(true);
+  imageNames.gump = result.imageName;
+  expect(result.imageName).toBeDefined();
 });
 
 Then("an image url is uploaded", async function() {
   const result = await this.client.saveImageUrl(imageUrl);
-  imageNames.shrimp = result.Value.imageName;
-  expect(result.DidSucceed).toBe(true);
+  imageNames.shrimp = result.imageName;
+  expect(result.imageName).toBeDefined();
 });
 
 Then("the image file is found", async function() {

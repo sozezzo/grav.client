@@ -53,7 +53,7 @@ export function SaveImageUrlResult() {
   const response = new SaveImageUrlMethodResponse("");
   response.json = stub.saveImageUrlResponse;
   response.parseMembers();
-  return Promise.resolve(Result.Ok(response));
+  return Promise.resolve(response);
 }
 
 export function UseUserImageResult() {

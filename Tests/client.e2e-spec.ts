@@ -47,21 +47,21 @@ describe("GravatarClient", () => {
   it("should upload image file", async () => {
     const imgPath = join(__dirname, "../Common/Assets/bubba.jpg");
     const result = await client.saveImage(imgPath);
-    imageNames.bubba = result.Value.imageName;
-    expect(result.DidSucceed).toBe(true);
+    imageNames.bubba = result.imageName;
+    expect(result.imageName).toBeDefined();
   });
   it("should upload encoded image", async () => {
     const imgPath = join(__dirname, "../Common/Assets/gump.jpg");
     const bitmap = readFileSync(imgPath);
     const imageData = Buffer.from(bitmap).toString("base64");
     const result = await client.saveEncodedImage(imageData);
-    imageNames.gump = result.Value.imageName;
-    expect(result.DidSucceed).toBe(true);
+    imageNames.gump = result.imageName;
+    expect(result.imageName).toBeDefined();
   });
   it("should save image url", async () => {
     const result = await client.saveImageUrl(imageUrl);
-    imageNames.shrimp = result.Value.imageName;
-    expect(result.DidSucceed).toBe(true);
+    imageNames.shrimp = result.imageName;
+    expect(result.imageName).toBeDefined();
   });
   it("should remove primary image", async () => {
     const result = await client.removeImage();

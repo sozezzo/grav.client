@@ -71,7 +71,7 @@ describe("GravatarService", () => {
     const imageFilePath = join(__dirname, "../Common/Assets/bubba.jpg");
     service.http = mockHttpShim(responseStub);
     const result = await service.saveImage(imageFilePath);
-    expect(result.DidSucceed).toBe(true);
+    expect(result.imageName).toBeDefined();
   });
   it("should save encoded image", async () => {
     const responseStub = stub.SaveEncodedImageHttpResponse();
@@ -80,13 +80,13 @@ describe("GravatarService", () => {
     const bitmap = readFileSync(imgPath);
     const imageData = Buffer.from(bitmap).toString("base64");
     const result = await service.saveEncodedImage(imageData);
-    expect(result.DidSucceed).toBe(true);
+    expect(result.imageName).toBeDefined();
   });
   it("should save image url", async () => {
     const responseStub = stub.SaveImageUrlHttpResponse();
     service.http = mockHttpShim(responseStub);
     const result = await service.saveImageUrl(imageUrl);
-    expect(result.DidSucceed).toBe(true);
+    expect(result.imageName).toBeDefined();
   });
   it("should use user image", async () => {
     const responseStub = stub.UseUserImageHttpResponse(email);

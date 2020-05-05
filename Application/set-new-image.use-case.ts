@@ -1,6 +1,5 @@
 import { UseCase } from "./use-case.interface";
 import { GravatarClient, ImageRating } from "../Presentation";
-import { Result } from "../Common/result";
 import { SaveImageUrlMethodResponse } from "../Domain/method-responses";
 
 export class SetNewImageUseCase implements UseCase<string> {
@@ -24,8 +23,8 @@ export class SetNewImageUseCase implements UseCase<string> {
     throw new Error("Please provide an image URL or file path");
   }
 
-  private _handleResult(result: Result<SaveImageUrlMethodResponse>) {
-    const { imageName } = result.Value;
+  private _handleResult(result: SaveImageUrlMethodResponse) {
+    const { imageName } = result;
     this.client.useUserImage(imageName);
     return imageName;
   }
