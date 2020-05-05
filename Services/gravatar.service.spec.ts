@@ -137,32 +137,38 @@ describe("GravatarService", () => {
     }
   });
   
-  // interface TestData {
-  //   methodName: string;
-  //   args: Array<string>;
-  // }
-  // it("should fail", () => {
-  //   const validImageFilePath = join(__dirname, "../Common/Assets/bubba.jpg");
-  //   [
-  //     { methodName: "exists", args: [] },
-  //     { methodName: "addresses", args: [] },
-  //     { methodName: "userImages", args: [] },
-  //     { methodName: "saveImage", args: [fakeImageFilePath] },
-  //     { methodName: "saveImage", args: [validImageFilePath] },
-  //     { methodName: "saveEncodedImage", args: [imageData] },
-  //     { methodName: "saveImageUrl", args: [imageUrl] },
-  //     { methodName: "useUserImage", args: [imageName] },
-  //     { methodName: "removeImage", args: [] },
-  //     { methodName: "deleteUserImage", args: [imageName] },
-  //     { methodName: "test", args: [] },
-  //   ].forEach(async (row) => {
-  //     const testData: TestData = row as TestData;
-  //     const responseStub = stub.BadRequestHttpResponse(errorMessage);
-  //     const httpShim = mockHttpShim(responseStub);
-  //     service.http = httpShim;
-  //     const method = (service as any)[testData.methodName].bind(service);
-  //     const response = await method(...testData.args);
-  //     expect(response.DidFail).toBe(true);
-  //   });
-  // });
+  interface TestData {
+    methodName: string;
+    args: Array<string>;
+  }
+  it("should fail", () => {
+    const validImageFilePath = join(__dirname, "../Common/Assets/bubba.jpg");
+    [
+      { methodName: "exists", args: [] },
+      { methodName: "addresses", args: [] },
+      { methodName: "userImages", args: [] },
+      { methodName: "saveImage", args: [fakeImageFilePath] },
+      { methodName: "saveImage", args: [validImageFilePath] },
+      { methodName: "saveEncodedImage", args: [imageData] },
+      { methodName: "saveImageUrl", args: [imageUrl] },
+      { methodName: "useUserImage", args: [imageName] },
+      { methodName: "removeImage", args: [] },
+      { methodName: "deleteUserImage", args: [imageName] },
+      { methodName: "test", args: [] },
+    ].forEach(async (row) => {
+      const testData: TestData = row as TestData;
+      const responseStub = stub.BadRequestHttpResponse(errorMessage);
+      const httpShim = mockHttpShim(responseStub);
+      service.http = httpShim;
+      const method = (service as any)[testData.methodName].bind(service);
+      let error: Error = null as any;
+      try {
+        const response = await method(...testData.args);
+      } catch (ex) {
+        error = ex as Error;
+      } finally {
+        expect(error).toBeDefined();
+      }
+    });
+  });
 });
