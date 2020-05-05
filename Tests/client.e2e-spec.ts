@@ -69,7 +69,7 @@ describe("GravatarClient", () => {
   });
   it("should update primary image", async () => {
     const result = await client.useUserImage(originalPrimaryImage.name || imageNames.shrimp);
-    expect(result.DidSucceed).toBe(true);
+    expect(result.success).toBe(true);
   });
   it("should delete image", async () => {
     const result = await client.deleteUserImage(imageNames.shrimp);

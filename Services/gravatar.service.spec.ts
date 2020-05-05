@@ -92,13 +92,13 @@ describe("GravatarService", () => {
     const responseStub = stub.UseUserImageHttpResponse(email);
     service.http = mockHttpShim(responseStub);
     const result = await service.useUserImage(imageName);
-    expect(result.DidSucceed).toBe(true);
+    expect(result.success).toBe(true);
   });
   it("should use user image for multiple email addresses", async () => {
     const responseStub = stub.UseUserImageMultipleHttpResponse(email, email2);
     service.http = mockHttpShim(responseStub);
     const result = await service.useUserImage(imageName, email, email2);
-    expect(result.DidSucceed).toBe(true);
+    expect(result.success).toBe(true);
   });
   it("should remove image", async () => {
     const responseStub = stub.RemoveImageHttpResponse(email);

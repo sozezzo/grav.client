@@ -141,7 +141,7 @@ export class GravatarService {
   public async useUserImage(
     imageName: string,
     ...emailAddresses: string[]
-  ): Promise<Result<UseUserImageMethodResponse>> {
+  ): Promise<UseUserImageMethodResponse> {
     const addresses = emailAddresses.length ? emailAddresses : [this.email];
     const methodCall = new UseUserImageMethodCall(
       imageName,
@@ -151,10 +151,9 @@ export class GravatarService {
     const response = await this.http.rpc(methodCall.xml);
     if (response.ok) {
       const xmlResponse = await response.text();
-      const methodResponse = new UseUserImageMethodResponse(xmlResponse);
-      return Result.Ok(methodResponse);
+      return new UseUserImageMethodResponse(xmlResponse);
     } else {
-      return Result.Fail(response.statusText);
+      throw response.statusText;
     }
   }
   public async removeImage(

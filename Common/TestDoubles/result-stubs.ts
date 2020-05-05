@@ -60,7 +60,7 @@ export function UseUserImageResult() {
   const response = new UseUserImageMethodResponse("");
   response.json = stub.useUserImageJsonResponse;
   response.parseMembers();
-  return Promise.resolve(Result.Ok(response));
+  return Promise.resolve(response);
 }
 
 export function TestResult() {
