@@ -155,29 +155,27 @@ export class GravatarService {
   }
   public async removeImage(
     ...emailAddresses: string[]
-  ): Promise<Result<RemoveImageMethodResponse>> {
+  ): Promise<RemoveImageMethodResponse> {
     const addresses = emailAddresses.length ? emailAddresses : [this.email];
     const methodCall = new RemoveImageMethodCall(addresses, this._password);
     const response = await this.http.rpc(methodCall.xml);
     if (response.ok) {
       const xmlResponse = await response.text();
-      const methodResponse = new RemoveImageMethodResponse(xmlResponse);
-      return Result.Ok(methodResponse);
+      return new RemoveImageMethodResponse(xmlResponse);
     } else {
-      return Result.Fail(response.statusText);
+      throw response.statusText;
     }
   }
   public async deleteUserImage(
     imageName: string
-  ): Promise<Result<DeleteUserImageMethodResponse>> {
+  ): Promise<DeleteUserImageMethodResponse> {
     const methodCall = new DeleteUserImageMethodCall(imageName, this._password);
     const response = await this.http.rpc(methodCall.xml);
     if (response.ok) {
       const xmlResponse = await response.text();
-      const methodResponse = new DeleteUserImageMethodResponse(xmlResponse);
-      return Result.Ok(methodResponse);
+      return new DeleteUserImageMethodResponse(xmlResponse);
     } else {
-      return Result.Fail(response.statusText);
+      throw response.statusText;
     }
   }
   public async test(): Promise<TestMethodResponse> {

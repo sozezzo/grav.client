@@ -104,19 +104,19 @@ describe("GravatarService", () => {
     const responseStub = stub.RemoveImageHttpResponse(email);
     service.http = mockHttpShim(responseStub);
     const result = await service.removeImage();
-    expect(result.DidSucceed).toBe(true);
+    expect(result.success).toBe(true);
   });
   it("should remove image for multiple email addresses", async () => {
     const responseStub = stub.RemoveImageMultipleHttpResponse(email, email2);
     service.http = mockHttpShim(responseStub);
     const result = await service.removeImage(email, email2);
-    expect(result.DidSucceed).toBe(true);
+    expect(result.success).toBe(true);
   });
   it("should delete user image", async () => {
     const responseStub = stub.DeleteUserImageHttpResponse();
     service.http = mockHttpShim(responseStub);
     const result = await service.deleteUserImage(imageName);
-    expect(result.DidSucceed).toBe(true);
+    expect(result.success).toBe(true);
   });
   it("should do sanity check", async () => {
     const responseStub = stub.TestHttpResponse();

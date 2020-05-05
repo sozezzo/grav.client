@@ -65,7 +65,7 @@ describe("GravatarClient", () => {
   });
   it("should remove primary image", async () => {
     const result = await client.removeImage();
-    expect(result.DidSucceed).toBe(true);
+    expect(result.success).toBe(true);
   });
   it("should update primary image", async () => {
     const result = await client.useUserImage(originalPrimaryImage.name || imageNames.shrimp);
@@ -73,7 +73,7 @@ describe("GravatarClient", () => {
   });
   it("should delete image", async () => {
     const result = await client.deleteUserImage(imageNames.shrimp);
-    expect(result.DidSucceed).toBe(true);
+    expect(result.success).toBe(true);
   });
   it("should do sanity check", async () => {
     const response = await client.test();
