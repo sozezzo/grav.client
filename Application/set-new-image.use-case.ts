@@ -13,18 +13,18 @@ export class SetNewImageUseCase implements UseCase<string> {
     if (this.imageFilePath) {
       return this.client
         .saveImage(this.imageFilePath)
-        .then(this._handleResult.bind(this));
+        .then(this._handleResponse.bind(this));
     }
     if (this.imageUrl) {
       return this.client
         .saveImageUrl(this.imageUrl)
-        .then(this._handleResult.bind(this));
+        .then(this._handleResponse.bind(this));
     }
     throw new Error("Please provide an image URL or file path");
   }
 
-  private _handleResult(result: SaveImageUrlMethodResponse) {
-    const { imageName } = result;
+  private _handleResponse(response: SaveImageUrlMethodResponse) {
+    const { imageName } = response;
     this.client.useUserImage(imageName);
     return imageName;
   }

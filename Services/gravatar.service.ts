@@ -1,6 +1,5 @@
 import { Md5 } from "ts-md5/dist/md5";
 import { HttpShim } from "../Infrastructure/http-shim";
-import { Result } from "../Common/result";
 import { ImageRating } from "../Domain/image-rating";
 import { readFileSync, existsSync } from "fs";
 

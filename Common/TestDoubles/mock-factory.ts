@@ -9,7 +9,7 @@ import nock from "nock";
 
 import { origin } from "../../Infrastructure/http-shim";
 
-import * as stub from "./result-stubs";
+import * as stub from "./response-stubs";
 
 import { UseCaseType } from "../../Application/use-case-type";
 
@@ -30,25 +30,25 @@ export function mockClient(
   let client: GravatarClient = new GravatarClient(email, password);
   switch (useCaseType) {
     case UseCaseType.FindImage:
-      spyOn(client, "userImages").and.returnValue(stub.UserImagesResult());
+      spyOn(client, "userImages").and.returnValue(stub.UserImagesResponse());
       return client;
     case UseCaseType.GetPrimaryImage:
-      spyOn(client, "addresses").and.returnValue(stub.AddressesResult());
+      spyOn(client, "addresses").and.returnValue(stub.AddressesResponse());
       return client;
     case UseCaseType.VerifyAccount:
-      spyOn(client, "exists").and.returnValue(stub.ExistsResult());
-      spyOn(client, "test").and.returnValue(stub.TestResult());
+      spyOn(client, "exists").and.returnValue(stub.ExistsResponse());
+      spyOn(client, "test").and.returnValue(stub.TestResponse());
       return client;
     case UseCaseType.LoadNextImage:
     case UseCaseType.LoadPreviousImage:
-      spyOn(client, "addresses").and.returnValue(stub.AddressesResult());
-      spyOn(client, "userImages").and.returnValue(stub.UserImagesResult());
-      spyOn(client, "useUserImage").and.returnValue(stub.UseUserImageResult());
+      spyOn(client, "addresses").and.returnValue(stub.AddressesResponse());
+      spyOn(client, "userImages").and.returnValue(stub.UserImagesResponse());
+      spyOn(client, "useUserImage").and.returnValue(stub.UseUserImageResponse());
       return client;
     case UseCaseType.SetNewImage:
-      spyOn(client, "saveImage").and.returnValue(stub.SaveImageUrlResult());
-      spyOn(client, "saveImageUrl").and.returnValue(stub.SaveImageUrlResult());
-      spyOn(client, "useUserImage").and.returnValue(stub.UseUserImageResult());
+      spyOn(client, "saveImage").and.returnValue(stub.SaveImageUrlResponse());
+      spyOn(client, "saveImageUrl").and.returnValue(stub.SaveImageUrlResponse());
+      spyOn(client, "useUserImage").and.returnValue(stub.UseUserImageResponse());
       return client;
     default:
       return client;
@@ -57,10 +57,10 @@ export function mockClient(
 
 export function mockClientHavingASingleImage() {
   let client: GravatarClient = new GravatarClient(email, password);
-  spyOn(client, "addresses").and.returnValue(stub.AddressesResult());
+  spyOn(client, "addresses").and.returnValue(stub.AddressesResponse());
   spyOn(client, "userImages").and.returnValue(
-    stub.UserImagesResultSingleImage()
+    stub.UserImagesResponseSingleImage()
   );
-  spyOn(client, "useUserImage").and.returnValue(stub.UseUserImageResult());
+  spyOn(client, "useUserImage").and.returnValue(stub.UseUserImageResponse());
   return client;
 }

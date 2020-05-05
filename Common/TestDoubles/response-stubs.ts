@@ -10,9 +10,7 @@ import {
 import * as stub from "./json-response-stubs";
 import * as xml from "./xml-response-stubs";
 
-import { Result } from "../result";
-
-export function ExistsResult() {
+export function ExistsResponse() {
   const response = new ExistsMethodResponse("");
   response.json = stub.existsJsonResponse;
   response.parseMembers();
@@ -20,50 +18,42 @@ export function ExistsResult() {
   return Promise.resolve(response);
 }
 
-export function ExistsResultMultiple() {
-  const response = new ExistsMethodResponse("");
-  response.json = stub.existsJsonResponseMultiple;
-  response.parseMembers();
-  response.success = true;
-  return Promise.resolve(Result.Ok(response));
-}
-
-export function AddressesResult() {
+export function AddressesResponse() {
   const response = new AddressesMethodResponse(xml.addressesXml);
   response.json = stub.addressesJsonResponse;
   response.parseMembers();
   return Promise.resolve(response);
 }
 
-export function UserImagesResult() {
+export function UserImagesResponse() {
   const response = new UserImagesMethodResponse(xml.userImagesXml);
   response.json = stub.userImagesJsonResponse;
   response.parseMembers();
   return Promise.resolve(response);
 }
 
-export function UserImagesResultSingleImage() {
+export function UserImagesResponseSingleImage() {
   const response = new UserImagesMethodResponse(xml.userImagesSingleXml);
   response.json = stub.userImagesSingleJsonResponse;
   response.parseMembers();
   return Promise.resolve(response);
 }
 
-export function SaveImageUrlResult() {
+export function SaveImageUrlResponse() {
   const response = new SaveImageUrlMethodResponse("");
   response.json = stub.saveImageUrlResponse;
   response.parseMembers();
   return Promise.resolve(response);
 }
 
-export function UseUserImageResult() {
+export function UseUserImageResponse() {
   const response = new UseUserImageMethodResponse("");
   response.json = stub.useUserImageJsonResponse;
   response.parseMembers();
   return Promise.resolve(response);
 }
 
-export function TestResult() {
+export function TestResponse() {
   const response = new TestMethodResponse("");
   response.json = stub.testJsonResponse;
   response.parseMembers();

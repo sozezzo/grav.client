@@ -11,29 +11,29 @@ let _userImages = [];
 
 When("an image file is uploaded", async function() {
   const imagePath = join(__dirname, '../../../Common/Assets/bubba.jpg');
-  const result = await this.client.saveImage(imagePath);
-  imageNames.bubba = result.imageName;
-  expect(result.imageName).toBeDefined();
+  const response = await this.client.saveImage(imagePath);
+  imageNames.bubba = response.imageName;
+  expect(response.imageName).toBeDefined();
 });
 
 Then("an encoded image is uploaded", async function() {
   const imgPath = join(__dirname, '../../../Common/Assets/gump.jpg');
   const bitmap = readFileSync(imgPath);
   const imageData = Buffer.from(bitmap).toString('base64');
-  const result = await this.client.saveEncodedImage(imageData, 'jpeg');
-  imageNames.gump = result.imageName;
-  expect(result.imageName).toBeDefined();
+  const response = await this.client.saveEncodedImage(imageData, 'jpeg');
+  imageNames.gump = response.imageName;
+  expect(response.imageName).toBeDefined();
 });
 
 Then("an image url is uploaded", async function() {
-  const result = await this.client.saveImageUrl(imageUrl);
-  imageNames.shrimp = result.imageName;
-  expect(result.imageName).toBeDefined();
+  const response = await this.client.saveImageUrl(imageUrl);
+  imageNames.shrimp = response.imageName;
+  expect(response.imageName).toBeDefined();
 });
 
 Then("the image file is found", async function() {
-  const result = await this.client.userImages();
-  _userImages = result.userImages;
+  const response = await this.client.userImages();
+  _userImages = response.userImages;
   const image = _userImages.find(image => image.name == imageNames.bubba);
   expect(image).toBeDefined();
 });
