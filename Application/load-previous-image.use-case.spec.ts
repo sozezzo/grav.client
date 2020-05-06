@@ -3,8 +3,10 @@ import { LoadPreviousImageUseCase } from "./load-previous-image.use-case";
 import {
   mockClient,
   mockClientHavingASingleImage,
+  mockClientHavingNoImages,
 } from "../Common/TestDoubles/mock-factory";
 import { UseCaseType } from "./use-case-type";
+import { NoImagesError } from "../Domain/no-images-error";
 
 describe("LoadPreviousImageUseCase", () => {
   let useCase: LoadPreviousImageUseCase;
@@ -23,5 +25,17 @@ describe("LoadPreviousImageUseCase", () => {
     useCase.client = mockClientHavingASingleImage();
     const previousImage = await useCase.execute();
     expect(previousImage).toBeDefined();
+  });
+
+  it("should throw with zero images", async () => {
+    useCase.client = mockClientHavingNoImages();
+    let error: any = null;
+    try {
+      await useCase.execute();
+    } catch (ex) {
+      error = ex;
+    } finally {
+      expect(error).toBeInstanceOf(NoImagesError);
+    }
   });
 });

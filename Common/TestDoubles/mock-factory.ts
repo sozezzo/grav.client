@@ -64,3 +64,13 @@ export function mockClientHavingASingleImage() {
   spyOn(client, "useUserImage").and.returnValue(stub.UseUserImageResponse());
   return client;
 }
+
+export function mockClientHavingNoImages() {
+  let client: GravatarClient = new GravatarClient(email, password);
+  spyOn(client, "addresses").and.returnValue(stub.AddressesResponse());
+  spyOn(client, "userImages").and.returnValue(
+    stub.UserImagesResponseNoImages()
+  );
+  spyOn(client, "useUserImage").and.returnValue(stub.UseUserImageResponse());
+  return client;
+}
