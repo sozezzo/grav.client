@@ -66,6 +66,12 @@ describe("GravatarService", () => {
     const response = await service.userImages();
     expect(response.userImages.length).toBe(1);
   });
+  it("should get empty image array", async () => {
+    const responseStub = stub.UserImagesNoneHttpResponse();
+    service.http = mockHttpShim(responseStub);
+    const response = await service.userImages();
+    expect(response.userImages.length).toBe(0);
+  });
   it("should save image file", async () => {
     const responseStub = stub.SaveImageHttpResponse();
     const imageFilePath = join(__dirname, "../Common/Assets/bubba.jpg");

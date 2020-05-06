@@ -133,6 +133,9 @@ export class UserImagesMethodResponse extends MethodResponse {
 
   public parseMembers() {
     if (this.json && !this.json.methodResponse.fault) {
+      if(this.json.methodResponse.params.param.value.array){
+        return this.userImages = [];
+      }
       const { member } = this.json.methodResponse.params.param.value.struct;
       const members = Array.isArray(member) ? member : [member];
       const self = this;
