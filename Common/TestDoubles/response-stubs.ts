@@ -32,8 +32,15 @@ export function UserImagesResponse() {
   return Promise.resolve(response);
 }
 
+export function UserImagesResponseNoImages() {
+  const response = new UserImagesMethodResponse(xml.userImagesNoneXml);
+  response.json = stub.userImagesNoneJsonResponse;
+  response.parseMembers();
+  return Promise.resolve(response);
+}
+
 export function UserImagesResponseSingleImage() {
-  const response = new UserImagesMethodResponse(xml.userImagesSingleXml);
+  const response = new UserImagesMethodResponse(xml.userImagesNoneXml);
   response.json = stub.userImagesSingleJsonResponse;
   response.parseMembers();
   return Promise.resolve(response);
