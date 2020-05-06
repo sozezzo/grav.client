@@ -19,7 +19,7 @@ import {
   AddressesMethodResponse,
   ExistsMethodResponse,
   UserImagesMethodResponse,
-  SaveImageUrlMethodResponse,
+  SaveImageMethodResponse,
   UseUserImageMethodResponse,
   RemoveImageMethodResponse,
   DeleteUserImageMethodResponse,
@@ -55,7 +55,7 @@ export class GravatarService {
       const xmlResponse = await response.text();
       return new ExistsMethodResponse(xmlResponse);
     } else {
-      throw response.statusText;
+      throw new Error(response.statusText);
     }
   }
   public async addresses(): Promise<AddressesMethodResponse> {
@@ -65,7 +65,7 @@ export class GravatarService {
       const xmlResponse = await response.text();
       return new AddressesMethodResponse(xmlResponse);
     } else {
-      throw response.statusText;
+      throw new Error(response.statusText);
     }
   }
   public async userImages(): Promise<UserImagesMethodResponse> {
@@ -75,15 +75,15 @@ export class GravatarService {
       const xmlResponse = await response.text();
       return new UserImagesMethodResponse(xmlResponse);
     } else {
-      throw response.statusText;
+      throw new Error(response.statusText);
     }
   }
   public async saveImage(
     imageFilePath: string,
     imageRating = ImageRating.G
-  ): Promise<SaveImageUrlMethodResponse> {
+  ): Promise<SaveImageMethodResponse> {
     if (!existsSync(imageFilePath)) {
-      throw `file not found: ${imageFilePath}`;
+      throw new Error(`file not found: ${imageFilePath}`);
     }
     const bitmap = readFileSync(imageFilePath);
     const imageData = Buffer.from(bitmap).toString("base64");
@@ -95,15 +95,15 @@ export class GravatarService {
     const response = await this.http.rpc(methodCall.xml);
     if (response.ok) {
       const xmlResponse = await response.text();
-      return new SaveImageUrlMethodResponse(xmlResponse);
+      return new SaveImageMethodResponse(xmlResponse);
     } else {
-      throw response.statusText;
+      throw new Error(response.statusText);
     }
   }
   public async saveEncodedImage(
     base64String: string,
     imageRating = ImageRating.G
-  ): Promise<SaveImageUrlMethodResponse> {
+  ): Promise<SaveImageMethodResponse> {
     const methodCall = new SaveDataMethodCall(
       base64String,
       imageRating,
@@ -112,15 +112,15 @@ export class GravatarService {
     const response = await this.http.rpc(methodCall.xml);
     if (response.ok) {
       const xmlResponse = await response.text();
-      return new SaveImageUrlMethodResponse(xmlResponse);
+      return new SaveImageMethodResponse(xmlResponse);
     } else {
-      throw response.statusText;
+      throw new Error(response.statusText);
     }
   }
   public async saveImageUrl(
     imageUrl: string,
     imageRating = ImageRating.G
-  ): Promise<SaveImageUrlMethodResponse> {
+  ): Promise<SaveImageMethodResponse> {
     const methodCall = new SaveImageUrlMethodCall(
       imageUrl,
       imageRating,
@@ -129,9 +129,9 @@ export class GravatarService {
     const response = await this.http.rpc(methodCall.xml);
     if (response.ok) {
       const xmlResponse = await response.text();
-      return new SaveImageUrlMethodResponse(xmlResponse);
+      return new SaveImageMethodResponse(xmlResponse);
     } else {
-      throw response.statusText;
+      throw new Error(response.statusText);
     }
   }
   public async useUserImage(
@@ -149,7 +149,7 @@ export class GravatarService {
       const xmlResponse = await response.text();
       return new UseUserImageMethodResponse(xmlResponse);
     } else {
-      throw response.statusText;
+      throw new Error(response.statusText);
     }
   }
   public async removeImage(
@@ -162,7 +162,7 @@ export class GravatarService {
       const xmlResponse = await response.text();
       return new RemoveImageMethodResponse(xmlResponse);
     } else {
-      throw response.statusText;
+      throw new Error(response.statusText);
     }
   }
   public async deleteUserImage(
@@ -174,7 +174,7 @@ export class GravatarService {
       const xmlResponse = await response.text();
       return new DeleteUserImageMethodResponse(xmlResponse);
     } else {
-      throw response.statusText;
+      throw new Error(response.statusText);
     }
   }
   public async test(): Promise<TestMethodResponse> {
@@ -184,7 +184,7 @@ export class GravatarService {
       const xmlResponse = await response.text();
       return new TestMethodResponse(xmlResponse);
     } else {
-      throw response.statusText;
+      throw new Error(response.statusText);
     }
   }
 }

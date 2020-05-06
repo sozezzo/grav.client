@@ -2,7 +2,7 @@ import {
   ExistsMethodResponse,
   AddressesMethodResponse,
   UserImagesMethodResponse,
-  SaveImageUrlMethodResponse,
+  SaveImageMethodResponse,
   UseUserImageMethodResponse,
   TestMethodResponse,
 } from "../../Domain/method-responses";
@@ -40,7 +40,7 @@ export function UserImagesResponseSingleImage() {
 }
 
 export function SaveImageUrlResponse() {
-  const response = new SaveImageUrlMethodResponse("");
+  const response = new SaveImageMethodResponse("");
   response.json = stub.saveImageUrlResponse;
   response.parseMembers();
   return Promise.resolve(response);

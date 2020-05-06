@@ -103,7 +103,7 @@ export class AddressesMethodResponse extends MethodResponse {
   }
 }
 
-export class SaveImageUrlMethodResponse extends MethodResponse {
+export class SaveImageMethodResponse extends MethodResponse {
   public imageName: string;
   constructor(public xml: string) {
     super(xmlToJson(xml));
