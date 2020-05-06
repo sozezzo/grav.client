@@ -18,7 +18,6 @@ import {
 
 import * as stub from "../Common/TestDoubles/http-response-stubs";
 import { mockHttpShim } from "../Common/TestDoubles/mock-factory";
-import { ImageRating } from "../Presentation";
 
 describe("GravatarService", () => {
   let service: GravatarService;
@@ -29,14 +28,14 @@ describe("GravatarService", () => {
   it("should check if account exists", async () => {
     const responseStub = stub.ExistsHttpResponse(service.emailHash);
     service.http = mockHttpShim(responseStub);
-    const result = await service.exists();
-    expect(result.DidSucceed).toBe(true);
+    const response = await service.exists();
+    expect(response.success).toBe(true);
   });
   it("should check if multiple accounts exist", async () => {
     const responseStub = stub.ExistsMultipleHttpResponse(emailHash, email2Hash);
     service.http = mockHttpShim(responseStub);
-    const result = await service.exists(email, email2);
-    expect(result.DidSucceed).toBe(true);
+    const response = await service.exists(email, email2);
+    expect(response.success).toBe(true);
   });
   it("should have gravatar image url", () => {
     service.http = new HttpShim(service.emailHash);
@@ -46,27 +45,33 @@ describe("GravatarService", () => {
   it("should get user email address", async () => {
     const responseStub = stub.AddressesHttpResponse(service.emailHash);
     service.http = mockHttpShim(responseStub);
-    const result = await service.addresses();
-    expect(result.DidSucceed).toBe(true);
+    const response = await service.addresses();
+    expect(response.userAddresses).toBeDefined();
   });
   it("should get user email addresses", async () => {
     const responseStub = stub.AddressesMultipleHttpResponse(email, email2);
     service.http = mockHttpShim(responseStub);
-    const result = await service.addresses();
-    expect(result.DidSucceed).toBe(true);
+    const response = await service.addresses();
+    expect(response.userAddresses).toBeDefined();
   });
   it("should get user images", async () => {
     const responseStub = stub.UserImagesHttpResponse();
     service.http = mockHttpShim(responseStub);
-    const result = await service.userImages();
-    expect(result.DidSucceed).toBe(true);
+    const response = await service.userImages();
+    expect(response.userImages).toBeDefined();
+  });
+  it("should get single user image", async () => {
+    const responseStub = stub.UserImageHttpResponse();
+    service.http = mockHttpShim(responseStub);
+    const response = await service.userImages();
+    expect(response.userImages.length).toBe(1);
   });
   it("should save image file", async () => {
     const responseStub = stub.SaveImageHttpResponse();
     const imageFilePath = join(__dirname, "../Common/Assets/bubba.jpg");
     service.http = mockHttpShim(responseStub);
-    const result = await service.saveImage(imageFilePath);
-    expect(result.DidSucceed).toBe(true);
+    const response = await service.saveImage(imageFilePath);
+    expect(response.imageName).toBeDefined();
   });
   it("should save encoded image", async () => {
     const responseStub = stub.SaveEncodedImageHttpResponse();
@@ -74,50 +79,50 @@ describe("GravatarService", () => {
     const imgPath = join(__dirname, "../Common/Assets/gump.jpg");
     const bitmap = readFileSync(imgPath);
     const imageData = Buffer.from(bitmap).toString("base64");
-    const result = await service.saveEncodedImage(imageData);
-    expect(result.DidSucceed).toBe(true);
+    const response = await service.saveEncodedImage(imageData);
+    expect(response.imageName).toBeDefined();
   });
   it("should save image url", async () => {
     const responseStub = stub.SaveImageUrlHttpResponse();
     service.http = mockHttpShim(responseStub);
-    const result = await service.saveImageUrl(imageUrl);
-    expect(result.DidSucceed).toBe(true);
+    const response = await service.saveImageUrl(imageUrl);
+    expect(response.imageName).toBeDefined();
   });
   it("should use user image", async () => {
     const responseStub = stub.UseUserImageHttpResponse(email);
     service.http = mockHttpShim(responseStub);
-    const result = await service.useUserImage(imageName);
-    expect(result.DidSucceed).toBe(true);
+    const response = await service.useUserImage(imageName);
+    expect(response.success).toBe(true);
   });
   it("should use user image for multiple email addresses", async () => {
     const responseStub = stub.UseUserImageMultipleHttpResponse(email, email2);
     service.http = mockHttpShim(responseStub);
-    const result = await service.useUserImage(imageName, email, email2);
-    expect(result.DidSucceed).toBe(true);
+    const response = await service.useUserImage(imageName, email, email2);
+    expect(response.success).toBe(true);
   });
   it("should remove image", async () => {
     const responseStub = stub.RemoveImageHttpResponse(email);
     service.http = mockHttpShim(responseStub);
-    const result = await service.removeImage();
-    expect(result.DidSucceed).toBe(true);
+    const response = await service.removeImage();
+    expect(response.success).toBe(true);
   });
   it("should remove image for multiple email addresses", async () => {
     const responseStub = stub.RemoveImageMultipleHttpResponse(email, email2);
     service.http = mockHttpShim(responseStub);
-    const result = await service.removeImage(email, email2);
-    expect(result.DidSucceed).toBe(true);
+    const response = await service.removeImage(email, email2);
+    expect(response.success).toBe(true);
   });
   it("should delete user image", async () => {
     const responseStub = stub.DeleteUserImageHttpResponse();
     service.http = mockHttpShim(responseStub);
-    const result = await service.deleteUserImage(imageName);
-    expect(result.DidSucceed).toBe(true);
+    const response = await service.deleteUserImage(imageName);
+    expect(response.success).toBe(true);
   });
   it("should do sanity check", async () => {
     const responseStub = stub.TestHttpResponse();
     service.http = mockHttpShim(responseStub);
-    const result = await service.test();
-    expect(result.DidSucceed).toBe(true);
+    const response = await service.test();
+    expect(response.response).toBeDefined();
   });
   it("should throw", async () => {
     let error: Error = null as any;
@@ -131,7 +136,7 @@ describe("GravatarService", () => {
       expect(error).toBeDefined();
     }
   });
-
+  
   interface TestData {
     methodName: string;
     args: Array<string>;
@@ -156,8 +161,14 @@ describe("GravatarService", () => {
       const httpShim = mockHttpShim(responseStub);
       service.http = httpShim;
       const method = (service as any)[testData.methodName].bind(service);
-      const result = await method(...testData.args);
-      expect(result.DidFail).toBe(true);
+      let error: Error = null as any;
+      try {
+        const response = await method(...testData.args);
+      } catch (ex) {
+        error = ex as Error;
+      } finally {
+        expect(error).toBeDefined();
+      }
     });
   });
 });

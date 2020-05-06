@@ -25,56 +25,58 @@ describe("GravatarClient", () => {
   });
 
   afterAll(async () => {
-    await client.useUserImage(originalPrimaryImage.name);
+    if(originalPrimaryImage.name){
+      await client.useUserImage(originalPrimaryImage.name);
+    }
     await client.deleteUserImage(imageNames.bubba);
     await client.deleteUserImage(imageNames.gump);
   });
 
   it("should check if account exists", async () => {
-    const result = await client.exists();
-    expect(result.DidSucceed).toBe(true);
+    const response = await client.exists();
+    expect(response).toBeDefined();
   });
   it("should get account email addresses", async () => {
-    const result = await client.addresses();
-    expect(result.DidSucceed).toBe(true);
+    const response = await client.addresses();
+    expect(response.userAddresses).toBeDefined();
   });
   it("should get user images", async () => {
-    const result = await client.userImages();
-    expect(result.DidSucceed).toBe(true);
+    const response = await client.userImages();
+    expect(response.userImages).toBeDefined();
   });
   it("should upload image file", async () => {
     const imgPath = join(__dirname, "../Common/Assets/bubba.jpg");
-    const result = await client.saveImage(imgPath);
-    imageNames.bubba = result.Value.imageName;
-    expect(result.DidSucceed).toBe(true);
+    const response = await client.saveImage(imgPath);
+    imageNames.bubba = response.imageName;
+    expect(response.imageName).toBeDefined();
   });
   it("should upload encoded image", async () => {
     const imgPath = join(__dirname, "../Common/Assets/gump.jpg");
     const bitmap = readFileSync(imgPath);
     const imageData = Buffer.from(bitmap).toString("base64");
-    const result = await client.saveEncodedImage(imageData);
-    imageNames.gump = result.Value.imageName;
-    expect(result.DidSucceed).toBe(true);
+    const response = await client.saveEncodedImage(imageData);
+    imageNames.gump = response.imageName;
+    expect(response.imageName).toBeDefined();
   });
   it("should save image url", async () => {
-    const result = await client.saveImageUrl(imageUrl);
-    imageNames.shrimp = result.Value.imageName;
-    expect(result.DidSucceed).toBe(true);
+    const response = await client.saveImageUrl(imageUrl);
+    imageNames.shrimp = response.imageName;
+    expect(response.imageName).toBeDefined();
   });
   it("should remove primary image", async () => {
-    const result = await client.removeImage();
-    expect(result.DidSucceed).toBe(true);
+    const response = await client.removeImage();
+    expect(response.success).toBe(true);
   });
   it("should update primary image", async () => {
-    const result = await client.useUserImage(originalPrimaryImage.name);
-    expect(result.DidSucceed).toBe(true);
+    const response = await client.useUserImage(originalPrimaryImage.name || imageNames.shrimp);
+    expect(response.success).toBe(true);
   });
   it("should delete image", async () => {
-    const result = await client.deleteUserImage(imageNames.shrimp);
-    expect(result.DidSucceed).toBe(true);
+    const response = await client.deleteUserImage(imageNames.shrimp);
+    expect(response.success).toBe(true);
   });
   it("should do sanity check", async () => {
-    const result = await client.test();
-    expect(result.DidSucceed).toBe(true);
+    const response = await client.test();
+    expect(response.response).toBeDefined();
   });
 });

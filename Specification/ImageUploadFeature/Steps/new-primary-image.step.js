@@ -29,7 +29,9 @@ Then("the primary image is updated", async function() {
 AfterAll(() => {
   const world = new World();
   setTimeout(async () => {
-    await world.client.useUserImage(originalPrimaryImage.name);
+    if(originalPrimaryImage.name){
+      await world.client.useUserImage(originalPrimaryImage.name);
+    }
     await world.client.deleteUserImage(newImage.name);
   }, 3000);
 })

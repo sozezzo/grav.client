@@ -103,7 +103,7 @@ export class AddressesMethodResponse extends MethodResponse {
   }
 }
 
-export class SaveImageUrlMethodResponse extends MethodResponse {
+export class SaveImageMethodResponse extends MethodResponse {
   public imageName: string;
   constructor(public xml: string) {
     super(xmlToJson(xml));
@@ -133,10 +133,10 @@ export class UserImagesMethodResponse extends MethodResponse {
 
   public parseMembers() {
     if (this.json && !this.json.methodResponse.fault) {
-      const rawUserImages = this.json.methodResponse.params.param.value.struct
-        .member;
+      const { member } = this.json.methodResponse.params.param.value.struct;
+      const members = Array.isArray(member) ? member : [member];
       const self = this;
-      this.userImages = rawUserImages.map(function (img: any) {
+      this.userImages = members.map(function (img: any) {
         const userImage = new UserImage();
         userImage.name = self.parseFieldValue(img.name);
         const members: Array<any> = img.value.array.data.value;

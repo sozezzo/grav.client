@@ -1,6 +1,5 @@
 import { Md5 } from "ts-md5/dist/md5";
 import { HttpShim } from "../Infrastructure/http-shim";
-import { Result } from "../Common/result";
 import { ImageRating } from "../Domain/image-rating";
 import { readFileSync, existsSync } from "fs";
 
@@ -9,7 +8,7 @@ import {
   ExistsMethodCall,
   UserImagesMethodCall,
   SaveDataMethodCall,
-  SaveImageUrlMethodCall,
+  SaveImageMethodCall,
   UseUserImageMethodCall,
   RemoveImageMethodCall,
   DeleteUserImageMethodCall,
@@ -20,7 +19,7 @@ import {
   AddressesMethodResponse,
   ExistsMethodResponse,
   UserImagesMethodResponse,
-  SaveImageUrlMethodResponse,
+  SaveImageMethodResponse,
   UseUserImageMethodResponse,
   RemoveImageMethodResponse,
   DeleteUserImageMethodResponse,
@@ -47,47 +46,44 @@ export class GravatarService {
   }
   public async exists(
     ...emailAddresses: string[]
-  ): Promise<Result<ExistsMethodResponse>> {
+  ): Promise<ExistsMethodResponse> {
     const addresses = emailAddresses.length ? emailAddresses : [this.email];
     const hashes = addresses.map(this.hashEmail);
     const methodCall = new ExistsMethodCall(hashes, this._password);
     const response = await this.http.rpc(methodCall.xml);
     if (response.ok) {
       const xmlResponse = await response.text();
-      const methodResponse = new ExistsMethodResponse(xmlResponse);
-      return Result.Ok(methodResponse);
+      return new ExistsMethodResponse(xmlResponse);
     } else {
-      return Result.Fail(response.statusText);
+      throw new Error(response.statusText);
     }
   }
-  public async addresses(): Promise<Result<AddressesMethodResponse>> {
+  public async addresses(): Promise<AddressesMethodResponse> {
     const methodCall = new AddressesMethodCall(this._password);
     const response = await this.http.rpc(methodCall.xml);
     if (response.ok) {
       const xmlResponse = await response.text();
-      const methodResponse = new AddressesMethodResponse(xmlResponse);
-      return Result.Ok(methodResponse);
+      return new AddressesMethodResponse(xmlResponse);
     } else {
-      return Result.Fail(response.statusText);
+      throw new Error(response.statusText);
     }
   }
-  public async userImages(): Promise<Result<UserImagesMethodResponse>> {
+  public async userImages(): Promise<UserImagesMethodResponse> {
     const methodCall = new UserImagesMethodCall(this._password);
     const response = await this.http.rpc(methodCall.xml);
     if (response.ok) {
       const xmlResponse = await response.text();
-      const methodResponse = new UserImagesMethodResponse(xmlResponse);
-      return Result.Ok(methodResponse);
+      return new UserImagesMethodResponse(xmlResponse);
     } else {
-      return Result.Fail(response.statusText);
+      throw new Error(response.statusText);
     }
   }
   public async saveImage(
     imageFilePath: string,
     imageRating = ImageRating.G
-  ): Promise<Result<SaveImageUrlMethodResponse>> {
+  ): Promise<SaveImageMethodResponse> {
     if (!existsSync(imageFilePath)) {
-      return Result.Fail(`file not found: ${imageFilePath}`);
+      throw new Error(`file not found: ${imageFilePath}`);
     }
     const bitmap = readFileSync(imageFilePath);
     const imageData = Buffer.from(bitmap).toString("base64");
@@ -99,16 +95,15 @@ export class GravatarService {
     const response = await this.http.rpc(methodCall.xml);
     if (response.ok) {
       const xmlResponse = await response.text();
-      const methodResponse = new SaveImageUrlMethodResponse(xmlResponse);
-      return Result.Ok(methodResponse);
+      return new SaveImageMethodResponse(xmlResponse);
     } else {
-      return Result.Fail(response.statusText);
+      throw new Error(response.statusText);
     }
   }
   public async saveEncodedImage(
     base64String: string,
     imageRating = ImageRating.G
-  ): Promise<Result<SaveImageUrlMethodResponse>> {
+  ): Promise<SaveImageMethodResponse> {
     const methodCall = new SaveDataMethodCall(
       base64String,
       imageRating,
@@ -117,17 +112,16 @@ export class GravatarService {
     const response = await this.http.rpc(methodCall.xml);
     if (response.ok) {
       const xmlResponse = await response.text();
-      const methodResponse = new SaveImageUrlMethodResponse(xmlResponse);
-      return Result.Ok(methodResponse);
+      return new SaveImageMethodResponse(xmlResponse);
     } else {
-      return Result.Fail(response.statusText);
+      throw new Error(response.statusText);
     }
   }
   public async saveImageUrl(
     imageUrl: string,
     imageRating = ImageRating.G
-  ): Promise<Result<SaveImageUrlMethodResponse>> {
-    const methodCall = new SaveImageUrlMethodCall(
+  ): Promise<SaveImageMethodResponse> {
+    const methodCall = new SaveImageMethodCall(
       imageUrl,
       imageRating,
       this._password
@@ -135,16 +129,15 @@ export class GravatarService {
     const response = await this.http.rpc(methodCall.xml);
     if (response.ok) {
       const xmlResponse = await response.text();
-      const methodResponse = new SaveImageUrlMethodResponse(xmlResponse);
-      return Result.Ok(methodResponse);
+      return new SaveImageMethodResponse(xmlResponse);
     } else {
-      return Result.Fail(response.statusText);
+      throw new Error(response.statusText);
     }
   }
   public async useUserImage(
     imageName: string,
     ...emailAddresses: string[]
-  ): Promise<Result<UseUserImageMethodResponse>> {
+  ): Promise<UseUserImageMethodResponse> {
     const addresses = emailAddresses.length ? emailAddresses : [this.email];
     const methodCall = new UseUserImageMethodCall(
       imageName,
@@ -154,48 +147,44 @@ export class GravatarService {
     const response = await this.http.rpc(methodCall.xml);
     if (response.ok) {
       const xmlResponse = await response.text();
-      const methodResponse = new UseUserImageMethodResponse(xmlResponse);
-      return Result.Ok(methodResponse);
+      return new UseUserImageMethodResponse(xmlResponse);
     } else {
-      return Result.Fail(response.statusText);
+      throw new Error(response.statusText);
     }
   }
   public async removeImage(
     ...emailAddresses: string[]
-  ): Promise<Result<RemoveImageMethodResponse>> {
+  ): Promise<RemoveImageMethodResponse> {
     const addresses = emailAddresses.length ? emailAddresses : [this.email];
     const methodCall = new RemoveImageMethodCall(addresses, this._password);
     const response = await this.http.rpc(methodCall.xml);
     if (response.ok) {
       const xmlResponse = await response.text();
-      const methodResponse = new RemoveImageMethodResponse(xmlResponse);
-      return Result.Ok(methodResponse);
+      return new RemoveImageMethodResponse(xmlResponse);
     } else {
-      return Result.Fail(response.statusText);
+      throw new Error(response.statusText);
     }
   }
   public async deleteUserImage(
     imageName: string
-  ): Promise<Result<DeleteUserImageMethodResponse>> {
+  ): Promise<DeleteUserImageMethodResponse> {
     const methodCall = new DeleteUserImageMethodCall(imageName, this._password);
     const response = await this.http.rpc(methodCall.xml);
     if (response.ok) {
       const xmlResponse = await response.text();
-      const methodResponse = new DeleteUserImageMethodResponse(xmlResponse);
-      return Result.Ok(methodResponse);
+      return new DeleteUserImageMethodResponse(xmlResponse);
     } else {
-      return Result.Fail(response.statusText);
+      throw new Error(response.statusText);
     }
   }
-  public async test(): Promise<Result<TestMethodResponse>> {
+  public async test(): Promise<TestMethodResponse> {
     const methodCall = new TestMethodCall(this._password);
     const response = await this.http.rpc(methodCall.xml);
     if (response.ok) {
       const xmlResponse = await response.text();
-      const methodResponse = new TestMethodResponse(xmlResponse);
-      return Result.Ok(methodResponse);
+      return new TestMethodResponse(xmlResponse);
     } else {
-      return Result.Fail(response.statusText);
+      throw new Error(response.statusText);
     }
   }
 }

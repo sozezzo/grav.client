@@ -104,7 +104,7 @@ export class SaveDataMethodCall implements MethodCall {
   }
 }
 
-export class SaveImageUrlMethodCall implements MethodCall {
+export class SaveImageMethodCall implements MethodCall {
   constructor(
     public imageUrl: string,
     public imageRating: ImageRating,
