@@ -8,7 +8,7 @@ import {
   ExistsMethodCall,
   UserImagesMethodCall,
   SaveDataMethodCall,
-  SaveImageUrlMethodCall,
+  SaveImageMethodCall,
   UseUserImageMethodCall,
   RemoveImageMethodCall,
   DeleteUserImageMethodCall,
@@ -121,7 +121,7 @@ export class GravatarService {
     imageUrl: string,
     imageRating = ImageRating.G
   ): Promise<SaveImageMethodResponse> {
-    const methodCall = new SaveImageUrlMethodCall(
+    const methodCall = new SaveImageMethodCall(
       imageUrl,
       imageRating,
       this._password
