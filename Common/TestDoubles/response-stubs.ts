@@ -39,9 +39,9 @@ export function UserImagesResponseSingleImage() {
   return Promise.resolve(response);
 }
 
-export function SaveImageUrlResponse() {
+export function SaveImageResponse() {
   const response = new SaveImageMethodResponse("");
-  response.json = stub.saveImageUrlResponse;
+  response.json = stub.saveImageResponse;
   response.parseMembers();
   return Promise.resolve(response);
 }

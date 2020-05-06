@@ -90,7 +90,7 @@ export function SaveImageUrlHttpResponse() {
   return Promise.resolve({
     ok: true,
     status: 200,
-    text: () => Promise.resolve(stub.saveUrlXml),
+    text: () => Promise.resolve(stub.saveImageUrlXml),
   } as Response);
 }
 

@@ -1,4 +1,4 @@
-export const saveUrlXml = `
+export const saveImageUrlXml = `
 <?xml version="1.0"?>
 <methodResponse>
   <params>
