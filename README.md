@@ -1,6 +1,6 @@
-# grav.client
+# grav.client NodeJS SDK
 
- A Node.js client for the [Gravatar XML-RPC API](https://en.gravatar.com/site/implement/xmlrpc)
+ A NodeJS SDK for the [Gravatar XML-RPC API](https://en.gravatar.com/site/implement/xmlrpc)
  
  ---
  

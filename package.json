@@ -1,7 +1,7 @@
 {
   "name": "grav.client",
   "version": "2.4.15",
-  "description": "a node.js client for the gravatar xml-rpc api",
+  "description": "a NodeJS SDK for the gravatar xml-rpc api",
   "main": "Release/Presentation/index.js",
   "types": "Release/Presentation/index.d.ts",
   "scripts": {
@@ -24,7 +24,8 @@
     "gravatar",
     "xml-rpc",
     "api",
-    "client"
+    "node",
+    "sdk"
   ],
   "author": "mrtillman",
   "license": "MIT",
