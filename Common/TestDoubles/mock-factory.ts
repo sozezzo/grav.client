@@ -1,5 +1,3 @@
-require("jasmine");
-
 import { GravatarClient } from "../../Presentation";
 import { HttpShim } from "../../Infrastructure/http-shim";
 
