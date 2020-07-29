@@ -1,11 +1,11 @@
 {
   "name": "grav.client",
-  "version": "2.4.15",
+  "version": "2.4.16",
   "description": "a NodeJS SDK for the gravatar xml-rpc api",
   "main": "Release/Presentation/index.js",
   "types": "Release/Presentation/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "./node_modules/typescript/bin/tsc",
     "test": "jasmine-ts --config=jasmine.json",
     "test:cov": "nyc -r text -e .ts -x \"**/*.spec.ts\" --exclude \"Common/TestDoubles\" npm run test",
     "test:e2e": "ts-node node_modules/jasmine/bin/jasmine --config=Tests/jasmine.e2e.json",
