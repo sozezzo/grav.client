@@ -8,8 +8,10 @@ describe("FindImageUseCase", () => {
   let useCase: FindImageUseCase;
 
   beforeAll(() => {
+    const client = mockClient(UseCaseType.FindImage);
+    expect(client).toBeDefined();
     useCase = new FindImageUseCase();
-    useCase.client = mockClient(UseCaseType.FindImage);
+    useCase.client = client;
   });
 
   it("should work", async () => {
