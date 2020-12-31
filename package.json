@@ -60,7 +60,8 @@
     "minimist": ">=0.2.1",
     "minimatch": ">=3.0.2",
     "prettier": "^2.0.4",
-    "snyk": "^1.319.0"
+    "snyk": "^1.319.0",
+    "yargs-parser": ">=13.1.2"
   },
   "snyk": true
 }
