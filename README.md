@@ -11,9 +11,9 @@
 
 [![NPM](https://nodei.co/npm/grav.client.png)](https://www.npmjs.com/package/grav.client)
 
-If you are just getting started, be sure to see the [Wiki](https://github.com/mrtillman/grav.client/wiki) and [API docs](https://documenter.getpostman.com/view/1403721/Rztpr87i).
+If you are just getting started, be sure to see the [Wiki](https://github.com/mrtillman/grav.client/wiki) and [API docs](https://documenter.getpostman.com/view/1403721/TWDcEuXX).
 
- [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/e27a4edf756f4cbe80b5)
+ [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/0e7ec98e4fac2e5849c4)
 
 ## Installation
 
