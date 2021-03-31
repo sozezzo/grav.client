@@ -1,4 +1,4 @@
-# grav.client NodeJS SDK
+# Gravatar NodeJS SDK
 
  A NodeJS SDK for the [Gravatar XML-RPC API](https://en.gravatar.com/site/implement/xmlrpc)
  
@@ -6,7 +6,7 @@
  
 [![Build Status](https://travis-ci.com/mrtillman/grav.client.svg?branch=master)](https://travis-ci.com/mrtillman/grav.client)
 [![Coverage Status](https://coveralls.io/repos/github/mrtillman/grav.client/badge.svg?branch=master)](https://coveralls.io/github/mrtillman/grav.client?branch=master)
-[![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/mrtillman/grav.client?sort=semver)](https://github.com/mrtillman/grav.client/releases/tag/2.4.20)
+[![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/mrtillman/grav.client?sort=semver)](https://github.com/mrtillman/grav.client/releases/tag/2.4.21)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/mrtillman/grav.client/blob/master/LICENSE.md)
 
 [![NPM](https://nodei.co/npm/grav.client.png)](https://www.npmjs.com/package/grav.client)

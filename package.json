@@ -1,6 +1,6 @@
 {
   "name": "grav.client",
-  "version": "2.4.20",
+  "version": "2.4.21",
   "description": "a NodeJS SDK for the gravatar xml-rpc api",
   "main": "Release/Presentation/index.js",
   "types": "Release/Presentation/index.d.ts",
@@ -49,18 +49,19 @@
     "nock": "^11.7.2",
     "ts-md5": "^1.2.7",
     "xml-js": "^1.6.11",
-    "typescript": "^3.7.4"
+    "typescript": "^3.7.4",
+    "netmask": ">=2.0.1"
   },
   "devDependencies": {
     "coveralls": "^3.0.9",
     "jasmine-ts": "^0.3.0",
-    "nyc": "^15.0.0",
-    "ts-node": "^8.6.2",
     "mem": ">=4.0.0",
-    "minimist": ">=0.2.1",
     "minimatch": ">=3.0.2",
+    "minimist": ">=0.2.1",
+    "nyc": "^15.0.0",
     "prettier": "^2.0.4",
-    "snyk": "^1.319.0",
+    "snyk": "^1.519.0",
+    "ts-node": "^8.6.2",
     "yargs-parser": ">=13.1.2"
   },
   "snyk": true
