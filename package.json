@@ -1,6 +1,6 @@
 {
   "name": "grav.client",
-  "version": "2.4.21",
+  "version": "2.4.22",
   "description": "a NodeJS SDK for the gravatar xml-rpc api",
   "main": "Release/Presentation/index.js",
   "types": "Release/Presentation/index.d.ts",
